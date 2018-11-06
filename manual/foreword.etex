@@ -1,82 +1,54 @@
-\chapter*{Foreword}
+\chapter*{前言}
 \markboth{Foreword}{}
 %HEVEA\cutname{foreword.html}
 
-This manual documents the release \ocamlversion\ of the OCaml
-system. It is organized as follows.
+该手册记录了OCaml系统 \ocamlversion\ 版本的相关信息。其结构组织如下：
+
 \begin{itemize}
-\item Part~\ref{p:tutorials}, ``An introduction to OCaml'',
-gives an overview of the language.
-\item Part~\ref{p:refman}, ``The OCaml language'', is the
-reference description of the language.
-\item Part~\ref{p:commands}, ``The OCaml tools'', documents
-the compilers, toplevel system, and programming utilities.
-\item Part~\ref{p:library}, ``The OCaml library'', describes the
-modules provided in the standard library.
+\item 部分~\ref{p:tutorials},“OCaml简介”将提供该语言的简要介绍。
+\item 部分~\ref{p:refman},“OCaml语言”，给出该语言的使用参考说明。
+\item 部分~\ref{p:commands},“OCaml工具”，记录了编译器、顶层系统和编程工具的相关信息。
+\item 部分~\ref{p:library},“OCaml库”，描述了标准库所提供的模块。
 \begin{latexonly}
-\item Part~\ref{p:appendix}, ``Appendix'', contains an
-index of all identifiers defined in the standard library, and an
-index of keywords.
+\item 部分~\ref{p:appendix},“附录”，包含了标准库中所有标示符的索引和关键词的索引。
 \end{latexonly}
 \end{itemize}
 
-\section*{Conventions}
+\section*{约定}
 
-OCaml runs on several operating systems. The parts of
-this manual that are specific to one operating system are presented as
-shown below:
+OCaml可以在若干操作系统上运行。因此该手册上的部分内容将只针对如下的某一特定操作系统：
 
-\begin{unix} This is material specific to the Unix family of operating
-systems, including Linux and \hbox{MacOS~X}.
+\begin{unix} 这部分材料仅针对Unix族的操作系统，如Linux和\hbox{MacOS~X}。
 \end{unix}
 
-\begin{windows} This is material specific to Microsoft Windows
-  (XP, Vista, 7, 8, 10).
+\begin{windows} 这部分材料仅针对Microsoft Windows操作系统，如XP、Vista、7、8、10。
 \end{windows}
 
-\section*{License}
+\section*{协议}
 
-The OCaml system is copyright \copyright\ 1996--\number\year\
-Institut National de Recherche en Informatique et en
-Automatique (INRIA).
-INRIA holds all ownership rights to the OCaml system.
+OCaml系统的版权归属为copyright \copyright\ 1996--\number\year\
+法国国家信息与自动化研究所（Institut National de Recherche en Informatique et en Automatique，简称INRIA）。INRIA拥有OCaml系统的所有权。
 
-The OCaml system is open source and can be freely
-redistributed.  See the file "LICENSE" in the distribution for
-licensing information.
+OCaml系统是开源的，可以被自由的重新分发。请查看发行版中的“LICENSE”文件获取有关的许可协议信息。
 
-The present documentation is copyright \copyright\ \number\year\
-Institut National de Recherche en Informatique et en
-Automatique (INRIA).  The OCaml documentation and user's
-manual may be reproduced and distributed in whole or
-in part, subject to the following conditions:
+本文档的版权归属于copyright \copyright\ \number\year\
+法国国家信息与自动化研究所。OCaml文档和用户手册在满足如下条件时可以被全部或部分复制与分发：
 \begin{itemize}
-\item The copyright notice above and this permission notice must be
-preserved complete on all complete or partial copies.
-\item Any translation or derivative work of the OCaml
-documentation and user's manual must be approved by the authors in
-writing before distribution.
-\item If you distribute the OCaml
-documentation and user's manual in part, instructions for obtaining
-the complete version of this manual must be included, and a
-means for obtaining a complete version provided.
-\item Small portions may be reproduced as illustrations for reviews or
-quotes in other works without this permission notice if proper
-citation is given.
+\item 以上的版权声明与此许可声明必须被完整地保留在所有完整或部分副本中。
+\item 任何OCaml文档和用户手册的翻译或衍生作品在发行必须得到原作者的书面批准。
+\item 如果您部分分发OCaml文档和用户手册，则必须包括获取本手册完整版本的说明，并提供获取完整版本手册的方法。
+\item 若给出合适的引用，可以在不包含此声明许可的情况下，将手册的一小部分内容作为其他作品中的评论或引用示例使用。
 \end{itemize}
 
-\section*{Availability}
+\section*{可用性}
 
 \begin{latexonly}
-The complete OCaml distribution can be accessed via the Web
-sites \url{http://www.ocaml.org/} and \url{http://caml.inria.fr/}.
-The former Web site contains a lot of additional information on OCaml.
+完整的OCaml发行版可以在\url{http://www.ocaml.org/}和\url{http://caml.inria.fr/}获得。
+第一个网站包括大量关于OCaml的额外信息。
 \end{latexonly}
 
 \begin{htmlonly}
-The complete OCaml distribution can be accessed via the
-\href{http://www.ocaml.org/}{community Caml Web site} and the
-\href{http://caml.inria.fr/}{older Caml Web site}.
-The \href{http://www.ocaml.org/}{community Caml Web site}
-contains a lot of additional information on OCaml.
+完整的OCaml发行版可以在
+\href{http://www.ocaml.org/}{Caml社区网站}和
+\href{http://caml.inria.fr/}{旧版的Caml网站}上获得。\href{http://www.ocaml.org/}{Caml社区网站}上包括大量关于OCaml的额外信息。
 \end{htmlonly}
