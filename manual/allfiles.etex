@@ -10,14 +10,14 @@
 ~\vfill
 \Huge           The OCaml system \\
                 release \ocamlversion \\[1cm]
-\Large          Documentation and user's manual \\[1cm]
+\Large          文档与用户手册 \\[1cm]
 \large          Xavier Leroy, \\
                 Damien Doligez, Alain Frisch, Jacques Garrigue, Didier Rémy and Jérôme Vouillon \\[1cm]
                 \today \\
                 ~
 \vfill
 \normalsize     Copyright \copyright\ \number\year\ Institut National de
-                Recherche en Informatique et en Automatique
+                Recherche en Informatique et en Automatique. 法国国家信息与自动化研究所版权所有
 \end{maintitle}
 \cleardoublepage
 \setcounter{page}{1}
@@ -41,7 +41,7 @@ and as a
 
 \input{foreword.tex}
 
-\part{An introduction to OCaml}
+\part{OCaml简介}
 \label{p:tutorials}
 \input{coreexamples.tex}
 \input{moduleexamples.tex}
@@ -50,12 +50,12 @@ and as a
 \input{polymorphism.tex}
 \input{advexamples.tex}
 
-\part{The OCaml language}
+\part{OCaml语言}
 \label{p:refman}
 \input{refman.tex}
 \input{exten.tex}
 
-\part{The OCaml tools}
+\part{OCaml工具}
 \label{p:commands}
 
 \input{comp.tex}
@@ -76,7 +76,7 @@ and as a
 \input{afl-fuzz.tex}
 \input{plugins}
 
-\part{The OCaml library}
+\part{OCaml库}
 \label{p:library}
 \input{core.tex}
 \input{stdlib.tex}
@@ -89,20 +89,20 @@ and as a
 \input{libdynlink.tex}
 \input{libbigarray.tex}
 
-\part{Appendix}
+\part{附录}
 \label{p:appendix}
 
 \ifouthtml
 \begin{links}
-\item \ahref{libref/index_modules.html}{Index of modules}
-\item \ahref{libref/index_module_types.html}{Index of module types}
-\item \ahref{libref/index_types.html}{Index of types}
-\item \ahref{libref/index_exceptions.html}{Index of exceptions}
-\item \ahref{libref/index_values.html}{Index of values}
+\item \ahref{libref/index_modules.html}{模块索引}
+\item \ahref{libref/index_module_types.html}{模块类型索引}
+\item \ahref{libref/index_types.html}{类型索引}
+\item \ahref{libref/index_exceptions.html}{异常索引}
+\item \ahref{libref/index_values.html}{值索引}
 \end{links}
 \else
-\printindex{\jobname}{Index to the library}
+\printindex{\jobname}{库索引}
 \fi
-\printindex{\jobname.kwd}{Index of keywords}
+\printindex{\jobname.kwd}{关键字索引}
 
 \end{document}
