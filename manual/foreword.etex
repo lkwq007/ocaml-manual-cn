@@ -1,8 +1,8 @@
 \chapter*{前言}
-\markboth{Foreword}{}
+\markboth{前言}{}
 %HEVEA\cutname{foreword.html}
 
-该手册记录了OCaml系统 \ocamlversion\ 版本的相关信息。其结构组织如下：
+该手册记录了OCaml \ocamlversion\ 版本的相关信息。其结构组织如下：
 
 \begin{itemize}
 \item 部分~\ref{p:tutorials},“OCaml简介”将提供该语言的简要介绍。
