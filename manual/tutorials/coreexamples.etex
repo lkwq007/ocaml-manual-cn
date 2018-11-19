@@ -1,17 +1,10 @@
-\chapter{The core language} \label{c:core-xamples}
+\chapter{核心语言} \label{c:core-xamples}
 %HEVEA\cutname{coreexamples.html}
 
-This part of the manual is a tutorial introduction to the
-OCaml language. A good familiarity with programming in a conventional
-languages (say, C or Java) is assumed, but no prior exposure to
-functional languages is required. The present chapter introduces the
-core language. Chapter~\ref{c:moduleexamples} deals with the
-module system, chapter~\ref{c:objectexamples} with the
-object-oriented features, chapter~\ref{c:labl-examples} with
-extensions to the core language (labeled arguments and polymorphic
-variants), and chapter~\ref{c:advexamples} gives some advanced examples.
+这一部分文档是OCaml语言的教程简介。在这里，文档假设读者对一种传统语言（如C或Java）具有一定的熟悉度，但读者不必具备函数式编程的相关经验。本章主要介绍核心语言。
+第\ref{c:moduleexamples}章讨论模块系统，第\ref{c:objectexamples}涵盖面向对象特性，第~\ref{c:labl-examples} 章介绍核心语言的拓展（标签参数和多态变体），第\ref{c:advexamples}章则给出了若干高级示例.
 
-\section{Basics}
+\section{基础}
 
 For this overview of OCaml, we use the interactive system, which
 is started by running "ocaml" from the Unix shell, or by launching the
