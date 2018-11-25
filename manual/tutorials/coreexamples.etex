@@ -8,32 +8,26 @@
 
 对于OCaml的概览，我们将使用交互式系统（即顶层环境）。读者可以在Unix shell中运行 "ocaml" 命令或者在Windows系统中运行 "OCamlwin.exe" 程序来启动OCaml顶层环境。本教程以交互式系统会话的文本形式呈现：以 "#" 符号开始的行表示用户输入；系统的响应则在用户输入之下显示，系统响应行不具备前导的 "#" 符号。
 
-在交互式系统中，用户输入以 ";;" 结尾的Ocaml语句以Under the interactive system, the user types OCaml phrases terminated
-by ";;" in response to the "#" prompt, 系统将会动态的编译、执行这些语句，并输出运行结果。语句可以是简单的表达式，或者标识符（值或函数）的 "let" 定义。
+在交互式系统中，面对 "#" 命令行，用户输入以 ";;" 结尾的Ocaml语句，系统将会动态地编译、执行这些语句，并输出运行结果。语句可以是简单的表达式，或者标识符（值或函数）的 "let" 定义。
 \begin{caml_example}{toplevel}
 1+2*3;;
 let pi = 4.0 *. atan 1.0;;
 let square x = x *. x;;
 square (sin pi) +. square (cos pi);;
 \end{caml_example}
-The OCaml system computes both the value and the type for
-each phrase. Even function parameters need no explicit type declaration:
-the system infers their types from their usage in the
-function. Notice also that integers and floating-point numbers are
-distinct types, with distinct operators: "+" and "*" operate on
-integers, but "+." and "*."  operate on floats.
+OCaml系统计算每个语句的值和类型。即使是函数参数也不需要显式的类型声明：系统将根据它们的使用情况自动推断出它们的类型。需要注意的是，在Ocaml中，整数与浮点数对应不同的数据类型，有不同的运算符： "+" 和 "*" 作用于整数, "+." 和 "*." 作用于浮点数。
 \begin{caml_example}{toplevel}[error]
 1.0 * 2;;
 \end{caml_example}
 
-Recursive functions are defined with the "let rec" binding:
+递归函数由 "let rec" 绑定定义：
 \begin{caml_example}{toplevel}
 let rec fib n =
   if n < 2 then n else fib (n-1) + fib (n-2);;
 fib 10;;
 \end{caml_example}
 
-\section{Data types}
+\section{数据类型}
 
 In addition to integers and floating-point numbers, OCaml offers the
 usual basic data types:
