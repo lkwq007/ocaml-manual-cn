@@ -29,20 +29,19 @@ fib 10;;
 
 \section{数据类型}
 
-In addition to integers and floating-point numbers, OCaml offers the
-usual basic data types:
+除了整数和浮点数之外，OCaml还提供常见的基本数据类型：
 \begin{itemize}%
-\item booleans
+\item 布尔型
 \begin{caml_example}{toplevel}
 (1 < 2) = false;;
 let one = if true then 1 else 2;;
 \end{caml_example}
-\item characters
+\item 字符型
 \begin{caml_example}{toplevel}
  'a';;
  int_of_char '\n';;
 \end{caml_example}
-\item immutable character strings
+\item 不可变字符串
 \begin{caml_example}{toplevel}
 "Hello" ^ " " ^ "world";;
 {|This is a quoted string, here, neither \ nor " are special characters|};;
@@ -52,27 +51,14 @@ let one = if true then 1 else 2;;
 \end{caml_example}
 \end{itemize}
 
-Predefined data structures include tuples, arrays, and lists. There are also
-general mechanisms for defining your own data structures, such as records and
-variants, which will be covered in more detail later; for now, we concentrate
-on lists. Lists are either given in extension as a bracketed list of
-semicolon-separated elements, or built from the empty list "[]"
-(pronounce ``nil'') by adding elements in front using the "::"
-(``cons'') operator.
+预定义的数据结构包括元组、数组和列表。同时OCaml也具备自行定义数据结构的通用机制，如记录和变体，稍后将更详细地介绍。现在，我们先主要考虑列表。列表可以通过分号分隔的元素的方括号列表的形式给出，也可以在空列表 "[]" （即 ``nil''）的基础上使用 "::" （`cons''）运算符在其前面添加元素以构建列表。 
 \begin{caml_example}{toplevel}
 let l = ["is"; "a"; "tale"; "told"; "etc."];;
 "Life" :: l;;
 \end{caml_example}
-As with all other OCaml data structures, lists do not need to be
-explicitly allocated and deallocated from memory: all memory
-management is entirely automatic in OCaml. Similarly, there is no
-explicit handling of pointers: the OCaml compiler silently introduces
-pointers where necessary.
+与所有其他OCaml数据结构一样，列表不需要显式地在内存中分配和释放：OCaml中的内存管理都是完全自动的。类似地，OCaml中没有对指针的显式处理：OCaml编译器会在需要的时候自动引入指针。
 
-As with most OCaml data structures, inspecting and destructuring lists
-is performed by pattern-matching. List patterns have exactly the same
-form as list expressions, with identifiers representing unspecified
-parts of the list. As an example, here is insertion sort on a list:
+与大多数OCaml数据结构一样，检查和解构列表是通过模式匹配来执行的。列表模式具有与列表表达式完全相同的形式，其中标识符表示列表中未指定的部分。例如，下面是列表中的插入排序示例：
 \begin{caml_example}{toplevel}
 let rec sort lst =
   match lst with
@@ -86,9 +72,7 @@ and insert elt lst =
 sort l;;
 \end{caml_example}
 
-The type inferred for "sort", "'a list -> 'a list", means that "sort"
-can actually apply to lists of any type, and returns a list of the
-same type. The type "'a" is a {\em type variable}, and stands for any
+上述示例中 "sort" 函数被推导出的类型 "'a list -> 'a list" 意味着 "sort" 函数可以作用于任何类型的列表。The type "'a" is a {\em type variable}, and stands for any
 given type. The reason why "sort" can apply to lists of any type is
 that the comparisons ("=", "<=", etc.) are {\em polymorphic} in OCaml:
 they operate between any two values of the same type. This makes
