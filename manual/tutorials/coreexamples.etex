@@ -80,24 +80,16 @@ sort [3.14; 2.718];;
 
 以上的"sort"函数并不会修改它的输入列表：它会构建并返回一个包含与输入列表相同元素且按升序排列的新列表。事实上，在OCaml中，一个列表在被构建后就无法被修改：我们将列表称之为不可变数据结构。大多数OCaml数据结构都是不可变的，但少数（其中最典型的是数组）是可变的，这意味着它们可以在任何时间被直接修改。
 
-The OCaml notation for the type of a function with multiple arguments is \\
-"arg1_type -> arg2_type -> ... -> return_type".  For example,
-the type inferred for "insert", "'a -> 'a list -> 'a list", means that "insert"
-takes two arguments, an element of any type "'a" and a list with elements of
-the same type "'a" and returns a list of the same type.
-\section{Functions as values}
+具有多个参数的函数类型的记法为"arg1_type -> arg2_type -> ... -> return_type"。例如，"insert"函数的类型为"'a -> 'a list -> 'a list"，其意味着"insert"接受两个参数，一个是任意类型"'a"的元素，另一个是具有相同类型"'a"的元素的列表，并返回相同类型的列表。
+\section{函数作为值}
 
-OCaml is a  functional language: functions in the full mathematical
-sense are supported and can be passed around freely just as any other
-piece of data. For instance, here is a "deriv" function that takes any
-float function as argument and returns an approximation of its
-derivative function:
+OCaml是一种函数式语言：完全数学意义上的函数是被支持的，可以像其他数据一样自由地传递。例如，这是一个以浮点函数为参数并返回其导数函数近似值的"deriv"函数：
 \begin{caml_example}{toplevel}
 let deriv f dx = function x -> (f (x +. dx) -. f x) /. dx;;
 let sin' = deriv sin 1e-6;;
 sin' pi;;
 \end{caml_example}
-Even function composition is definable:
+我们甚至可以定义复合函数：
 \begin{caml_example}{toplevel}
 let compose f g = function x -> f (g x);;
 let cos2 = compose square cos;;
