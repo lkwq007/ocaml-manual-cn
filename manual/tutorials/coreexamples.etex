@@ -94,19 +94,11 @@ sin' pi;;
 let compose f g = function x -> f (g x);;
 let cos2 = compose square cos;;
 \end{caml_example}
-
-Functions that take other functions as arguments are called
-``functionals'', or ``higher-order functions''. Functionals are
-especially useful to provide iterators or similar generic operations
-over a data structure. For instance, the standard OCaml library
-provides a "List.map" functional that applies a given function to each
-element of a list, and returns the list of the results:
+将其他函数作为参数的函数称为“泛函”（functionals）或“高阶函数”（higher-order functions）。高阶函数对于在数据结构上提供迭代器或类似的通用操作非常有用。例如，OCaml标准库提供了一个"List.map"函数，它将给定的函数应用于列表的每个元素，并返回结果列表：
 \begin{caml_example}{toplevel}
 List.map (function n -> n * 2 + 1) [0;1;2;3;4];;
 \end{caml_example}
-This functional, along with a number of other list and array
-functionals, is predefined because it is often useful, but there is
-nothing magic with it: it can easily be defined as follows.
+像一些其他列表和数组函数一样，这个函数是预定义的，因为它非常实用。但是事实上这个函数非常简单，我们可以定义"map"函数如下：
 \begin{caml_example}{toplevel}
 let rec map f l =
   match l with
