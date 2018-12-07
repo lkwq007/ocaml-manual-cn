@@ -147,21 +147,13 @@ let ratio num denom = {num; denom};;
 \begin{caml_example}{toplevel}
   let integer_product integer ratio = { ratio with num = integer * ratio.num };;
 \end{caml_example}
-使用如上的更新记法，"with"左侧的记录会被原样复制，但其右侧的字段会被更新。
+使用如上的更新记法，"with"右侧的字段会被更新，其左侧记录中的其他字段会被原样复制。
 
-The declaration of a variant type lists all possible forms for values
-of that type. Each case is identified by a name, called a constructor,
-which serves both for constructing values of the variant type and
-inspecting them by pattern-matching. Constructor names are capitalized
-to distinguish them from variable names (which must start with a
-lowercase letter). For instance, here is a variant
-type for doing mixed arithmetic (integers and floats):
+变体类型的声明列出了该类型值的所有可能形式。每种情况都由一个名为构造函数的名称标识，构造函数既用于构造变体类型的值，也用于通过模式匹配检查它们的值。构造函数名称要大写，以便与变量名称（必须以小写字母开头）区分开来。例如，这里有一个用于混合运算（整数和浮点数）的变体类型：
 \begin{caml_example}{toplevel}
 type number = Int of int | Float of float | Error;;
 \end{caml_example}
-This declaration expresses that a value of type "number" is either an
-integer, a floating-point number, or the constant "Error" representing
-the result of an invalid operation (e.g. a division by zero).
+该声明表示类型"number"的值要么是整数，要么是浮点数，要么是表示无效运算结果（例如除以0）的常量"Error"。
 
 Enumerated types are a special case of variant types, where all
 alternatives are constants:
