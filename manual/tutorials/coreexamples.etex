@@ -210,11 +210,10 @@ let rec insert x btree =
 \end{caml_example}
 
 
-\subsection{Record and variant disambiguation}
-( This subsection can be skipped on the first reading )
+\subsection{记录与变体消歧义Record and variant disambiguation}
+（在第一次阅读时可以跳过这个小节）
 
-Astute readers may have wondered what happens when two or more record
-fields or constructors share the same name
+机敏的读者可能想知道，当两个或多个记录字段或构造函数使用相同的名称时会发生什么。
 
 \begin{caml_example*}{toplevel}
 type first_record  = { x:int; y:int; z:int }
@@ -224,11 +223,7 @@ type first_variant = A | B | C
 type last_variant  = A;;
 \end{caml_example*}
 
-The answer is that when confronted with multiple options, OCaml tries to
-use locally available information to disambiguate between the various fields
-and constructors. First, if the type of the record or variant is known,
-OCaml can pick unambiguously the corresponding field or constructor.
-For instance:
+答案是，当面对多个选项时，OCaml会尝试使用本地可用的信息来消除各种字段和构造函数之间的歧义。首先，如果已知记录或变体的类型，OCaml可以明确地选择对应的字段或构造函数。例如：
 
 \begin{caml_example}{toplevel}
 let look_at_x_then_z (r:first_record) =
@@ -242,19 +237,9 @@ type wrapped = First of first_record
 let f (First r) = r, r.x;;
 \end{caml_example}
 
-In the first example, "(r:first_record)" is an explicit annotation
-telling OCaml that the type of "r" is "first_record". With this
-annotation, Ocaml knows that "r.x" refers to the "x" field of the first
-record type. Similarly, the type annotation in the second example makes
-it clear to OCaml that the constructors "A", "B" and "C" come from the
-first variant type. Contrarily, in the last example, OCaml has inferred
-by itself that the type of "r" can only be "first_record" and there are
-no needs for explicit type annotations.
+在第一个例子中，"(r:first_record)"是一个显式注释，它告诉OCaml参数"r"的类型是"first_record"。通过这个注释，Ocaml知道"r.x"是第一个记录类型的"x"字段。类似地，第二个示例中的类型注释向OCaml表明构造函数"A"、"B"、"C"来自第一个变体类型。相反地，在最后一个示例中，OCaml自己推断"r"的类型只能是"first_record"，不需要显式类型注释。
 
-Those explicit type annotations can in fact be used anywhere.
-Most of the time they are unnecessary, but they are useful to guide
-disambiguation, to debug unexpected type errors, or combined with some
-of the more advanced features of OCaml described in later chapters.
+实际上，这些显式类型注释可以在任何地方使用。在大多数情况下，它们不是必要的，但是它们对于指导消歧义、调试意外的类型错误或者结合后面章节中描述的OCaml的一些更高级的特性非常有用。
 
 Secondly, for records, OCaml can also deduce the right record type by
 looking at the whole set of fields used in a expression or pattern:
