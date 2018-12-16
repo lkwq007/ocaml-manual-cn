@@ -241,18 +241,14 @@ let f (First r) = r, r.x;;
 
 实际上，这些显式类型注释可以在任何地方使用。在大多数情况下，它们不是必要的，但是它们对于指导消歧义、调试意外的类型错误或者结合后面章节中描述的OCaml的一些更高级的特性非常有用。
 
-Secondly, for records, OCaml can also deduce the right record type by
-looking at the whole set of fields used in a expression or pattern:
+其次，对于记录，OCaml还可以通过查看表达式或模式中使用的字段集来推断正确的记录类型：
 \begin{caml_example}{toplevel}
 let project_and_rotate {x;y; _ } = { x= - y; y = x ; z = 0} ;;
 \end{caml_example}
-Since the fields "x" and "y" can only appear simultaneously in the first
-record type, OCaml infers that the type of "project_and_rotate" is
-"first_record -> first_record".
 
-In last resort, if there is not enough information to disambiguate between
-different fields or constructors, Ocaml picks the last defined type
-amongst all locally valid choices:
+由于字段"x"和"y"只能同时出现在第一个记录类型中，OCaml推断"project_and_rotate"的类型为"first_record -> first_record"。
+
+最后，如果没有足够的信息来消除不同字段或构造函数之间的歧义，OCaml会在所有本地有效的选项中选择最后定义的类型：
 
 \begin{caml_example}{toplevel}
 let look_at_xz {x;z} = x;;
