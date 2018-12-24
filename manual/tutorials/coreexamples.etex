@@ -254,14 +254,9 @@ let project_and_rotate {x;y; _ } = { x= - y; y = x ; z = 0} ;;
 let look_at_xz {x;z} = x;;
 \end{caml_example}
 
-Here, OCaml has inferred that the possible choices for the type of
-"{x;z}" are "first_record" and "middle_record", since the type
-"last_record" has no field "z". Ocaml then picks the type "middle_record"
-as the last defined type between the two possibilities.
+在这里，OCaml推断"{x;z}"类型的可能选择是"first_record"和"middle_record"，因为"last_record"类型没有字段"z"。随后，Ocaml会选择这两种可能性之间最后定义的类型"middle_record"。
 
-Beware that this last resort disambiguation is local: once Ocaml has
-chosen a disambiguation, it sticks to this choice, even if it leads to
-an ulterior type error:
+需要注意这种消歧义方法是局部性的：一旦Ocaml选择了一种类型，它就会坚持这个选择，即使此后它会导致一个类型错误：
 
 \begin{caml_example}{toplevel}[error]
 let look_at_x_then_y r =
@@ -272,11 +267,7 @@ let is_a_or_b x = match x with
   | B -> true;;
 \end{caml_example}
 
-Moreover, being the last defined type is a quite unstable position that
-may change surreptitiously after adding or moving around a type
-definition, or after opening a module (see chapter \ref{c:moduleexamples}).
-Consequently, adding explicit type annotations to guide disambiguation is
-more robust than relying on the last defined type disambiguation.
+此外，最后定义的类型处于一个非常不稳定的位置。在添加或移动类型定义，或者在打开一个模块之后（参见第\ref{c:moduleexamples}章），这一位置可能会偷偷地改变。因此，添加显式类型注释来完成类型消歧义比依赖于最后定义的类型进行消歧义更加健壮。
 
 \section{Imperative features}
 
