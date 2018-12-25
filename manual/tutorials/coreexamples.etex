@@ -344,15 +344,9 @@ r.id <- (fun x -> print_string "called id\n"; x);;
 g r;;
 \end{caml_example}
 
-\section{Exceptions}
+\section{异常}
 
-OCaml provides exceptions for signalling and handling exceptional
-conditions. Exceptions can also be used as a general-purpose non-local
-control structure, although this should not be overused since it can
-make the code harder to understand. Exceptions are declared with the
-"exception" construct, and signalled with the "raise" operator. For instance,
-the function below for taking the head of a list uses an exception to
-signal the case where an empty list is given.
+OCaml为异常提供了触发与处理机制。异常也可以用作一种通用的非本地控制结构，但您应该谨慎地使用这种方式，注意不应过度使用，因为它会使代码变得更难理解。异常是用"exception"构造声明的，并使用"raise"操作符触发。例如，下面用于获取列表头部的函数使用一个异常来告知输入为空列表的情况。
 \begin{caml_example}{toplevel}
 exception Empty_list;;
 let head l =
@@ -363,17 +357,13 @@ head [1;2];;
 head [];;
 \end{caml_example}
 
-Exceptions are used throughout the standard library to signal cases
-where the library functions cannot complete normally. For instance,
-the "List.assoc" function, which returns the data associated with a
-given key in a list of (key, data) pairs, raises the predefined
-exception "Not_found" when the key does not appear in the list:
+整个标准库都使用异常来应对库函数不能正常运行的情况。例如，"List.assoc"函数，该函数会在一个（键，值）列表中查找给定的键并返回与之对应的值，当键未出现在列表中时，将会触发预定义的"Not_found"异常：
 \begin{caml_example}{toplevel}
 List.assoc 1 [(0, "zero"); (1, "one")];;
 List.assoc 2 [(0, "zero"); (1, "one")];;
 \end{caml_example}
 
-Exceptions can be trapped with the "try"\ldots"with" construct:
+使用"try"\ldots"with"可以捕获异常：
 \begin{caml_example}{toplevel}
 let name_of_binary_digit digit =
   try
