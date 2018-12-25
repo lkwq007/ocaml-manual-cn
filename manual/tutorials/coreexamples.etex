@@ -269,15 +269,9 @@ let is_a_or_b x = match x with
 
 此外，最后定义的类型处于一个非常不稳定的位置。在添加或移动类型定义，或者在打开一个模块之后（参见第\ref{c:moduleexamples}章），这一位置可能会偷偷地改变。因此，添加显式类型注释来完成类型消歧义比依赖于最后定义的类型进行消歧义更加健壮。
 
-\section{Imperative features}
+\section{命令式特性}
 
-Though all examples so far were written in purely applicative style,
-OCaml is also equipped with full imperative features. This includes the
-usual "while" and "for" loops, as well as mutable data structures such
-as arrays. Arrays are either created by listing semicolon-separated element
-values between "[|" and "|]" brackets, or allocated and initialized with the
-"Array.make" function, then filled up later by assignments. For instance, the
-function below sums two vectors (represented as float arrays) componentwise.
+虽然到目前为止所有的示例都是用纯函数式风格编写的，但是OCaml也具有完整的命令式特性。这包括通常的"while"和"for"循环，以及可变的数据结构，如数组。数组可以通过在"[|"和"|]"方括号中列出以分号分隔的元素来创建，也可以通过 "Array.make" 函数进行分配和初始化，随后通过赋值进行填充。例如，下面定义的函数按分量对两个向量（表示为浮点数组）求和。
 \begin{caml_example}{toplevel}
 let add_vect v1 v2 =
   let len = min (Array.length v1) (Array.length v2) in
@@ -289,8 +283,7 @@ let add_vect v1 v2 =
 add_vect [| 1.0; 2.0 |] [| 3.0; 4.0 |];;
 \end{caml_example}
 
-Record fields can also be modified by assignment, provided they are
-declared "mutable" in the definition of the record type:
+记录字段也可以通过赋值进行修改，前提是它们在记录类型的定义中声明为可变的：
 \begin{caml_example}{toplevel}
 type mutable_point = { mutable x: float; mutable y: float };;
 let translate p dx dy =
@@ -300,6 +293,8 @@ translate mypoint 1.0 2.0;;
 mypoint;;
 \end{caml_example}
 
+OCaml没有内置的可以通过赋值修改变量值的“变量—标识符”概念（"let"绑定不是赋值，它在新的作用域中引入了新标识符）。不过，标准库使用操作符提供了“引用
+（reference，随后我们将简称引用为 "ref"）。“引用”是可变的间接单元格，我们可以使用"!"获取“引用”的当前内容，使用":="为“引用”的赋值。这意味着我们可以使用“引用”的"let"绑定来模拟可变变量。例如，这里有一个在数组上的插入排序:
 OCaml has no built-in notion of variable -- identifiers whose current
 value can be changed by assignment. (The "let" binding is not an
 assignment, it introduces a new identifier with a new scope.)
@@ -321,6 +316,7 @@ let insertion_sort a =
   done;;
 \end{caml_example}
 
+"ref"对于编写在两次调用之间维持状态的函数也很有用。例如，下面的伪随机数生成器将最后一次返回的数字保存在"ref"中：
 References are also useful to write functions that maintain a current
 state between two calls to the function. For instance, the following
 pseudo-random number generator keeps the last returned number in a
@@ -332,19 +328,14 @@ let random () =
   !current_rand;;
 \end{caml_example}
 
-Again, there is nothing magical with references: they are implemented as
-a single-field mutable record, as follows.
+同样的，"ref"并没有什么神奇之处：它们是作为单字段可变记录实现的：
 \begin{caml_example}{toplevel}
 type 'a ref = { mutable contents: 'a };;
 let ( ! ) r = r.contents;;
 let ( := ) r newval = r.contents <- newval;;
 \end{caml_example}
 
-In some special cases, you may need to store a polymorphic function in
-a data structure, keeping its polymorphism.  Doing this requires
-user-provided type annotations, since polymorphism is only introduced
-automatically for global definitions.  However, you can explicitly give
-polymorphic types to record fields.
+在某些特殊情况下，您可能需要在数据结构中存储多态函数，以保持其多态性。这样做需要用户提供的类型注释，因为只有全局定义才会自动引入多态性。但是，您可以显式地为记录字段提供多态类型。
 \begin{caml_example}{toplevel}
 type idref = { mutable id: 'a. 'a -> 'a };;
 let r = {id = fun x -> x};;
