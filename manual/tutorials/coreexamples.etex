@@ -406,15 +406,9 @@ let assoc_may_map f x l =
   | exception Not_found -> None
   | y -> f y;;
 \end{caml_example}
-Note that this construction is only useful if the exception is raised
-between "match"\ldots"with". Moreover, exceptions can only
-appear at the toplevel of such a pattern match.
-For instance, exception cases cannot currently be combined with an
-or-pattern: "exception A | exception B ->" \ldots .
+请注意，此结构仅在"match"\ldots"with"之间出现异常时才有效。而且，异常只能出现在这种模式匹配的顶层。例如，异常情况目前不能与or模式组合：“"exception A | exception B ->" \ldots。
 
-When exceptions are used as a control structure, it can be useful to make
-them as local as possible by using a locally defined exception.
-For instance, with
+当异常用作控制结构时，使用本地定义的异常使异常控制结构尽可能地本地化是很有用的。例如：
 \begin{caml_eval}
   let ref x: _ ref = {contents=x};;
 \end{caml_eval}
@@ -428,8 +422,7 @@ let fixpoint f x =
     done; assert false
   with Done -> !x;;
 \end{caml_example}
-the function "f" cannot raise a "Done" exception, which removes an
-entire class of misbehaving functions.
+在这里，函数"f"不能引发"Done"异常，这样就过滤掉了一类行为不匹配的函数。
 
 \section{Symbolic processing of expressions}
 
