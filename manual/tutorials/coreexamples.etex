@@ -424,12 +424,9 @@ let fixpoint f x =
 \end{caml_example}
 在这里，函数"f"不能引发"Done"异常，这样就过滤掉了一类行为不匹配的函数。
 
-\section{Symbolic processing of expressions}
+\section{表达式的符号处理}
 
-We finish this introduction with a more complete example
-representative of the use of OCaml for symbolic processing: formal
-manipulations of arithmetic expressions containing variables. The
-following variant type describes the expressions we shall manipulate:
+我们用一个更完整的例子来结束这一章的介绍，这个例子代表了OCaml在符号处理中的应用：包含变量的算术表达式的形式化操作。下面的变体类型描述了我们将要处理的表达式：
 \begin{caml_example}{toplevel}
 type expression =
     Const of float
@@ -441,9 +438,7 @@ type expression =
 ;;
 \end{caml_example}
 
-We first define a function to evaluate an expression given an
-environment that maps variable names to their values. For simplicity,
-the environment is represented as an association list.
+我们首先定义一个函数来计算给定环境下的表达式，该环境将变量名映射到它们的值。为了简单起见，将环境表示为一个关联列表。
 \begin{caml_example}{toplevel}
 exception Unbound_variable of string;;
 let rec eval env exp =
@@ -458,8 +453,7 @@ let rec eval env exp =
 eval [("x", 1.0); ("y", 3.14)] (Prod(Sum(Var "x", Const 2.0), Var "y"));;
 \end{caml_example}
 
-Now for a real symbolic processing, we define the derivative of an
-expression with respect to a variable "dv":
+现在，对于一个真正的符号处理过程，我们定义一个表达式对变量"dv"的导数：
 \begin{caml_example}{toplevel}
 let rec deriv exp dv =
   match exp with
@@ -474,20 +468,11 @@ let rec deriv exp dv =
 deriv (Quot(Const 1.0, Var "x")) "x";;
 \end{caml_example}
 
-\section{Pretty-printing}
+\section{美观打印}
 
-As shown in the examples above, the internal representation (also
-called {\em abstract syntax\/}) of expressions quickly becomes hard to
-read and write as the expressions get larger. We need a printer and a
-parser to go back and forth between the abstract syntax and the {\em
-concrete syntax}, which in the case of expressions is the familiar
-algebraic notation (e.g. "2*x+1").
+如以上例子所示，随着表达式的复杂化，表达式的内部表示（也称为抽象语法）也就很快变得难以读写。我们需要一台输出器和一个解析器来在抽象语法和具体语法之间完成转换。其中，具体语法在表达式的情况下，这是我们熟悉的代数表示法（如"2*x+1"）。
 
-For the printing function, we take into account the usual precedence
-rules (i.e. "*" binds tighter than "+") to avoid printing unnecessary
-parentheses. To this end, we maintain the current operator precedence
-and print parentheses around an operator only if its precedence is
-less than the current precedence.
+对于输出函数，我们考虑了通常的优先级规则（即"*"绑定比"+"更紧密）以避免打印不必要的括号。为此，我们需得知当前操作符的优先级，并且仅当操作符的优先级小于当前优先级时，才输出操作符周围的圆括号。
 \begin{caml_example}{toplevel}
 let print_expr exp =
   (* Local function definitions *)
@@ -611,22 +596,9 @@ print_expr (deriv e "x"); print_newline ();;
 %% the second space in "x - 1" causes the lexer to return the three
 %% expected tokens: "Ident \"x\"", then "Kwd \"-\"", then "Int(1)".
 
-\section{Standalone OCaml programs}
+\section{独立OCaml程序}
 
-All examples given so far were executed under the interactive system.
-OCaml code can also be compiled separately and executed
-non-interactively using the batch compilers "ocamlc" and "ocamlopt".
-The source code must be put in a file with extension ".ml". It
-consists of a sequence of phrases, which will be evaluated at runtime
-in their order of appearance in the source file. Unlike in interactive
-mode, types and values are not printed automatically; the program must
-call printing functions explicitly to produce some output.  The ";;" used
-in the interactive examples is not required in
-source files created for use with OCaml compilers, but can be helpful
-to mark the end of a top-level expression unambiguously even when
-there are syntax errors.
-Here is a
-sample standalone program to print Fibonacci numbers:
+到目前为止给出的所有示例都是在交互式系统下执行的。OCaml代码也可以被单独地编译，并使用批处理编译器"ocamlc"和"ocamlopt"非交互式地执行。这种情况下，源代码必须放在扩展名为".ml"的文件中。整个程序由一系列语句组成，这些语句将在运行时按照它们在源文件中出现的顺序被执行。与交互式模式不同，类型和值不是自动输出的，程序必须显式调用打印函数以产生一些输出。在交互式示例中使用的";;"在源文件中不是必需的，但是";;"的使用有助于明确地标记顶层表达式的结尾，即使在出现语法错误时也是如此。下面是一个输出斐波那契数的独立程序示例：
 \begin{verbatim}
 (* File fib.ml *)
 let rec fib n =
@@ -638,10 +610,7 @@ let main () =
   exit 0;;
 main ();;
 \end{verbatim}
-"Sys.argv" is an array of strings containing the command-line
-parameters. "Sys.argv.(1)" is thus the first command-line parameter.
-The program above is compiled and executed with the following shell
-commands:
+"Sys.argv"是一个包含命令行参数的字符串数组。因此，"Sys.argv.(1)"是第一个命令行参数。上面的程序可以通过以下shell命令编译与执行：
 \begin{verbatim}
 $ ocamlc -o fib fib.ml
 $ ./fib 10
@@ -650,11 +619,4 @@ $ ./fib 20
 10946
 \end{verbatim}
 
-More complex standalone OCaml programs are typically composed of
-multiple source files, and can link with precompiled libraries.
-Chapters~\ref{c:camlc} and~\ref{c:nativecomp} explain how to use the
-batch compilers "ocamlc" and "ocamlopt".  Recompilation of
-multi-file OCaml projects can be automated using third-party
-build systems, such as the
-\href{https://github.com/ocaml/ocamlbuild/}{ocamlbuild}
-compilation manager.
+更复杂的独立OCaml程序通常由多个源文件组成，同时也可以链接到预编译的库。第\ref{c:camlc}章和第\ref{c:nativecomp}章解释了如何使用批处理编译器"ocamlc"和"ocamlopt"。可以使用第三方构建系统（如\href{https://github.com/ocaml/ocamlbuild/}{ocamlbuild}编译管理器）完成多文件项目编译的自动化。
