@@ -1,19 +1,11 @@
-\chapter{The module system} \label{c:moduleexamples}
+\chapter{模块系统} \label{c:moduleexamples}
 %HEVEA\cutname{moduleexamples.html}
 
-This chapter introduces the module system of OCaml.
+本章介绍了OCaml的模块系统。
 
 \section{Structures}
 
-A primary motivation for modules is to package together related
-definitions (such as the definitions of a data type and associated
-operations over that type) and enforce a consistent naming scheme for
-these definitions. This avoids running out of names or accidentally
-confusing names. Such a package is called a {\em structure} and
-is introduced by the "struct"\ldots"end" construct, which contains an
-arbitrary sequence of definitions. The structure is usually given a
-name with the "module" binding. Here is for instance a structure
-packaging together a type of priority queues and their operations:
+模块的主要动机是将相关定义（例如数据类型的定义和该类型上的操作）打包在一起，并为这些定义强制赋予一致的命名模式。这样可以避免名称耗尽或意外地混淆名称。这样的包被称为结构（structure），由"struct"\ldots"end"构造引入，该结构可以包含任意定义序列。结构通常用"module"绑定来命名。例如，下面是将一种优先级队列及其操作打包在一起的结构：
 \begin{caml_example}{toplevel}
 module PrioQueue =
   struct
@@ -42,29 +34,19 @@ module PrioQueue =
       | Node(prio, elt, _, _) as queue -> (prio, elt, remove_top queue)
   end;;
 \end{caml_example}
-Outside the structure, its components can be referred to using the
-``dot notation'', that is, identifiers qualified by a structure name.
-For instance, "PrioQueue.insert" is the function "insert" defined
-inside the structure "PrioQueue" and "PrioQueue.queue" is the type
-"queue" defined in "PrioQueue".
+在结构外部，可以使用“点表示法”来引用其组件，即由结构名称限定的标识符。例如，"PrioQueue.insert"是在结构"PrioQueue"中定义的函数，"PrioQueue.queue"是在"PrioQueue"中定义的"queue"类型。
 \begin{caml_example}{toplevel}
 PrioQueue.insert PrioQueue.empty 1 "hello";;
 \end{caml_example}
 
-Another possibility is to open the module, which brings all
-identifiers defined inside the module in the scope of the current
-structure.
+另一种方式是打开模块，它将模块中定义的所有标识符都放在当前结构的范围内。
 
 \begin{caml_example}{toplevel}
   open PrioQueue;;
   insert empty 1 "hello";;
 \end{caml_example}
 
-Opening a module enables lighter access to its components, at the
-cost of making it harder to identify in which module a identifier
-has been defined. In particular, opened modules can shadow
-identifiers present in the current scope, potentially leading
-to confusing errors:
+打开模块可以更方便地访问其组件，但代价是更难识别在哪个模块中定义了哪个标识符。特别是，打开的模块可能会覆盖当前作用域中出现的标识符，从而可能导致混淆错误：
 
 \begin{caml_example}{toplevel}
   let empty = []
