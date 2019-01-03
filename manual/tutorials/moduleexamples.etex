@@ -5,7 +5,7 @@
 
 \section{Structures}
 
-模块的主要动机是将相关定义（例如数据类型的定义和该类型上的操作）打包在一起，并为这些定义强制赋予一致的命名模式。这样可以避免名称耗尽或意外地混淆名称。这样的包被称为结构（structure），由"struct"\ldots"end"构造引入，该结构可以包含任意定义序列。结构通常用"module"绑定来命名。例如，下面是将一种优先级队列及其操作打包在一起的结构：
+模块的主要动机是将相关定义（例如数据类型的定义和该类型上的操作）打包在一起，并为这些定义强制赋予一致的命名模式。这样可以避免名称耗尽或意外地混淆名称。这样的包被称为结构（structure），由"struct"\ldots"end"构造引入，该结构可以包含任意定义序列。结构通常用"module"绑定来命名。例如，下面是将一种优先队列及其操作打包在一起的结构：
 \begin{caml_example}{toplevel}
 module PrioQueue =
   struct
@@ -76,7 +76,7 @@ PrioQueue.insert PrioQueue.empty 1 "hello";;
   PrioQueue.[insert empty 1 "hello"];;
 \end{caml_example}
 
-还可以使用"include"语句将模块的组件复制到另一个模块中。这对于扩展现有模块特别实用。举例来说，我们可以添加一些函数，在优先级队列为空时返回一个可选值，而不是一个异常。
+还可以使用"include"语句将模块的组件复制到另一个模块中。这对于扩展现有模块特别实用。举例来说，我们可以添加一些函数，在优先队列为空时返回一个可选值，而不是一个异常。
 \begin{caml_example}{toplevel}
   module PrioQueueOpt =
   struct
@@ -90,16 +90,9 @@ PrioQueue.insert PrioQueue.empty 1 "hello";;
   end;;
 \end{caml_example}
 
-\section{Signatures}
+\section{签名}
 
-Signatures are interfaces for structures. A signature specifies
-which components of a structure are accessible from the outside, and
-with which type. It can be used to hide some components of a structure
-(e.g. local function definitions) or export some components with a
-restricted type. For instance, the signature below specifies the three
-priority queue operations "empty", "insert" and "extract", but not the
-auxiliary function "remove_top". Similarly, it makes the "queue" type
-abstract (by not providing its actual representation as a concrete type).
+签名是结构的接口。签名指定了结构的哪些组件可以由外部访问，以及暴露哪些类型。签名可以用于隐藏结构的某些组件（例如本地函数定义），或者导出具有受限类型的组件。例如，下面的签名指定了三个优先队列操作："empty"、"insert"、"extract"，但没有指定辅助函数"remove_top"。类似地，它使"queue"类型抽象化（不以具体类型提供其实际表示）。
 \begin{caml_example}{toplevel}
 module type PRIOQUEUE =
   sig
@@ -111,29 +104,23 @@ module type PRIOQUEUE =
     exception Queue_is_empty
   end;;
 \end{caml_example}
-Restricting the "PrioQueue" structure by this signature results in
-another view of the "PrioQueue" structure where the "remove_top"
-function is not accessible and the actual representation of priority
-queues is hidden:
+
+通过这个签名限制"PrioQueue"结构会产生"PrioQueue"结构的另一个视图，其中"remove_top"函数不可以被访问，并且优先队列的实际表示是隐藏的：
 \begin{caml_example}{toplevel}
 module AbstractPrioQueue = (PrioQueue : PRIOQUEUE);;
 AbstractPrioQueue.remove_top [@@expect error];;
 AbstractPrioQueue.insert AbstractPrioQueue.empty 1 "hello";;
 \end{caml_example}
-The restriction can also be performed during the definition of the
-structure, as in
+这种限制也可以在结构的定义过程中执行，如：
 \begin{verbatim}
 module PrioQueue = (struct ... end : PRIOQUEUE);;
 \end{verbatim}
-An alternate syntax is provided for the above:
+也可以使用另一种语法完成限制：
 \begin{verbatim}
 module PrioQueue : PRIOQUEUE = struct ... end;;
 \end{verbatim}
 
-Like for modules, it is possible to include a signature to copy
-its components inside the current signature. For instance, we
-can extend the PRIOQUEUE signature with the "extract_opt"
-function:
+与模块一样，可以包含一个签名来将其组件复制到当前签名中。例如，我们可以使用"extract_opt"函数扩展"PRIOQUEUE"签名:
 
 \begin{caml_example}{toplevel}
 module type PRIOQUEUE_WITH_OPT =
