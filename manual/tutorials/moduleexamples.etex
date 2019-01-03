@@ -131,13 +131,9 @@ module type PRIOQUEUE_WITH_OPT =
 \end{caml_example}
 
 
-\section{Functors}
+\section{仿函数}
 
-Functors are ``functions'' from modules to modules. Functors let you create
-parameterized modules and then provide other modules as parameter(s) to get
-a specific implementation.  For instance, a "Set" module implementing sets
-as sorted lists could be parameterized to work with any module that provides
-an element type and a comparison function "compare" (such as "OrderedString"):
+仿函数（functor，又称为函子）是从一个模块到另一个模块的“函数”。仿函数允许您创建参数化模块，然后将其他模块作为参数以获得特定的实现。例如，可以参数化"Set"模块，将"Set"实现为有序列表，以与任何提供元素类型和比较函数"compare"（如"OrderedString"）的模块一起工作：
 
 \begin{caml_example}{toplevel}
 type comparison = Less | Equal | Greater;;
@@ -170,8 +166,7 @@ module Set =
             | Greater -> member x tl
     end;;
 \end{caml_example}
-By applying the "Set" functor to a structure implementing an ordered
-type, we obtain set operations for this type:
+通过将"Set"仿函数应用到实现有序类型的结构中，我们可以得到该类型的集合运算：
 \begin{caml_example}{toplevel}
 module OrderedString =
   struct
@@ -182,7 +177,7 @@ module StringSet = Set(OrderedString);;
 StringSet.member "bar" (StringSet.add "foo" StringSet.empty);;
 \end{caml_example}
 
-\section{Functors and type abstraction}
+\section{仿函数和类型抽象}
 
 As in the "PrioQueue" example, it would be good style to hide the
 actual implementation of the type "set", so that users of the
