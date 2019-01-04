@@ -179,12 +179,7 @@ StringSet.member "bar" (StringSet.add "foo" StringSet.empty);;
 
 \section{仿函数和类型抽象}
 
-As in the "PrioQueue" example, it would be good style to hide the
-actual implementation of the type "set", so that users of the
-structure will not rely on sets being lists, and we can switch later
-to another, more efficient representation of sets without breaking
-their code. This can be achieved by restricting "Set" by a suitable
-functor signature:
+就像在"PrioQueue"示例中一样，隐藏"set"类型的实际实现是一种很好的风格，这样结构的用户就不会依赖于集合是列表的情况。这意味着我们可以在不破坏现有代码的情况下切换到另一种更有效的集合表示形式。我们可以通过给"Set"加以合适的仿函数签名限制来实现这一目的：
 \begin{caml_example}{toplevel}
 module type SETFUNCTOR =
   functor (Elt: ORDERED_TYPE) ->
@@ -200,9 +195,7 @@ module AbstractStringSet = AbstractSet(OrderedString);;
 AbstractStringSet.add "gee" AbstractStringSet.empty;;
 \end{caml_example}
 
-In an attempt to write the type constraint above more elegantly,
-one may wish to name the signature of the structure
-returned by the functor, then use that signature in the constraint:
+为了更优雅地编写上面的类型约束，我们可能希望命名仿函数返回结构的签名，然后在约束中使用该签名：
 \begin{caml_example}{toplevel}
 module type SET =
   sig
@@ -216,6 +209,7 @@ module WrongSet = (Set : functor(Elt: ORDERED_TYPE) -> SET);;
 module WrongStringSet = WrongSet(OrderedString);;
 WrongStringSet.add "gee" WrongStringSet.empty [@@expect error];;
 \end{caml_example}
+这里的问题是"SET"抽象地指定了"element"类型，
 The problem here is that "SET" specifies the type "element"
 abstractly, so that the type equality between "element" in the result
 of the functor and "t" in its argument is forgotten. Consequently,
