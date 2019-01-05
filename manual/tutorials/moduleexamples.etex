@@ -209,36 +209,19 @@ module WrongSet = (Set : functor(Elt: ORDERED_TYPE) -> SET);;
 module WrongStringSet = WrongSet(OrderedString);;
 WrongStringSet.add "gee" WrongStringSet.empty [@@expect error];;
 \end{caml_example}
-这里的问题是"SET"抽象地指定了"element"类型，
-The problem here is that "SET" specifies the type "element"
-abstractly, so that the type equality between "element" in the result
-of the functor and "t" in its argument is forgotten. Consequently,
-"WrongStringSet.element" is not the same type as "string", and the
-operations of "WrongStringSet" cannot be applied to strings.
-As demonstrated above, it is important that the type "element" in the
-signature "SET" be declared equal to "Elt.t"; unfortunately, this is
-impossible above since "SET" is defined in a context where "Elt" does
-not exist. To overcome this difficulty, OCaml provides a
-"with type" construct over signatures that allows enriching a signature
-with extra type equalities:
+这里的问题是"SET"抽象地指定了"element"类型，这样就丢失了仿函数返回结果中"element"类型与仿函数参数"t"类型的相等性。因此，"WrongStringSet.element"与"string"是不同的类型, "WrongStringSet"中的操作无法所用于字符串。如上所示，保证操作可用的关键是将签名"SET"中的"element"类型声明为"Elt.t"类型。但不幸的是，我们无法做到这一点，因为"SET"是在"Elt"不存在的上下文中被定义的。为了克服这个问题，OCaml提供了"with type"结构在现有签名的基础上进一步构造签名，它允许使用额外的类型等式来扩展签名：
 \begin{caml_example}{toplevel}
 module AbstractSet2 =
   (Set : functor(Elt: ORDERED_TYPE) -> (SET with type element = Elt.t));;
 \end{caml_example}
 
-As in the case of simple structures, an alternate syntax is provided
-for defining functors and restricting their result:
+在简单结构的情况下，OCaml提供了另一种语法来定义仿函数并限制其结果：
 \begin{verbatim}
 module AbstractSet2(Elt: ORDERED_TYPE) : (SET with type element = Elt.t) =
   struct ... end;;
 \end{verbatim}
 
-Abstracting a type component in a functor result is a powerful
-technique that provides a high degree of type safety, as we now
-illustrate. Consider an ordering over character strings that is
-different from the standard ordering implemented in the
-"OrderedString" structure. For instance, we compare strings without
-distinguishing upper and lower case.
+在仿函数结果中抽象类型组件是一种强大的技术，它提供了高度的类型安全性，正如我们现在展示的那样。考虑一个不同于"OrderedString"结构中实现的标准排序的字符串排序方式。例如，我们比较字符串时不区分大小写。
 \begin{caml_example}{toplevel}
 module NoCaseString =
   struct
