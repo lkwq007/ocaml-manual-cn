@@ -232,16 +232,7 @@ module NoCaseString =
 module NoCaseStringSet = AbstractSet(NoCaseString);;
 NoCaseStringSet.add "FOO" AbstractStringSet.empty [@@expect error];;
 \end{caml_example}
-Note that the two types "AbstractStringSet.set" and
-"NoCaseStringSet.set" are not compatible, and values of these
-two types do not match. This is the correct behavior: even though both
-set types contain elements of the same type (strings), they are built
-upon different orderings of that type, and different invariants need
-to be maintained by the operations (being strictly increasing for the
-standard ordering and for the case-insensitive ordering). Applying
-operations from "AbstractStringSet" to values of type
-"NoCaseStringSet.set" could give incorrect results, or build
-lists that violate the invariants of "NoCaseStringSet".
+注意，这两种类型"AbstractStringSet.set"和"NoCaseStringSet.set"是互不兼容的，这两种类型的值也是不匹配的。这是正确的行为：尽管这两种集合类型都包含相同类型（字符串）的元素，但它们是基于该类型的不同顺序构建的，操作需要维护不同的不变式（基于标准排序的严格递增与大小写不敏感的递增）。将"AbstractStringSet"中的操作应用到"NoCaseStringSet.set"类型的值可能会给出不正确的结果，或者构建违背出"NoCaseStringSet"不变式的列表。
 
 \section{Modules and separate compilation}
 
