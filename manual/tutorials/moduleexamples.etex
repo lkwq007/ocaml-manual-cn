@@ -234,29 +234,16 @@ NoCaseStringSet.add "FOO" AbstractStringSet.empty [@@expect error];;
 \end{caml_example}
 注意，这两种类型"AbstractStringSet.set"和"NoCaseStringSet.set"是互不兼容的，这两种类型的值也是不匹配的。这是正确的行为：尽管这两种集合类型都包含相同类型（字符串）的元素，但它们是基于该类型的不同顺序构建的，操作需要维护不同的不变式（基于标准排序的严格递增与大小写不敏感的递增）。将"AbstractStringSet"中的操作应用到"NoCaseStringSet.set"类型的值可能会给出不正确的结果，或者构建违背出"NoCaseStringSet"不变式的列表。
 
-\section{Modules and separate compilation}
+\section{模块和单独编译}
 
-All examples of modules so far have been given in the context of the
-interactive system. However, modules are most useful for large,
-batch-compiled programs. For these programs, it is a practical
-necessity to split the source into several files, called compilation
-units, that can be compiled separately, thus minimizing recompilation
-after changes.
+到目前为止，模块的所有示例都是在交互系统的上下文中给出的。然而，模块对于需要批量编译的大型程序最为实用。对于这些程序，实际上我们有必要将源代码分割成若干个文件（称为编译单元）。这些文件可以被单独编译，从而最小化修改代码后的重新编译量。
 
-In OCaml, compilation units are special cases of structures
-and signatures, and the relationship between the units can be
-explained easily in terms of the module system. A compilation unit \var{A}
-comprises two files:
+在OCaml中，编译单元是结构和签名的特例，可以很容易地用模块系统来解释单元之间的关系。编译单元\var{A}包括两个文件：
 \begin{itemize}
-\item the implementation file \var{A}".ml", which contains a sequence
-of definitions, analogous to the inside of a "struct"\ldots"end"
-construct;
-\item the interface file \var{A}".mli", which contains a sequence of
-specifications, analogous to the inside of a "sig"\ldots"end"
-construct.
+\item 实现文件\var{A}".ml"，它包含一系列定义，类似于"struct"\ldots"end"结构的内部；
+\item 接口文件\var{A}".mli"，它包含一系列规范，类似于"sig"\ldots"end"结构的内部。
 \end{itemize}
-These two files together define a structure named \var{A} as if
-the following definition was entered at top-level:
+这两个文件一起定义了一个名为\var{A}的结构，就如同下面的定义是在顶层环境中输入的一样：
 \begin{alltt}
 module \var{A}: sig (* \hbox{contents of file} \var{A}.mli *) end
         = struct (* \hbox{contents of file} \var{A}.ml *) end;;
