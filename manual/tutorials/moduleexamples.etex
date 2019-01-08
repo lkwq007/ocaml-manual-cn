@@ -248,23 +248,15 @@ NoCaseStringSet.add "FOO" AbstractStringSet.empty [@@expect error];;
 module \var{A}: sig (* \hbox{contents of file} \var{A}.mli *) end
         = struct (* \hbox{contents of file} \var{A}.ml *) end;;
 \end{alltt}
-The files that define the compilation units can be compiled separately
-using the "ocamlc -c" command (the "-c" option means ``compile only, do
-not try to link''); this produces compiled interface files (with
-extension ".cmi") and compiled object code files (with extension
-".cmo"). When all units have been compiled, their ".cmo" files are
-linked together using the "ocamlc" command. For instance, the following
-commands compile and link a program composed of two compilation units
-"Aux" and "Main":
+定义编译单元的文件可以使用"ocamlc -c"命令单独编译("-c"选项表示“仅编译，但不进行链接”)；这将生成编译后的接口文件（扩展名为".cmi"）和编译后的目标代码文件（扩展名为".cmo"）。编译完所有单元后，可以使用"ocamlc"命令将它们的".cmo"文件链接到一起。例如，下面的命令编译并链接了一个由"Aux"和"Main"编译单元组成的程序：
 \begin{verbatim}
-$ ocamlc -c Aux.mli                     # produces aux.cmi
-$ ocamlc -c Aux.ml                      # produces aux.cmo
-$ ocamlc -c Main.mli                    # produces main.cmi
-$ ocamlc -c Main.ml                     # produces main.cmo
+$ ocamlc -c Aux.mli                     # 生成 aux.cmi
+$ ocamlc -c Aux.ml                      # 生成 aux.cmo
+$ ocamlc -c Main.mli                    # 生成 main.cmi
+$ ocamlc -c Main.ml                     # 生成 main.cmo
 $ ocamlc -o theprogram Aux.cmo Main.cmo
 \end{verbatim}
-The program behaves exactly as if the following phrases were entered
-at top-level:
+该程序的行为就如同在顶层环境中输入如下语句一样：
 \begin{alltt}
 module Aux: sig (* \rminalltt{contents of} Aux.mli *) end
           = struct (* \rminalltt{contents of} Aux.ml *) end;;
