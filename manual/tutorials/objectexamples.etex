@@ -42,13 +42,10 @@
 
 \end{htmlonly}
 
-\section{Classes and objects}
+\section{类与对象}
 \label{ss:classes-and-objects}
 
-The class "point" below defines one instance variable "x" and two methods
-"get_x" and "move". The initial value of the instance variable is "0".
-The variable "x" is declared mutable, so the method "move" can change
-its value.
+下面的"point"类定义了一个实例变量"x"与两个方法"get_x"和"move"。其中实例变量的初始值是"0"。变量"x"被声明为可变的，因此"move"方法可以更改它的值。
 \begin{caml_example}{toplevel}
 class point =
   object
@@ -58,26 +55,20 @@ class point =
   end;;
 \end{caml_example}
 
-We now create a new point "p", instance of the "point" class.
+现在我们创建一个"point"类的实例，点"p"。
 \begin{caml_example}{toplevel}
 let p = new point;;
 \end{caml_example}
-Note that the type of "p" is "point". This is an abbreviation
-automatically defined by the class definition above. It stands for the
-object type "<get_x : int; move : int -> unit>", listing the methods
-of class "point" along with their types.
+需要注意，"p"的类型是"point"。这其实是由上面的类定义所自动定义的缩写。它代表对象类型"<get_x : int; move : int -> unit>"，该类型给出了"point"包含的方法及它们的类型。
 
-We now invoke some methods of "p":
+我们现在可以调用"p"的一些方法：
 \begin{caml_example}{toplevel}
 p#get_x;;
 p#move 3;;
 p#get_x;;
 \end{caml_example}
 
-The evaluation of the body of a class only takes place at object
-creation time.  Therefore, in the following example, the instance
-variable "x" is initialized to different values for two different
-objects.
+类中变量的求值只在对象被创建时进行。因此，在下面的示例中，实例变量"x"被初始化为两个不同对象的不同值。
 \begin{caml_example}{toplevel}
 let x0 = ref 0;;
 class point =
