@@ -263,18 +263,8 @@ module Aux: sig (* \rminalltt{contents of} Aux.mli *) end
 module Main: sig (* \rminalltt{contents of} Main.mli *) end
            = struct (* \rminalltt{contents of} Main.ml *) end;;
 \end{alltt}
-In particular, "Main" can refer to "Aux": the definitions and
-declarations contained in "Main.ml" and "Main.mli" can refer to
-definition in "Aux.ml", using the "Aux."\var{ident} notation, provided
-these definitions are exported in "Aux.mli".
+"Main"可以引用"Aux"模块："Main.ml"和"Main.mli"中包含的定义和声明可以通过"Aux."\var{ident}的方式引用"Aux.ml"中由"Aux.mli"所导出的定义。
 
-The order in which the ".cmo" files are given to "ocamlc" during the
-linking phase determines the order in which the module definitions
-occur. Hence, in the example above, "Aux" appears first and "Main" can
-refer to it, but "Aux" cannot refer to "Main".
+在链接阶段，"ocamlc"参数中".cmo"文件列表的顺序决定了模块定义生成的顺序。因此，在上面的例子中，"Aux"应位于"Main"前面，这样"Main"可以引用"Aux"，但是"Aux"不能引用"Main"。
 
-Note that only top-level structures can be mapped to
-separately-compiled files, but neither functors nor module types.
-However, all module-class objects can appear as components of a
-structure, so the solution is to put the functor or module type
-inside a structure, which can then be mapped to a file.
+需要注意，只能将顶级结构映射到单独编译的文件，但仿函数或模块类型不能被直接映射到文件。但是，所有的模块类对象都可以作为结构的组件出现，因此我们可以将仿函数或模块类型放置在结构中，然后将结构映射到文件中。
