@@ -1,41 +1,34 @@
-\chapter{Objects in OCaml}
+\chapter{OCaml中的对象}
 \label{c:objectexamples}
 %HEVEA\cutname{objectexamples.html}
-{\it (Chapter written by Jérôme Vouillon, Didier Rémy and Jacques Garrigue)}
+{\it (作者：Jérôme Vouillon、Didier Rémy、Jacques Garrigue)}
 
 \bigskip
 
-\noindent This chapter gives an overview of the object-oriented features of
-OCaml.
+\noindent 本章概述了OCaml的面向对象特性。
 
-Note that the relationship between object, class and type in OCaml is
-different than in mainstream object-oriented languages such as Java and
-C++, so you shouldn't assume that similar keywords mean the same thing.
-Object-oriented features are used much less frequently in OCaml than
-in those languages.  OCaml has alternatives that are often more appropriate,
-such as modules and functors.  Indeed, many OCaml programs do not use objects
-at all.
+请注意，OCaml中的对象、类和类型之间的关系与主流面向对象语言（如Java和C++）中的关系不同，因此您不应该假设类似的关键字具有相同的含义。与那些语言相比，在OCaml中使用面向对象特性的频率要低得多。使用OCaml时通常有更合适的选择，比如模块和函数。事实上，很多OCaml程序根本不使用对象。
 
 
 \begin{htmlonly}
 
-\ref{ss:classes-and-objects} Classes and objects \\
-\ref{ss:immediate-objects} Immediate objects \\
-\ref{ss:reference-to-self} Reference to self \\
-\ref{ss:initializers} Initializers \\
-\ref{ss:virtual-methods} Virtual methods \\
-\ref{ss:private-methods} Private methods \\
-\ref{ss:class-interfaces} Class interfaces \\
-\ref{ss:inheritance} Inheritance \\
-\ref{ss:multiple-inheritance} Multiple inheritance \\
-\ref{ss:parameterized-classes} Parameterized classes \\
-\ref{ss:polymorphic-methods} Polymorphic methods \\
-\ref{ss:using-coercions} Using coercions \\
-\ref{ss:functional-objects} Functional objects \\
-\ref{ss:cloning-objects} Cloning objects \\
-\ref{ss:recursive-classes} Recursive classes \\
+\ref{ss:classes-and-objects} 类和对象 \\
+\ref{ss:immediate-objects} 直接对象 \\
+\ref{ss:reference-to-self} 对自身的引用 \\
+\ref{ss:initializers} 初始化器 \\
+\ref{ss:virtual-methods} 虚方法 \\
+\ref{ss:private-methods} 私有方法 \\
+\ref{ss:class-interfaces} 类接口 \\
+\ref{ss:inheritance} 继承 \\
+\ref{ss:multiple-inheritance} 多继承 \\
+\ref{ss:parameterized-classes} 参数化类 \\
+\ref{ss:polymorphic-methods} 多态方法 \\
+\ref{ss:using-coercions} 强制转换 \\
+\ref{ss:functional-objects} 函数对象 \\
+\ref{ss:cloning-objects} 克隆对象 \\
+\ref{ss:recursive-classes} 递归类 \\
 \ref{ss:binary-methods} Binary methods \\
-\ref{ss:friends} Friends \\
+\ref{ss:friends} 友元 \\
 
 %%\ref{s:advanced-examples} {\bf Advanced examples}
 %%
