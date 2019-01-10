@@ -81,8 +81,7 @@ new point#get_x;;
 new point#get_x;;
 \end{caml_example}
 
-The class "point" can also be abstracted over the initial values of
-the "x" coordinate.
+"point"类还可以被抽象为"x"坐标的初值。
 \begin{caml_example}{toplevel}
 class point = fun x_init ->
   object
@@ -91,8 +90,7 @@ class point = fun x_init ->
     method move d = x <- x + d
   end;;
 \end{caml_example}
-Like in function definitions, the definition above can be
-abbreviated as:
+与函数定义一样，上面的定义可以缩写为：
 \begin{caml_example}{toplevel}
 class point x_init =
   object
@@ -101,16 +99,12 @@ class point x_init =
     method move d = x <- x + d
   end;;
 \end{caml_example}
-An instance of the class "point" is now a function that expects an
-initial parameter to create a point object:
+"point"类的一个实例现在是一个函数，该函数需要一个初始参数来创建一个点对象：
 \begin{caml_example}{toplevel}
 new point;;
 let p = new point 7;;
 \end{caml_example}
-The parameter "x_init" is, of course, visible in the whole body of the
-definition, including methods. For instance, the method "get_offset"
-in the class below returns the position of the object relative to its
-initial position.
+当然，参数"x_init"在定义的整个主体中都是可见的，包括方法。例如，下面类中的"get_offset"方法可以返回对象与其初始位置的相对位置。
 \begin{caml_example}{toplevel}
 class point x_init =
   object
@@ -131,10 +125,7 @@ class point x_init =
 %    method move d = x <- x + d
 %  end;;
 %\end{caml_example}
-Expressions can be evaluated and bound before defining the object body
-of the class. This is useful to enforce invariants. For instance,
-points can be automatically adjusted to the nearest point on a grid,
-as follows:
+在定义类的对象主体之前，可以对表达式进行求值和绑定。这对于增强不变式是有用的。例如，点可以被自动调整到坐标网格中最近的点，如下所示：
 \begin{caml_example}{toplevel}
 class adjusted_point x_init =
   let origin = (x_init / 10) * 10 in
@@ -145,29 +136,19 @@ class adjusted_point x_init =
     method move d = x <- x + d
   end;;
 \end{caml_example}
-(One could also raise an exception if the "x_init" coordinate is not
-on the grid.) In fact, the same effect could here be obtained by
-calling the definition of class "point" with the value of the
-"origin".
+（当"x_init"坐标不在坐标网格上时，可能会引发异常）事实上，这里也可以通过使用"origin"的值调用"point"类的定义来获得相同的效果。
 \begin{caml_example}{toplevel}
 class adjusted_point x_init =  point ((x_init / 10) * 10);;
 \end{caml_example}
-An alternate solution would have been to define the adjustment in
-a special allocation function:
+另一种解决办法是在一个特殊的分配函数中进行调整：
 \begin{caml_example}{toplevel}
 let new_adjusted_point x_init = new point ((x_init / 10) * 10);;
 \end{caml_example}
-However, the former pattern is generally more appropriate, since
-the code for adjustment is part of the definition of the class and will be
-inherited.
+但是，前一种模式通常更合适，因为用于调整的代码是类定义的一部分，可以被继承。
 
-This ability provides class constructors as can be found in other
-languages. Several constructors can be defined this way to build objects of
-the same class but with different initialization patterns; an
-alternative is to use initializers, as described below in section
-\ref{ss:initializers}.
+这种机制提供了其他语言中的类构造函数。可以用这种方式定义几个构造函数来构建具有相同类中具备不同初始化模式的对象；另一种方法是使用初始化器，如下面的\ref{ss:initializers}节所述。
 
-\section{Immediate objects}
+\section{直接对象}
 \label{ss:immediate-objects}
 
 There is another, more direct way to create an object: create it
