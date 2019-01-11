@@ -151,12 +151,9 @@ let new_adjusted_point x_init = new point ((x_init / 10) * 10);;
 \section{直接对象}
 \label{ss:immediate-objects}
 
-There is another, more direct way to create an object: create it
-without going through a class.
+还有另一种更直接的方法来创建对象：不通过类来创建它。
 
-The syntax is exactly the same as for class expressions, but the
-result is a single object rather than a class. All the constructs
-described in the rest of this section also apply to immediate objects.
+这种方法的语法与类表达式完全相同，但是结果是一个对象而不是一个类。本节其余部分中描述的所有结构也适用于直接对象。
 \begin{caml_example}{toplevel}
 let p =
   object
@@ -169,19 +166,14 @@ p#move 3;;
 p#get_x;;
 \end{caml_example}
 
-Unlike classes, which cannot be defined inside an expression,
-immediate objects can appear anywhere, using variables from their
-environment.
+与类不能在表达式中定义这一点不同，直接对象可以出现在任何地方，并使用它们所在环境中的变量。
 \begin{caml_example}{toplevel}
 let minmax x y =
   if x < y then object method min = x method max = y end
   else object method min = y method max = x end;;
 \end{caml_example}
 
-Immediate objects have two weaknesses compared to classes: their types
-are not abbreviated, and you cannot inherit from them. But these two
-weaknesses can be advantages in some situations, as we will see
-in sections \ref{ss:reference-to-self} and \ref{ss:parameterized-classes}.
+与类相比，直接对象有两个缺点：它们的类型没有缩写，并且不能被继承。但是这两个缺点在某些情况下可能是优点，我们将在\ref{ss:reference-to-self}和\ref{ss:parameterized-classes}节中进行阐释。
 
 \section{Reference to self}
 \label{ss:reference-to-self}
