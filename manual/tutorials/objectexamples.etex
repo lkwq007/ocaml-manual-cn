@@ -14,7 +14,7 @@
 
 \ref{ss:classes-and-objects} 类和对象 \\
 \ref{ss:immediate-objects} 直接对象 \\
-\ref{ss:reference-to-self} 对自身的引用 \\
+\ref{ss:reference-to-self} 引用self \\
 \ref{ss:initializers} 初始化器 \\
 \ref{ss:virtual-methods} 虚方法 \\
 \ref{ss:private-methods} 私有方法 \\
@@ -175,13 +175,10 @@ let minmax x y =
 
 与类相比，直接对象有两个缺点：它们的类型没有缩写，并且不能被继承。但是这两个缺点在某些情况下可能是优点，我们将在\ref{ss:reference-to-self}和\ref{ss:parameterized-classes}节中进行阐释。
 
-\section{Reference to self}
+\section{引用self}
 \label{ss:reference-to-self}
 
-A method or an initializer can invoke methods on self (that is,
-the current object).  For that, self must be explicitly bound, here to
-the variable "s" ("s" could be any identifier, even though we will
-often choose the name "self".)
+方法或初始化器可以调用self（即当前对象）上的方法。为此，必须显式地将self绑定到变量"s" （事实上"s"可以是任何标识符，尽管我们通常会选择"self"这个名称）。
 \begin{caml_example}{toplevel}
 class printable_point x_init =
   object (s)
@@ -193,12 +190,9 @@ class printable_point x_init =
 let p = new printable_point 7;;
 p#print;;
 \end{caml_example}
-Dynamically, the variable "s" is bound at the invocation of a method.  In
-particular, when the class "printable_point" is inherited, the variable
-"s" will be correctly bound to the object of the subclass.
+变量"s"会在方法调用时被动态地绑定。特别是，当"printable_point"类被继承时，变量"s"将被正确地绑定到子类的对象上。
 
-A common problem with self is that, as its type may be extended in
-subclasses, you cannot fix it in advance. Here is a simple example.
+self的一个常见问题是，由于它的类型可能在子类中被扩展，所以您不能预先固定它的类型。这里有一个简单的例子。
 \begin{caml_example}{toplevel}
 let ints = ref [];;
 class my_int =
@@ -207,13 +201,7 @@ class my_int =
     method register = ints := self :: !ints
   end [@@expect error];;
 \end{caml_example}
-You can ignore the first two lines of the error message. What matters
-is the last one: putting self into an external reference would make it
-impossible to extend it through inheritance.
-We will see in section \ref{ss:using-coercions} a workaround to this
-problem.
-Note however that, since immediate objects are not extensible, the
-problem does not occur with them.
+您可以忽略报错消息的前两行。最后一行才是最重要的：把self放在外部引用中将使我们无法通过继承来拓展它。我们将在第\ref{ss:using-coercions}节中看到这个问题的解决方案。但是请注意，由于直接对象是不可扩展的，所以使用它们时不会遭遇这一问题。
 \begin{caml_example}{toplevel}
 let my_int =
   object (self)
