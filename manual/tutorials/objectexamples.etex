@@ -210,14 +210,10 @@ let my_int =
   end;;
 \end{caml_example}
 
-\section{Initializers}
+\section{初始化器}
 \label{ss:initializers}
 
-Let-bindings within class definitions are evaluated before the object
-is constructed. It is also possible to evaluate an expression
-immediately after the object has been built. Such code is written as
-an anonymous hidden method called an initializer. Therefore, it can
-access self and the instance variables.
+类定义中的let绑定在对象被构建前被执行。我们也可以在构建对象之后立即执行其他表达式。这样的代码可以被编写为一个隐藏的匿名方法，我们称之为初始化器。因此，初始化器可以访问self和实例变量。
 \begin{caml_example}{toplevel}
 class printable_point x_init =
   let origin = (x_init / 10) * 10 in
@@ -230,11 +226,7 @@ class printable_point x_init =
   end;;
 let p = new printable_point 17;;
 \end{caml_example}
-Initializers cannot be overridden. On the contrary, all initializers are
-evaluated sequentially.
-Initializers are particularly useful to enforce invariants.
-Another example can be seen in section \ref{ss:bank-accounts}.
-
+初始化器是无法被重载的。相反，所有初始化器都是按顺序被执行的。初始化器对于保持不变式特别实用。另一个例子可以在\ref{ss:bank-accounts}节中看到。
 
 \section{Virtual methods}
 \label{ss:virtual-methods}
