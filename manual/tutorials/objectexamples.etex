@@ -213,7 +213,7 @@ let my_int =
 \section{初始化器}
 \label{ss:initializers}
 
-类定义中的let绑定在对象被构建前被执行。我们也可以在构建对象之后立即执行其他表达式。这样的代码可以被编写为一个隐藏的匿名方法，我们称之为初始化器。因此，初始化器可以访问self和实例变量。
+类定义中的let绑定在对象被构建前被执行。我们也可以在构建对象之后立即执行其他表达式。这样的代码可以被编写为一个隐藏的匿名方法，我们称之为初始化器（"initializer"）。因此，初始化器可以访问self和实例变量。
 \begin{caml_example}{toplevel}
 class printable_point x_init =
   let origin = (x_init / 10) * 10 in
@@ -228,15 +228,10 @@ let p = new printable_point 17;;
 \end{caml_example}
 初始化器是无法被重载的。相反，所有初始化器都是按顺序被执行的。初始化器对于保持不变式特别实用。另一个例子可以在\ref{ss:bank-accounts}节中看到。
 
-\section{Virtual methods}
+\section{虚方法}
 \label{ss:virtual-methods}
 
-It is possible to declare a method without actually defining it, using
-the keyword "virtual".  This method will be provided later in
-subclasses. A class containing virtual methods must be flagged
-"virtual", and cannot be instantiated (that is, no object of this class
-can be created). It still defines type abbreviations (treating virtual methods
-as other methods.)
+我们可以使用关键字"virtual"声明一个方法，但不实际定义它。这个方法将在随后的子类中提供。这种方法被称为虚方法。包含虚方法的类必须被包换"virtual"标记，并且不能被实例化（也就是说，不能创建该类的任何对象）。该类的定义仍然会定义类型缩写（将虚方法视为其他方法）。
 \begin{caml_example}{toplevel}
 class virtual abstract_point x_init =
   object (self)
@@ -253,8 +248,7 @@ class point x_init =
   end;;
 \end{caml_example}
 
-Instance variables can also be declared as virtual, with the same effect
-as with methods.
+实例变量也可以被声明为虚变量，其效果与方法相同。
 \begin{caml_example}{toplevel}
 class virtual abstract_point2 =
   object
