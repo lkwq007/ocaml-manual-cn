@@ -263,11 +263,10 @@ class point2 x_init =
   end;;
 \end{caml_example}
 
-\section{Private methods}
+\section{私有方法}
 \label{ss:private-methods}
 
-Private methods are methods that do not appear in object interfaces.
-They can only be invoked from other methods of the same object.
+私有方法是不出现在对象接口中的方法，它们只能被同一对象的其他方法调用。
 \begin{caml_example}{toplevel}
 class restricted_point x_init =
   object (self)
@@ -280,18 +279,11 @@ let p = new restricted_point 0;;
 p#move 10 [@@expect error] ;;
 p#bump;;
 \end{caml_example}
-Note that this is not the same thing as private and protected methods
-in Java or C++, which can be called from other objects of the same
-class. This is a direct consequence of the independence between types
-and classes in OCaml: two unrelated classes may produce
-objects of the same type, and there is no way at the type level to
-ensure that an object comes from a specific class. However a possible
-encoding of friend methods is given in section \ref{ss:friends}.
+请注意，这与Java或C++中的私有方法和受保护方法不同，后者可以从同一类的其他对象调用。这是OCaml中类型和类之间独立性的直接结果：两个不相关的类可能产生相同类型的对象，这意味着我们无法在类型上确保某一对象来自特定的类。然而，在\ref{ss:friends}节中给出了友元的编写方式。
 
-Private methods are inherited (they are by default visible in subclasses),
-unless they are hidden by signature matching, as described below.
+私有方法是会被子类继承的（默认情况下它们在子类中是可见的），除非它们被签名隐藏，如下所示。
 
-Private methods can be made public in a subclass.
+同时，私有方法可以在子类中被转化为公有。
 \begin{caml_example}{toplevel}
 class point_again x =
   object (self)
@@ -299,12 +291,9 @@ class point_again x =
     method virtual move : _
   end;;
 \end{caml_example}
-The annotation "virtual" here is only used to mention a method without
-providing its definition. Since we didn't add the "private"
-annotation, this makes the method public, keeping the original
-definition.
+这里的"virtual"标记只用于声明一个方法，但不提供其定义。由于我们没有添加私有标记，这使得该方法成为公有的，并保留了原始定义。
 
-An alternative definition is
+另一种定义方式是
 \begin{caml_example}{toplevel}
 class point_again x =
   object (self : < move : _; ..> )
