@@ -300,13 +300,9 @@ class point_again x =
     inherit restricted_point x
   end;;
 \end{caml_example}
-The constraint on self's type is requiring a public "move" method, and
-this is sufficient to override "private".
+self的类型约束要求使用公有的"move"方法，这足以重载"private"标记。
 
-One could think that a private method should remain private in a subclass.
-However, since the method is visible in a subclass, it is always possible
-to pick its code and define a method of the same name that runs that
-code, so yet another (heavier) solution would be:
+可以认为私有方法应该在子类中保持私有。然而，由于该方法在子类中是可见的，所以总是可以选取它的代码并定义运行该代码的同名方法，因此另一个（较重的）解决方案是：
 \begin{caml_example}{toplevel}
 class point_again x =
   object
@@ -315,8 +311,7 @@ class point_again x =
   end;;
 \end{caml_example}
 
-Of course, private methods can also be virtual. Then, the keywords must
-appear in this order "method private virtual".
+当然，私有方法也可以是虚拟的。其关键字必须按此顺序出现"method private virtual"。
 
 \section{Class interfaces}
 \label{ss:class-interfaces}
