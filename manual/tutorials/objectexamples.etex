@@ -313,15 +313,13 @@ class point_again x =
 
 当然，私有方法也可以是虚拟的。其关键字必须按此顺序出现"method private virtual"。
 
-\section{Class interfaces}
+\section{类接口}
 \label{ss:class-interfaces}
 
 
 %XXX Differentiate class type and class interface ?
 
-Class interfaces are inferred from class definitions.  They may also
-be defined directly and used to restrict the type of a class.  Like class
-declarations, they also define a new type abbreviation.
+类接口是从类定义中推导出来的。它们也可以直接被定义，并用于限制类的类型。像类声明一样，它们还定义了一个新的类型缩写。
 \begin{caml_example}{toplevel}
 class type restricted_point_type =
   object
@@ -330,19 +328,15 @@ class type restricted_point_type =
 end;;
 fun (x : restricted_point_type) -> x;;
 \end{caml_example}
-In addition to program documentation, class interfaces can be used to
-constrain the type of a class. Both concrete instance variables and concrete
-private methods can be hidden by a class type constraint. Public
-methods and virtual members, however, cannot.
+除了用于程序文档，类接口还可以被用来约束类的类型。具体的实例变量和私有方法都可以通过类的类型约束来隐藏。但是，公有方法和虚拟成员则无法被隐藏。
 \begin{caml_example}{toplevel}
 class restricted_point' x = (restricted_point x : restricted_point_type);;
 \end{caml_example}
-Or, equivalently:
+或者，相当于：
 \begin{caml_example}{toplevel}
 class restricted_point' = (restricted_point : int -> restricted_point_type);;
 \end{caml_example}
-The interface of a class can also be specified in a module
-signature, and used to restrict the inferred signature of a module.
+类的接口也可以在模块签名中指定，并用于限制模块的推导签名。
 \begin{caml_example}{toplevel}
 module type POINT = sig
   class restricted_point' : int ->
