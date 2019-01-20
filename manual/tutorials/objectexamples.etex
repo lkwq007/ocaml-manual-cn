@@ -350,13 +350,10 @@ module Point : POINT = struct
 end;;
 \end{caml_example}
 
-\section{Inheritance}
+\section{继承}
 \label{ss:inheritance}
 
-We illustrate inheritance by defining a class of colored points that
-inherits from the class of points.  This class has all instance
-variables and all methods of class "point", plus a new instance
-variable "c" and a new method "color".
+我们通过定义从"point"类继承的"colored_point"类来说明继承。这个类具备"point"类中的所有的实例变量和方法，与一个新的实例变量"c"和一个新的"color"方法。
 \begin{caml_example}{toplevel}
 class colored_point x (c : string) =
   object
@@ -367,16 +364,12 @@ class colored_point x (c : string) =
 let p' = new colored_point 5 "red";;
 p'#get_x, p'#color;;
 \end{caml_example}
-A point and a colored point have incompatible types, since a point has
-no method "color". However, the function "get_x" below is a generic
-function applying method "get_x" to any object "p" that has this
-method (and possibly some others, which are represented by an ellipsis
-in the type). Thus, it applies to both points and colored points.
+"point"和"colored_point"具有不兼容的类型，因为"point"没有"color"方法。但是，下面的"get_x"函数是一个通用函数，它可以将"get_x"方法应用于任何具有此方法的对象"p"（可能还有其他的对象，它们由类型中的省略号表示）。因此，它同时适用于"point"和"colored_point"。
 \begin{caml_example}{toplevel}
 let get_succ_x p = p#get_x + 1;;
 get_succ_x p + get_succ_x p';;
 \end{caml_example}
-Methods need not be declared previously, as shown by the example:
+在定义函数前不需要提前声明所使用的方法，如示例所示：
 \begin{caml_example}{toplevel}
 let set_x p = p#set_x;;
 let incr p = set_x p (get_succ_x p);;
