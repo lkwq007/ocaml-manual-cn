@@ -375,16 +375,10 @@ let set_x p = p#set_x;;
 let incr p = set_x p (get_succ_x p);;
 \end{caml_example}
 
-\section{Multiple inheritance}
+\section{多继承}
 \label{ss:multiple-inheritance}
 
-Multiple inheritance is allowed. Only the last definition of a method
-is kept: the redefinition in a subclass of a method that was visible in
-the parent class overrides the definition in the parent class.
-Previous definitions of a method can be reused by binding the related
-ancestor. Below, "super" is bound to the ancestor "printable_point".
-The name "super" is a pseudo value identifier that can only be used to
-invoke a super-class method, as in "super#print".
+OCaml允许多继承。其中只保留方法的最后一个定义：在子类中重新定义父类中可见的方法会覆盖父类中的定义。可以通过绑定相关的祖先来重用被覆盖方法的定义。下面，"super"被绑定到祖先"printable_point"上。"super"是一个伪值标识符，只能用于调用超类方法，如"super#print"。
 \begin{caml_example}{toplevel}
 class printable_colored_point y c =
   object (self)
@@ -401,23 +395,16 @@ class printable_colored_point y c =
 let p' = new printable_colored_point 17 "red";;
 p'#print;;
 \end{caml_example}
-A private method that has been hidden in the parent class is no longer
-visible, and is thus not overridden. Since initializers are treated as
-private methods, all initializers along the class hierarchy are evaluated,
-in the order they are introduced.
+隐藏在父类中的私有方法是不可见的，因此不会被覆盖。由于初始化器被视为私有方法，所以沿着类层次结构的所有初始化器都将按照引入它们的顺序被执行。
 
-Note that for clarity's sake, the method "print" is explicitly marked as
-overriding another definition by annotating the "method" keyword with
-an exclamation mark "!". If the method "print" were not overriding the
-"print" method of "printable_point", the compiler would raise an error:
+注意，为了清晰起见，方法"print"被通过"method"关键字与感叹号"!"显式地标记为覆盖另一个定义。如果方法print没有覆盖"printable_point"的"print"方法，编译器会抛出一个错误：
 \begin{caml_example}{toplevel}[error]
   object
     method! m = ()
   end;;
 \end{caml_example}
 
-This explicit overriding annotation also works
-for "val" and "inherit":
+这个显式覆盖标记对"val"和"inherit"也同样适用：
 \begin{caml_example}{toplevel}
 class another_printable_colored_point y c c' =
   object (self)
