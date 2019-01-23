@@ -414,11 +414,10 @@ class another_printable_colored_point y c c' =
   end;;
 \end{caml_example}
 
-\section{Parameterized classes}
+\section{参数化类}
 \label{ss:parameterized-classes}
 
-Reference cells can be implemented as objects.
-The naive definition fails to typecheck:
+可以将ref类型作为一个对象来实现。不过以下的定义无法通过类型检查：
 \begin{caml_example}{toplevel}[error]
 class oref x_init =
   object
@@ -427,11 +426,7 @@ class oref x_init =
     method set y = x <- y
   end;;
 \end{caml_example}
-The reason is that at least one of the methods has a polymorphic type
-(here, the type of the value stored in the reference cell), thus
-either the class should be parametric, or the method type should be
-constrained to a monomorphic type.  A monomorphic instance of the class could
-be defined by:
+报错的原因是至少有一个方法具有多态类型（这里是存储在ref单元中值的类型），因此这个类应该是参数化的，或者方法的类型应该被限制为单态类型。类的单态实例可以定义为：
 \begin{caml_example}{toplevel}
 class oref (x_init:int) =
   object
@@ -440,8 +435,7 @@ class oref (x_init:int) =
     method set y = x <- y
   end;;
 \end{caml_example}
-Note that since immediate objects do not define a class type, they have
-no such restriction.
+注意，由于直接对象不定义类类型，因此它们没有这样的限制。
 \begin{caml_example}{toplevel}
 let new_oref x_init =
   object
@@ -450,10 +444,7 @@ let new_oref x_init =
     method set y = x <- y
   end;;
 \end{caml_example}
-On the other hand, a class for polymorphic references must explicitly
-list the type parameters in its declaration. Class type parameters are
-listed between "[" and "]". The type parameters must also be
-bound somewhere in the class body by a type constraint.
+另一方面，用于多态ref的类必须在其声明中显式列出类型参数。类的类型参数被列在"["和"]"之间。类型参数还必须通过类型约束绑定到类主体中的某个位置。
 \begin{caml_example}{toplevel}
 class ['a] oref x_init =
   object
@@ -463,9 +454,7 @@ class ['a] oref x_init =
   end;;
 let r = new oref 1 in r#set 2; (r#get);;
 \end{caml_example}
-The type parameter in the declaration may actually be constrained in the
-body of the class definition. In the class type, the actual value of
-the type parameter is displayed in the "constraint" clause.
+声明中的类型参数实际上可能在类定义的主体中受到约束。在类类型中，类型参数的实际值在"constraint"子句中显示。
 \begin{caml_example}{toplevel}
 class ['a] oref_succ (x_init:'a) =
   object
@@ -474,10 +463,7 @@ class ['a] oref_succ (x_init:'a) =
     method set y = x <- y
   end;;
 \end{caml_example}
-Let us consider a more complex example: define a circle, whose center
-may be any kind of point.  We put an additional type
-constraint in method "move", since no free variables must remain
-unaccounted for by the class type parameters.
+让我们考虑一个更复杂的例子：定义一个圆，其圆心可以是任何类型的点。我们在方法"move"中添加了一个额外的类型约束，因为类的类型参数不能忽略任何自由变量。
 \begin{caml_example}{toplevel}
 class ['a] circle (c : 'a) =
   object
