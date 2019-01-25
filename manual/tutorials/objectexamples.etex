@@ -473,15 +473,7 @@ class ['a] circle (c : 'a) =
     method move = (center#move : int -> unit)
   end;;
 \end{caml_example}
-An alternate definition of "circle", using a "constraint" clause in
-the class definition, is shown below. The type "#point" used below in
-the "constraint" clause is an abbreviation produced by the definition
-of class "point". This abbreviation unifies with the type of any
-object belonging to a subclass of class "point". It actually expands to
-"< get_x : int; move : int -> unit; .. >". This leads to the following
-alternate definition of "circle", which has slightly stronger
-constraints on its argument, as we now expect "center" to have a
-method "get_x".
+我们可以使用"constraint"子句实现"circle"另一种定义方式。"constraint"子句中使用的"#point"类型是由"point"类的定义生成的缩写。这个缩写能够与属于"point"类子类的任何对象的类型相匹配。它实际上可以被扩展为"< get_x : int; move : int -> unit; .. >"。因此我们可以给出"circle"的替代定义如下，该定义对其参数有略微强一些的约束，因为我们现在期望"center"具备"get_x"方法。
 \begin{caml_example}{toplevel}
 class ['a] circle (c : 'a) =
   object
@@ -492,11 +484,7 @@ class ['a] circle (c : 'a) =
     method move = center#move
   end;;
 \end{caml_example}
-The class "colored_circle" is a specialized version of class
-"circle" that requires the type of the center to unify with
-"#colored_point", and adds a method "color". Note that when specializing a
-parameterized class, the instance of type parameter must always be
-explicitly given. It is again written between "[" and "]".
+"colored_circle"类是"circle"类的一个特别版本，它要求"center"的类型与"#colored_point"一致，并包括方法"color"。注意，在定制参数化类时，类型参数的实例必须始终被显式给出。它同样被写在"["和"]"之间。
 \begin{caml_example}{toplevel}
 class ['a] colored_circle c =
   object
