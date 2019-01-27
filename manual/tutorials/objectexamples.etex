@@ -494,13 +494,12 @@ class ['a] colored_circle c =
   end;;
 \end{caml_example}
 
-\section{Polymorphic methods}
+\section{多态方法}
 \label{ss:polymorphic-methods}
 
-While parameterized classes may be polymorphic in their contents, they
-are not enough to allow polymorphism of method use.
+虽然参数化类的内容可能是具有多态性的，但它们不足以允许方法使用的多态性。
 
-A classical example is defining an iterator.
+一个经典的例子是迭代器的定义。
 \begin{caml_example}{toplevel}
 List.fold_left;;
 class ['a] intlist (l : int list) =
@@ -509,23 +508,16 @@ class ['a] intlist (l : int list) =
     method fold f (accu : 'a) = List.fold_left f accu l
   end;;
 \end{caml_example}
-At first look, we seem to have a polymorphic iterator, however this
-does not work in practice.
+乍看之下，我们似乎得到了一个多态迭代器，但是这在实践中不起作用。
 \begin{caml_example}{toplevel}
 let l = new intlist [1; 2; 3];;
 l#fold (fun x y -> x+y) 0;;
 l;;
 l#fold (fun s x -> s ^ string_of_int x ^ " ") "" [@@expect error];;
 \end{caml_example}
-Our iterator works, as shows its first use for summation. However,
-since objects themselves are not polymorphic (only their constructors
-are), using the "fold" method fixes its type for this individual object.
-Our next attempt to use it as a string iterator fails.
+在第一次求和运算中，我们的迭代器可以工作。然而，由于对象本身不是多态的（只有它们的构造函数是多态的），因此"fold"方法的使用规定了这个对象的类型。因此，我们将其用作字符串迭代器第二次尝试就失败了。
 
-The problem here is that quantification was wrongly located: it is
-not the class we want to be polymorphic, but the "fold" method.
-This can be achieved by giving an explicitly polymorphic type in the
-method definition.
+这里的问题是量化过程被错误地定位了：我们所需要的不是多态类，而是多态的"fold"方法。这可以通过在方法定义中显式地提供多态类型来实现。
 \begin{caml_example}{toplevel}
 class intlist (l : int list) =
   object
