@@ -1,21 +1,21 @@
 \chapter{核心语言} \label{c:core-xamples}
 %HEVEA\cutname{coreexamples.html}
 
-这一部分文档是OCaml语言的教程简介。在这里，文档假设读者对一种传统语言（如C或Java）具有一定的熟悉度，但读者不必具备函数式编程的相关经验。本章主要介绍核心语言。
-第\ref{c:moduleexamples}章讨论模块系统，第\ref{c:objectexamples}涵盖面向对象特性，第~\ref{c:labl-examples} 章介绍核心语言的拓展（标签参数和多态变体），第\ref{c:advexamples}章则给出了若干高级示例.
+这一部分文档是 OCaml 语言的教程简介。在这里，本文假设读者对一种传统语言（如 C 或 Java）具有一定的熟悉度，但读者不必具备函数式编程的相关经验。本章主要介绍核心语言。第~\ref{c:moduleexamples} 章讨论模块系统，第~\ref{c:objectexamples} 章涵盖面向对象特性，第~\ref{c:labl-examples} 章介绍核心语言的拓展（标签参数和多态变体），第~\ref{c:advexamples} 章则给出了若干高级示例。
 
 \section{基础}
 
-对于OCaml的概览，我们将使用交互式系统（即顶层环境）。读者可以在Unix shell中运行 "ocaml" 命令或者在Windows系统中运行 "OCamlwin.exe" 程序来启动OCaml顶层环境。本教程以交互式系统会话的文本形式呈现：以 "#" 符号开始的行表示用户输入；系统的响应则在用户输入之下显示，系统响应行不具备前导的 "#" 符号。
+对于 OCaml 的概览，我们将使用交互式系统（即顶层环境）。读者可以在 Unix shell 中运行~"ocaml" 命令或者在 Windows 系统中运行~"OCamlwin.exe" 程序来启动 OCaml 顶层环境。本教程以交互式系统会话的文本形式呈现：以~"#" 符号开始的行表示用户输入；系统的响应则在用户输入之下显示，系统响应行不具备前导的~"#" 符号。
 
-在交互式系统中，面对 "#" 命令行，用户输入以 ";;" 结尾的Ocaml语句，系统将会动态地编译、执行这些语句，并输出运行结果。语句可以是简单的表达式，或者标识符（值或函数）的 "let" 定义。
+在交互式系统中，面对~"#" 命令行，用户输入以~";;" 结尾的Ocaml语句，系统将会动态地编译、执行这些语句，并输出运行结果。语句可以是简单的表达式，或者标识符（值或函数）的~"let" 定义。
 \begin{caml_example}{toplevel}
 1+2*3;;
 let pi = 4.0 *. atan 1.0;;
 let square x = x *. x;;
 square (sin pi) +. square (cos pi);;
 \end{caml_example}
-OCaml系统计算每个语句的值和类型。即使是函数参数也不需要显式的类型声明：系统将根据它们的使用情况自动推断出它们的类型。需要注意的是，在Ocaml中，整数与浮点数对应不同的数据类型，有不同的运算符： "+" 和 "*" 作用于整数, "+." 和 "*." 作用于浮点数。
+
+OCaml 系统会计算每个语句的值和类型。即使是函数参数也不需要显式的类型声明：系统将根据它们的使用情况自动推断出它们的类型。需要注意的是，在 Ocaml 中，整数与浮点数对应不同的数据类型，有不同的运算符：~"+" 和~"*" 作用于整数,~"+." 和~"*." 作用于浮点数。
 \begin{caml_example}{toplevel}[error]
 1.0 * 2;;
 \end{caml_example}
@@ -29,7 +29,7 @@ fib 10;;
 
 \section{数据类型}
 
-除了整数和浮点数之外，OCaml还提供常见的基本数据类型：
+除了整数和浮点数之外，OCaml 还提供常见的基本数据类型：
 \begin{itemize}%
 \item 布尔型
 \begin{caml_example}{toplevel}
@@ -51,14 +51,15 @@ let one = if true then 1 else 2;;
 \end{caml_example}
 \end{itemize}
 
-预定义的数据结构包括元组、数组和列表。同时OCaml也具备自行定义数据结构的通用机制，如记录和变体，稍后将更详细地介绍。现在，我们先主要考虑列表。列表可以通过分号分隔的元素的方括号列表的形式给出，也可以在空列表 "[]" （即 ``nil''）的基础上使用 "::" （`cons''）运算符在其前面添加元素以构建列表。 
+预定义的数据结构包括元组、数组和列表。同时 OCaml 也具备自行定义数据结构的通用机制，如记录和变体，稍后将更详细地介绍。现在，我们先主要考虑列表。列表可以通过分号分隔的元素的方括号列表的形式给出，也可以在空列表~"[]" （即“nil”）的基础上使用~"::" （“cons”）运算符在其前面添加元素以构建列表。 
 \begin{caml_example}{toplevel}
 let l = ["is"; "a"; "tale"; "told"; "etc."];;
 "Life" :: l;;
 \end{caml_example}
-与所有其他OCaml数据结构一样，列表不需要显式地在内存中分配和释放：OCaml中的内存管理都是完全自动的。类似地，OCaml中没有对指针的显式处理：OCaml编译器会在需要的时候自动引入指针。
 
-与大多数OCaml数据结构一样，检查和解构列表是通过模式匹配来执行的。列表模式具有与列表表达式完全相同的形式，其中标识符表示列表中未指定的部分。例如，下面是列表中的插入排序示例：
+与所有其他 OCaml 数据结构一样，列表不需要显式地在内存中分配和释放：OCaml 中的内存管理都是完全自动的。类似地，OCaml 中没有对指针的显式处理：OCaml 编译器会在需要的时候自动引入指针。
+
+与大多数 OCaml 数据结构一样，检查和解构列表是通过模式匹配来执行的。列表模式具有与列表表达式完全相同的形式，其中标识符表示列表中未指定的部分。例如，下面是列表中的插入排序示例：
 \begin{caml_example}{toplevel}
 let rec sort lst =
   match lst with
@@ -72,33 +73,36 @@ and insert elt lst =
 sort l;;
 \end{caml_example}
 
-上述示例中"sort"函数被推导出的类型"'a list -> 'a list"意味着"sort"函数可以作用于任何类型的列表。类型"'a"是一个类型变量，其代表任意给定的类型。"sort"可以作用于任何类型的列表的原因是，Ocaml中的比较运算（"="、"<="、等）是多态的：他们可以作用于相同类型的任意两个值。这使得"sort"也在所有的列表类型上具有多态性。
+上述示例中~"sort" 函数被推导出的类型~"'a list -> 'a list" 意味着~"sort" 函数可以作用于任何类型的列表。类型~"'a" 是一个类型变量，其代表任意给定的类型。"sort" 可以作用于任何类型的列表的原因是，Ocaml 中的比较运算（"="、"<="等）是多态的：他们可以作用于相同类型的任意两个值。这使得~"sort" 也在所有的列表类型上具有多态性。
 \begin{caml_example}{toplevel}
 sort [6;2;5;3];;
 sort [3.14; 2.718];;
 \end{caml_example}
 
-以上的"sort"函数并不会修改它的输入列表：它会构建并返回一个包含与输入列表相同元素且按升序排列的新列表。事实上，在OCaml中，一个列表在被构建后就无法被修改：我们将列表称之为不可变数据结构。大多数OCaml数据结构都是不可变的，但少数（其中最典型的是数组）是可变的，这意味着它们可以在任何时间被直接修改。
+以上的~"sort" 函数并不会修改它的输入列表：它会构建并返回一个包含与输入列表相同元素且按升序排列的新列表。事实上，在 OCaml 中，一个列表在被构建后就无法被修改：我们将列表称之为不可变数据结构。大多数 OCaml 数据结构都是不可变的，但少数（其中最典型的是数组）是可变的，这意味着它们可以在任何时间被直接修改。
 
-具有多个参数的函数类型的记法为"arg1_type -> arg2_type -> ... -> return_type"。例如，"insert"函数的类型为"'a -> 'a list -> 'a list"，其意味着"insert"接受两个参数，一个是任意类型"'a"的元素，另一个是具有相同类型"'a"的元素的列表，并返回相同类型的列表。
+具有多个参数的函数类型的记法为~"arg1_type -> arg2_type -> ... -> return_type"。例如，~"insert" 函数的类型为~"'a -> 'a list -> 'a list"，其意味着~"insert" 接受两个参数，一个是任意类型~"'a" 的元素，另一个是具有相同类型~"'a" 的元素的列表，并返回相同类型的列表。
 \section{函数作为值}
 
-OCaml是一种函数式语言：完全数学意义上的函数是被支持的，可以像其他数据一样自由地传递。例如，这是一个以浮点函数为参数并返回其导数函数近似值的"deriv"函数：
+OCaml 是一种函数式语言：完全数学意义上的函数是被支持的，可以像其他数据一样自由地传递。例如，这是一个以浮点函数为参数并返回其导数函数近似值的~"deriv" 函数：
 \begin{caml_example}{toplevel}
 let deriv f dx = function x -> (f (x +. dx) -. f x) /. dx;;
 let sin' = deriv sin 1e-6;;
 sin' pi;;
 \end{caml_example}
+
 我们甚至可以定义复合函数：
 \begin{caml_example}{toplevel}
 let compose f g = function x -> f (g x);;
 let cos2 = compose square cos;;
 \end{caml_example}
-将其他函数作为参数的函数称为“泛函”（functionals）或“高阶函数”（higher-order functions）。高阶函数对于在数据结构上提供迭代器或类似的通用操作非常有用。例如，OCaml标准库提供了一个"List.map"函数，它将给定的函数应用于列表的每个元素，并返回结果列表：
+
+将其他函数作为参数的函数称为“泛函”（functionals）或“高阶函数”（higher-order functions）。高阶函数对于在数据结构上提供迭代器或类似的通用操作非常有用。例如，OCaml 标准库提供了一个~"List.map" 函数，它将给定的函数应用于列表的每个元素，并返回结果列表：
 \begin{caml_example}{toplevel}
 List.map (function n -> n * 2 + 1) [0;1;2;3;4];;
 \end{caml_example}
-像一些其他列表和数组函数一样，这个函数是预定义的，因为它非常实用。但是事实上这个函数非常简单，我们可以定义"map"函数如下：
+
+像一些其他列表和数组函数一样，这个函数是预定义的，因为它非常实用。但是事实上这个函数非常简单，我们可以定义~"map" 函数如下：
 \begin{caml_example}{toplevel}
 let rec map f l =
   match l with
@@ -109,7 +113,7 @@ let rec map f l =
 \section{记录与变体}
 \label{s:tut-recvariants}
 
-用户定义的数据结构包括记录（record）和变体（variant）。两者都是用"type"声明定义的。在这里，我们声明一个记录类型来表示有理数。
+用户定义的数据结构包括记录（record）和变体（variant）。两者都是用~"type" 声明定义的。在这里，我们声明一个记录类型来表示有理数。
 \begin{caml_example}{toplevel}
 type ratio = {num: int; denom: int};;
 let add_ratio r1 r2 =
@@ -117,43 +121,52 @@ let add_ratio r1 r2 =
    denom = r1.denom * r2.denom};;
 add_ratio {num=1; denom=3} {num=2; denom=5};;
 \end{caml_example}
+
 记录字段也可以通过模式匹配来访问：
 \begin{caml_example}{toplevel}
 let integer_part r =
   match r with
     {num=num; denom=denom} -> num / denom;;
 \end{caml_example}
-由于这种模式匹配只有一种情况，因此可以在记录模式中直接展开参数"r"：
+
+由于这种模式匹配只有一种情况，因此可以在记录模式中直接展开参数~"r"：
 \begin{caml_example}{toplevel}
 let integer_part {num=num; denom=denom} = num / denom;;
 \end{caml_example}
+
 不需要的字段可以被省略：
 \begin{caml_example}{toplevel}
 let get_denom {denom=denom} = denom;;
 \end{caml_example}
-可选地，通过在字段列表的末尾加上通配符"_"，可以显式地显示缺少的字段：
+
+可选地，通过在字段列表的末尾加上通配符~"_"，可以显式地显示缺少的字段：
 \begin{caml_example}{toplevel}
 let get_num {num=num; _ } = num;;
 \end{caml_example}
-当"="的两边相同时，可以通过省略"=字段"部分来避免重复字段名：
+
+当~"=" 的两边相同时，可以通过省略"=字段"部分来避免重复字段名：
 \begin{caml_example}{toplevel}
 let integer_part {num; denom} = num / denom;;
 \end{caml_example}
+
 这个字段的简短记法在构造记录时也同样适用：
 \begin{caml_example}{toplevel}
 let ratio num denom = {num; denom};;
 \end{caml_example}
+
 最后，可以一次更新一条记录的几个字段：
 \begin{caml_example}{toplevel}
   let integer_product integer ratio = { ratio with num = integer * ratio.num };;
 \end{caml_example}
-使用如上的更新记法，"with"右侧的字段会被更新，其左侧记录中的其他字段会被原样复制。
+
+使用如上的更新记法，~"with" 右侧的字段会被更新，其左侧记录中的其他字段会被原样复制。
 
 变体类型的声明列出了该类型值的所有可能形式。每种情况都由一个名为构造函数的名称标识，构造函数既用于构造变体类型的值，也用于通过模式匹配检查它们的值。构造函数名称要大写，以便与变量名称（必须以小写字母开头）区分开来。例如，这里有一个用于混合运算（整数和浮点数）的变体类型：
 \begin{caml_example}{toplevel}
 type number = Int of int | Float of float | Error;;
 \end{caml_example}
-该声明表示类型"number"的值要么是整数，要么是浮点数，要么是表示无效运算结果（例如除以0）的常量"Error"。
+
+该声明表示类型~"number" 的值要么是整数，要么是浮点数，要么是表示无效运算结果（例如除以 0）的常量~"Error"。
 
 枚举类型是变体类型的一种特殊情况，其中所有选项都是常量：
 \begin{caml_example}{toplevel}
@@ -161,7 +174,7 @@ type sign = Positive | Negative;;
 let sign_int n = if n >= 0 then Positive else Negative;;
 \end{caml_example}
 
-为了定义"number"类型的算术运算，我们对运算涉及的两个数字使用模式匹配：
+为了定义~"number" 类型的算术运算，我们对运算涉及的两个数字使用模式匹配：
 \begin{caml_example}{toplevel}
 let add_num n1 n2 =
   match (n1, n2) with
@@ -178,10 +191,11 @@ let add_num n1 n2 =
 add_num (Int 123) (Float 3.14159);;
 \end{caml_example}
 
-变体类型的另一个有趣的例子是内置的"'a option"类型，它表示一个类型"'a"的值或没有值：
+变体类型的另一个有趣的例子是内置的~"'a option" 类型，它表示一个类型~"'a" 的值或没有值：
 \begin{caml_example}{toplevel}
 type 'a option = Some of 'a | None;;
 \end{caml_example}
+
 定义在通常情况下可能失败的函数时，这种类型特别有用。示例如下：
 \begin{caml_example}{toplevel}
 let safe_square_root x = if x > 0. then Some(sqrt x) else None;;
@@ -191,7 +205,8 @@ let safe_square_root x = if x > 0. then Some(sqrt x) else None;;
 \begin{caml_example}{toplevel}
 type 'a btree = Empty | Node of 'a * 'a btree * 'a btree;;
 \end{caml_example}
-该定义如下所示：一个包含类型"'a"（任意类型）的值的二叉树要么是空的，要么是一个包含类型"'a"的值的节点和两个也包含类型"'a"的值的子树，即两个"'a btree"。
+
+该定义如下所示：一个包含类型~"'a" （任意类型）的值的二叉树要么是空的，要么是一个包含类型~"'a" 的值的节点和两个也包含类型~"'a" 的值的子树，即两个~"'a btree"。
 
 对二叉树的操作可以表示为与类型定义相同结构的递归函数。例如，以下是在有序二叉树中执行查找和插入的函数（元素从左到右递增）：
 \begin{caml_example}{toplevel}
@@ -210,7 +225,8 @@ let rec insert x btree =
 \end{caml_example}
 
 
-\subsection{记录与变体消歧义Record and variant disambiguation}
+\subsection{记录与变体消歧义}
+
 （在第一次阅读时可以跳过这个小节）
 
 机敏的读者可能想知道，当两个或多个记录字段或构造函数使用相同的名称时会发生什么。
@@ -223,7 +239,7 @@ type first_variant = A | B | C
 type last_variant  = A;;
 \end{caml_example*}
 
-答案是，当面对多个选项时，OCaml会尝试使用本地可用的信息来消除各种字段和构造函数之间的歧义。首先，如果已知记录或变体的类型，OCaml可以明确地选择对应的字段或构造函数。例如：
+答案是，当面对多个选项时，OCaml 会尝试使用本地可用的信息来消除各种字段和构造函数之间的歧义。首先，如果已知记录或变体的类型，OCaml 可以明确地选择对应的字段或构造函数。例如：
 
 \begin{caml_example}{toplevel}
 let look_at_x_then_z (r:first_record) =
@@ -237,26 +253,27 @@ type wrapped = First of first_record
 let f (First r) = r, r.x;;
 \end{caml_example}
 
-在第一个例子中，"(r:first_record)"是一个显式注释，它告诉OCaml参数"r"的类型是"first_record"。通过这个注释，Ocaml知道"r.x"是第一个记录类型的"x"字段。类似地，第二个示例中的类型注释向OCaml表明构造函数"A"、"B"、"C"来自第一个变体类型。相反地，在最后一个示例中，OCaml自己推断"r"的类型只能是"first_record"，不需要显式类型注释。
+在第一个例子中，~"(r:first_record)" 是一个显式注释，它告诉 OCaml 参数~"r" 的类型是~"first_record"。通过这个注释，Ocaml 知道~"r.x" 是第一个记录类型的
+~"x" 字段。类似地，第二个示例中的类型注释向OCaml表明构造函数~"A"、"B"、"C" 来自第一个变体类型。相反地，在最后一个示例中，OCaml 自己推断~"r" 的类型只能是~"first_record"，不需要显式类型注释。
 
-实际上，这些显式类型注释可以在任何地方使用。在大多数情况下，它们不是必要的，但是它们对于指导消歧义、调试意外的类型错误或者结合后面章节中描述的OCaml的一些更高级的特性非常有用。
+实际上，这些显式类型注释可以在任何地方使用。在大多数情况下，它们不是必要的，但是它们对于指导消歧义、调试意外的类型错误或者结合后面章节中描述的 OCaml 的一些更高级的特性非常有用。
 
-其次，对于记录，OCaml还可以通过查看表达式或模式中使用的字段集来推断正确的记录类型：
+其次，对于记录，OCaml 还可以通过查看表达式或模式中使用的字段集来推断正确的记录类型：
 \begin{caml_example}{toplevel}
 let project_and_rotate {x;y; _ } = { x= - y; y = x ; z = 0} ;;
 \end{caml_example}
 
-由于字段"x"和"y"只能同时出现在第一个记录类型中，OCaml推断"project_and_rotate"的类型为"first_record -> first_record"。
+由于字段~"x" 和~"y" 只能同时出现在第一个记录类型中，OCaml 推断~"project_and_rotate" 的类型为~"first_record -> first_record"。
 
-最后，如果没有足够的信息来消除不同字段或构造函数之间的歧义，OCaml会在所有本地有效的选项中选择最后定义的类型：
+最后，如果没有足够的信息来消除不同字段或构造函数之间的歧义，OCaml 会在所有本地有效的选项中选择最后定义的类型：
 
 \begin{caml_example}{toplevel}
 let look_at_xz {x;z} = x;;
 \end{caml_example}
 
-在这里，OCaml推断"{x;z}"类型的可能选择是"first_record"和"middle_record"，因为"last_record"类型没有字段"z"。随后，Ocaml会选择这两种可能性之间最后定义的类型"middle_record"。
+在这里，OCaml 推断~"{x;z}" 类型的可能选择是~"first_record" 和~"middle_record"，因为~"last_record" 类型没有字段~"z"。随后，Ocaml 会选择这两种可能性之间最后定义的类型~"middle_record"。
 
-需要注意这种消歧义方法是局部性的：一旦Ocaml选择了一种类型，它就会坚持这个选择，即使此后它会导致一个类型错误：
+需要注意这种消歧义方法是局部性的：一旦 Ocaml 选择了一种类型，它就会坚持这个选择，即使此后它会导致一个类型错误：
 
 \begin{caml_example}{toplevel}[error]
 let look_at_x_then_y r =
@@ -267,11 +284,11 @@ let is_a_or_b x = match x with
   | B -> true;;
 \end{caml_example}
 
-此外，最后定义的类型处于一个非常不稳定的位置。在添加或移动类型定义，或者在打开一个模块之后（参见第\ref{c:moduleexamples}章），这一位置可能会偷偷地改变。因此，添加显式类型注释来完成类型消歧义比依赖于最后定义的类型进行消歧义更加健壮。
+此外，最后定义的类型处于一个非常不稳定的位置。在添加或移动类型定义，或者在打开一个模块之后（参见第~\ref{c:moduleexamples} 章），这一位置可能会偷偷地改变。因此，添加显式类型注释来完成类型消歧义比依赖于最后定义的类型进行消歧义更加健壮。
 
 \section{命令式特性}
 
-虽然到目前为止所有的示例都是用纯函数式风格编写的，但是OCaml也具有完整的命令式特性。这包括通常的"while"和"for"循环，以及可变的数据结构，如数组。数组可以通过在"[|"和"|]"方括号中列出以分号分隔的元素来创建，也可以通过 "Array.make" 函数进行分配和初始化，随后通过赋值进行填充。例如，下面定义的函数按分量对两个向量（表示为浮点数组）求和。
+虽然到目前为止所有的示例都是用纯函数式风格编写的，但是 OCaml 也具有完整的命令式特性。这包括通常的~"while" 和~"for" 循环，以及可变的数据结构，如数组。数组可以通过在~"[|" 和~"|]" 方括号中列出以分号分隔的元素来创建，也可以通过~"Array.make" 函数进行分配和初始化，随后通过赋值进行填充。例如，下面定义的函数按分量对两个向量（表示为浮点数组）求和。
 \begin{caml_example}{toplevel}
 let add_vect v1 v2 =
   let len = min (Array.length v1) (Array.length v2) in
@@ -293,16 +310,8 @@ translate mypoint 1.0 2.0;;
 mypoint;;
 \end{caml_example}
 
-OCaml没有内置的可以通过赋值修改变量值的“变量—标识符”概念（"let"绑定不是赋值，它在新的作用域中引入了新标识符）。不过，标准库使用操作符提供了“引用
-（reference，随后我们将简称引用为 "ref"）。“引用”是可变的间接单元格，我们可以使用"!"获取“引用”的当前内容，使用":="为“引用”的赋值。这意味着我们可以使用“引用”的"let"绑定来模拟可变变量。例如，这里有一个在数组上的插入排序:
-OCaml has no built-in notion of variable -- identifiers whose current
-value can be changed by assignment. (The "let" binding is not an
-assignment, it introduces a new identifier with a new scope.)
-However, the standard library provides references, which are mutable
-indirection cells, with operators "!" to fetch
-the current contents of the reference and ":=" to assign the contents.
-Variables can then be emulated by "let"-binding a reference. For
-instance, here is an in-place insertion sort over arrays:
+OCaml 没有内置的可以通过赋值修改变量值的“变量—标识符”概念（"let"绑定不是赋值，它在新的作用域中引入了新标识符）。不过，标准库使用操作符提供了“引用
+（reference，随后我们将简称引用为 ref）。ref 是可变的间接单元格，我们可以使用~"!" 获取“引用”的当前内容，使用~":=" 为 ref 的赋值。这意味着我们可以使用 ref 的~"let" 绑定来模拟可变变量。例如，这里有一个在数组的插入排序：
 \begin{caml_example}{toplevel}
 let insertion_sort a =
   for i = 1 to Array.length a - 1 do
@@ -316,11 +325,7 @@ let insertion_sort a =
   done;;
 \end{caml_example}
 
-"ref"对于编写在两次调用之间维持状态的函数也很有用。例如，下面的伪随机数生成器将最后一次返回的数字保存在"ref"中：
-References are also useful to write functions that maintain a current
-state between two calls to the function. For instance, the following
-pseudo-random number generator keeps the last returned number in a
-reference:
+ref 对于编写在两次调用之间维持状态的函数也很有用。例如，下面的伪随机数生成器将最后一次返回的数字保存在 ref 中：
 \begin{caml_example}{toplevel}
 let current_rand = ref 0;;
 let random () =
@@ -328,7 +333,7 @@ let random () =
   !current_rand;;
 \end{caml_example}
 
-同样的，"ref"并没有什么神奇之处：它们是作为单字段可变记录实现的：
+同样的，ref 并没有什么神奇之处：它们是作为单字段可变记录实现的：
 \begin{caml_example}{toplevel}
 type 'a ref = { mutable contents: 'a };;
 let ( ! ) r = r.contents;;
@@ -346,7 +351,7 @@ g r;;
 
 \section{异常}
 
-OCaml为异常提供了触发与处理机制。异常也可以用作一种通用的非本地控制结构，但您应该谨慎地使用这种方式，注意不应过度使用，因为它会使代码变得更难理解。异常是用"exception"构造声明的，并使用"raise"操作符触发。例如，下面用于获取列表头部的函数使用一个异常来告知输入为空列表的情况。
+OCaml 为异常提供了触发与处理机制。异常也可以用作一种通用的非本地控制结构，但您应该谨慎地使用这种方式，注意不应过度使用，因为它会使代码变得更难理解。异常是用~"exception" 构造声明的，并使用~"raise" 操作符触发。例如，下面用于获取列表头部的函数使用一个异常来告知输入为空列表的情况。
 \begin{caml_example}{toplevel}
 exception Empty_list;;
 let head l =
@@ -357,7 +362,7 @@ head [1;2];;
 head [];;
 \end{caml_example}
 
-整个标准库都使用异常来应对库函数不能正常运行的情况。例如，"List.assoc"函数，该函数会在一个（键，值）列表中查找给定的键并返回与之对应的值，当键未出现在列表中时，将会触发预定义的"Not_found"异常：
+整个标准库都使用异常来应对库函数不能正常运行的情况。例如，~"List.assoc" 函数，该函数会在一个（键，值）列表中查找给定的键并返回与之对应的值，当键未出现在列表中时，将会触发预定义的~"Not_found" 异常：
 \begin{caml_example}{toplevel}
 List.assoc 1 [(0, "zero"); (1, "one")];;
 List.assoc 2 [(0, "zero"); (1, "one")];;
@@ -374,7 +379,7 @@ name_of_binary_digit 0;;
 name_of_binary_digit (-1);;
 \end{caml_example}
 
-"with"部分使用与"match"相同的语法和行为对异常值进行模式匹配。因此，通过构造，一个"try"\ldots"with"结构可以捕获多个异常：
+"with" 部分使用与~"match" 相同的语法和行为对异常值进行模式匹配。因此，通过构造，一个~"try"\ldots"with" 结构可以捕获多个异常：
 \begin{caml_example}{toplevel}
 let rec first_named_value values names =
   try
@@ -399,14 +404,15 @@ let temporarily_set_reference ref newval funct =
     raise x;;
 \end{caml_example}
 
-"try"\ldots"with"的另一种用法是在模式匹配时捕捉异常：
+"try"\ldots"with" 的另一种用法是在模式匹配时捕捉异常：
 \begin{caml_example}{toplevel}
 let assoc_may_map f x l =
   match List.assoc x l with
   | exception Not_found -> None
   | y -> f y;;
 \end{caml_example}
-请注意，此结构仅在"match"\ldots"with"之间出现异常时才有效。而且，异常只能出现在这种模式匹配的顶层。例如，异常情况目前不能与or模式组合：“"exception A | exception B ->" \ldots。
+
+请注意，此结构仅在~"match"\ldots"with" 之间出现异常时才有效。而且，异常只能出现在这种模式匹配的顶层。例如，异常情况目前不能与or模式组合：~"exception A | exception B ->" \ldots。
 
 当异常用作控制结构时，使用本地定义的异常使异常控制结构尽可能地本地化是很有用的。例如：
 \begin{caml_eval}
@@ -422,11 +428,12 @@ let fixpoint f x =
     done; assert false
   with Done -> !x;;
 \end{caml_example}
-在这里，函数"f"不能引发"Done"异常，这样就过滤掉了一类行为不匹配的函数。
+
+在这里，函数~"f" 不能引发~"Done" 异常，这样就过滤掉了一类行为不匹配的函数。
 
 \section{表达式的符号处理}
 
-我们用一个更完整的例子来结束这一章的介绍，这个例子代表了OCaml在符号处理中的应用：包含变量的算术表达式的形式化操作。下面的变体类型描述了我们将要处理的表达式：
+我们用一个更完整的例子来结束这一章的介绍，这个例子代表了 OCaml 在符号处理中的应用：包含变量的算术表达式的形式化操作。下面的变体类型描述了我们将要处理的表达式：
 \begin{caml_example}{toplevel}
 type expression =
     Const of float
@@ -453,7 +460,7 @@ let rec eval env exp =
 eval [("x", 1.0); ("y", 3.14)] (Prod(Sum(Var "x", Const 2.0), Var "y"));;
 \end{caml_example}
 
-现在，对于一个真正的符号处理过程，我们定义一个表达式对变量"dv"的导数：
+现在，对于一个真正的符号处理过程，我们定义一个表达式对变量~"dv" 的导数：
 \begin{caml_example}{toplevel}
 let rec deriv exp dv =
   match exp with
@@ -470,9 +477,9 @@ deriv (Quot(Const 1.0, Var "x")) "x";;
 
 \section{美观打印}
 
-如以上例子所示，随着表达式的复杂化，表达式的内部表示（也称为抽象语法）也就很快变得难以读写。我们需要一台输出器和一个解析器来在抽象语法和具体语法之间完成转换。其中，具体语法在表达式的情况下，这是我们熟悉的代数表示法（如"2*x+1"）。
+如以上例子所示，随着表达式的复杂化，表达式的内部表示（也称为抽象语法）也就很快变得难以读写。我们需要一台输出器和一个解析器来在抽象语法和具体语法之间完成转换。其中，具体语法在表达式的情况下，这是我们熟悉的代数表示法（如~"2*x+1"）。
 
-对于输出函数，我们考虑了通常的优先级规则（即"*"绑定比"+"更紧密）以避免打印不必要的括号。为此，我们需得知当前操作符的优先级，并且仅当操作符的优先级小于当前优先级时，才输出操作符周围的圆括号。
+对于输出函数，我们考虑了通常的优先级规则（即~"*" 绑定比~"+" 更紧密）以避免打印不必要的括号。为此，我们需得知当前操作符的优先级，并且仅当操作符的优先级小于当前优先级时，才输出操作符周围的圆括号。
 \begin{caml_example}{toplevel}
 let print_expr exp =
   (* Local function definitions *)
@@ -596,9 +603,9 @@ print_expr (deriv e "x"); print_newline ();;
 %% the second space in "x - 1" causes the lexer to return the three
 %% expected tokens: "Ident \"x\"", then "Kwd \"-\"", then "Int(1)".
 
-\section{独立OCaml程序}
+\section{独立 OCaml 程序}
 
-到目前为止给出的所有示例都是在交互式系统下执行的。OCaml代码也可以被单独地编译，并使用批处理编译器"ocamlc"和"ocamlopt"非交互式地执行。这种情况下，源代码必须放在扩展名为".ml"的文件中。整个程序由一系列语句组成，这些语句将在运行时按照它们在源文件中出现的顺序被执行。与交互式模式不同，类型和值不是自动输出的，程序必须显式调用打印函数以产生一些输出。在交互式示例中使用的";;"在源文件中不是必需的，但是";;"的使用有助于明确地标记顶层表达式的结尾，即使在出现语法错误时也是如此。下面是一个输出斐波那契数的独立程序示例：
+到目前为止给出的所有示例都是在交互式系统下执行的。OCaml 代码也可以被单独地编译，并使用批处理编译器~"ocamlc" 和~"ocamlopt" 非交互式地执行。这种情况下，源代码必须放在扩展名为~".ml" 的文件中。整个程序由一系列语句组成，这些语句将在运行时按照它们在源文件中出现的顺序被执行。与交互式模式不同，类型和值不是自动输出的，程序必须显式调用打印函数以产生一些输出。在交互式示例中使用的~";;" 在源文件中不是必需的，但是~";;" 的使用有助于明确地标记顶层表达式的结尾，即使在出现语法错误时也是如此。下面是一个输出斐波那契数的独立程序示例：
 \begin{verbatim}
 (* File fib.ml *)
 let rec fib n =
@@ -610,7 +617,8 @@ let main () =
   exit 0;;
 main ();;
 \end{verbatim}
-"Sys.argv"是一个包含命令行参数的字符串数组。因此，"Sys.argv.(1)"是第一个命令行参数。上面的程序可以通过以下shell命令编译与执行：
+
+"Sys.argv" 是一个包含命令行参数的字符串数组。因此，~"Sys.argv.(1)" 是第一个命令行参数。上面的程序可以通过以下 shell 命令编译与执行：
 \begin{verbatim}
 $ ocamlc -o fib fib.ml
 $ ./fib 10
@@ -619,4 +627,4 @@ $ ./fib 20
 10946
 \end{verbatim}
 
-更复杂的独立OCaml程序通常由多个源文件组成，同时也可以链接到预编译的库。第\ref{c:camlc}章和第\ref{c:nativecomp}章解释了如何使用批处理编译器"ocamlc"和"ocamlopt"。可以使用第三方构建系统（如\href{https://github.com/ocaml/ocamlbuild/}{ocamlbuild}编译管理器）完成多文件项目编译的自动化。
+更复杂的独立 OCaml 程序通常由多个源文件组成，同时也可以链接到预编译的库。第~\ref{c:camlc} 章和第~\ref{c:nativecomp} 章解释了如何使用批处理编译器~"ocamlc" 和~"ocamlopt"。可以使用第三方构建系统（如~\href{https://github.com/ocaml/ocamlbuild/}{ocamlbuild} 编译管理器）完成多文件项目编译的自动化。
