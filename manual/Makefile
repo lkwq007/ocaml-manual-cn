@@ -30,7 +30,7 @@ TEXT_FLAGS = -fix -exec xxdate.exe -text -w 79
 
 manual: files
 	cd texstuff \
-	  && TEXINPUTS=$(TEXINPUTS) pdflatex manual.tex
+	  && TEXINPUTS=$(TEXINPUTS) xelatex manual.tex
 
 index:
 	cd texstuff \

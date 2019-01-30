@@ -4,7 +4,7 @@
 \setlength{\emergencystretch}{50pt}  % pour que TeX resolve les overfull hbox lui-meme
 
 \begin{document}
-
+\usepackage[UTF8]{ctex}
 \thispagestyle{empty}
 \begin{maintitle}
 ~\vfill
