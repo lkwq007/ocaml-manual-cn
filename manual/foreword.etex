@@ -2,53 +2,53 @@
 \markboth{前言}{}
 %HEVEA\cutname{foreword.html}
 
-该手册记录了OCaml \ocamlversion\ 版本的相关信息。其结构组织如下：
+该手册记录了 OCaml \ocamlversion\ 版本的相关信息。其结构组织如下：
 
 \begin{itemize}
-\item 部分~\ref{p:tutorials},“OCaml简介”将提供该语言的简要介绍。
-\item 部分~\ref{p:refman},“OCaml语言”，给出该语言的使用参考说明。
-\item 部分~\ref{p:commands},“OCaml工具”，记录了编译器、顶层系统和编程工具的相关信息。
-\item 部分~\ref{p:library},“OCaml库”，描述了标准库所提供的模块。
+\item 第~\ref{p:tutorials} 部分，“OCaml 简介”将提供该语言的简要介绍。
+\item 第~\ref{p:refman} 部分，“OCaml 语言”，给出该语言的使用参考说明。
+\item 第~\ref{p:commands} 部分，“OCaml 工具”，记录了编译器、顶层系统和编程工具的相关信息。
+\item 第~\ref{p:library} 部分，“OCaml 库”，描述了标准库所提供的模块。
 \begin{latexonly}
-\item 部分~\ref{p:appendix},“附录”，包含了标准库中所有标示符的索引和关键词的索引。
+\item 第~\ref{p:appendix} 部分，“附录”，包含了标准库中所有标示符的索引和关键词的索引。
 \end{latexonly}
 \end{itemize}
 
 \section*{约定}
 
-OCaml可以在若干操作系统上运行。因此该手册上的部分内容将只针对如下的某一特定操作系统：
+OCaml 可以在若干操作系统上运行。因此该手册上的部分内容将只针对如下的某一特定操作系统：
 
-\begin{unix} 这部分材料仅针对Unix族的操作系统，如Linux和\hbox{MacOS~X}。
+\begin{unix} 这部分材料仅针对 Unix 族的操作系统，如 Linux 和~\hbox{MacOS~X}。
 \end{unix}
 
-\begin{windows} 这部分材料仅针对Microsoft Windows操作系统，如XP、Vista、7、8、10。
+\begin{windows} 这部分材料仅针对 Microsoft Windows 操作系统，如 XP、Vista、7、8、10。
 \end{windows}
 
 \section*{协议}
 
-OCaml系统的版权归属为copyright \copyright\ 1996--\number\year\
-法国国家信息与自动化研究所（Institut National de Recherche en Informatique et en Automatique，简称INRIA）。INRIA拥有OCaml系统的所有权。
+OCaml 系统的版权归属为 copyright \copyright\ 1996--\number\year\
+法国国家信息与自动化研究所（Institut National de Recherche en Informatique et en Automatique，简称 INRIA）。INRIA 拥有 OCaml 系统的所有权。
 
-OCaml系统是开源的，可以被自由的重新分发。请查看发行版中的“LICENSE”文件获取有关的许可协议信息。
+OCaml 系统是开源的，可以被自由的重新分发。请查看发行版中的“LICENSE”文件获取有关的许可协议信息。
 
-本文档的版权归属于copyright \copyright\ \number\year\
-法国国家信息与自动化研究所。OCaml文档和用户手册在满足如下条件时可以被全部或部分复制与分发：
+本文档的版权归属于 copyright \copyright\ \number\year\
+法国国家信息与自动化研究所。OCaml 文档和用户手册在满足如下条件时可以被全部或部分复制与分发：
 \begin{itemize}
 \item 以上的版权声明与此许可声明必须被完整地保留在所有完整或部分副本中。
-\item 任何OCaml文档和用户手册的翻译或衍生作品在发行必须得到原作者的书面批准。
-\item 如果您部分分发OCaml文档和用户手册，则必须包括获取本手册完整版本的说明，并提供获取完整版本手册的方法。
+\item 任何 OCaml 文档和用户手册的翻译或衍生作品在发行必须得到原作者的书面批准。
+\item 如果您部分分发 OCaml 文档和用户手册，则必须包括获取本手册完整版本的说明，并提供获取完整版本手册的方法。
 \item 若给出合适的引用，可以在不包含此声明许可的情况下，将手册的一小部分内容作为其他作品中的评论或引用示例使用。
 \end{itemize}
 
 \section*{可用性}
 
 \begin{latexonly}
-完整的OCaml发行版可以在\url{http://www.ocaml.org/}和\url{http://caml.inria.fr/}获得。
-第一个网站包括大量关于OCaml的额外信息。
+完整的 OCaml 发行版可以在~\url{http://www.ocaml.org/} 和~\url{http://caml.inria.fr/} 获得。
+第一个网站包括大量关于 OCaml 的额外信息。
 \end{latexonly}
 
 \begin{htmlonly}
 完整的OCaml发行版可以在
-\href{http://www.ocaml.org/}{Caml社区网站}和
-\href{http://caml.inria.fr/}{旧版的Caml网站}上获得。\href{http://www.ocaml.org/}{Caml社区网站}上包括大量关于OCaml的额外信息。
+\href{http://www.ocaml.org/}{Caml 社区网站}和
+\href{http://caml.inria.fr/}{旧版的 Caml 网站}上获得。\href{http://www.ocaml.org/}{Caml 社区网站}上包括大量关于 OCaml 的额外信息。
 \end{htmlonly}
