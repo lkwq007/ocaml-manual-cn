@@ -8,8 +8,8 @@
 \thispagestyle{empty}
 \begin{maintitle}
 ~\vfill
-\Huge           The OCaml system \\
-                release \ocamlversion \\[1cm]
+\Huge           OCaml 系统 \\
+                版本 \ocamlversion \\[1cm]
 \Large          文档与用户手册 \\[1cm]
 \large          Xavier Leroy, \\
                 Damien Doligez, Alain Frisch, Jacques Garrigue, Didier Rémy and Jérôme Vouillon \\[1cm]
@@ -17,7 +17,7 @@
                 ~
 \vfill
 \normalsize     Copyright \copyright\ \number\year\ Institut National de
-                Recherche en Informatique et en Automatique. 法国国家信息与自动化研究所版权所有
+                Recherche en Informatique et en Automatique. \\法国国家信息与自动化研究所版权所有
 \end{maintitle}
 \cleardoublepage
 \setcounter{page}{1}
@@ -41,7 +41,7 @@ and as a
 
 \input{foreword.tex}
 
-\part{OCaml简介}
+\part{OCaml 简介}
 \label{p:tutorials}
 \input{coreexamples.tex}
 \input{moduleexamples.tex}
@@ -50,12 +50,12 @@ and as a
 \input{polymorphism.tex}
 \input{advexamples.tex}
 
-\part{OCaml语言}
+\part{OCaml 语言}
 \label{p:refman}
 \input{refman.tex}
 \input{exten.tex}
 
-\part{OCaml工具}
+\part{OCaml 工具}
 \label{p:commands}
 
 \input{comp.tex}
@@ -76,7 +76,7 @@ and as a
 \input{afl-fuzz.tex}
 \input{plugins}
 
-\part{OCaml库}
+\part{OCaml 库}
 \label{p:library}
 \input{core.tex}
 \input{stdlib.tex}
