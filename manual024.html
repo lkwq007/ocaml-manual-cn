@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="hevea 2.32">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<link rel="stylesheet" type="text/css" href="manual.css">
+<title>8.2  Lazy patterns</title>
+</head>
+<body>
+<a href="manual023.html"><img src="previous_motif.svg" alt="Previous"></a>
+<a href="extn.html"><img src="contents_motif.svg" alt="Up"></a>
+<a href="manual025.html"><img src="next_motif.svg" alt="Next"></a>
+<hr>
+<h2 class="section" id="sec236">8.2  Lazy patterns</h2>
+<p> <a id="s:lazypat"></a></p><p><a id="hevea_manual.kwd204"></a></p><p>(Introduced in Objective Caml 3.11)</p><div class="syntax"><table class="display dcenter"><tr class="c019"><td class="dcell"><table class="c001 cellpading0"><tr><td class="c018">
+<a class="syntax" href="patterns.html#pattern"><span class="c010">pattern</span></a></td><td class="c015">::=</td><td class="c017"> ...
+ </td></tr>
+<tr><td class="c018">&nbsp;</td><td class="c015">∣</td><td class="c017"> <span class="c004">lazy</span> <a class="syntax" href="patterns.html#pattern"><span class="c010">pattern</span></a>
+</td></tr>
+</table></td></tr>
+</table></div><p>The pattern <span class="c004">lazy</span> <a class="syntax" href="patterns.html#pattern"><span class="c010">pattern</span></a> matches a value <span class="c009">v</span> of type <span class="c003">Lazy.t</span>,
+provided <a class="syntax" href="patterns.html#pattern"><span class="c010">pattern</span></a> matches the result of forcing <span class="c009">v</span> with
+<span class="c003">Lazy.force</span>. A successful match of a pattern containing <span class="c004">lazy</span>
+sub-patterns forces the corresponding parts of the value being matched, even
+those that imply no test such as <span class="c004">lazy</span> <a class="syntax" href="names.html#value-name"><span class="c010">value-name</span></a> or <span class="c002"><span class="c003">lazy</span> <span class="c003">_</span></span>.
+Matching a value with a <a class="syntax" href="expr.html#pattern-matching"><span class="c010">pattern-matching</span></a> where some patterns
+contain <span class="c004">lazy</span> sub-patterns may imply forcing parts of the value,
+even when the pattern selected in the end has no <span class="c004">lazy</span> sub-pattern.</p><p>For more information, see the description of module <span class="c003">Lazy</span> in the
+standard library (
+<a href="libref/Lazy.html">Module <span class="c003">Lazy</span></a>).
+<a id="hevea_manual4"></a><a id="hevea_manual5"></a></p>
+<hr>
+<a href="manual023.html"><img src="previous_motif.svg" alt="Previous"></a>
+<a href="extn.html"><img src="contents_motif.svg" alt="Up"></a>
+<a href="manual025.html"><img src="next_motif.svg" alt="Next"></a>
+</body>
+</html>

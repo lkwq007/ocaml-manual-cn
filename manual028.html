@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="hevea 2.32">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<link rel="stylesheet" type="text/css" href="manual.css">
+<title>8.6  Object copy short notations</title>
+</head>
+<body>
+<a href="manual027.html"><img src="previous_motif.svg" alt="Previous"></a>
+<a href="extn.html"><img src="contents_motif.svg" alt="Up"></a>
+<a href="manual029.html"><img src="next_motif.svg" alt="Next"></a>
+<hr>
+<h2 class="section" id="sec243">8.6  Object copy short notations</h2>
+<p> <a id="s:object-notations"></a>
+<a id="hevea_manual.kwd211"></a></p><p>(Introduced in OCaml 4.03)</p><div class="syntax"><table class="display dcenter"><tr class="c019"><td class="dcell"><table class="c001 cellpading0"><tr><td class="c018">
+<a class="syntax" href="expr.html#expr"><span class="c010">expr</span></a></td><td class="c015">::=</td><td class="c017">
+...
+ </td></tr>
+<tr><td class="c018">&nbsp;</td><td class="c015">∣</td><td class="c017"> <span class="c004">{</span> <span class="c004">&lt;</span> <a class="syntax" href="expr.html#expr"><span class="c010">expr</span></a> <span class="c004">with</span>  <a class="syntax" href="names.html#field"><span class="c010">field</span></a>  [<span class="c004">=</span> <a class="syntax" href="expr.html#expr"><span class="c010">expr</span></a>]  { <span class="c004">;</span> <a class="syntax" href="names.html#field"><span class="c010">field</span></a>  [<span class="c004">=</span> <a class="syntax" href="expr.html#expr"><span class="c010">expr</span></a>] }  [<span class="c004">;</span>] <span class="c004">&gt;</span> <span class="c004">}</span>
+</td></tr>
+</table></td></tr>
+</table></div><p>In an object copy expression,
+a single identifier <span class="c010">id</span> stands for <span class="c010">id</span> <span class="c004">=</span>  <span class="c010">id</span>, and a qualified identifier
+<a class="syntax" href="names.html#module-path"><span class="c010">module-path</span></a> <span class="c004">.</span>  <span class="c010">id</span> stands for <a class="syntax" href="names.html#module-path"><span class="c010">module-path</span></a> <span class="c004">.</span>  <span class="c010">id</span> <span class="c004">=</span>  <span class="c010">id</span>.
+For example, all following methods are equivalent:
+
+
+</p><div class="caml-example verbatim">
+
+<pre><div class="caml-input"> object
+   val x=0. val y=0. val z=0.
+   method f_0 x y = {&lt; x; y &gt;}
+   method f_1 x y = {&lt; x = x; y &gt;}
+   method f_2 x y = {&lt; x=x ; y = y &gt;}
+ end
+</div>
+</pre>
+
+
+</div>
+<hr>
+<a href="manual027.html"><img src="previous_motif.svg" alt="Previous"></a>
+<a href="extn.html"><img src="contents_motif.svg" alt="Up"></a>
+<a href="manual029.html"><img src="next_motif.svg" alt="Next"></a>
+</body>
+</html>

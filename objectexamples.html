@@ -1,0 +1,2116 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="hevea 2.32">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<link rel="stylesheet" type="text/css" href="manual.css">
+<title>Chapter 3  OCaml中的对象</title>
+</head>
+<body>
+<a href="moduleexamples.html"><img src="previous_motif.svg" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.svg" alt="Up"></a>
+<a href="lablexamples.html"><img src="next_motif.svg" alt="Next"></a>
+<hr>
+<h1 class="chapter" id="sec24">Chapter 3  OCaml中的对象</h1>
+<ul>
+<li><a href="objectexamples.html#sec25">3.1  类与对象</a>
+</li><li><a href="objectexamples.html#sec26">3.2  直接对象</a>
+</li><li><a href="objectexamples.html#sec27">3.3  引用self</a>
+</li><li><a href="objectexamples.html#sec28">3.4  初始化器</a>
+</li><li><a href="objectexamples.html#sec29">3.5  虚方法</a>
+</li><li><a href="objectexamples.html#sec30">3.6  私有方法</a>
+</li><li><a href="objectexamples.html#sec31">3.7  类接口</a>
+</li><li><a href="objectexamples.html#sec32">3.8  继承</a>
+</li><li><a href="objectexamples.html#sec33">3.9  多继承</a>
+</li><li><a href="objectexamples.html#sec34">3.10  参数化类</a>
+</li><li><a href="objectexamples.html#sec35">3.11  多态方法</a>
+</li><li><a href="objectexamples.html#sec36">3.12  Using coercions</a>
+</li><li><a href="objectexamples.html#sec37">3.13  Functional objects</a>
+</li><li><a href="objectexamples.html#sec38">3.14  Cloning objects</a>
+</li><li><a href="objectexamples.html#sec39">3.15  Recursive classes</a>
+</li><li><a href="objectexamples.html#sec40">3.16  Binary methods</a>
+</li><li><a href="objectexamples.html#sec41">3.17  Friends</a>
+</li></ul>
+<p>
+<a id="c:objectexamples"></a>
+</p><p>
+<span class="c009">(作者：Jérôme Vouillon、Didier Rémy、Jacques Garrigue)</span></p><p><br>
+<br>
+</p><p>本章概述了OCaml的面向对象特性。</p><p>请注意，OCaml中的对象、类和类型之间的关系与主流面向对象语言（如Java和C++）中的关系不同，因此您不应该假设类似的关键字具有相同的含义。与那些语言相比，在OCaml中使用面向对象特性的频率要低得多。使用OCaml时通常有更合适的选择，比如模块和函数。事实上，很多OCaml程序根本不使用对象。</p><p><a href="#ss%3Aclasses-and-objects">3.1</a> 类和对象 <br>
+<a href="#ss%3Aimmediate-objects">3.2</a> 直接对象 <br>
+<a href="#ss%3Areference-to-self">3.3</a> 引用self <br>
+<a href="#ss%3Ainitializers">3.4</a> 初始化器 <br>
+<a href="#ss%3Avirtual-methods">3.5</a> 虚方法 <br>
+<a href="#ss%3Aprivate-methods">3.6</a> 私有方法 <br>
+<a href="#ss%3Aclass-interfaces">3.7</a> 类接口 <br>
+<a href="#ss%3Ainheritance">3.8</a> 继承 <br>
+<a href="#ss%3Amultiple-inheritance">3.9</a> 多继承 <br>
+<a href="#ss%3Aparameterized-classes">3.10</a> 参数化类 <br>
+<a href="#ss%3Apolymorphic-methods">3.11</a> 多态方法 <br>
+<a href="#ss%3Ausing-coercions">3.12</a> 强制转换 <br>
+<a href="#ss%3Afunctional-objects">3.13</a> 函数对象 <br>
+<a href="#ss%3Acloning-objects">3.14</a> 克隆对象 <br>
+<a href="#ss%3Arecursive-classes">3.15</a> 递归类 <br>
+<a href="#ss%3Abinary-methods">3.16</a> Binary methods <br>
+<a href="#ss%3Afriends">3.17</a> 友元 <br>
+
+</p>
+<h2 class="section" id="sec25">3.1  类与对象</h2>
+<p>
+<a id="ss:classes-and-objects"></a></p><p>下面的<span class="c003">point</span>类定义了一个实例变量<span class="c003">x</span>与两个方法<span class="c003">get_x</span>和<span class="c003">move</span>。其中实例变量的初始值是<span class="c003">0</span>。变量<span class="c003">x</span>被声明为可变的，因此<span class="c003">move</span>方法可以更改它的值。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class point =
+    object
+      val mutable x = 0
+      method get_x = x
+      method move d = x &lt;- x + d
+    end;;
+</div><div class="caml-output ok">class point :
+  object val mutable x : int method get_x : int method move : int -&gt; unit end
+</div></pre>
+
+
+</div><p>现在我们创建一个<span class="c003">point</span>类的实例，点<span class="c003">p</span>。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let p = new point;;
+</div><div class="caml-output ok">val p : point = &lt;obj&gt;
+</div></pre>
+
+
+</div><p>
+
+需要注意，<span class="c003">p</span>的类型是<span class="c003">point</span>。这其实是由上面的类定义所自动定义的缩写。它代表对象类型<span class="c003">&lt;get_x : int; move : int -&gt; unit&gt;</span>，该类型给出了<span class="c003">point</span>包含的方法及它们的类型。</p><p>我们现在可以调用<span class="c003">p</span>的一些方法：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> p#get_x;;
+</div><div class="caml-output ok">- : int = 0
+</div></pre>
+
+<pre><div class="caml-input"> p#move 3;;
+</div><div class="caml-output ok">- : unit = ()
+</div></pre>
+
+<pre><div class="caml-input"> p#get_x;;
+</div><div class="caml-output ok">- : int = 3
+</div></pre>
+
+
+</div><p>类中变量的求值只在对象被创建时进行。因此，在下面的示例中，实例变量<span class="c003">x</span>被初始化为两个不同对象的不同值。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let x0 = ref 0;;
+</div><div class="caml-output ok">val x0 : int ref = {contents = 0}
+</div></pre>
+
+<pre><div class="caml-input"> class point =
+    object
+      val mutable x = incr x0; !x0
+      method get_x = x
+      method move d = x &lt;- x + d
+    end;;
+</div><div class="caml-output ok">class point :
+  object val mutable x : int method get_x : int method move : int -&gt; unit end
+</div></pre>
+
+<pre><div class="caml-input"> new point#get_x;;
+</div><div class="caml-output ok">- : int = 1
+</div></pre>
+
+<pre><div class="caml-input"> new point#get_x;;
+</div><div class="caml-output ok">- : int = 2
+</div></pre>
+
+
+</div><p><span class="c003">point</span>类还可以被抽象为<span class="c003">x</span>坐标的初值。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class point = fun x_init -&gt;
+    object
+      val mutable x = x_init
+      method get_x = x
+      method move d = x &lt;- x + d
+    end;;
+</div><div class="caml-output ok">class point :
+  int -&gt;
+  object val mutable x : int method get_x : int method move : int -&gt; unit end
+</div></pre>
+
+
+</div><p>
+
+与函数定义一样，上面的定义可以缩写为：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class point x_init =
+    object
+      val mutable x = x_init
+      method get_x = x
+      method move d = x &lt;- x + d
+    end;;
+</div><div class="caml-output ok">class point :
+  int -&gt;
+  object val mutable x : int method get_x : int method move : int -&gt; unit end
+</div></pre>
+
+
+</div><p>
+
+<span class="c003">point</span>类的一个实例现在是一个函数，该函数需要一个初始参数来创建一个点对象：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> new point;;
+</div><div class="caml-output ok">- : int -&gt; point = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let p = new point 7;;
+</div><div class="caml-output ok">val p : point = &lt;obj&gt;
+</div></pre>
+
+
+</div><p>
+
+当然，参数<span class="c003">x_init</span>在定义的整个主体中都是可见的，包括方法。例如，下面类中的<span class="c003">get_offset</span>方法可以返回对象与其初始位置的相对位置。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class point x_init =
+    object
+      val mutable x = x_init
+      method get_x = x
+      method get_offset = x - x_init
+      method move d = x &lt;- x + d
+    end;;
+</div><div class="caml-output ok">class point :
+  int -&gt;
+  object
+    val mutable x : int
+    method get_offset : int
+    method get_x : int
+    method move : int -&gt; unit
+  end
+</div></pre>
+
+
+</div><p>
+
+在定义类的对象主体之前，可以对表达式进行求值和绑定。这对于增强不变式是有用的。例如，点可以被自动调整到坐标网格中最近的点，如下所示：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class adjusted_point x_init =
+    let origin = (x_init / 10) * 10 in
+    object
+      val mutable x = origin
+      method get_x = x
+      method get_offset = x - origin
+      method move d = x &lt;- x + d
+    end;;
+</div><div class="caml-output ok">class adjusted_point :
+  int -&gt;
+  object
+    val mutable x : int
+    method get_offset : int
+    method get_x : int
+    method move : int -&gt; unit
+  end
+</div></pre>
+
+
+</div><p>
+
+（当<span class="c003">x_init</span>坐标不在坐标网格上时，可能会引发异常）事实上，这里也可以通过使用<span class="c003">origin</span>的值调用<span class="c003">point</span>类的定义来获得相同的效果。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class adjusted_point x_init =  point ((x_init / 10) * 10);;
+</div><div class="caml-output ok">class adjusted_point : int -&gt; point
+</div></pre>
+
+
+</div><p>
+
+另一种解决办法是在一个特殊的分配函数中进行调整：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let new_adjusted_point x_init = new point ((x_init / 10) * 10);;
+</div><div class="caml-output ok">val new_adjusted_point : int -&gt; point = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>
+
+但是，前一种模式通常更合适，因为用于调整的代码是类定义的一部分，可以被继承。</p><p>这种机制提供了其他语言中的类构造函数。可以用这种方式定义几个构造函数来构建具有相同类中具备不同初始化模式的对象；另一种方法是使用初始化器，如下面的<a href="#ss%3Ainitializers">3.4</a>节所述。</p>
+<h2 class="section" id="sec26">3.2  直接对象</h2>
+<p>
+<a id="ss:immediate-objects"></a></p><p>还有另一种更直接的方法来创建对象：不通过类来创建它。</p><p>这种方法的语法与类表达式完全相同，但是结果是一个对象而不是一个类。本节其余部分中描述的所有结构也适用于直接对象。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let p =
+    object
+      val mutable x = 0
+      method get_x = x
+      method move d = x &lt;- x + d
+    end;;
+</div><div class="caml-output ok">val p : &lt; get_x : int; move : int -&gt; unit &gt; = &lt;obj&gt;
+</div></pre>
+
+<pre><div class="caml-input"> p#get_x;;
+</div><div class="caml-output ok">- : int = 0
+</div></pre>
+
+<pre><div class="caml-input"> p#move 3;;
+</div><div class="caml-output ok">- : unit = ()
+</div></pre>
+
+<pre><div class="caml-input"> p#get_x;;
+</div><div class="caml-output ok">- : int = 3
+</div></pre>
+
+
+</div><p>与类不能在表达式中定义这一点不同，直接对象可以出现在任何地方，并使用它们所在环境中的变量。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let minmax x y =
+    if x &lt; y then object method min = x method max = y end
+    else object method min = y method max = x end;;
+</div><div class="caml-output ok">val minmax : 'a -&gt; 'a -&gt; &lt; max : 'a; min : 'a &gt; = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>与类相比，直接对象有两个缺点：它们的类型没有缩写，并且不能被继承。但是这两个缺点在某些情况下可能是优点，我们将在<a href="#ss%3Areference-to-self">3.3</a>和<a href="#ss%3Aparameterized-classes">3.10</a>节中进行阐释。</p>
+<h2 class="section" id="sec27">3.3  引用self</h2>
+<p>
+<a id="ss:reference-to-self"></a></p><p>方法或初始化器可以调用self（即当前对象）上的方法。为此，必须显式地将self绑定到变量<span class="c003">s</span> （事实上<span class="c003">s</span>可以是任何标识符，尽管我们通常会选择<span class="c003">self</span>这个名称）。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class printable_point x_init =
+    object (s)
+      val mutable x = x_init
+      method get_x = x
+      method move d = x &lt;- x + d
+      method print = print_int s#get_x
+    end;;
+</div><div class="caml-output ok">class printable_point :
+  int -&gt;
+  object
+    val mutable x : int
+    method get_x : int
+    method move : int -&gt; unit
+    method print : unit
+  end
+</div></pre>
+
+<pre><div class="caml-input"> let p = new printable_point 7;;
+</div><div class="caml-output ok">val p : printable_point = &lt;obj&gt;
+</div></pre>
+
+<pre><div class="caml-input"> p#print;;
+</div><div class="caml-output ok">7- : unit = ()
+</div></pre>
+
+
+</div><p>
+
+变量<span class="c003">s</span>会在方法调用时被动态地绑定。特别是，当<span class="c003">printable_point</span>类被继承时，变量<span class="c003">s</span>将被正确地绑定到子类的对象上。</p><p>self的一个常见问题是，由于它的类型可能在子类中被扩展，所以您不能预先固定它的类型。这里有一个简单的例子。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let ints = ref [];;
+</div><div class="caml-output ok">val ints : '_weak1 list ref = {contents = []}
+</div></pre>
+
+<pre><div class="caml-input"> class my_int =
+    object (self)
+      method n = 1
+      method register = ints := <U>self</U> :: !ints
+    end ;;
+</div><div class="caml-output error">Error: This expression has type &lt; n : int; register : 'a; .. &gt;
+       but an expression was expected of type 'weak1
+       Self type cannot escape its class
+</div></pre>
+
+
+</div><p>
+
+您可以忽略报错消息的前两行。最后一行才是最重要的：把self放在外部引用中将使我们无法通过继承来拓展它。我们将在第<a href="#ss%3Ausing-coercions">3.12</a>节中看到这个问题的解决方案。但是请注意，由于直接对象是不可扩展的，所以使用它们时不会遭遇这一问题。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let my_int =
+    object (self)
+      method n = 1
+      method register = ints := self :: !ints
+    end;;
+</div><div class="caml-output ok">val my_int : &lt; n : int; register : unit &gt; = &lt;obj&gt;
+</div></pre>
+
+
+</div>
+<h2 class="section" id="sec28">3.4  初始化器</h2>
+<p>
+<a id="ss:initializers"></a></p><p>类定义中的let绑定在对象被构建前被执行。我们也可以在构建对象之后立即执行其他表达式。这样的代码可以被编写为一个隐藏的匿名方法，我们称之为初始化器（<span class="c003">initializer</span>）。因此，初始化器可以访问self和实例变量。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class printable_point x_init =
+    let origin = (x_init / 10) * 10 in
+    object (self)
+      val mutable x = origin
+      method get_x = x
+      method move d = x &lt;- x + d
+      method print = print_int self#get_x
+      initializer print_string "new point at "; self#print; print_newline ()
+    end;;
+</div><div class="caml-output ok">class printable_point :
+  int -&gt;
+  object
+    val mutable x : int
+    method get_x : int
+    method move : int -&gt; unit
+    method print : unit
+  end
+</div></pre>
+
+<pre><div class="caml-input"> let p = new printable_point 17;;
+</div><div class="caml-output ok">new point at 10
+val p : printable_point = &lt;obj&gt;
+</div></pre>
+
+
+</div><p>
+
+初始化器是无法被重载的。相反，所有初始化器都是按顺序被执行的。初始化器对于保持不变式特别实用。另一个例子可以在<a href="advexamples.html#ss%3Abank-accounts">6.1</a>节中看到。</p>
+<h2 class="section" id="sec29">3.5  虚方法</h2>
+<p>
+<a id="ss:virtual-methods"></a></p><p>我们可以使用关键字<span class="c003">virtual</span>声明一个方法，但不实际定义它。这个方法将在随后的子类中提供。这种方法被称为虚方法。包含虚方法的类必须被包换<span class="c003">virtual</span>标记，并且不能被实例化（也就是说，不能创建该类的任何对象）。该类的定义仍然会定义类型缩写（将虚方法视为其他方法）。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class virtual abstract_point x_init =
+    object (self)
+      method virtual get_x : int
+      method get_offset = self#get_x - x_init
+      method virtual move : int -&gt; unit
+    end;;
+</div><div class="caml-output ok">class virtual abstract_point :
+  int -&gt;
+  object
+    method get_offset : int
+    method virtual get_x : int
+    method virtual move : int -&gt; unit
+  end
+</div></pre>
+
+<pre><div class="caml-input"> class point x_init =
+    object
+      inherit abstract_point x_init
+      val mutable x = x_init
+      method get_x = x
+      method move d = x &lt;- x + d
+    end;;
+</div><div class="caml-output ok">class point :
+  int -&gt;
+  object
+    val mutable x : int
+    method get_offset : int
+    method get_x : int
+    method move : int -&gt; unit
+  end
+</div></pre>
+
+
+</div><p>实例变量也可以被声明为虚变量，其效果与方法相同。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class virtual abstract_point2 =
+    object
+      val mutable virtual x : int
+      method move d = x &lt;- x + d
+    end;;
+</div><div class="caml-output ok">class virtual abstract_point2 :
+  object val mutable virtual x : int method move : int -&gt; unit end
+</div></pre>
+
+<pre><div class="caml-input"> class point2 x_init =
+    object
+      inherit abstract_point2
+      val mutable x = x_init
+      method get_offset = x - x_init
+    end;;
+</div><div class="caml-output ok">class point2 :
+  int -&gt;
+  object
+    val mutable x : int
+    method get_offset : int
+    method move : int -&gt; unit
+  end
+</div></pre>
+
+
+</div>
+<h2 class="section" id="sec30">3.6  私有方法</h2>
+<p>
+<a id="ss:private-methods"></a></p><p>私有方法是不出现在对象接口中的方法，它们只能被同一对象的其他方法调用。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class restricted_point x_init =
+    object (self)
+      val mutable x = x_init
+      method get_x = x
+      method private move d = x &lt;- x + d
+      method bump = self#move 1
+    end;;
+</div><div class="caml-output ok">class restricted_point :
+  int -&gt;
+  object
+    val mutable x : int
+    method bump : unit
+    method get_x : int
+    method private move : int -&gt; unit
+  end
+</div></pre>
+
+<pre><div class="caml-input"> let p = new restricted_point 0;;
+</div><div class="caml-output ok">val p : restricted_point = &lt;obj&gt;
+</div></pre>
+
+<pre><div class="caml-input"> <U>p</U>#move 10 ;;
+</div><div class="caml-output error">Error: This expression has type restricted_point
+       It has no method move
+</div></pre>
+
+<pre><div class="caml-input"> p#bump;;
+</div><div class="caml-output ok">- : unit = ()
+</div></pre>
+
+
+</div><p>
+
+请注意，这与Java或C++中的私有方法和受保护方法不同，后者可以从同一类的其他对象调用。这是OCaml中类型和类之间独立性的直接结果：两个不相关的类可能产生相同类型的对象，这意味着我们无法在类型上确保某一对象来自特定的类。然而，在<a href="#ss%3Afriends">3.17</a>节中给出了友元的编写方式。</p><p>私有方法是会被子类继承的（默认情况下它们在子类中是可见的），除非它们被签名隐藏，如下所示。</p><p>同时，私有方法可以在子类中被转化为公有。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class point_again x =
+    object (self)
+      inherit restricted_point x
+      method virtual move : _
+    end;;
+</div><div class="caml-output ok">class point_again :
+  int -&gt;
+  object
+    val mutable x : int
+    method bump : unit
+    method get_x : int
+    method move : int -&gt; unit
+  end
+</div></pre>
+
+
+</div><p>
+
+这里的<span class="c003">virtual</span>标记只用于声明一个方法，但不提供其定义。由于我们没有添加私有标记，这使得该方法成为公有的，并保留了原始定义。</p><p>另一种定义方式是
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class point_again x =
+    object (self : &lt; move : _; ..&gt; )
+      inherit restricted_point x
+    end;;
+</div><div class="caml-output ok">class point_again :
+  int -&gt;
+  object
+    val mutable x : int
+    method bump : unit
+    method get_x : int
+    method move : int -&gt; unit
+  end
+</div></pre>
+
+
+</div><p>
+
+self的类型约束要求使用公有的<span class="c003">move</span>方法，这足以重载<span class="c003">private</span>标记。</p><p>可以认为私有方法应该在子类中保持私有。然而，由于该方法在子类中是可见的，所以总是可以选取它的代码并定义运行该代码的同名方法，因此另一个（较重的）解决方案是：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class point_again x =
+    object
+      inherit restricted_point x as super
+      method move = super#move
+    end;;
+</div><div class="caml-output ok">class point_again :
+  int -&gt;
+  object
+    val mutable x : int
+    method bump : unit
+    method get_x : int
+    method move : int -&gt; unit
+  end
+</div></pre>
+
+
+</div><p>当然，私有方法也可以是虚拟的。其关键字必须按此顺序出现<span class="c003">method private virtual</span>。</p>
+<h2 class="section" id="sec31">3.7  类接口</h2>
+<p>
+<a id="ss:class-interfaces"></a></p><p>类接口是从类定义中推导出来的。它们也可以直接被定义，并用于限制类的类型。像类声明一样，它们还定义了一个新的类型缩写。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class type restricted_point_type =
+    object
+      method get_x : int
+      method bump : unit
+  end;;
+</div><div class="caml-output ok">class type restricted_point_type =
+  object method bump : unit method get_x : int end
+</div></pre>
+
+<pre><div class="caml-input"> fun (x : restricted_point_type) -&gt; x;;
+</div><div class="caml-output ok">- : restricted_point_type -&gt; restricted_point_type = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>
+
+除了用于程序文档，类接口还可以被用来约束类的类型。具体的实例变量和私有方法都可以通过类的类型约束来隐藏。但是，公有方法和虚拟成员则无法被隐藏。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class restricted_point' x = (restricted_point x : restricted_point_type);;
+</div><div class="caml-output ok">class restricted_point' : int -&gt; restricted_point_type
+</div></pre>
+
+
+</div><p>
+
+或者，相当于：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class restricted_point' = (restricted_point : int -&gt; restricted_point_type);;
+</div><div class="caml-output ok">class restricted_point' : int -&gt; restricted_point_type
+</div></pre>
+
+
+</div><p>
+
+类的接口也可以在模块签名中指定，并用于限制模块的推导签名。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> module type POINT = sig
+    class restricted_point' : int -&gt;
+      object
+        method get_x : int
+        method bump : unit
+      end
+  end;;
+</div><div class="caml-output ok">module type POINT =
+  sig
+    class restricted_point' :
+      int -&gt; object method bump : unit method get_x : int end
+  end
+</div></pre>
+
+<pre><div class="caml-input"> module Point : POINT = struct
+    class restricted_point' = restricted_point
+  end;;
+</div><div class="caml-output ok">module Point : POINT
+</div></pre>
+
+
+</div>
+<h2 class="section" id="sec32">3.8  继承</h2>
+<p>
+<a id="ss:inheritance"></a></p><p>我们通过定义从<span class="c003">point</span>类继承的<span class="c003">colored_point</span>类来说明继承。这个类具备<span class="c003">point</span>类中的所有的实例变量和方法，与一个新的实例变量<span class="c003">c</span>和一个新的<span class="c003">color</span>方法。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class colored_point x (c : string) =
+    object
+      inherit point x
+      val c = c
+      method color = c
+    end;;
+</div><div class="caml-output ok">class colored_point :
+  int -&gt;
+  string -&gt;
+  object
+    val c : string
+    val mutable x : int
+    method color : string
+    method get_offset : int
+    method get_x : int
+    method move : int -&gt; unit
+  end
+</div></pre>
+
+<pre><div class="caml-input"> let p' = new colored_point 5 "red";;
+</div><div class="caml-output ok">val p' : colored_point = &lt;obj&gt;
+</div></pre>
+
+<pre><div class="caml-input"> p'#get_x, p'#color;;
+</div><div class="caml-output ok">- : int * string = (5, "red")
+</div></pre>
+
+
+</div><p>
+
+<span class="c003">point</span>和<span class="c003">colored_point</span>具有不兼容的类型，因为<span class="c003">point</span>没有<span class="c003">color</span>方法。但是，下面的<span class="c003">get_x</span>函数是一个通用函数，它可以将<span class="c003">get_x</span>方法应用于任何具有此方法的对象<span class="c003">p</span>（可能还有其他的对象，它们由类型中的省略号表示）。因此，它同时适用于<span class="c003">point</span>和<span class="c003">colored_point</span>。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let get_succ_x p = p#get_x + 1;;
+</div><div class="caml-output ok">val get_succ_x : &lt; get_x : int; .. &gt; -&gt; int = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> get_succ_x p + get_succ_x p';;
+</div><div class="caml-output ok">- : int = 8
+</div></pre>
+
+
+</div><p>
+
+在定义函数前不需要提前声明所使用的方法，如示例所示：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let set_x p = p#set_x;;
+</div><div class="caml-output ok">val set_x : &lt; set_x : 'a; .. &gt; -&gt; 'a = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let incr p = set_x p (get_succ_x p);;
+</div><div class="caml-output ok">val incr : &lt; get_x : int; set_x : int -&gt; 'a; .. &gt; -&gt; 'a = &lt;fun&gt;
+</div></pre>
+
+
+</div>
+<h2 class="section" id="sec33">3.9  多继承</h2>
+<p>
+<a id="ss:multiple-inheritance"></a></p><p>OCaml允许多继承。其中只保留方法的最后一个定义：在子类中重新定义父类中可见的方法会覆盖父类中的定义。可以通过绑定相关的祖先来重用被覆盖方法的定义。下面，<span class="c003">super</span>被绑定到祖先<span class="c003">printable_point</span>上。<span class="c003">super</span>是一个伪值标识符，只能用于调用超类方法，如<span class="c003">super#print</span>。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class printable_colored_point y c =
+    object (self)
+      val c = c
+      method color = c
+      inherit printable_point y as super
+      method! print =
+        print_string "(";
+        super#print;
+        print_string ", ";
+        print_string (self#color);
+        print_string ")"
+    end;;
+</div><div class="caml-output ok">class printable_colored_point :
+  int -&gt;
+  string -&gt;
+  object
+    val c : string
+    val mutable x : int
+    method color : string
+    method get_x : int
+    method move : int -&gt; unit
+    method print : unit
+  end
+</div></pre>
+
+<pre><div class="caml-input"> let p' = new printable_colored_point 17 "red";;
+</div><div class="caml-output ok">new point at (10, red)
+val p' : printable_colored_point = &lt;obj&gt;
+</div></pre>
+
+<pre><div class="caml-input"> p'#print;;
+</div><div class="caml-output ok">(10, red)- : unit = ()
+</div></pre>
+
+
+</div><p>
+
+隐藏在父类中的私有方法是不可见的，因此不会被覆盖。由于初始化器被视为私有方法，所以沿着类层次结构的所有初始化器都将按照引入它们的顺序被执行。</p><p>注意，为了清晰起见，方法<span class="c003">print</span>被通过<span class="c003">method</span>关键字与感叹号<span class="c003">!</span>显式地标记为覆盖另一个定义。如果方法print没有覆盖<span class="c003">printable_point</span>的<span class="c003">print</span>方法，编译器会抛出一个错误：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input">   object
+      <U>method! m = ()</U>
+    end;;
+</div><div class="caml-output error">Error: The method `m' has no previous definition
+</div></pre>
+
+
+</div><p>这个显式覆盖标记对<span class="c003">val</span>和<span class="c003">inherit</span>也同样适用：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class another_printable_colored_point y c c' =
+    object (self)
+    inherit printable_point y
+    inherit! printable_colored_point y c
+    val! c = c'
+    end;;
+</div><div class="caml-output ok">class another_printable_colored_point :
+  int -&gt;
+  string -&gt;
+  string -&gt;
+  object
+    val c : string
+    val mutable x : int
+    method color : string
+    method get_x : int
+    method move : int -&gt; unit
+    method print : unit
+  end
+</div></pre>
+
+
+</div>
+<h2 class="section" id="sec34">3.10  参数化类</h2>
+<p>
+<a id="ss:parameterized-classes"></a></p><p>可以将ref类型作为一个对象来实现。不过以下的定义无法通过类型检查：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> <U>class oref x_init =
+    object
+      val mutable x = x_init
+      method get = x
+      method set y = x &lt;- y
+    end</U>;;
+</div><div class="caml-output error">Error: Some type variables are unbound in this type:
+         class oref :
+           'a -&gt;
+           object
+             val mutable x : 'a
+             method get : 'a
+             method set : 'a -&gt; unit
+           end
+       The method get has type 'a where 'a is unbound
+</div></pre>
+
+
+</div><p>
+
+报错的原因是至少有一个方法具有多态类型（这里是存储在ref单元中值的类型），因此这个类应该是参数化的，或者方法的类型应该被限制为单态类型。类的单态实例可以定义为：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class oref (x_init:int) =
+    object
+      val mutable x = x_init
+      method get = x
+      method set y = x &lt;- y
+    end;;
+</div><div class="caml-output ok">class oref :
+  int -&gt;
+  object val mutable x : int method get : int method set : int -&gt; unit end
+</div></pre>
+
+
+</div><p>
+
+注意，由于直接对象不定义类类型，因此它们没有这样的限制。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let new_oref x_init =
+    object
+      val mutable x = x_init
+      method get = x
+      method set y = x &lt;- y
+    end;;
+</div><div class="caml-output ok">val new_oref : 'a -&gt; &lt; get : 'a; set : 'a -&gt; unit &gt; = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>
+
+另一方面，用于多态ref的类必须在其声明中显式列出类型参数。类的类型参数被列在<span class="c003">[</span>和<span class="c003">]</span>之间。类型参数还必须通过类型约束绑定到类主体中的某个位置。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class ['a] oref x_init =
+    object
+      val mutable x = (x_init : 'a)
+      method get = x
+      method set y = x &lt;- y
+    end;;
+</div><div class="caml-output ok">class ['a] oref :
+  'a -&gt; object val mutable x : 'a method get : 'a method set : 'a -&gt; unit end
+</div></pre>
+
+<pre><div class="caml-input"> let r = new oref 1 in r#set 2; (r#get);;
+</div><div class="caml-output ok">- : int = 2
+</div></pre>
+
+
+</div><p>
+
+声明中的类型参数实际上可能在类定义的主体中受到约束。在类类型中，类型参数的实际值在<span class="c003">constraint</span>子句中显示。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class ['a] oref_succ (x_init:'a) =
+    object
+      val mutable x = x_init + 1
+      method get = x
+      method set y = x &lt;- y
+    end;;
+</div><div class="caml-output ok">class ['a] oref_succ :
+  'a -&gt;
+  object
+    constraint 'a = int
+    val mutable x : int
+    method get : int
+    method set : int -&gt; unit
+  end
+</div></pre>
+
+
+</div><p>
+
+让我们考虑一个更复杂的例子：定义一个圆，其圆心可以是任何类型的点。我们在方法<span class="c003">move</span>中添加了一个额外的类型约束，因为类的类型参数不能忽略任何自由变量。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class ['a] circle (c : 'a) =
+    object
+      val mutable center = c
+      method center = center
+      method set_center c = center &lt;- c
+      method move = (center#move : int -&gt; unit)
+    end;;
+</div><div class="caml-output ok">class ['a] circle :
+  'a -&gt;
+  object
+    constraint 'a = &lt; move : int -&gt; unit; .. &gt;
+    val mutable center : 'a
+    method center : 'a
+    method move : int -&gt; unit
+    method set_center : 'a -&gt; unit
+  end
+</div></pre>
+
+
+</div><p>
+
+我们可以使用<span class="c003">constraint</span>子句实现<span class="c003">circle</span>另一种定义方式。<span class="c003">constraint</span>子句中使用的<span class="c003">#point</span>类型是由<span class="c003">point</span>类的定义生成的缩写。这个缩写能够与属于<span class="c003">point</span>类子类的任何对象的类型相匹配。它实际上可以被扩展为<span class="c003">&lt; get_x : int; move : int -&gt; unit; .. &gt;</span>。因此我们可以给出<span class="c003">circle</span>的替代定义如下，该定义对其参数有略微强一些的约束，因为我们现在期望<span class="c003">center</span>具备<span class="c003">get_x</span>方法。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class ['a] circle (c : 'a) =
+    object
+      constraint 'a = #point
+      val mutable center = c
+      method center = center
+      method set_center c = center &lt;- c
+      method move = center#move
+    end;;
+</div><div class="caml-output ok">class ['a] circle :
+  'a -&gt;
+  object
+    constraint 'a = #point
+    val mutable center : 'a
+    method center : 'a
+    method move : int -&gt; unit
+    method set_center : 'a -&gt; unit
+  end
+</div></pre>
+
+
+</div><p>
+
+<span class="c003">colored_circle</span>类是<span class="c003">circle</span>类的一个特别版本，它要求<span class="c003">center</span>的类型与<span class="c003">#colored_point</span>一致，并包括方法<span class="c003">color</span>。注意，在定制参数化类时，类型参数的实例必须始终被显式给出。它同样被写在<span class="c003">[</span>和<span class="c003">]</span>之间。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class ['a] colored_circle c =
+    object
+      constraint 'a = #colored_point
+      inherit ['a] circle c
+      method color = center#color
+    end;;
+</div><div class="caml-output ok">class ['a] colored_circle :
+  'a -&gt;
+  object
+    constraint 'a = #colored_point
+    val mutable center : 'a
+    method center : 'a
+    method color : string
+    method move : int -&gt; unit
+    method set_center : 'a -&gt; unit
+  end
+</div></pre>
+
+
+</div>
+<h2 class="section" id="sec35">3.11  多态方法</h2>
+<p>
+<a id="ss:polymorphic-methods"></a></p><p>虽然参数化类的内容可能是具有多态性的，但它们不足以允许方法使用的多态性。</p><p>一个经典的例子是迭代器的定义。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> List.fold_left;;
+</div><div class="caml-output ok">- : ('a -&gt; 'b -&gt; 'a) -&gt; 'a -&gt; 'b list -&gt; 'a = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> class ['a] intlist (l : int list) =
+    object
+      method empty = (l = [])
+      method fold f (accu : 'a) = List.fold_left f accu l
+    end;;
+</div><div class="caml-output ok">class ['a] intlist :
+  int list -&gt;
+  object method empty : bool method fold : ('a -&gt; int -&gt; 'a) -&gt; 'a -&gt; 'a end
+</div></pre>
+
+
+</div><p>
+
+乍看之下，我们似乎得到了一个多态迭代器，但是这在实践中不起作用。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let l = new intlist [1; 2; 3];;
+</div><div class="caml-output ok">val l : '_weak2 intlist = &lt;obj&gt;
+</div></pre>
+
+<pre><div class="caml-input"> l#fold (fun x y -&gt; x+y) 0;;
+</div><div class="caml-output ok">- : int = 6
+</div></pre>
+
+<pre><div class="caml-input"> l;;
+</div><div class="caml-output ok">- : int intlist = &lt;obj&gt;
+</div></pre>
+
+<pre><div class="caml-input"> l#fold (fun s x -&gt; <U>s</U> ^ string_of_int x ^ " ") "" ;;
+</div><div class="caml-output error">Error: This expression has type int but an expression was expected of type
+         string
+</div></pre>
+
+
+</div><p>
+
+在第一次求和运算中，我们的迭代器可以工作。然而，由于对象本身不是多态的（只有它们的构造函数是多态的），因此<span class="c003">fold</span>方法的使用规定了这个对象的类型。因此，我们将其用作字符串迭代器第二次尝试就失败了。</p><p>这里的问题是量化过程被错误地定位了：我们所需要的不是多态类，而是多态的<span class="c003">fold</span>方法。这可以通过在方法定义中显式地提供多态类型来实现。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class intlist (l : int list) =
+    object
+      method empty = (l = [])
+      method fold : 'a. ('a -&gt; int -&gt; 'a) -&gt; 'a -&gt; 'a =
+        fun f accu -&gt; List.fold_left f accu l
+    end;;
+</div><div class="caml-output ok">class intlist :
+  int list -&gt;
+  object method empty : bool method fold : ('a -&gt; int -&gt; 'a) -&gt; 'a -&gt; 'a end
+</div></pre>
+
+<pre><div class="caml-input"> let l = new intlist [1; 2; 3];;
+</div><div class="caml-output ok">val l : intlist = &lt;obj&gt;
+</div></pre>
+
+<pre><div class="caml-input"> l#fold (fun x y -&gt; x+y) 0;;
+</div><div class="caml-output ok">- : int = 6
+</div></pre>
+
+<pre><div class="caml-input"> l#fold (fun s x -&gt; s ^ string_of_int x ^ " ") "";;
+</div><div class="caml-output ok">- : string = "1 2 3 "
+</div></pre>
+
+
+</div><p>
+
+As you can see in the class type shown by the compiler, while
+polymorphic method types must be fully explicit in class definitions
+(appearing immediately after the method name), quantified type
+variables can be left implicit in class descriptions. Why require types
+to be explicit? The problem is that <span class="c003">(int -&gt; int -&gt; int) -&gt; int -&gt; int</span> would also be a valid type for <span class="c003">fold</span>, and it happens to be
+incompatible with the polymorphic type we gave (automatic
+instantiation only works for toplevel types variables, not for inner
+quantifiers, where it becomes an undecidable problem.) So the compiler
+cannot choose between those two types, and must be helped.</p><p>However, the type can be completely omitted in the class definition if
+it is already known, through inheritance or type constraints on self.
+Here is an example of method overriding.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class intlist_rev l =
+    object
+      inherit intlist l
+      method! fold f accu = List.fold_left f accu (List.rev l)
+    end;;
+</div>
+</pre>
+
+
+</div><p>
+
+The following idiom separates description and definition.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class type ['a] iterator =
+    object method fold : ('b -&gt; 'a -&gt; 'b) -&gt; 'b -&gt; 'b end;;
+</div>
+</pre>
+
+<pre><div class="caml-input"> class intlist' l =
+    object (self : int #iterator)
+      method empty = (l = [])
+      method fold f accu = List.fold_left f accu l
+    end;;
+</div>
+</pre>
+
+
+</div><p>
+
+Note here the <span class="c003">(self : int #iterator)</span> idiom, which ensures that this
+object implements the interface <span class="c003">iterator</span>.</p><p>Polymorphic methods are called in exactly the same way as normal
+methods, but you should be aware of some limitations of type
+inference. Namely, a polymorphic method can only be called if its
+type is known at the call site. Otherwise, the method will be assumed
+to be monomorphic, and given an incompatible type.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let sum lst = lst#fold (fun x y -&gt; x+y) 0;;
+</div><div class="caml-output ok">val sum : &lt; fold : (int -&gt; int -&gt; int) -&gt; int -&gt; 'a; .. &gt; -&gt; 'a = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> sum <U>l</U> ;;
+</div><div class="caml-output error">Error: This expression has type intlist
+       but an expression was expected of type
+         &lt; fold : (int -&gt; int -&gt; int) -&gt; int -&gt; 'a; .. &gt;
+       Types for method fold are incompatible
+</div></pre>
+
+
+</div><p>
+
+The workaround is easy: you should put a type constraint on the
+parameter.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let sum (lst : _ #iterator) = lst#fold (fun x y -&gt; x+y) 0;;
+</div><div class="caml-output ok">val sum : int #iterator -&gt; int = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>
+
+Of course the constraint may also be an explicit method type.
+Only occurences of quantified variables are required.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let sum lst =
+    (lst : &lt; fold : 'a. ('a -&gt; _ -&gt; 'a) -&gt; 'a -&gt; 'a; .. &gt;)#fold (+) 0;;
+</div><div class="caml-output ok">val sum : &lt; fold : 'a. ('a -&gt; int -&gt; 'a) -&gt; 'a -&gt; 'a; .. &gt; -&gt; int = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>Another use of polymorphic methods is to allow some form of implicit
+subtyping in method arguments. We have already seen in section
+<a href="#ss%3Ainheritance">3.8</a> how some functions may be polymorphic in the
+class of their argument. This can be extended to methods.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class type point0 = object method get_x : int end;;
+</div><div class="caml-output ok">class type point0 = object method get_x : int end
+</div></pre>
+
+<pre><div class="caml-input"> class distance_point x =
+    object
+      inherit point x
+      method distance : 'a. (#point0 as 'a) -&gt; int =
+        fun other -&gt; abs (other#get_x - x)
+    end;;
+</div><div class="caml-output ok">class distance_point :
+  int -&gt;
+  object
+    val mutable x : int
+    method distance : #point0 -&gt; int
+    method get_offset : int
+    method get_x : int
+    method move : int -&gt; unit
+  end
+</div></pre>
+
+<pre><div class="caml-input"> let p = new distance_point 3 in
+  (p#distance (new point 8), p#distance (new colored_point 1 "blue"));;
+</div><div class="caml-output ok">- : int * int = (5, 2)
+</div></pre>
+
+
+</div><p>
+
+Note here the special syntax <span class="c003">(#point0 as 'a)</span> we have to use to
+quantify the extensible part of <span class="c003">#point0</span>. As for the variable binder,
+it can be omitted in class specifications. If you want polymorphism
+inside object field it must be quantified independently.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class multi_poly =
+    object
+      method m1 : 'a. (&lt; n1 : 'b. 'b -&gt; 'b; .. &gt; as 'a) -&gt; _ =
+        fun o -&gt; o#n1 true, o#n1 "hello"
+      method m2 : 'a 'b. (&lt; n2 : 'b -&gt; bool; .. &gt; as 'a) -&gt; 'b -&gt; _ =
+        fun o x -&gt; o#n2 x
+    end;;
+</div><div class="caml-output ok">class multi_poly :
+  object
+    method m1 : &lt; n1 : 'b. 'b -&gt; 'b; .. &gt; -&gt; bool * string
+    method m2 : &lt; n2 : 'b -&gt; bool; .. &gt; -&gt; 'b -&gt; bool
+  end
+</div></pre>
+
+
+</div><p>
+
+In method <span class="c003">m1</span>, <span class="c003">o</span> must be an object with at least a method <span class="c003">n1</span>,
+itself polymorphic. In method <span class="c003">m2</span>, the argument of <span class="c003">n2</span> and <span class="c003">x</span> must
+have the same type, which is quantified at the same level as <span class="c003">'a</span>.</p>
+<h2 class="section" id="sec36">3.12  Using coercions</h2>
+<p>
+<a id="ss:using-coercions"></a></p><p>Subtyping is never implicit. There are, however, two ways to perform
+subtyping. The most general construction is fully explicit: both the
+domain and the codomain of the type coercion must be given.</p><p>We have seen that points and colored points have incompatible types.
+For instance, they cannot be mixed in the same list. However, a
+colored point can be coerced to a point, hiding its <span class="c003">color</span> method:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let colored_point_to_point cp = (cp : colored_point :&gt; point);;
+</div><div class="caml-output ok">val colored_point_to_point : colored_point -&gt; point = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let p = new point 3 and q = new colored_point 4 "blue";;
+</div><div class="caml-output ok">val p : point = &lt;obj&gt;
+val q : colored_point = &lt;obj&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let l = [p; (colored_point_to_point q)];;
+</div><div class="caml-output ok">val l : point list = [&lt;obj&gt;; &lt;obj&gt;]
+</div></pre>
+
+
+</div><p>
+
+An object of type <span class="c003">t</span> can be seen as an object of type <span class="c003">t'</span>
+only if <span class="c003">t</span> is a subtype of <span class="c003">t'</span>. For instance, a point cannot be
+seen as a colored point.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> <U>(p : point :&gt; colored_point)</U>;;
+</div><div class="caml-output error">Error: Type point = &lt; get_offset : int; get_x : int; move : int -&gt; unit &gt;
+       is not a subtype of
+         colored_point =
+           &lt; color : string; get_offset : int; get_x : int;
+             move : int -&gt; unit &gt; 
+       The first object type has no method color
+</div></pre>
+
+
+</div><p>
+
+Indeed, narrowing coercions without runtime checks would be unsafe.
+Runtime type checks might raise exceptions, and they would require
+the presence of type information at runtime, which is not the case in
+the OCaml system.
+For these reasons, there is no such operation available in the language.</p><p>Be aware that subtyping and inheritance are not related. Inheritance is a
+syntactic relation between classes while subtyping is a semantic relation
+between types. For instance, the class of colored points could have been
+defined directly, without inheriting from the class of points; the type of
+colored points would remain unchanged and thus still be a subtype of
+points.
+</p><p>The domain of a coercion can often be omitted. For instance, one can
+define:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let to_point cp = (cp :&gt; point);;
+</div><div class="caml-output ok">val to_point : #point -&gt; point = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>
+
+In this case, the function <span class="c003">colored_point_to_point</span> is an instance of the
+function <span class="c003">to_point</span>. This is not always true, however. The fully
+explicit coercion is more precise and is sometimes unavoidable.
+Consider, for example, the following class:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class c0 = object method m = {&lt; &gt;} method n = 0 end;;
+</div><div class="caml-output ok">class c0 : object ('a) method m : 'a method n : int end
+</div></pre>
+
+
+</div><p>
+
+The object type <span class="c003">c0</span> is an abbreviation for <span class="c003">&lt;m : 'a; n : int&gt; as 'a</span>.
+Consider now the type declaration:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class type c1 =  object method m : c1 end;;
+</div><div class="caml-output ok">class type c1 = object method m : c1 end
+</div></pre>
+
+
+</div><p>
+
+The object type <span class="c003">c1</span> is an abbreviation for the type <span class="c003">&lt;m : 'a&gt; as 'a</span>.
+The coercion from an object of type <span class="c003">c0</span> to an object of type <span class="c003">c1</span> is
+correct:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> fun (x:c0) -&gt; (x : c0 :&gt; c1);;
+</div><div class="caml-output ok">- : c0 -&gt; c1 = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>
+
+However, the domain of the coercion cannot always be omitted.
+In that case, the solution is to use the explicit form.
+Sometimes, a change in the class-type definition can also solve the problem
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class type c2 = object ('a) method m : 'a end;;
+</div><div class="caml-output ok">class type c2 = object ('a) method m : 'a end
+</div></pre>
+
+<pre><div class="caml-input"> fun (x:c0) -&gt; (x :&gt; c2);;
+</div><div class="caml-output ok">- : c0 -&gt; c2 = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>
+
+While class types <span class="c003">c1</span> and <span class="c003">c2</span> are different, both object types
+<span class="c003">c1</span> and <span class="c003">c2</span> expand to the same object type (same method names and types).
+Yet, when the domain of a coercion is left implicit and its co-domain
+is an abbreviation of a known class type, then the class type, rather
+than the object type, is used to derive the coercion function. This
+allows leaving the domain implicit in most cases when coercing form a
+subclass to its superclass.
+The type of a coercion can always be seen as below:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let to_c1 x = (x :&gt; c1);;
+</div><div class="caml-output ok">val to_c1 : &lt; m : #c1; .. &gt; -&gt; c1 = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let to_c2 x = (x :&gt; c2);;
+</div><div class="caml-output ok">val to_c2 : #c2 -&gt; c2 = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>
+
+Note the difference between these two coercions: in the case of <span class="c003">to_c2</span>,
+the type
+<span class="c003">#c2 = &lt; m : 'a; .. &gt; as 'a</span> is polymorphically recursive (according
+to the explicit recursion in the class type of <span class="c003">c2</span>); hence the
+success of applying this coercion to an object of class <span class="c003">c0</span>.
+On the other hand, in the first case, <span class="c003">c1</span> was only expanded and
+unrolled twice to obtain <span class="c003">&lt; m : &lt; m : c1; .. &gt;; .. &gt;</span> (remember <span class="c003">#c1 = &lt; m : c1; .. &gt;</span>), without introducing recursion.
+You may also note that the type of <span class="c003">to_c2</span> is <span class="c003">#c2 -&gt; c2</span> while
+the type of <span class="c003">to_c1</span> is more general than <span class="c003">#c1 -&gt; c1</span>. This is not always true,
+since there are class types for which some instances of <span class="c003">#c</span> are not subtypes
+of <span class="c003">c</span>, as explained in section <a href="#ss%3Abinary-methods">3.16</a>. Yet, for
+parameterless classes the coercion <span class="c003">(_ :&gt; c)</span> is always more general than
+<span class="c003">(_ : #c :&gt; c)</span>.
+</p><p>A common problem may occur when one tries to define a coercion to a
+class <span class="c003">c</span> while defining class <span class="c003">c</span>. The problem is due to the type
+abbreviation not being completely defined yet, and so its subtypes are not
+clearly known. Then, a coercion <span class="c003">(_ :&gt; c)</span> or <span class="c003">(_ : #c :&gt; c)</span> is taken to be
+the identity function, as in
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> function x -&gt; (x :&gt; 'a);;
+</div><div class="caml-output ok">- : 'a -&gt; 'a = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>
+
+As a consequence, if the coercion is applied to <span class="c003">self</span>, as in the
+following example, the type of <span class="c003">self</span> is unified with the closed type
+<span class="c003">c</span> (a closed object type is an object type without ellipsis). This
+would constrain the type of self be closed and is thus rejected.
+Indeed, the type of self cannot be closed: this would prevent any
+further extension of the class. Therefore, a type error is generated
+when the unification of this type with another type would result in a
+closed object type.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class c = object method m = 1 end
+  and d = object (self)
+    inherit c
+    method n = 2
+    method as_c = (<U>self</U> :&gt; c)
+  end;;
+</div><div class="caml-output error">Error: This expression cannot be coerced to type c = &lt; m : int &gt;; it has type
+         &lt; as_c : c; m : int; n : int; .. &gt;
+       but is here used with type c
+       Self type cannot escape its class
+</div></pre>
+
+
+</div><p>
+
+However, the most common instance of this problem, coercing self to
+its current class, is detected as a special case by the type checker,
+and properly typed.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class c = object (self) method m = (self :&gt; c) end;;
+</div><div class="caml-output ok">class c : object method m : c end
+</div></pre>
+
+
+</div><p>
+
+This allows the following idiom, keeping a list of all objects
+belonging to a class or its subclasses:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let all_c = ref [];;
+</div><div class="caml-output ok">val all_c : '_weak3 list ref = {contents = []}
+</div></pre>
+
+<pre><div class="caml-input"> class c (m : int) =
+    object (self)
+      method m = m
+      initializer all_c := (self :&gt; c) :: !all_c
+    end;;
+</div><div class="caml-output ok">class c : int -&gt; object method m : int end
+</div></pre>
+
+
+</div><p>
+
+This idiom can in turn be used to retrieve an object whose type has
+been weakened:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let rec lookup_obj obj = function [] -&gt; raise Not_found
+    | obj' :: l -&gt;
+       if (obj :&gt; &lt; &gt;) = (obj' :&gt; &lt; &gt;) then obj' else lookup_obj obj l ;;
+</div><div class="caml-output ok">val lookup_obj : &lt; .. &gt; -&gt; (&lt; .. &gt; as 'a) list -&gt; 'a = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let lookup_c obj = lookup_obj obj !all_c;;
+</div><div class="caml-output ok">val lookup_c : &lt; .. &gt; -&gt; &lt; m : int &gt; = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>
+
+The type <span class="c003">&lt; m : int &gt;</span> we see here is just the expansion of <span class="c003">c</span>, due
+to the use of a reference; we have succeeded in getting back an object
+of type <span class="c003">c</span>.</p><p><br>
+The previous coercion problem can often be avoided by first
+defining the abbreviation, using a class type:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class type c' = object method m : int end;;
+</div><div class="caml-output ok">class type c' = object method m : int end
+</div></pre>
+
+<pre><div class="caml-input"> class c : c' = object method m = 1 end
+  and d = object (self)
+    inherit c
+    method n = 2
+    method as_c = (self :&gt; c')
+  end;;
+</div><div class="caml-output ok">class c : c'
+and d : object method as_c : c' method m : int method n : int end
+</div></pre>
+
+
+</div><p>
+
+It is also possible to use a virtual class. Inheriting from this class
+simultaneously forces all methods of <span class="c003">c</span> to have the same
+type as the methods of <span class="c003">c'</span>.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class virtual c' = object method virtual m : int end;;
+</div><div class="caml-output ok">class virtual c' : object method virtual m : int end
+</div></pre>
+
+<pre><div class="caml-input"> class c = object (self) inherit c' method m = 1 end;;
+</div><div class="caml-output ok">class c : object method m : int end
+</div></pre>
+
+
+</div><p>
+
+One could think of defining the type abbreviation directly:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> type c' = &lt;m : int&gt;;;
+</div>
+</pre>
+
+
+</div><p>
+
+However, the abbreviation <span class="c003">#c'</span> cannot be defined directly in a similar way.
+It can only be defined by a class or a class-type definition.
+This is because a <span class="c003">#</span>-abbreviation carries an implicit anonymous
+variable <span class="c003">..</span> that cannot be explicitly named.
+The closer you get to it is:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> type 'a c'_class = 'a constraint 'a = &lt; m : int; .. &gt;;;
+</div>
+</pre>
+
+
+</div><p>
+
+with an extra type variable capturing the open object type.</p>
+<h2 class="section" id="sec37">3.13  Functional objects</h2>
+<p>
+<a id="ss:functional-objects"></a></p><p>It is possible to write a version of class <span class="c003">point</span> without assignments
+on the instance variables. The override construct <span class="c003">{&lt; ... &gt;}</span> returns a copy of
+“self” (that is, the current object), possibly changing the value of
+some instance variables.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class functional_point y =
+    object
+      val x = y
+      method get_x = x
+      method move d = {&lt; x = x + d &gt;}
+    end;;
+</div><div class="caml-output ok">class functional_point :
+  int -&gt;
+  object ('a) val x : int method get_x : int method move : int -&gt; 'a end
+</div></pre>
+
+<pre><div class="caml-input"> let p = new functional_point 7;;
+</div><div class="caml-output ok">val p : functional_point = &lt;obj&gt;
+</div></pre>
+
+<pre><div class="caml-input"> p#get_x;;
+</div><div class="caml-output ok">- : int = 7
+</div></pre>
+
+<pre><div class="caml-input"> (p#move 3)#get_x;;
+</div><div class="caml-output ok">- : int = 10
+</div></pre>
+
+<pre><div class="caml-input"> p#get_x;;
+</div><div class="caml-output ok">- : int = 7
+</div></pre>
+
+
+</div><p>
+
+Note that the type abbreviation <span class="c003">functional_point</span> is recursive, which can
+be seen in the class type of <span class="c003">functional_point</span>: the type of self is <span class="c003">'a</span>
+and <span class="c003">'a</span> appears inside the type of the method <span class="c003">move</span>.</p><p>The above definition of <span class="c003">functional_point</span> is not equivalent
+to the following:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class bad_functional_point y =
+    object
+      val x = y
+      method get_x = x
+      method move d = new bad_functional_point (x+d)
+    end;;
+</div><div class="caml-output ok">class bad_functional_point :
+  int -&gt;
+  object
+    val x : int
+    method get_x : int
+    method move : int -&gt; bad_functional_point
+  end
+</div></pre>
+
+
+</div><p>
+
+While objects of either class will behave the same, objects of their
+subclasses will be different. In a subclass of <span class="c003">bad_functional_point</span>,
+the method <span class="c003">move</span> will
+keep returning an object of the parent class. On the contrary, in a
+subclass of <span class="c003">functional_point</span>, the method <span class="c003">move</span> will return an
+object of the subclass.</p><p>Functional update is often used in conjunction with binary methods
+as illustrated in section <a href="advexamples.html#module%3Astring">6.2.1</a>.</p>
+<h2 class="section" id="sec38">3.14  Cloning objects</h2>
+<p>
+<a id="ss:cloning-objects"></a></p><p>Objects can also be cloned, whether they are functional or imperative.
+The library function <span class="c003">Oo.copy</span> makes a shallow copy of an object. That is,
+it returns a new object that has the same methods and instance
+variables as its argument. The
+instance variables are copied but their contents are shared.
+Assigning a new value to an instance variable of the copy (using a method
+call) will not affect instance variables of the original, and conversely.
+A deeper assignment (for example if the instance variable is a reference cell)
+will of course affect both the original and the copy.</p><p>The type of <span class="c003">Oo.copy</span> is the following:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> Oo.copy;;
+</div><div class="caml-output ok">- : (&lt; .. &gt; as 'a) -&gt; 'a = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>
+
+The keyword <span class="c003">as</span> in that type binds the type variable <span class="c003">'a</span> to
+the object type <span class="c003">&lt; .. &gt;</span>. Therefore, <span class="c003">Oo.copy</span> takes an object with
+any methods (represented by the ellipsis), and returns an object of
+the same type. The type of <span class="c003">Oo.copy</span> is different from type <span class="c003">&lt; .. &gt; -&gt; &lt; .. &gt;</span> as each ellipsis represents a different set of methods.
+Ellipsis actually behaves as a type variable.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let p = new point 5;;
+</div><div class="caml-output ok">val p : point = &lt;obj&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let q = Oo.copy p;;
+</div><div class="caml-output ok">val q : point = &lt;obj&gt;
+</div></pre>
+
+<pre><div class="caml-input"> q#move 7; (p#get_x, q#get_x);;
+</div><div class="caml-output ok">- : int * int = (5, 12)
+</div></pre>
+
+
+</div><p>
+
+In fact, <span class="c003">Oo.copy p</span> will behave as <span class="c003">p#copy</span> assuming that a public
+method <span class="c003">copy</span> with body <span class="c003">{&lt; &gt;}</span> has been defined in the class of <span class="c003">p</span>.</p><p>Objects can be compared using the generic comparison functions <span class="c003">=</span> and <span class="c003">&lt;&gt;</span>.
+Two objects are equal if and only if they are physically equal. In
+particular, an object and its copy are not equal.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let q = Oo.copy p;;
+</div><div class="caml-output ok">val q : point = &lt;obj&gt;
+</div></pre>
+
+<pre><div class="caml-input"> p = q, p = p;;
+</div><div class="caml-output ok">- : bool * bool = (false, true)
+</div></pre>
+
+
+</div><p>
+
+Other generic comparisons such as (<span class="c003">&lt;</span>, <span class="c003">&lt;=</span>, ...) can also be used on
+objects. The
+relation <span class="c003">&lt;</span> defines an unspecified but strict ordering on objects. The
+ordering relationship between two objects is fixed once for all after the
+two objects have been created and it is not affected by mutation of fields.</p><p>Cloning and override have a non empty intersection.
+They are interchangeable when used within an object and without
+overriding any field:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class copy =
+    object
+      method copy = {&lt; &gt;}
+    end;;
+</div><div class="caml-output ok">class copy : object ('a) method copy : 'a end
+</div></pre>
+
+<pre><div class="caml-input"> class copy =
+    object (self)
+      method copy = Oo.copy self
+    end;;
+</div><div class="caml-output ok">class copy : object ('a) method copy : 'a end
+</div></pre>
+
+
+</div><p>
+
+Only the override can be used to actually override fields, and
+only the <span class="c003">Oo.copy</span> primitive can be used externally.</p><p>Cloning can also be used to provide facilities for saving and
+restoring the state of objects.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class backup =
+    object (self : 'mytype)
+      val mutable copy = None
+      method save = copy &lt;- Some {&lt; copy = None &gt;}
+      method restore = match copy with Some x -&gt; x | None -&gt; self
+    end;;
+</div><div class="caml-output ok">class backup :
+  object ('a)
+    val mutable copy : 'a option
+    method restore : 'a
+    method save : unit
+  end
+</div></pre>
+
+
+</div><p>
+
+The above definition will only backup one level.
+The backup facility can be added to any class by using multiple inheritance.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class ['a] backup_ref x = object inherit ['a] oref x inherit backup end;;
+</div><div class="caml-output ok">class ['a] backup_ref :
+  'a -&gt;
+  object ('b)
+    val mutable copy : 'b option
+    val mutable x : 'a
+    method get : 'a
+    method restore : 'b
+    method save : unit
+    method set : 'a -&gt; unit
+  end
+</div></pre>
+
+<pre><div class="caml-input"> let rec get p n = if n = 0 then p # get else get (p # restore) (n-1);;
+</div><div class="caml-output ok">val get : (&lt; get : 'b; restore : 'a; .. &gt; as 'a) -&gt; int -&gt; 'b = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let p = new backup_ref 0  in
+  p # save; p # set 1; p # save; p # set 2;
+  [get p 0; get p 1; get p 2; get p 3; get p 4];;
+</div><div class="caml-output ok">- : int list = [2; 1; 1; 1; 1]
+</div></pre>
+
+
+</div><p>
+
+We can define a variant of backup that retains all copies. (We also
+add a method <span class="c003">clear</span> to manually erase all copies.)
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class backup =
+    object (self : 'mytype)
+      val mutable copy = None
+      method save = copy &lt;- Some {&lt; &gt;}
+      method restore = match copy with Some x -&gt; x | None -&gt; self
+      method clear = copy &lt;- None
+    end;;
+</div><div class="caml-output ok">class backup :
+  object ('a)
+    val mutable copy : 'a option
+    method clear : unit
+    method restore : 'a
+    method save : unit
+  end
+</div></pre>
+
+
+</div><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class ['a] backup_ref x = object inherit ['a] oref x inherit backup end;;
+</div><div class="caml-output ok">class ['a] backup_ref :
+  'a -&gt;
+  object ('b)
+    val mutable copy : 'b option
+    val mutable x : 'a
+    method clear : unit
+    method get : 'a
+    method restore : 'b
+    method save : unit
+    method set : 'a -&gt; unit
+  end
+</div></pre>
+
+<pre><div class="caml-input"> let p = new backup_ref 0  in
+  p # save; p # set 1; p # save; p # set 2;
+  [get p 0; get p 1; get p 2; get p 3; get p 4];;
+</div><div class="caml-output ok">- : int list = [2; 1; 0; 0; 0]
+</div></pre>
+
+
+</div>
+<h2 class="section" id="sec39">3.15  Recursive classes</h2>
+<p>
+<a id="ss:recursive-classes"></a></p><p>Recursive classes can be used to define objects whose types are
+mutually recursive.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class window =
+    object
+      val mutable top_widget = (None : widget option)
+      method top_widget = top_widget
+    end
+  and widget (w : window) =
+    object
+      val window = w
+      method window = window
+    end;;
+</div><div class="caml-output ok">class window :
+  object
+    val mutable top_widget : widget option
+    method top_widget : widget option
+  end
+and widget : window -&gt; object val window : window method window : window end
+</div></pre>
+
+
+</div><p>
+
+Although their types are mutually recursive, the classes <span class="c003">widget</span> and
+<span class="c003">window</span> are themselves independent.</p>
+<h2 class="section" id="sec40">3.16  Binary methods</h2>
+<p>
+<a id="ss:binary-methods"></a></p><p>A binary method is a method which takes an argument of the same type
+as self. The class <span class="c003">comparable</span> below is a template for classes with a
+binary method <span class="c003">leq</span> of type <span class="c003">'a -&gt; bool</span> where the type variable <span class="c003">'a</span>
+is bound to the type of self. Therefore, <span class="c003">#comparable</span> expands to <span class="c003">&lt; leq : 'a -&gt; bool; .. &gt; as 'a</span>. We see here that the binder <span class="c003">as</span> also
+allows writing recursive types.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class virtual comparable =
+    object (_ : 'a)
+      method virtual leq : 'a -&gt; bool
+    end;;
+</div><div class="caml-output ok">class virtual comparable : object ('a) method virtual leq : 'a -&gt; bool end
+</div></pre>
+
+
+</div><p>
+
+We then define a subclass <span class="c003">money</span> of <span class="c003">comparable</span>. The class <span class="c003">money</span>
+simply wraps floats as comparable objects. We will extend it below with
+more operations. We have to use a type constraint on the class parameter <span class="c003">x</span>
+because the primitive <span class="c003">&lt;=</span> is a polymorphic function in
+OCaml. The <span class="c003">inherit</span> clause ensures that the type of objects
+of this class is an instance of <span class="c003">#comparable</span>.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class money (x : float) =
+    object
+      inherit comparable
+      val repr = x
+      method value = repr
+      method leq p = repr &lt;= p#value
+    end;;
+</div><div class="caml-output ok">class money :
+  float -&gt;
+  object ('a)
+    val repr : float
+    method leq : 'a -&gt; bool
+    method value : float
+  end
+</div></pre>
+
+
+</div><p>
+
+Note that the type <span class="c003">money</span> is not a subtype of type
+<span class="c003">comparable</span>, as the self type appears in contravariant position
+in the type of method <span class="c003">leq</span>.
+Indeed, an object <span class="c003">m</span> of class <span class="c003">money</span> has a method <span class="c003">leq</span>
+that expects an argument of type <span class="c003">money</span> since it accesses
+its <span class="c003">value</span> method. Considering <span class="c003">m</span> of type <span class="c003">comparable</span> would allow a
+call to method <span class="c003">leq</span> on <span class="c003">m</span> with an argument that does not have a method
+<span class="c003">value</span>, which would be an error.</p><p>Similarly, the type <span class="c003">money2</span> below is not a subtype of type <span class="c003">money</span>.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class money2 x =
+    object
+      inherit money x
+      method times k = {&lt; repr = k *. repr &gt;}
+    end;;
+</div><div class="caml-output ok">class money2 :
+  float -&gt;
+  object ('a)
+    val repr : float
+    method leq : 'a -&gt; bool
+    method times : float -&gt; 'a
+    method value : float
+  end
+</div></pre>
+
+
+</div><p>
+
+It is however possible to define functions that manipulate objects of
+type either <span class="c003">money</span> or <span class="c003">money2</span>: the function <span class="c003">min</span>
+will return the minimum of any two objects whose type unifies with
+<span class="c003">#comparable</span>. The type of <span class="c003">min</span> is not the same as <span class="c003">#comparable -&gt; #comparable -&gt; #comparable</span>, as the abbreviation <span class="c003">#comparable</span> hides a
+type variable (an ellipsis). Each occurrence of this abbreviation
+generates a new variable.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let min (x : #comparable) y =
+    if x#leq y then x else y;;
+</div><div class="caml-output ok">val min : (#comparable as 'a) -&gt; 'a -&gt; 'a = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>
+
+This function can be applied to objects of type <span class="c003">money</span>
+or <span class="c003">money2</span>.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> (min (new money  1.3) (new money 3.1))#value;;
+</div><div class="caml-output ok">- : float = 1.3
+</div></pre>
+
+<pre><div class="caml-input"> (min (new money2 5.0) (new money2 3.14))#value;;
+</div><div class="caml-output ok">- : float = 3.14
+</div></pre>
+
+
+</div><p>More examples of binary methods can be found in sections
+<a href="advexamples.html#module%3Astring">6.2.1</a> and <a href="advexamples.html#module%3Aset">6.2.3</a>.</p><p>Note the use of override for method <span class="c003">times</span>.
+Writing <span class="c003">new money2 (k *. repr)</span> instead of <span class="c003">{&lt; repr = k *. repr &gt;}</span>
+would not behave well with inheritance: in a subclass <span class="c003">money3</span> of <span class="c003">money2</span>
+the <span class="c003">times</span> method would return an object of class <span class="c003">money2</span> but not of class
+<span class="c003">money3</span> as would be expected.</p><p>The class <span class="c003">money</span> could naturally carry another binary method. Here is a
+direct definition:
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class money x =
+    object (self : 'a)
+      val repr = x
+      method value = repr
+      method print = print_float repr
+      method times k = {&lt; repr = k *. x &gt;}
+      method leq (p : 'a) = repr &lt;= p#value
+      method plus (p : 'a) = {&lt; repr = x +. p#value &gt;}
+    end;;
+</div><div class="caml-output ok">class money :
+  float -&gt;
+  object ('a)
+    val repr : float
+    method leq : 'a -&gt; bool
+    method plus : 'a -&gt; 'a
+    method print : unit
+    method times : float -&gt; 'a
+    method value : float
+  end
+</div></pre>
+
+
+</div>
+<h2 class="section" id="sec41">3.17  Friends</h2>
+<p>
+<a id="ss:friends"></a></p><p>The above class <span class="c003">money</span> reveals a problem that often occurs with binary
+methods. In order to interact with other objects of the same class, the
+representation of <span class="c003">money</span> objects must be revealed, using a method such as
+<span class="c003">value</span>. If we remove all binary methods (here <span class="c003">plus</span> and <span class="c003">leq</span>),
+the representation can easily be hidden inside objects by removing the method
+<span class="c003">value</span> as well. However, this is not possible as soon as some binary
+method requires access to the representation of objects of the same
+class (other than self).
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> class safe_money x =
+    object (self : 'a)
+      val repr = x
+      method print = print_float repr
+      method times k = {&lt; repr = k *. x &gt;}
+    end;;
+</div><div class="caml-output ok">class safe_money :
+  float -&gt;
+  object ('a)
+    val repr : float
+    method print : unit
+    method times : float -&gt; 'a
+  end
+</div></pre>
+
+
+</div><p>
+
+Here, the representation of the object is known only to a particular object.
+To make it available to other objects of the same class, we are forced to
+make it available to the whole world. However we can easily restrict the
+visibility of the representation using the module system.
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> module type MONEY =
+    sig
+      type t
+      class c : float -&gt;
+        object ('a)
+          val repr : t
+          method value : t
+          method print : unit
+          method times : float -&gt; 'a
+          method leq : 'a -&gt; bool
+          method plus : 'a -&gt; 'a
+        end
+    end;;
+</div>
+</pre>
+
+<pre><div class="caml-input"> module Euro : MONEY =
+    struct
+      type t = float
+      class c x =
+        object (self : 'a)
+          val repr = x
+          method value = repr
+          method print = print_float repr
+          method times k = {&lt; repr = k *. x &gt;}
+          method leq (p : 'a) = repr &lt;= p#value
+          method plus (p : 'a) = {&lt; repr = x +. p#value &gt;}
+        end
+    end;;
+</div>
+</pre>
+
+
+</div><p>
+
+Another example of friend functions may be found in section
+<a href="advexamples.html#module%3Aset">6.2.3</a>. These examples occur when a group of objects (here
+objects of the same class) and functions should see each others internal
+representation, while their representation should be hidden from the
+outside. The solution is always to define all friends in the same module,
+give access to the representation and use a signature constraint to make the
+representation abstract outside the module.</p>
+<hr>
+<a href="moduleexamples.html"><img src="previous_motif.svg" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.svg" alt="Up"></a>
+<a href="lablexamples.html"><img src="next_motif.svg" alt="Next"></a>
+</body>
+</html>

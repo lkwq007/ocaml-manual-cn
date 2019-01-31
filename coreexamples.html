@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="hevea 2.32">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<link rel="stylesheet" type="text/css" href="manual.css">
+<title>Chapter 1  核心语言</title>
+</head>
+<body>
+<a href="foreword.html"><img src="previous_motif.svg" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.svg" alt="Up"></a>
+<a href="moduleexamples.html"><img src="next_motif.svg" alt="Next"></a>
+<hr>
+<h1 class="chapter" id="sec7">Chapter 1  核心语言</h1>
+<ul>
+<li><a href="coreexamples.html#sec8">1.1  基础</a>
+</li><li><a href="coreexamples.html#sec9">1.2  数据类型</a>
+</li><li><a href="coreexamples.html#sec10">1.3  函数作为值</a>
+</li><li><a href="coreexamples.html#sec11">1.4  记录与变体</a>
+</li><li><a href="coreexamples.html#sec13">1.5  命令式特性</a>
+</li><li><a href="coreexamples.html#sec14">1.6  异常</a>
+</li><li><a href="coreexamples.html#sec15">1.7  表达式的符号处理</a>
+</li><li><a href="coreexamples.html#sec16">1.8  美观打印</a>
+</li><li><a href="coreexamples.html#sec17">1.9  独立 OCaml 程序</a>
+</li></ul>
+<p> <a id="c:core-xamples"></a>
+</p><p>这一部分文档是 OCaml 语言的教程简介。在这里，本文假设读者对一种传统语言（如 C 或 Java）具有一定的熟悉度，但读者不必具备函数式编程的相关经验。本章主要介绍核心语言。第 <a href="moduleexamples.html#c%3Amoduleexamples">2</a> 章讨论模块系统，第 <a href="objectexamples.html#c%3Aobjectexamples">3</a> 章涵盖面向对象特性，第 <a href="lablexamples.html#c%3Alabl-examples">4</a> 章介绍核心语言的拓展（标签参数和多态变体），第 <a href="advexamples.html#c%3Aadvexamples">6</a> 章则给出了若干高级示例。</p>
+<h2 class="section" id="sec8">1.1  基础</h2>
+<p>对于 OCaml 的概览，我们将使用交互式系统（即顶层环境）。读者可以在 Unix shell 中运行 <span class="c003">ocaml</span> 命令或者在 Windows 系统中运行 <span class="c003">OCamlwin.exe</span> 程序来启动 OCaml 顶层环境。本教程以交互式系统会话的文本形式呈现：以 <span class="c003">#</span> 符号开始的行表示用户输入；系统的响应则在用户输入之下显示，系统响应行不具备前导的 <span class="c003">#</span> 符号。</p><p>在交互式系统中，面对 <span class="c003">#</span> 命令行，用户输入以 <span class="c003">;;</span> 结尾的Ocaml语句，系统将会动态地编译、执行这些语句，并输出运行结果。语句可以是简单的表达式，或者标识符（值或函数）的 <span class="c003">let</span> 定义。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> 1+2*3;;
+</div><div class="caml-output ok">- : int = 7
+</div></pre>
+
+<pre><div class="caml-input"> let pi = 4.0 *. atan 1.0;;
+</div><div class="caml-output ok">val pi : float = 3.14159265358979312
+</div></pre>
+
+<pre><div class="caml-input"> let square x = x *. x;;
+</div><div class="caml-output ok">val square : float -&gt; float = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> square (sin pi) +. square (cos pi);;
+</div><div class="caml-output ok">- : float = 1.
+</div></pre>
+
+
+</div><p>OCaml 系统会计算每个语句的值和类型。即使是函数参数也不需要显式的类型声明：系统将根据它们的使用情况自动推断出它们的类型。需要注意的是，在 Ocaml 中，整数与浮点数对应不同的数据类型，有不同的运算符： <span class="c003">+</span> 和 <span class="c003">*</span> 作用于整数, <span class="c003">+.</span> 和 <span class="c003">*.</span> 作用于浮点数。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> <U>1.0</U> * 2;;
+</div><div class="caml-output error">Error: This expression has type float but an expression was expected of type
+         int
+</div></pre>
+
+
+</div><p>递归函数由 <span class="c003">let rec</span> 绑定定义：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let rec fib n =
+    if n &lt; 2 then n else fib (n-1) + fib (n-2);;
+</div><div class="caml-output ok">val fib : int -&gt; int = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> fib 10;;
+</div><div class="caml-output ok">- : int = 55
+</div></pre>
+
+
+</div>
+<h2 class="section" id="sec9">1.2  数据类型</h2>
+<p>除了整数和浮点数之外，OCaml 还提供常见的基本数据类型：
+</p><ul class="itemize"><li class="li-itemize">布尔型
+
+
+<div class="caml-example toplevel">
+
+<pre><div class="caml-input"> (1 &lt; 2) = false;;
+</div><div class="caml-output ok">- : bool = false
+</div></pre>
+
+<pre><div class="caml-input"> let one = if true then 1 else 2;;
+</div><div class="caml-output ok">val one : int = 1
+</div></pre>
+
+
+</div>
+
+</li><li class="li-itemize">字符型
+
+
+<div class="caml-example toplevel">
+
+<pre><div class="caml-input">  'a';;
+</div><div class="caml-output ok">- : char = 'a'
+</div></pre>
+
+<pre><div class="caml-input">  int_of_char '\n';;
+</div><div class="caml-output ok">- : int = 10
+</div></pre>
+
+
+</div>
+
+</li><li class="li-itemize">不可变字符串
+
+
+<div class="caml-example toplevel">
+
+<pre><div class="caml-input"> "Hello" ^ " " ^ "world";;
+</div><div class="caml-output ok">- : string = "Hello world"
+</div></pre>
+
+<pre><div class="caml-input"> {|This is a quoted string, here, neither \ nor " are special characters|};;
+</div><div class="caml-output ok">- : string =
+"This is a quoted string, here, neither \\ nor \" are special characters"
+</div></pre>
+
+<pre><div class="caml-input"> {|"\\"|}="\"\\\\\"";;
+</div><div class="caml-output ok">- : bool = true
+</div></pre>
+
+<pre><div class="caml-input">   {delimiter|the end of this|}quoted string is here|delimiter}
+  =           "the end of this|}quoted string is here";;
+</div><div class="caml-output ok">- : bool = true
+</div></pre>
+
+
+</div>
+
+</li></ul><p>预定义的数据结构包括元组、数组和列表。同时 OCaml 也具备自行定义数据结构的通用机制，如记录和变体，稍后将更详细地介绍。现在，我们先主要考虑列表。列表可以通过分号分隔的元素的方括号列表的形式给出，也可以在空列表 <span class="c003">[]</span> （即“nil”）的基础上使用 <span class="c003">::</span> （“cons”）运算符在其前面添加元素以构建列表。 
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let l = ["is"; "a"; "tale"; "told"; "etc."];;
+</div><div class="caml-output ok">val l : string list = ["is"; "a"; "tale"; "told"; "etc."]
+</div></pre>
+
+<pre><div class="caml-input"> "Life" :: l;;
+</div><div class="caml-output ok">- : string list = ["Life"; "is"; "a"; "tale"; "told"; "etc."]
+</div></pre>
+
+
+</div><p>与所有其他 OCaml 数据结构一样，列表不需要显式地在内存中分配和释放：OCaml 中的内存管理都是完全自动的。类似地，OCaml 中没有对指针的显式处理：OCaml 编译器会在需要的时候自动引入指针。</p><p>与大多数 OCaml 数据结构一样，检查和解构列表是通过模式匹配来执行的。列表模式具有与列表表达式完全相同的形式，其中标识符表示列表中未指定的部分。例如，下面是列表中的插入排序示例：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let rec sort lst =
+    match lst with
+      [] -&gt; []
+    | head :: tail -&gt; insert head (sort tail)
+  and insert elt lst =
+    match lst with
+      [] -&gt; [elt]
+    | head :: tail -&gt; if elt &lt;= head then elt :: lst else head :: insert elt tail
+  ;;
+</div><div class="caml-output ok">val sort : 'a list -&gt; 'a list = &lt;fun&gt;
+val insert : 'a -&gt; 'a list -&gt; 'a list = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> sort l;;
+</div><div class="caml-output ok">- : string list = ["a"; "etc."; "is"; "tale"; "told"]
+</div></pre>
+
+
+</div><p>上述示例中 <span class="c003">sort</span> 函数被推导出的类型 <span class="c003">'a list -&gt; 'a list</span> 意味着 <span class="c003">sort</span> 函数可以作用于任何类型的列表。类型 <span class="c003">'a</span> 是一个类型变量，其代表任意给定的类型。<span class="c003">sort</span> 可以作用于任何类型的列表的原因是，Ocaml 中的比较运算（<span class="c003">=</span>、<span class="c003">&lt;=</span>等）是多态的：他们可以作用于相同类型的任意两个值。这使得 <span class="c003">sort</span> 也在所有的列表类型上具有多态性。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> sort [6;2;5;3];;
+</div><div class="caml-output ok">- : int list = [2; 3; 5; 6]
+</div></pre>
+
+<pre><div class="caml-input"> sort [3.14; 2.718];;
+</div><div class="caml-output ok">- : float list = [2.718; 3.14]
+</div></pre>
+
+
+</div><p>以上的 <span class="c003">sort</span> 函数并不会修改它的输入列表：它会构建并返回一个包含与输入列表相同元素且按升序排列的新列表。事实上，在 OCaml 中，一个列表在被构建后就无法被修改：我们将列表称之为不可变数据结构。大多数 OCaml 数据结构都是不可变的，但少数（其中最典型的是数组）是可变的，这意味着它们可以在任何时间被直接修改。</p><p>具有多个参数的函数类型的记法为 <span class="c003">arg1_type -&gt; arg2_type -&gt; ... -&gt; return_type</span>。例如， <span class="c003">insert</span> 函数的类型为 <span class="c003">'a -&gt; 'a list -&gt; 'a list</span>，其意味着 <span class="c003">insert</span> 接受两个参数，一个是任意类型 <span class="c003">'a</span> 的元素，另一个是具有相同类型 <span class="c003">'a</span> 的元素的列表，并返回相同类型的列表。
+</p>
+<h2 class="section" id="sec10">1.3  函数作为值</h2>
+<p>OCaml 是一种函数式语言：完全数学意义上的函数是被支持的，可以像其他数据一样自由地传递。例如，这是一个以浮点函数为参数并返回其导数函数近似值的 <span class="c003">deriv</span> 函数：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let deriv f dx = function x -&gt; (f (x +. dx) -. f x) /. dx;;
+</div><div class="caml-output ok">val deriv : (float -&gt; float) -&gt; float -&gt; float -&gt; float = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let sin' = deriv sin 1e-6;;
+</div><div class="caml-output ok">val sin' : float -&gt; float = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> sin' pi;;
+</div><div class="caml-output ok">- : float = -1.00000000013961143
+</div></pre>
+
+
+</div><p>我们甚至可以定义复合函数：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let compose f g = function x -&gt; f (g x);;
+</div><div class="caml-output ok">val compose : ('a -&gt; 'b) -&gt; ('c -&gt; 'a) -&gt; 'c -&gt; 'b = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let cos2 = compose square cos;;
+</div><div class="caml-output ok">val cos2 : float -&gt; float = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>将其他函数作为参数的函数称为“泛函”（functionals）或“高阶函数”（higher-order functions）。高阶函数对于在数据结构上提供迭代器或类似的通用操作非常有用。例如，OCaml 标准库提供了一个 <span class="c003">List.map</span> 函数，它将给定的函数应用于列表的每个元素，并返回结果列表：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> List.map (function n -&gt; n * 2 + 1) [0;1;2;3;4];;
+</div><div class="caml-output ok">- : int list = [1; 3; 5; 7; 9]
+</div></pre>
+
+
+</div><p>像一些其他列表和数组函数一样，这个函数是预定义的，因为它非常实用。但是事实上这个函数非常简单，我们可以定义 <span class="c003">map</span> 函数如下：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let rec map f l =
+    match l with
+      [] -&gt; []
+    | hd :: tl -&gt; f hd :: map f tl;;
+</div><div class="caml-output ok">val map : ('a -&gt; 'b) -&gt; 'a list -&gt; 'b list = &lt;fun&gt;
+</div></pre>
+
+
+</div>
+<h2 class="section" id="sec11">1.4  记录与变体</h2>
+<p>
+<a id="s:tut-recvariants"></a></p><p>用户定义的数据结构包括记录（record）和变体（variant）。两者都是用 <span class="c003">type</span> 声明定义的。在这里，我们声明一个记录类型来表示有理数。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> type ratio = {num: int; denom: int};;
+</div><div class="caml-output ok">type ratio = { num : int; denom : int; }
+</div></pre>
+
+<pre><div class="caml-input"> let add_ratio r1 r2 =
+    {num = r1.num * r2.denom + r2.num * r1.denom;
+     denom = r1.denom * r2.denom};;
+</div><div class="caml-output ok">val add_ratio : ratio -&gt; ratio -&gt; ratio = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> add_ratio {num=1; denom=3} {num=2; denom=5};;
+</div><div class="caml-output ok">- : ratio = {num = 11; denom = 15}
+</div></pre>
+
+
+</div><p>记录字段也可以通过模式匹配来访问：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let integer_part r =
+    match r with
+      {num=num; denom=denom} -&gt; num / denom;;
+</div><div class="caml-output ok">val integer_part : ratio -&gt; int = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>由于这种模式匹配只有一种情况，因此可以在记录模式中直接展开参数 <span class="c003">r</span>：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let integer_part {num=num; denom=denom} = num / denom;;
+</div><div class="caml-output ok">val integer_part : ratio -&gt; int = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>不需要的字段可以被省略：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let get_denom {denom=denom} = denom;;
+</div><div class="caml-output ok">val get_denom : ratio -&gt; int = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>可选地，通过在字段列表的末尾加上通配符 <span class="c003">_</span>，可以显式地显示缺少的字段：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let get_num {num=num; _ } = num;;
+</div><div class="caml-output ok">val get_num : ratio -&gt; int = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>当 <span class="c003">=</span> 的两边相同时，可以通过省略<span class="c003">=字段</span>部分来避免重复字段名：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let integer_part {num; denom} = num / denom;;
+</div><div class="caml-output ok">val integer_part : ratio -&gt; int = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>这个字段的简短记法在构造记录时也同样适用：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let ratio num denom = {num; denom};;
+</div><div class="caml-output ok">val ratio : int -&gt; int -&gt; ratio = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>最后，可以一次更新一条记录的几个字段：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input">   let integer_product integer ratio = { ratio with num = integer * ratio.num };;
+</div><div class="caml-output ok">val integer_product : int -&gt; ratio -&gt; ratio = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>使用如上的更新记法， <span class="c003">with</span> 右侧的字段会被更新，其左侧记录中的其他字段会被原样复制。</p><p>变体类型的声明列出了该类型值的所有可能形式。每种情况都由一个名为构造函数的名称标识，构造函数既用于构造变体类型的值，也用于通过模式匹配检查它们的值。构造函数名称要大写，以便与变量名称（必须以小写字母开头）区分开来。例如，这里有一个用于混合运算（整数和浮点数）的变体类型：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> type number = Int of int | Float of float | Error;;
+</div><div class="caml-output ok">type number = Int of int | Float of float | Error
+</div></pre>
+
+
+</div><p>该声明表示类型 <span class="c003">number</span> 的值要么是整数，要么是浮点数，要么是表示无效运算结果（例如除以 0）的常量 <span class="c003">Error</span>。</p><p>枚举类型是变体类型的一种特殊情况，其中所有选项都是常量：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> type sign = Positive | Negative;;
+</div><div class="caml-output ok">type sign = Positive | Negative
+</div></pre>
+
+<pre><div class="caml-input"> let sign_int n = if n &gt;= 0 then Positive else Negative;;
+</div><div class="caml-output ok">val sign_int : int -&gt; sign = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>为了定义 <span class="c003">number</span> 类型的算术运算，我们对运算涉及的两个数字使用模式匹配：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let add_num n1 n2 =
+    match (n1, n2) with
+      (Int i1, Int i2) -&gt;
+        (* Check for overflow of integer addition *)
+        if sign_int i1 = sign_int i2 &amp;&amp; sign_int (i1 + i2) &lt;&gt; sign_int i1
+        then Float(float i1 +. float i2)
+        else Int(i1 + i2)
+    | (Int i1, Float f2) -&gt; Float(float i1 +. f2)
+    | (Float f1, Int i2) -&gt; Float(f1 +. float i2)
+    | (Float f1, Float f2) -&gt; Float(f1 +. f2)
+    | (Error, _) -&gt; Error
+    | (_, Error) -&gt; Error;;
+</div><div class="caml-output ok">val add_num : number -&gt; number -&gt; number = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> add_num (Int 123) (Float 3.14159);;
+</div><div class="caml-output ok">- : number = Float 126.14159
+</div></pre>
+
+
+</div><p>变体类型的另一个有趣的例子是内置的 <span class="c003">'a option</span> 类型，它表示一个类型 <span class="c003">'a</span> 的值或没有值：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> type 'a option = Some of 'a | None;;
+</div><div class="caml-output ok">type 'a option = Some of 'a | None
+</div></pre>
+
+
+</div><p>定义在通常情况下可能失败的函数时，这种类型特别有用。示例如下：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let safe_square_root x = if x &gt; 0. then Some(sqrt x) else None;;
+</div><div class="caml-output ok">val safe_square_root : float -&gt; float option = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>变体类型最常见的用法是描述递归数据结构。例如，二叉树的类型：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> type 'a btree = Empty | Node of 'a * 'a btree * 'a btree;;
+</div><div class="caml-output ok">type 'a btree = Empty | Node of 'a * 'a btree * 'a btree
+</div></pre>
+
+
+</div><p>该定义如下所示：一个包含类型 <span class="c003">'a</span> （任意类型）的值的二叉树要么是空的，要么是一个包含类型 <span class="c003">'a</span> 的值的节点和两个也包含类型 <span class="c003">'a</span> 的值的子树，即两个 <span class="c003">'a btree</span>。</p><p>对二叉树的操作可以表示为与类型定义相同结构的递归函数。例如，以下是在有序二叉树中执行查找和插入的函数（元素从左到右递增）：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let rec member x btree =
+    match btree with
+      Empty -&gt; false
+    | Node(y, left, right) -&gt;
+        if x = y then true else
+        if x &lt; y then member x left else member x right;;
+</div><div class="caml-output ok">val member : 'a -&gt; 'a btree -&gt; bool = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let rec insert x btree =
+    match btree with
+      Empty -&gt; Node(x, Empty, Empty)
+    | Node(y, left, right) -&gt;
+        if x &lt;= y then Node(y, insert x left, right)
+                  else Node(y, left, insert x right);;
+</div><div class="caml-output ok">val insert : 'a -&gt; 'a btree -&gt; 'a btree = &lt;fun&gt;
+</div></pre>
+
+
+</div>
+<h3 class="subsection" id="sec12">1.4.1  记录与变体消歧义</h3>
+<p>（在第一次阅读时可以跳过这个小节）</p><p>机敏的读者可能想知道，当两个或多个记录字段或构造函数使用相同的名称时会发生什么。</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> type first_record  = { x:int; y:int; z:int }
+  type middle_record = { x:int; z:int }
+  type last_record   = { x:int };;
+</div>
+</pre>
+
+<pre><div class="caml-input"> type first_variant = A | B | C
+  type last_variant  = A;;
+</div>
+</pre>
+
+
+</div><p>答案是，当面对多个选项时，OCaml 会尝试使用本地可用的信息来消除各种字段和构造函数之间的歧义。首先，如果已知记录或变体的类型，OCaml 可以明确地选择对应的字段或构造函数。例如：</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let look_at_x_then_z (r:first_record) =
+    let x = r.x in
+    x + r.z;;
+</div><div class="caml-output ok">val look_at_x_then_z : first_record -&gt; int = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let permute (x:first_variant) = match x with
+    | A -&gt; (B:first_variant)
+    | B -&gt; A
+    | C -&gt; C;;
+</div><div class="caml-output ok">val permute : first_variant -&gt; first_variant = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> type wrapped = First of first_record
+  let f (First r) = r, r.x;;
+</div><div class="caml-output ok">type wrapped = First of first_record
+val f : wrapped -&gt; first_record * int = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>在第一个例子中， <span class="c003">(r:first_record)</span> 是一个显式注释，它告诉 OCaml 参数 <span class="c003">r</span> 的类型是 <span class="c003">first_record</span>。通过这个注释，Ocaml 知道 <span class="c003">r.x</span> 是第一个记录类型的
+ <span class="c003">x</span> 字段。类似地，第二个示例中的类型注释向OCaml表明构造函数 <span class="c003">A</span>、<span class="c003">B</span>、<span class="c003">C</span> 来自第一个变体类型。相反地，在最后一个示例中，OCaml 自己推断 <span class="c003">r</span> 的类型只能是 <span class="c003">first_record</span>，不需要显式类型注释。</p><p>实际上，这些显式类型注释可以在任何地方使用。在大多数情况下，它们不是必要的，但是它们对于指导消歧义、调试意外的类型错误或者结合后面章节中描述的 OCaml 的一些更高级的特性非常有用。</p><p>其次，对于记录，OCaml 还可以通过查看表达式或模式中使用的字段集来推断正确的记录类型：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let project_and_rotate {x;y; _ } = { x= - y; y = x ; z = 0} ;;
+</div><div class="caml-output ok">val project_and_rotate : first_record -&gt; first_record = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>由于字段 <span class="c003">x</span> 和 <span class="c003">y</span> 只能同时出现在第一个记录类型中，OCaml 推断 <span class="c003">project_and_rotate</span> 的类型为 <span class="c003">first_record -&gt; first_record</span>。</p><p>最后，如果没有足够的信息来消除不同字段或构造函数之间的歧义，OCaml 会在所有本地有效的选项中选择最后定义的类型：</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let look_at_xz {x;z} = x;;
+</div><div class="caml-output ok">val look_at_xz : middle_record -&gt; int = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>在这里，OCaml 推断 <span class="c003">{x;z}</span> 类型的可能选择是 <span class="c003">first_record</span> 和 <span class="c003">middle_record</span>，因为 <span class="c003">last_record</span> 类型没有字段 <span class="c003">z</span>。随后，Ocaml 会选择这两种可能性之间最后定义的类型 <span class="c003">middle_record</span>。</p><p>需要注意这种消歧义方法是局部性的：一旦 Ocaml 选择了一种类型，它就会坚持这个选择，即使此后它会导致一个类型错误：</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let look_at_x_then_y r =
+    let x = r.x in (* Ocaml deduces [r: last_record] *)
+    x + r.<U>y</U>;;
+</div><div class="caml-output error">Error: This expression has type last_record
+       The field y does not belong to type last_record
+</div></pre>
+
+<pre><div class="caml-input"> let is_a_or_b x = match x with
+    | A -&gt; true (* OCaml infers [x: last_variant] *)
+    | <U>B</U> -&gt; true;;
+</div><div class="caml-output error">Error: This variant pattern is expected to have type last_variant
+       The constructor B does not belong to type last_variant
+</div></pre>
+
+
+</div><p>此外，最后定义的类型处于一个非常不稳定的位置。在添加或移动类型定义，或者在打开一个模块之后（参见第 <a href="moduleexamples.html#c%3Amoduleexamples">2</a> 章），这一位置可能会偷偷地改变。因此，添加显式类型注释来完成类型消歧义比依赖于最后定义的类型进行消歧义更加健壮。</p>
+<h2 class="section" id="sec13">1.5  命令式特性</h2>
+<p>虽然到目前为止所有的示例都是用纯函数式风格编写的，但是 OCaml 也具有完整的命令式特性。这包括通常的 <span class="c003">while</span> 和 <span class="c003">for</span> 循环，以及可变的数据结构，如数组。数组可以通过在 <span class="c003">[|</span> 和 <span class="c003">|]</span> 方括号中列出以分号分隔的元素来创建，也可以通过 <span class="c003">Array.make</span> 函数进行分配和初始化，随后通过赋值进行填充。例如，下面定义的函数按分量对两个向量（表示为浮点数组）求和。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let add_vect v1 v2 =
+    let len = min (Array.length v1) (Array.length v2) in
+    let res = Array.make len 0.0 in
+    for i = 0 to len - 1 do
+      res.(i) &lt;- v1.(i) +. v2.(i)
+    done;
+    res;;
+</div><div class="caml-output ok">val add_vect : float array -&gt; float array -&gt; float array = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> add_vect [| 1.0; 2.0 |] [| 3.0; 4.0 |];;
+</div><div class="caml-output ok">- : float array = [|4.; 6.|]
+</div></pre>
+
+
+</div><p>记录字段也可以通过赋值进行修改，前提是它们在记录类型的定义中声明为可变的：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> type mutable_point = { mutable x: float; mutable y: float };;
+</div><div class="caml-output ok">type mutable_point = { mutable x : float; mutable y : float; }
+</div></pre>
+
+<pre><div class="caml-input"> let translate p dx dy =
+    p.x &lt;- p.x +. dx; p.y &lt;- p.y +. dy;;
+</div><div class="caml-output ok">val translate : mutable_point -&gt; float -&gt; float -&gt; unit = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let mypoint = { x = 0.0; y = 0.0 };;
+</div><div class="caml-output ok">val mypoint : mutable_point = {x = 0.; y = 0.}
+</div></pre>
+
+<pre><div class="caml-input"> translate mypoint 1.0 2.0;;
+</div><div class="caml-output ok">- : unit = ()
+</div></pre>
+
+<pre><div class="caml-input"> mypoint;;
+</div><div class="caml-output ok">- : mutable_point = {x = 1.; y = 2.}
+</div></pre>
+
+
+</div><p>OCaml 没有内置的可以通过赋值修改变量值的“变量—标识符”概念（<span class="c003">let</span>绑定不是赋值，它在新的作用域中引入了新标识符）。不过，标准库使用操作符提供了“引用
+（reference，随后我们将简称引用为 ref）。ref 是可变的间接单元格，我们可以使用 <span class="c003">!</span> 获取“引用”的当前内容，使用 <span class="c003">:=</span> 为 ref 的赋值。这意味着我们可以使用 ref 的 <span class="c003">let</span> 绑定来模拟可变变量。例如，这里有一个在数组的插入排序：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let insertion_sort a =
+    for i = 1 to Array.length a - 1 do
+      let val_i = a.(i) in
+      let j = ref i in
+      while !j &gt; 0 &amp;&amp; val_i &lt; a.(!j - 1) do
+        a.(!j) &lt;- a.(!j - 1);
+        j := !j - 1
+      done;
+      a.(!j) &lt;- val_i
+    done;;
+</div><div class="caml-output ok">val insertion_sort : 'a array -&gt; unit = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>ref 对于编写在两次调用之间维持状态的函数也很有用。例如，下面的伪随机数生成器将最后一次返回的数字保存在 ref 中：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let current_rand = ref 0;;
+</div><div class="caml-output ok">val current_rand : int ref = {contents = 0}
+</div></pre>
+
+<pre><div class="caml-input"> let random () =
+    current_rand := !current_rand * 25713 + 1345;
+    !current_rand;;
+</div><div class="caml-output ok">val random : unit -&gt; int = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>同样的，ref 并没有什么神奇之处：它们是作为单字段可变记录实现的：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> type 'a ref = { mutable contents: 'a };;
+</div><div class="caml-output ok">type 'a ref = { mutable contents : 'a; }
+</div></pre>
+
+<pre><div class="caml-input"> let ( ! ) r = r.contents;;
+</div><div class="caml-output ok">val ( ! ) : 'a ref -&gt; 'a = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let ( := ) r newval = r.contents &lt;- newval;;
+</div><div class="caml-output ok">val ( := ) : 'a ref -&gt; 'a -&gt; unit = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>在某些特殊情况下，您可能需要在数据结构中存储多态函数，以保持其多态性。这样做需要用户提供的类型注释，因为只有全局定义才会自动引入多态性。但是，您可以显式地为记录字段提供多态类型。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> type idref = { mutable id: 'a. 'a -&gt; 'a };;
+</div><div class="caml-output ok">type idref = { mutable id : 'a. 'a -&gt; 'a; }
+</div></pre>
+
+<pre><div class="caml-input"> let r = {id = fun x -&gt; x};;
+</div><div class="caml-output ok">val r : idref = {id = &lt;fun&gt;}
+</div></pre>
+
+<pre><div class="caml-input"> let g s = (s.id 1, s.id true);;
+</div><div class="caml-output ok">val g : idref -&gt; int * bool = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> r.id &lt;- (fun x -&gt; print_string "called id\n"; x);;
+</div><div class="caml-output ok">- : unit = ()
+</div></pre>
+
+<pre><div class="caml-input"> g r;;
+</div><div class="caml-output ok">called id
+called id
+- : int * bool = (1, true)
+</div></pre>
+
+
+</div>
+<h2 class="section" id="sec14">1.6  异常</h2>
+<p>OCaml 为异常提供了触发与处理机制。异常也可以用作一种通用的非本地控制结构，但您应该谨慎地使用这种方式，注意不应过度使用，因为它会使代码变得更难理解。异常是用 <span class="c003">exception</span> 构造声明的，并使用 <span class="c003">raise</span> 操作符触发。例如，下面用于获取列表头部的函数使用一个异常来告知输入为空列表的情况。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> exception Empty_list;;
+</div><div class="caml-output ok">exception Empty_list
+</div></pre>
+
+<pre><div class="caml-input"> let head l =
+    match l with
+      [] -&gt; raise Empty_list
+    | hd :: tl -&gt; hd;;
+</div><div class="caml-output ok">val head : 'a list -&gt; 'a = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> head [1;2];;
+</div><div class="caml-output ok">- : int = 1
+</div></pre>
+
+<pre><div class="caml-input"> head [];;
+</div><div class="caml-output ok">Exception: Empty_list.
+</div></pre>
+
+
+</div><p>整个标准库都使用异常来应对库函数不能正常运行的情况。例如， <span class="c003">List.assoc</span> 函数，该函数会在一个（键，值）列表中查找给定的键并返回与之对应的值，当键未出现在列表中时，将会触发预定义的 <span class="c003">Not_found</span> 异常：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> List.assoc 1 [(0, "zero"); (1, "one")];;
+</div><div class="caml-output ok">- : string = "one"
+</div></pre>
+
+<pre><div class="caml-input"> List.assoc 2 [(0, "zero"); (1, "one")];;
+</div><div class="caml-output ok">Exception: Not_found.
+</div></pre>
+
+
+</div><p>使用<span class="c003">try</span>…<span class="c003">with</span>可以捕获异常：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let name_of_binary_digit digit =
+    try
+      List.assoc digit [0, "zero"; 1, "one"]
+    with Not_found -&gt;
+      "not a binary digit";;
+</div><div class="caml-output ok">val name_of_binary_digit : int -&gt; string = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> name_of_binary_digit 0;;
+</div><div class="caml-output ok">- : string = "zero"
+</div></pre>
+
+<pre><div class="caml-input"> name_of_binary_digit (-1);;
+</div><div class="caml-output ok">- : string = "not a binary digit"
+</div></pre>
+
+
+</div><p><span class="c003">with</span> 部分使用与 <span class="c003">match</span> 相同的语法和行为对异常值进行模式匹配。因此，通过构造，一个 <span class="c003">try</span>…<span class="c003">with</span> 结构可以捕获多个异常：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let rec first_named_value values names =
+    try
+      List.assoc (head values) names
+    with
+    | Empty_list -&gt; "no named value"
+    | Not_found -&gt; first_named_value (List.tl values) names;;
+</div><div class="caml-output ok">val first_named_value : 'a list -&gt; ('a * string) list -&gt; string = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> first_named_value [ 0; 10 ] [ 1, "one"; 10, "ten"];;
+</div><div class="caml-output ok">- : string = "ten"
+</div></pre>
+
+
+</div><p>此外，可以通过捕获所有异常、执行析构（finalization）、然后重新引发异常的方式完成析构过程：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let temporarily_set_reference ref newval funct =
+    let oldval = !ref in
+    try
+      ref := newval;
+      let res = funct () in
+      ref := oldval;
+      res
+    with x -&gt;
+      ref := oldval;
+      raise x;;
+</div><div class="caml-output ok">val temporarily_set_reference : 'a ref -&gt; 'a -&gt; (unit -&gt; 'b) -&gt; 'b = &lt;fun&gt;
+</div></pre>
+
+
+</div><p><span class="c003">try</span>…<span class="c003">with</span> 的另一种用法是在模式匹配时捕捉异常：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let assoc_may_map f x l =
+    match List.assoc x l with
+    | exception Not_found -&gt; None
+    | y -&gt; f y;;
+</div><div class="caml-output ok">val assoc_may_map : ('a -&gt; 'b option) -&gt; 'c -&gt; ('c * 'a) list -&gt; 'b option =
+  &lt;fun&gt;
+</div></pre>
+
+
+</div><p>请注意，此结构仅在 <span class="c003">match</span>…<span class="c003">with</span> 之间出现异常时才有效。而且，异常只能出现在这种模式匹配的顶层。例如，异常情况目前不能与or模式组合： <span class="c003">exception A | exception B -&gt;</span> …。</p><p>当异常用作控制结构时，使用本地定义的异常使异常控制结构尽可能地本地化是很有用的。例如：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let fixpoint f x =
+    let exception Done in
+    let x = ref x in
+    try while true do
+        let y = f !x in
+        if !x = y then raise Done else x := y
+      done; assert false
+    with Done -&gt; !x;;
+</div><div class="caml-output ok">val fixpoint : ('a -&gt; 'a) -&gt; 'a -&gt; 'a = &lt;fun&gt;
+</div></pre>
+
+
+</div><p>在这里，函数 <span class="c003">f</span> 不能引发 <span class="c003">Done</span> 异常，这样就过滤掉了一类行为不匹配的函数。</p>
+<h2 class="section" id="sec15">1.7  表达式的符号处理</h2>
+<p>我们用一个更完整的例子来结束这一章的介绍，这个例子代表了 OCaml 在符号处理中的应用：包含变量的算术表达式的形式化操作。下面的变体类型描述了我们将要处理的表达式：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> type expression =
+      Const of float
+    | Var of string
+    | Sum of expression * expression    (* e1 + e2 *)
+    | Diff of expression * expression   (* e1 - e2 *)
+    | Prod of expression * expression   (* e1 * e2 *)
+    | Quot of expression * expression   (* e1 / e2 *)
+  ;;
+</div><div class="caml-output ok">type expression =
+    Const of float
+  | Var of string
+  | Sum of expression * expression
+  | Diff of expression * expression
+  | Prod of expression * expression
+  | Quot of expression * expression
+</div></pre>
+
+
+</div><p>我们首先定义一个函数来计算给定环境下的表达式，该环境将变量名映射到它们的值。为了简单起见，将环境表示为一个关联列表。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> exception Unbound_variable of string;;
+</div><div class="caml-output ok">exception Unbound_variable of string
+</div></pre>
+
+<pre><div class="caml-input"> let rec eval env exp =
+    match exp with
+      Const c -&gt; c
+    | Var v -&gt;
+        (try List.assoc v env with Not_found -&gt; raise (Unbound_variable v))
+    | Sum(f, g) -&gt; eval env f +. eval env g
+    | Diff(f, g) -&gt; eval env f -. eval env g
+    | Prod(f, g) -&gt; eval env f *. eval env g
+    | Quot(f, g) -&gt; eval env f /. eval env g;;
+</div><div class="caml-output ok">val eval : (string * float) list -&gt; expression -&gt; float = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> eval [("x", 1.0); ("y", 3.14)] (Prod(Sum(Var "x", Const 2.0), Var "y"));;
+</div><div class="caml-output ok">- : float = 9.42
+</div></pre>
+
+
+</div><p>现在，对于一个真正的符号处理过程，我们定义一个表达式对变量 <span class="c003">dv</span> 的导数：
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let rec deriv exp dv =
+    match exp with
+      Const c -&gt; Const 0.0
+    | Var v -&gt; if v = dv then Const 1.0 else Const 0.0
+    | Sum(f, g) -&gt; Sum(deriv f dv, deriv g dv)
+    | Diff(f, g) -&gt; Diff(deriv f dv, deriv g dv)
+    | Prod(f, g) -&gt; Sum(Prod(f, deriv g dv), Prod(deriv f dv, g))
+    | Quot(f, g) -&gt; Quot(Diff(Prod(deriv f dv, g), Prod(f, deriv g dv)),
+                         Prod(g, g))
+  ;;
+</div><div class="caml-output ok">val deriv : expression -&gt; string -&gt; expression = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> deriv (Quot(Const 1.0, Var "x")) "x";;
+</div><div class="caml-output ok">- : expression =
+Quot (Diff (Prod (Const 0., Var "x"), Prod (Const 1., Const 1.)),
+ Prod (Var "x", Var "x"))
+</div></pre>
+
+
+</div>
+<h2 class="section" id="sec16">1.8  美观打印</h2>
+<p>如以上例子所示，随着表达式的复杂化，表达式的内部表示（也称为抽象语法）也就很快变得难以读写。我们需要一台输出器和一个解析器来在抽象语法和具体语法之间完成转换。其中，具体语法在表达式的情况下，这是我们熟悉的代数表示法（如 <span class="c003">2*x+1</span>）。</p><p>对于输出函数，我们考虑了通常的优先级规则（即 <span class="c003">*</span> 绑定比 <span class="c003">+</span> 更紧密）以避免打印不必要的括号。为此，我们需得知当前操作符的优先级，并且仅当操作符的优先级小于当前优先级时，才输出操作符周围的圆括号。
+
+
+</p><div class="caml-example toplevel">
+
+<pre><div class="caml-input"> let print_expr exp =
+    (* Local function definitions *)
+    let open_paren prec op_prec =
+      if prec &gt; op_prec then print_string "(" in
+    let close_paren prec op_prec =
+      if prec &gt; op_prec then print_string ")" in
+    let rec print prec exp =     (* prec is the current precedence *)
+      match exp with
+        Const c -&gt; print_float c
+      | Var v -&gt; print_string v
+      | Sum(f, g) -&gt;
+          open_paren prec 0;
+          print 0 f; print_string " + "; print 0 g;
+          close_paren prec 0
+      | Diff(f, g) -&gt;
+          open_paren prec 0;
+          print 0 f; print_string " - "; print 1 g;
+          close_paren prec 0
+      | Prod(f, g) -&gt;
+          open_paren prec 2;
+          print 2 f; print_string " * "; print 2 g;
+          close_paren prec 2
+      | Quot(f, g) -&gt;
+          open_paren prec 2;
+          print 2 f; print_string " / "; print 3 g;
+          close_paren prec 2
+    in print 0 exp;;
+</div><div class="caml-output ok">val print_expr : expression -&gt; unit = &lt;fun&gt;
+</div></pre>
+
+<pre><div class="caml-input"> let e = Sum(Prod(Const 2.0, Var "x"), Const 1.0);;
+</div><div class="caml-output ok">val e : expression = Sum (Prod (Const 2., Var "x"), Const 1.)
+</div></pre>
+
+<pre><div class="caml-input"> print_expr e; print_newline ();;
+</div><div class="caml-output ok">2. * x + 1.
+- : unit = ()
+</div></pre>
+
+<pre><div class="caml-input"> print_expr (deriv e "x"); print_newline ();;
+</div><div class="caml-output ok">2. * 1. + 0. * x + 0.
+- : unit = ()
+</div></pre>
+
+
+</div>
+<h2 class="section" id="sec17">1.9  独立 OCaml 程序</h2>
+<p>到目前为止给出的所有示例都是在交互式系统下执行的。OCaml 代码也可以被单独地编译，并使用批处理编译器 <span class="c003">ocamlc</span> 和 <span class="c003">ocamlopt</span> 非交互式地执行。这种情况下，源代码必须放在扩展名为 <span class="c003">.ml</span> 的文件中。整个程序由一系列语句组成，这些语句将在运行时按照它们在源文件中出现的顺序被执行。与交互式模式不同，类型和值不是自动输出的，程序必须显式调用打印函数以产生一些输出。在交互式示例中使用的 <span class="c003">;;</span> 在源文件中不是必需的，但是 <span class="c003">;;</span> 的使用有助于明确地标记顶层表达式的结尾，即使在出现语法错误时也是如此。下面是一个输出斐波那契数的独立程序示例：
+</p><pre>(* File fib.ml *)
+let rec fib n =
+  if n &lt; 2 then 1 else fib (n-1) + fib (n-2);;
+let main () =
+  let arg = int_of_string Sys.argv.(1) in
+  print_int (fib arg);
+  print_newline ();
+  exit 0;;
+main ();;
+</pre><p>
+<span class="c003">Sys.argv</span> 是一个包含命令行参数的字符串数组。因此， <span class="c003">Sys.argv.(1)</span> 是第一个命令行参数。上面的程序可以通过以下 shell 命令编译与执行：
+</p><pre>$ ocamlc -o fib fib.ml
+$ ./fib 10
+89
+$ ./fib 20
+10946
+</pre><p>
+更复杂的独立 OCaml 程序通常由多个源文件组成，同时也可以链接到预编译的库。第 <a href="comp.html#c%3Acamlc">9</a> 章和第 <a href="native.html#c%3Anativecomp">12</a> 章解释了如何使用批处理编译器 <span class="c003">ocamlc</span> 和 <span class="c003">ocamlopt</span>。可以使用第三方构建系统（如 <a href="https://github.com/ocaml/ocamlbuild/">ocamlbuild</a> 编译管理器）完成多文件项目编译的自动化。
+
+</p>
+<hr>
+<a href="foreword.html"><img src="previous_motif.svg" alt="Previous"></a>
+<a href="index.html"><img src="contents_motif.svg" alt="Up"></a>
+<a href="moduleexamples.html"><img src="next_motif.svg" alt="Next"></a>
+</body>
+</html>
