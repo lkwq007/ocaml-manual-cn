@@ -1,4 +1,4 @@
-TOPDIR = ../../..
+TOPDIR = ../../ocaml
 include $(TOPDIR)/Makefile.tools
 
 LD_PATH = "$(TOPDIR)/otherlibs/str:$(TOPDIR)/otherlibs/unix"

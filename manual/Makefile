@@ -1,4 +1,4 @@
-SRC = $(abspath ../..)
+SRC = $(abspath ../ocaml)
 
 export LD_LIBRARY_PATH   ?= "$(SRC)/otherlibs/unix/:$(SRC)/otherlibs/str/"
 export DYLD_LIBRARY_PATH ?= "$(SRC)/otherlibs/unix/:$(SRC)/otherlibs/str/"
@@ -13,6 +13,8 @@ OCAMLDOC = $(if $(wildcard $(SRC)/ocamldoc/ocamldoc.opt),\
 
 # Import the list of mli files for the library docs
 include $(SRC)/ocamldoc/Makefile.docfiles
+
+
 
 TEXQUOTE = $(SRC)/runtime/ocamlrun ../tools/texquote2
 

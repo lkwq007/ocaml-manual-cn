@@ -1,6 +1,8 @@
-all: tools manual tests
+all: ocaml tools manual tests
 
-
+ocaml:
+	cd ocaml && ./configure && $(MAKE) world.opt
+	
 # The tools and the tests are rebuilt each time in order to avoid issues with
 # different compiler versions
 tests: manual
@@ -32,7 +34,7 @@ pregen: tools
 	$(MAKE) -C manual files
 
 
-.PHONY: tests manual tools
+.PHONY: ocaml tests manual tools
 
 
 .PHONY: clean

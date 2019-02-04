@@ -1,4 +1,4 @@
-SRC = ../../..
+SRC = ../../ocaml
 
 CSLDIR = $(SRC)
 
