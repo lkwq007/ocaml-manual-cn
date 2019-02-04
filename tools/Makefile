@@ -1,4 +1,4 @@
-TOPDIR=../..
+TOPDIR=../ocaml
 COMPFLAGS=-I $(OTOPDIR)/otherlibs/str -I $(OTOPDIR)/otherlibs/unix
 include $(TOPDIR)/Makefile.tools
 

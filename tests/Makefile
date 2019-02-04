@@ -1,6 +1,6 @@
-TOPDIR=$(abspath ../..)
+TOPDIR=$(abspath ../ocaml)
 include $(TOPDIR)/Makefile.tools
-MANUAL=$(TOPDIR)/manual/manual
+MANUAL=$(TOPDIR)/../manual
 
 .PHONY: all
 all: check-cross-references check-stdlib
