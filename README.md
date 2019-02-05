@@ -1,5 +1,7 @@
 # OCaml 文档中文版
 
+https://lkwq007.github.io/ocaml-manual-cn/
+
 ## 动机
 
 自从我学习 OCaml 以来，就发现 OCaml 相关的中文材料实在是太少了。印象中只有《Real World OCaml》、《OCaml 语言编程基础教程》、社区网站陈旧的中文版教程以及在各个网站角落里的学习笔记。个人认为，官方文档与手册是在学习过程中非常值得参考的一类资料。然而并不是每个人都能够无障碍、顺畅地阅读原版手册。此外，对于我而言，OCaml 是一个非常符合直觉的编程语言。出于安利这门语言的目的，我决定开始翻译它的相关资料。
@@ -13,16 +15,46 @@
 
 翻译进行中。
 
-- [ ] 重写 Makefile
+
+- [X] 重写 Makefile
 - [ ] travis-ci
 - [ ] 全文翻译
-    - [X] 前言
-    - [ ] 第一部分：OCaml 简介
-    - [ ] 第二部分：OCaml 语言
-    - [ ] 第三部分：OCaml 工具
-    - [ ] 第四部分：OCaml 库
-    - [ ] 第五部分：附录
+- [ ] 翻译校对
 
+| 章节 | 翻译 | 校对 |
+| :--- | :--- | :--- |
+| 核心语言 | lkwq007 |   |
+| 模块系统 | lkwq007 |   |
+| OCaml中的对象 | lkwq007 |   |
+| 多态性及其局限性 |   |   |
+| 类与模块的高级示例 |   |   |
+| OCaml语言 |   |   |
+| 语言拓展 |   |   |
+| ocamlc |   |   |
+| ocaml |   |   |
+| ocamlrun |   |   |
+| ocamlopt |   |   |
+| ocamllex&ocamlyacc |   |   |
+| ocamldep |   |   |
+| ocamlbrowser |   |   |
+| ocamldoc |   |   |
+| ocamldebug |   |   |
+| ocamlprof |   |   |
+| ocamlbuild |   |   |
+| C 接口 |   |   |
+| Flambda |   |   |
+| Spacetime |   |   |
+| afl-fuzz |   |   |
+| 核心库 |   |   |
+| 标准库 |   |   |
+| 编译器前端 |   |   |
+| unix 库：Unix 系统调用 |   |   |
+| num 库：任意精度有理运算 |   |   |
+| str 库：正则表达式与字符串处理 |   |   |
+| threads 库 |   |   |
+| graphics 库 |   |   |
+| dynlink 库：对象文件的动态加载与链接 |   |   |
+| bigarray 库 |   |   |
 
 由于本人能力（语文差不多还回去了）和精力有限，翻译之中难免会出现错误（或者奇怪的表达），欢迎大家批评指正。在此对各位的校阅、建议表示感谢！
 同时，这里也欢迎大家为该文档提供翻译，以加快 OCaml 文档中文化的进度。
