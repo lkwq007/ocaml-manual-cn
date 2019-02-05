@@ -1,7 +1,7 @@
 all: ocaml tools manual tests
 
 ocaml:
-	cd ocaml && ./configure && $(MAKE) world.opt
+	cd ocaml && test -s ocamlc || ( ./configure && $(MAKE) world.opt ) 
 	
 # The tools and the tests are rebuilt each time in order to avoid issues with
 # different compiler versions
