@@ -1,6 +1,6 @@
 \makeindex{\jobname}
 \makeindex{\jobname.kwd}
-\usepackage[UTF8]{ctex}
+
 \setlength{\emergencystretch}{50pt}  % pour que TeX resolve les overfull hbox lui-meme
 
 \begin{document}
