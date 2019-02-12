@@ -45,7 +45,7 @@
 \section{类与对象}
 \label{ss:classes-and-objects}
 
-下面的"point"类定义了一个实例变量"x"与两个方法"get_x"和"move"。其中实例变量的初始值是"0"。变量"x"被声明为可变的，因此"move"方法可以更改它的值。
+下面的~"point"~类定义了一个实例变量~"x"~与两个方法~"get_x"~和~"move"。其中实例变量的初始值是~"0"。变量~"x"~被声明为可变的，因此~"move"~方法可以更改它的值。
 \begin{caml_example}{toplevel}
 class point =
   object
@@ -55,20 +55,21 @@ class point =
   end;;
 \end{caml_example}
 
-现在我们创建一个"point"类的实例，点"p"。
+现在我们创建一个~"point"~类的实例，点~"p"。
 \begin{caml_example}{toplevel}
 let p = new point;;
 \end{caml_example}
-需要注意，"p"的类型是"point"。这其实是由上面的类定义所自动定义的缩写。它代表对象类型"<get_x : int; move : int -> unit>"，该类型给出了"point"包含的方法及它们的类型。
 
-我们现在可以调用"p"的一些方法：
+需要注意，"p"~的类型是~"point"。这其实是由上面的类定义所自动定义的缩写。它代表对象类型~"<get_x : int; move : int -> unit>"，该类型给出了~"point"~包含的方法及它们的类型。
+
+我们现在可以调用~"p"~的方法：
 \begin{caml_example}{toplevel}
 p#get_x;;
 p#move 3;;
 p#get_x;;
 \end{caml_example}
 
-类中变量的求值只在对象被创建时进行。因此，在下面的示例中，实例变量"x"被初始化为两个不同对象的不同值。
+类中变量的求值只在对象被创建时进行。因此，在下面的示例中，实例变量~"x"~被初始化为两个不同对象的不同值。
 \begin{caml_example}{toplevel}
 let x0 = ref 0;;
 class point =
@@ -81,7 +82,7 @@ new point#get_x;;
 new point#get_x;;
 \end{caml_example}
 
-"point"类还可以被抽象为"x"坐标的初值。
+"point"~类还可以被抽象为~"x"~坐标的初值。
 \begin{caml_example}{toplevel}
 class point = fun x_init ->
   object
@@ -90,6 +91,7 @@ class point = fun x_init ->
     method move d = x <- x + d
   end;;
 \end{caml_example}
+
 与函数定义一样，上面的定义可以缩写为：
 \begin{caml_example}{toplevel}
 class point x_init =
@@ -99,12 +101,14 @@ class point x_init =
     method move d = x <- x + d
   end;;
 \end{caml_example}
-"point"类的一个实例现在是一个函数，该函数需要一个初始参数来创建一个点对象：
+
+"point"~类的一个实例现在是一个函数，该函数需要一个初始参数来创建一个点对象：
 \begin{caml_example}{toplevel}
 new point;;
 let p = new point 7;;
 \end{caml_example}
-当然，参数"x_init"在定义的整个主体中都是可见的，包括方法。例如，下面类中的"get_offset"方法可以返回对象与其初始位置的相对位置。
+
+当然，参数~"x_init"~在定义的整个主体中都是可见的，包括方法。例如，下面类中的~"get_offset"~方法可以返回对象与其初始位置的相对位置。
 \begin{caml_example}{toplevel}
 class point x_init =
   object
@@ -125,6 +129,7 @@ class point x_init =
 %    method move d = x <- x + d
 %  end;;
 %\end{caml_example}
+
 在定义类的对象主体之前，可以对表达式进行求值和绑定。这对于增强不变式是有用的。例如，点可以被自动调整到坐标网格中最近的点，如下所示：
 \begin{caml_example}{toplevel}
 class adjusted_point x_init =
@@ -136,17 +141,21 @@ class adjusted_point x_init =
     method move d = x <- x + d
   end;;
 \end{caml_example}
-（当"x_init"坐标不在坐标网格上时，可能会引发异常）事实上，这里也可以通过使用"origin"的值调用"point"类的定义来获得相同的效果。
+
+（当~"x_init"~坐标不在坐标网格上时，即坐标并非整数时，可能会引发异常）
+事实上，这里也可以通过使用~"origin"~的值调用~"point"~类的定义来获得相同的效果。
 \begin{caml_example}{toplevel}
 class adjusted_point x_init =  point ((x_init / 10) * 10);;
 \end{caml_example}
+
 另一种解决办法是在一个特殊的分配函数中进行调整：
 \begin{caml_example}{toplevel}
 let new_adjusted_point x_init = new point ((x_init / 10) * 10);;
 \end{caml_example}
+
 但是，前一种模式通常更合适，因为用于调整的代码是类定义的一部分，可以被继承。
 
-这种机制提供了其他语言中的类构造函数。可以用这种方式定义几个构造函数来构建具有相同类中具备不同初始化模式的对象；另一种方法是使用初始化器，如下面的\ref{ss:initializers}节所述。
+这种机制提供了其他语言中的类构造函数。可以用这种方式定义几个构造函数来构建具有相同类中具备不同初始化模式的对象；另一种方法是使用初始化器，如下面的第~\ref{ss:initializers}~节所述。
 
 \section{直接对象}
 \label{ss:immediate-objects}
@@ -173,12 +182,12 @@ let minmax x y =
   else object method min = y method max = x end;;
 \end{caml_example}
 
-与类相比，直接对象有两个缺点：它们的类型没有缩写，并且不能被继承。但是这两个缺点在某些情况下可能是优点，我们将在\ref{ss:reference-to-self}和\ref{ss:parameterized-classes}节中进行阐释。
+与类相比，直接对象有两个缺点：它们的类型没有缩写，并且不能被继承。但是这两个缺点在某些情况下可能是优点，我们将在第~\ref{ss:reference-to-self}~和~\ref{ss:parameterized-classes}~节中进行阐释。
 
-\section{引用self}
+\section{引用 self}
 \label{ss:reference-to-self}
 
-方法或初始化器可以调用self（即当前对象）上的方法。为此，必须显式地将self绑定到变量"s" （事实上"s"可以是任何标识符，尽管我们通常会选择"self"这个名称）。
+方法或初始化器可以调用 self（即当前对象）上的方法。为此，必须显式地将 self 绑定到变量~"s" （事实上~"s"~可以是任何标识符，尽管我们通常会选择~"self"~这个名称）。
 \begin{caml_example}{toplevel}
 class printable_point x_init =
   object (s)
@@ -190,9 +199,9 @@ class printable_point x_init =
 let p = new printable_point 7;;
 p#print;;
 \end{caml_example}
-变量"s"会在方法调用时被动态地绑定。特别是，当"printable_point"类被继承时，变量"s"将被正确地绑定到子类的对象上。
+变量~"s"~会在方法调用时被动态地绑定。特别是，当~"printable_point"~类被继承时，变量~"s"~将被正确地绑定到子类的对象上。
 
-self的一个常见问题是，由于它的类型可能在子类中被扩展，所以您不能预先固定它的类型。这里有一个简单的例子。
+self 的一个常见问题是，由于它的类型可能在子类中被扩展，所以您不能预先固定它的类型。这里有一个简单的例子。
 \begin{caml_example}{toplevel}
 let ints = ref [];;
 class my_int =
@@ -201,7 +210,8 @@ class my_int =
     method register = ints := self :: !ints
   end [@@expect error];;
 \end{caml_example}
-您可以忽略报错消息的前两行。最后一行才是最重要的：把self放在外部引用中将使我们无法通过继承来拓展它。我们将在第\ref{ss:using-coercions}节中看到这个问题的解决方案。但是请注意，由于直接对象是不可扩展的，所以使用它们时不会遭遇这一问题。
+
+您可以忽略报错消息的前两行。最后一行才是最重要的：把 self 放在外部引用中将使我们无法通过继承来拓展它。我们将在第~\ref{ss:using-coercions}~节中看到这个问题的解决方案。但是请注意，由于直接对象是不可扩展的，所以使用它们时不会遭遇这一问题。
 \begin{caml_example}{toplevel}
 let my_int =
   object (self)
@@ -213,7 +223,7 @@ let my_int =
 \section{初始化器}
 \label{ss:initializers}
 
-类定义中的let绑定在对象被构建前被执行。我们也可以在构建对象之后立即执行其他表达式。这样的代码可以被编写为一个隐藏的匿名方法，我们称之为初始化器（"initializer"）。因此，初始化器可以访问self和实例变量。
+类定义中的 let 绑定在对象被构建前被执行。我们也可以在构建对象之后立即执行其他表达式。这样的代码可以被编写为一个隐藏的匿名方法，我们称之为初始化器（"initializer"）。因此，初始化器可以访问 self 和实例变量。
 \begin{caml_example}{toplevel}
 class printable_point x_init =
   let origin = (x_init / 10) * 10 in
@@ -226,12 +236,13 @@ class printable_point x_init =
   end;;
 let p = new printable_point 17;;
 \end{caml_example}
-初始化器是无法被重载的。相反，所有初始化器都是按顺序被执行的。初始化器对于保持不变式特别实用。另一个例子可以在\ref{ss:bank-accounts}节中看到。
+
+初始化器是无法被重载的。相反，所有初始化器都是按顺序被执行的。初始化器对于保持不变式特别实用。另一个例子可以在第~\ref{ss:bank-accounts}~节中看到。
 
 \section{虚方法}
 \label{ss:virtual-methods}
 
-我们可以使用关键字"virtual"声明一个方法，但不实际定义它。这个方法将在随后的子类中提供。这种方法被称为虚方法。包含虚方法的类必须被包换"virtual"标记，并且不能被实例化（也就是说，不能创建该类的任何对象）。该类的定义仍然会定义类型缩写（将虚方法视为其他方法）。
+我们可以使用关键字~"virtual"~声明一个方法，但不实际定义它。这个方法将在随后的子类中提供。这种方法被称为虚方法。包含虚方法的类必须被包换~"virtual"~标记，并且不能被实例化（也就是说，不能创建该类的任何对象）。该类的定义仍然会定义类型缩写（将虚方法视为其他方法）。
 \begin{caml_example}{toplevel}
 class virtual abstract_point x_init =
   object (self)
@@ -279,7 +290,8 @@ let p = new restricted_point 0;;
 p#move 10 [@@expect error] ;;
 p#bump;;
 \end{caml_example}
-请注意，这与Java或C++中的私有方法和受保护方法不同，后者可以从同一类的其他对象调用。这是OCaml中类型和类之间独立性的直接结果：两个不相关的类可能产生相同类型的对象，这意味着我们无法在类型上确保某一对象来自特定的类。然而，在\ref{ss:friends}节中给出了友元的编写方式。
+
+请注意，这与 Java 或 C++ 中的私有方法和受保护方法不同，后者可以从同一类的其他对象调用。这是 OCaml 中类型和类之间独立性的直接结果：两个不相关的类可能产生相同类型的对象，这意味着我们无法在类型上确保某一对象来自特定的类。然而，在第~\ref{ss:friends}~节中给出了友元的编写方式。
 
 私有方法是会被子类继承的（默认情况下它们在子类中是可见的），除非它们被签名隐藏，如下所示。
 
@@ -291,7 +303,8 @@ class point_again x =
     method virtual move : _
   end;;
 \end{caml_example}
-这里的"virtual"标记只用于声明一个方法，但不提供其定义。由于我们没有添加私有标记，这使得该方法成为公有的，并保留了原始定义。
+
+这里的~"virtual"~标记只用于声明一个方法，但不提供其定义。由于我们没有添加私有标记，这使得该方法成为公有的，并保留了原始定义。
 
 另一种定义方式是
 \begin{caml_example}{toplevel}
@@ -300,7 +313,7 @@ class point_again x =
     inherit restricted_point x
   end;;
 \end{caml_example}
-self的类型约束要求使用公有的"move"方法，这足以重载"private"标记。
+self 的类型约束要求使用公有的~"move"~方法，这足以重载~"private"~标记。
 
 可以认为私有方法应该在子类中保持私有。然而，由于该方法在子类中是可见的，所以总是可以选取它的代码并定义运行该代码的同名方法，因此另一个（较重的）解决方案是：
 \begin{caml_example}{toplevel}
@@ -311,7 +324,7 @@ class point_again x =
   end;;
 \end{caml_example}
 
-当然，私有方法也可以是虚拟的。其关键字必须按此顺序出现"method private virtual"。
+当然，私有方法也可以是虚拟的。其关键字必须按此顺序出现~"method private virtual"。
 
 \section{类接口}
 \label{ss:class-interfaces}
@@ -328,6 +341,7 @@ class type restricted_point_type =
 end;;
 fun (x : restricted_point_type) -> x;;
 \end{caml_example}
+
 除了用于程序文档，类接口还可以被用来约束类的类型。具体的实例变量和私有方法都可以通过类的类型约束来隐藏。但是，公有方法和虚拟成员则无法被隐藏。
 \begin{caml_example}{toplevel}
 class restricted_point' x = (restricted_point x : restricted_point_type);;
@@ -336,6 +350,7 @@ class restricted_point' x = (restricted_point x : restricted_point_type);;
 \begin{caml_example}{toplevel}
 class restricted_point' = (restricted_point : int -> restricted_point_type);;
 \end{caml_example}
+
 类的接口也可以在模块签名中指定，并用于限制模块的推导签名。
 \begin{caml_example}{toplevel}
 module type POINT = sig
@@ -353,7 +368,7 @@ end;;
 \section{继承}
 \label{ss:inheritance}
 
-我们通过定义从"point"类继承的"colored_point"类来说明继承。这个类具备"point"类中的所有的实例变量和方法，与一个新的实例变量"c"和一个新的"color"方法。
+我们通过定义从~"point"~类继承的~"colored_point"~类来说明继承。这个类具备~"point"~类中的所有的实例变量和方法，与一个新的实例变量~"c"~和一个新的~"color"~方法。
 \begin{caml_example}{toplevel}
 class colored_point x (c : string) =
   object
@@ -364,11 +379,13 @@ class colored_point x (c : string) =
 let p' = new colored_point 5 "red";;
 p'#get_x, p'#color;;
 \end{caml_example}
-"point"和"colored_point"具有不兼容的类型，因为"point"没有"color"方法。但是，下面的"get_x"函数是一个通用函数，它可以将"get_x"方法应用于任何具有此方法的对象"p"（可能还有其他的对象，它们由类型中的省略号表示）。因此，它同时适用于"point"和"colored_point"。
+
+"point"~和~"colored_point"~具有不兼容的类型，因为~"point"~没有~"color"~方法。但是，下面的~"get_x"~函数是一个通用函数，它可以将~"get_x"~方法应用于任何具有此方法的对象~"p"（可能还有其他的对象，它们由类型中的省略号表示）。因此，它同时适用于~"point"~和~"colored_point"。
 \begin{caml_example}{toplevel}
 let get_succ_x p = p#get_x + 1;;
 get_succ_x p + get_succ_x p';;
 \end{caml_example}
+
 在定义函数前不需要提前声明所使用的方法，如示例所示：
 \begin{caml_example}{toplevel}
 let set_x p = p#set_x;;
@@ -378,7 +395,7 @@ let incr p = set_x p (get_succ_x p);;
 \section{多继承}
 \label{ss:multiple-inheritance}
 
-OCaml允许多继承。其中只保留方法的最后一个定义：在子类中重新定义父类中可见的方法会覆盖父类中的定义。可以通过绑定相关的祖先来重用被覆盖方法的定义。下面，"super"被绑定到祖先"printable_point"上。"super"是一个伪值标识符，只能用于调用超类方法，如"super#print"。
+OCaml 允许多继承。其中只保留方法的最后一个定义：在子类中重新定义父类中可见的方法会覆盖父类中的定义。可以通过绑定相关的祖先来重用被覆盖方法的定义。下面，"super"~被绑定到祖先~"printable_point"~上。"super"~是一个伪值标识符，只能用于调用超类方法，如~"super#print"。
 \begin{caml_example}{toplevel}
 class printable_colored_point y c =
   object (self)
@@ -395,16 +412,17 @@ class printable_colored_point y c =
 let p' = new printable_colored_point 17 "red";;
 p'#print;;
 \end{caml_example}
+
 隐藏在父类中的私有方法是不可见的，因此不会被覆盖。由于初始化器被视为私有方法，所以沿着类层次结构的所有初始化器都将按照引入它们的顺序被执行。
 
-注意，为了清晰起见，方法"print"被通过"method"关键字与感叹号"!"显式地标记为覆盖另一个定义。如果方法print没有覆盖"printable_point"的"print"方法，编译器会抛出一个错误：
+注意，为了清晰起见，方法·"print"~被通过~"method"~关键字与感叹号~"!"~显式地标记为覆盖另一个定义。如果 print 方法没有覆盖~"printable_point"~的~"print"~方法，编译器会抛出一个错误：
 \begin{caml_example}{toplevel}[error]
   object
     method! m = ()
   end;;
 \end{caml_example}
 
-这个显式覆盖标记对"val"和"inherit"也同样适用：
+这个显式覆盖标记对~"val"~和~"inherit"~也同样适用：
 \begin{caml_example}{toplevel}
 class another_printable_colored_point y c c' =
   object (self)
@@ -417,7 +435,7 @@ class another_printable_colored_point y c c' =
 \section{参数化类}
 \label{ss:parameterized-classes}
 
-可以将ref类型作为一个对象来实现。不过以下的定义无法通过类型检查：
+可以将 ref 类型作为一个对象来实现。不过以下的定义无法通过类型检查：
 \begin{caml_example}{toplevel}[error]
 class oref x_init =
   object
@@ -426,7 +444,8 @@ class oref x_init =
     method set y = x <- y
   end;;
 \end{caml_example}
-报错的原因是至少有一个方法具有多态类型（这里是存储在ref单元中值的类型），因此这个类应该是参数化的，或者方法的类型应该被限制为单态类型。类的单态实例可以定义为：
+
+报错的原因是至少有一个方法具有多态类型（这里是存储在 ref 单元中值的类型），因此这个类应该是参数化的，或者方法的类型应该被限制为单态类型。类的单态实例可以定义为：
 \begin{caml_example}{toplevel}
 class oref (x_init:int) =
   object
@@ -435,6 +454,7 @@ class oref (x_init:int) =
     method set y = x <- y
   end;;
 \end{caml_example}
+
 注意，由于直接对象不定义类类型，因此它们没有这样的限制。
 \begin{caml_example}{toplevel}
 let new_oref x_init =
@@ -444,7 +464,8 @@ let new_oref x_init =
     method set y = x <- y
   end;;
 \end{caml_example}
-另一方面，用于多态ref的类必须在其声明中显式列出类型参数。类的类型参数被列在"["和"]"之间。类型参数还必须通过类型约束绑定到类主体中的某个位置。
+
+另一方面，用于多态 ref 的类必须在其声明中显式列出类型参数。类的类型参数被列在~"["~和~"]"~之间。类型参数还必须通过类型约束绑定到类主体中的某个位置。
 \begin{caml_example}{toplevel}
 class ['a] oref x_init =
   object
@@ -454,7 +475,8 @@ class ['a] oref x_init =
   end;;
 let r = new oref 1 in r#set 2; (r#get);;
 \end{caml_example}
-声明中的类型参数实际上可能在类定义的主体中受到约束。在类类型中，类型参数的实际值在"constraint"子句中显示。
+
+声明中的类型参数实际上可能在类定义的主体中受到约束。在类类型中，类型参数的实际值在~"constraint"~子句中显示。
 \begin{caml_example}{toplevel}
 class ['a] oref_succ (x_init:'a) =
   object
@@ -463,7 +485,8 @@ class ['a] oref_succ (x_init:'a) =
     method set y = x <- y
   end;;
 \end{caml_example}
-让我们考虑一个更复杂的例子：定义一个圆，其圆心可以是任何类型的点。我们在方法"move"中添加了一个额外的类型约束，因为类的类型参数不能忽略任何自由变量。
+
+让我们考虑一个更复杂的例子：定义一个圆，其圆心可以是任何类型的点。我们在方法~"move"~中添加了一个额外的类型约束，因为类的类型参数不能忽略任何自由变量。
 \begin{caml_example}{toplevel}
 class ['a] circle (c : 'a) =
   object
@@ -473,7 +496,8 @@ class ['a] circle (c : 'a) =
     method move = (center#move : int -> unit)
   end;;
 \end{caml_example}
-我们可以使用"constraint"子句实现"circle"另一种定义方式。"constraint"子句中使用的"#point"类型是由"point"类的定义生成的缩写。这个缩写能够与属于"point"类子类的任何对象的类型相匹配。它实际上可以被扩展为"< get_x : int; move : int -> unit; .. >"。因此我们可以给出"circle"的替代定义如下，该定义对其参数有略微强一些的约束，因为我们现在期望"center"具备"get_x"方法。
+
+我们可以使用~"constraint"~子句实现~"circle"~另一种定义方式。"constraint"~子句中使用的~"#point"~类型是由~"point"~类的定义生成的缩写。这个缩写能够与属于~"point"~类子类的任何对象的类型相匹配。它实际上可以被扩展为~"< get_x : int; move : int -> unit; .. >"。因此我们可以给出~"circle"~的替代定义如下，该定义对其参数有略微强一些的约束，因为我们现在期望~"center"~具备~"get_x"~方法。
 \begin{caml_example}{toplevel}
 class ['a] circle (c : 'a) =
   object
@@ -484,7 +508,8 @@ class ['a] circle (c : 'a) =
     method move = center#move
   end;;
 \end{caml_example}
-"colored_circle"类是"circle"类的一个特别版本，它要求"center"的类型与"#colored_point"一致，并包括方法"color"。注意，在定制参数化类时，类型参数的实例必须始终被显式给出。它同样被写在"["和"]"之间。
+
+"colored_circle"~类是~"circle"~类的一个特别版本，它要求~"center"~的类型与~"#colored_point"~一致，并包括方法~"color"。注意，在定制参数化类时，类型参数的实例必须始终被显式给出。它同样被写在~"["~和~"]"~之间。
 \begin{caml_example}{toplevel}
 class ['a] colored_circle c =
   object
@@ -508,6 +533,7 @@ class ['a] intlist (l : int list) =
     method fold f (accu : 'a) = List.fold_left f accu l
   end;;
 \end{caml_example}
+
 乍看之下，我们似乎得到了一个多态迭代器，但是这在实践中不起作用。
 \begin{caml_example}{toplevel}
 let l = new intlist [1; 2; 3];;
@@ -515,9 +541,10 @@ l#fold (fun x y -> x+y) 0;;
 l;;
 l#fold (fun s x -> s ^ string_of_int x ^ " ") "" [@@expect error];;
 \end{caml_example}
-在第一次求和运算中，我们的迭代器可以工作。然而，由于对象本身不是多态的（只有它们的构造函数是多态的），因此"fold"方法的使用规定了这个对象的类型。因此，我们将其用作字符串迭代器第二次尝试就失败了。
 
-这里的问题是量化过程被错误地定位了：我们所需要的不是多态类，而是多态的"fold"方法。这可以通过在方法定义中显式地提供多态类型来实现。
+在第一次求和运算中，我们的迭代器可以工作。然而，由于对象本身不是多态的（只有它们的构造函数是多态的），因此·"fold"~方法的使用规定了这个对象的类型。因此，我们将其用作字符串迭代器第二次尝试就失败了。
+
+这里的问题是量化过程被错误地定位了：我们所需要的不是多态类，而是多态的~"fold"~方法。这可以通过在方法定义中显式地提供多态类型来实现。
 \begin{caml_example}{toplevel}
 class intlist (l : int list) =
   object
