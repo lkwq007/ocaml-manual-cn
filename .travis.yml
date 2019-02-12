@@ -3,5 +3,7 @@ language: c
 script: bash -ex .travis-ci.sh
 before_install:
   - sudo add-apt-repository ppa:jonathonf/texlive -y
+  - sudo add-apt-repository ppa:apt-fast/stable -y
   - sudo apt-get update -q
-  - sudo apt-get install ocaml ocaml-native-compilers opam texlive-full -y
+  - sudo apt-get install apt-fast -y
+  - sudo apt-fast install ocaml ocaml-native-compilers opam texlive-full -y
