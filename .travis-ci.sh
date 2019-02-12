@@ -2,9 +2,6 @@
 
 OPAM_DEPENDS="hevea"
 
-echo "yes" | sudo add-apt-repository ppa:jonathonf/texlive
-sudo apt-get update -y
-sudo apt-get install -y curl build-essential m4 zlib1g-dev libssl-dev ocaml ocaml-native-compilers opam texlive-full
 export OPAMYES=1
 export OPAMVERBOSE=1
 echo OCaml version
