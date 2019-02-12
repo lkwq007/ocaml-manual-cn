@@ -32,7 +32,7 @@ TEXT_FLAGS = -fix -exec xxdate.exe -text -w 79
 
 manual: files
 	cd texstuff \
-	  && TEXINPUTS=$(TEXINPUTS) xelatex manual.tex
+	  && TEXINPUTS=$(TEXINPUTS) xelatex manual.tex -interaction=nonstopmode -halt-on-error
 
 index:
 	cd texstuff \
