@@ -556,20 +556,11 @@ let l = new intlist [1; 2; 3];;
 l#fold (fun x y -> x+y) 0;;
 l#fold (fun s x -> s ^ string_of_int x ^ " ") "";;
 \end{caml_example}
-As you can see in the class type shown by the compiler, while
-polymorphic method types must be fully explicit in class definitions
-(appearing immediately after the method name), quantified type
-variables can be left implicit in class descriptions. Why require types
-to be explicit? The problem is that "(int -> int -> int) -> int ->
-int" would also be a valid type for "fold", and it happens to be
-incompatible with the polymorphic type we gave (automatic
-instantiation only works for toplevel types variables, not for inner
-quantifiers, where it becomes an undecidable problem.) So the compiler
-cannot choose between those two types, and must be helped.
 
-However, the type can be completely omitted in the class definition if
-it is already known, through inheritance or type constraints on self.
-Here is an example of method overriding.
+正如您在编译器显示的类类型中所看到的，虽然多态方法类型在类定义中必须是显示给出的（紧跟在方法名称之后），但是量化的类型变量可以隐式地留在类描述中。为什么要求类型是显式的呢？这里的问题是~"(int -> int -> int) -> int ->
+int"~对于~"fold"~同样也是一个有效的类型，而它恰好与我们所给出的多态类型不兼容（自动实例化仅适用于顶层的类型变量，对于内层的限定符并不适用，因此内层类型的选取变成了一个不可判定问题）。因此编译器不能在这两种类型之间进行选择，必须获得额外的帮助。
+
+但是，如果类型是已知的，则可以通过继承或 self 上的类型约束在类定义中完全省略该类型。下面是一个方法重载的例子。
 \begin{caml_example*}{toplevel}
 class intlist_rev l =
   object
@@ -577,7 +568,8 @@ class intlist_rev l =
     method! fold f accu = List.fold_left f accu (List.rev l)
   end;;
 \end{caml_example*}
-The following idiom separates description and definition.
+
+下面的习惯用法将描述和定义分开。
 \begin{caml_example*}{toplevel}
 class type ['a] iterator =
   object method fold : ('b -> 'a -> 'b) -> 'b -> 'b end;;
@@ -587,6 +579,7 @@ class intlist' l =
     method fold f accu = List.fold_left f accu l
   end;;
 \end{caml_example*}
+
 Note here the "(self : int #iterator)" idiom, which ensures that this
 object implements the interface "iterator".
 
