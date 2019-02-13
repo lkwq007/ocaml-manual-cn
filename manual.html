@@ -112,7 +112,7 @@ a.syntax:hover{color:black;text-decoration:none;background-color:#FF6060}
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
-<title>The OCaml system, release 4.08
+<title>OCaml 系统，版本 4.08
 </title>
 </head>
 <body>
@@ -123,7 +123,7 @@ a.syntax:hover{color:black;text-decoration:none;background-color:#FF6060}
 <span style="font-size:x-large">文档与用户手册 <br>
 <span style="font-size:large">Xavier Leroy, <br>
  Damien Doligez, Alain Frisch, Jacques Garrigue, Didier Rémy and Jérôme Vouillon <br>
- January 31, 2019<br>
+ February 13, 2019<br>
   
 <span style="font-size:medium">Copyright © 2013 Institut National de
 Recherche en Informatique et en Automatique. <br>
@@ -169,7 +169,7 @@ and as a
 <ul class="toc"><li class="li-toc">
 <a href="#sec25">3.1  类与对象</a>
 </li><li class="li-toc"><a href="#sec26">3.2  直接对象</a>
-</li><li class="li-toc"><a href="#sec27">3.3  引用self</a>
+</li><li class="li-toc"><a href="#sec27">3.3  引用 self</a>
 </li><li class="li-toc"><a href="#sec28">3.4  初始化器</a>
 </li><li class="li-toc"><a href="#sec29">3.5  虚方法</a>
 </li><li class="li-toc"><a href="#sec30">3.6  私有方法</a>
@@ -1609,9 +1609,9 @@ $ ./fib 20
 <!--TOC chapter id="sec18" Chapter 2  模块系统-->
 <h1 class="chapter" id="sec18">Chapter 2  模块系统</h1><!--SEC END --><p> <a id="c:moduleexamples"></a>
 </p><!--NAME moduleexamples.html-->
-<p>本章介绍了OCaml的模块系统。</p>
+<p>本章介绍了 OCaml 的模块系统。</p>
 <!--TOC section id="sec19" 2.1  Structures-->
-<h2 class="section" id="sec19">2.1  Structures</h2><!--SEC END --><p>模块的主要动机是将相关定义（例如数据类型的定义和该类型上的操作）打包在一起，并为这些定义强制赋予一致的命名模式。这样可以避免名称耗尽或意外地混淆名称。这样的包被称为结构（structure），由<span class="c003">struct</span>…<span class="c003">end</span>构造引入，该结构可以包含任意定义序列。结构通常用<span class="c003">module</span>绑定来命名。例如，下面是将一种优先队列及其操作打包在一起的结构：
+<h2 class="section" id="sec19">2.1  Structures</h2><!--SEC END --><p>模块的主要动机是将相关定义（例如数据类型的定义和该类型上的操作）打包在一起，并为这些定义强制赋予一致的命名模式。这样可以避免名称耗尽或意外地混淆名称。这样的包被称为结构（structure），由 <span class="c003">struct</span>…<span class="c003">end</span> 构造引入，该结构可以包含任意定义序列。结构通常用 <span class="c003">module</span> 绑定来命名。例如，下面是将一种优先队列及其操作打包在一起的结构：
 
 
 </p><div class="caml-example toplevel">
@@ -1655,9 +1655,7 @@ $ ./fib 20
 </div></pre>
 
 
-</div><p>
-
-在结构外部，可以使用“点表示法”来引用其组件，即由结构名称限定的标识符。例如，<span class="c003">PrioQueue.insert</span>是在结构<span class="c003">PrioQueue</span>中定义的函数，<span class="c003">PrioQueue.queue</span>是在<span class="c003">PrioQueue</span>中定义的<span class="c003">queue</span>类型。
+</div><p>在结构外部，可以使用“点表示法”来引用其组件，即由结构名称限定的标识符。例如，<span class="c003">PrioQueue.insert</span> 是在结构 <span class="c003">PrioQueue</span> 中定义的函数，<span class="c003">PrioQueue.queue</span> 是在 <span class="c003">PrioQueue</span> 中定义的 <span class="c003">queue</span> 类型。
 
 
 </p><div class="caml-example toplevel">
@@ -1668,7 +1666,10 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>另一种方式是打开模块，它将模块中定义的所有标识符都放在当前结构的范围内。</p><div class="caml-example toplevel">
+</div><p>另一种方式是打开模块，它将模块中定义的所有标识符都放在当前结构的范围内。
+
+
+</p><div class="caml-example toplevel">
 
 <pre><div class="caml-input">   open PrioQueue;;
 </div></pre>
@@ -1711,9 +1712,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>
-
-在第二种形式中，当局部打开的主体本身由括号、大括号或方括号分隔时，可以省略局部打开的括号。例如：
+</div><p>在第二种形式中，当局部打开的主体本身由括号、大括号或方括号分隔时，可以省略局部打开的括号。例如：
 
 
 </p><div class="caml-example toplevel">
@@ -1743,7 +1742,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>还可以使用<span class="c003">include</span>语句将模块的组件复制到另一个模块中。这对于扩展现有模块特别实用。举例来说，我们可以添加一些函数，在优先队列为空时返回一个可选值，而不是一个异常。
+</div><p>还可以使用  <span class="c003">include</span> 语句将模块的组件复制到另一个模块中。这对于扩展现有模块特别实用。举例来说，我们可以添加一些函数，在优先队列为空时返回一个可选值，而不是一个异常。
 
 
 </p><div class="caml-example toplevel">
@@ -1778,7 +1777,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 
 </div>
 <!--TOC section id="sec20" 2.2  签名-->
-<h2 class="section" id="sec20">2.2  签名</h2><!--SEC END --><p>签名是结构的接口。签名指定了结构的哪些组件可以由外部访问，以及暴露哪些类型。签名可以用于隐藏结构的某些组件（例如本地函数定义），或者导出具有受限类型的组件。例如，下面的签名指定了三个优先队列操作：<span class="c003">empty</span>、<span class="c003">insert</span>、<span class="c003">extract</span>，但没有指定辅助函数<span class="c003">remove_top</span>。类似地，它使<span class="c003">queue</span>类型抽象化（不以具体类型提供其实际表示）。
+<h2 class="section" id="sec20">2.2  签名</h2><!--SEC END --><p>签名是结构的接口。签名指定了结构的哪些组件可以由外部访问，以及暴露哪些类型。签名可以用于隐藏结构的某些组件（例如本地函数定义），或者导出具有受限类型的组件。例如，下面的签名指定了三个优先队列操作：<span class="c003">empty</span>、<span class="c003">insert</span>、<span class="c003">extract</span>，但没有指定辅助函数 <span class="c003">remove_top</span>。类似地，它使 <span class="c003">queue</span> 类型抽象化（不以具体类型提供其实际表示）。
 
 
 </p><div class="caml-example toplevel">
@@ -1804,7 +1803,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>通过这个签名限制<span class="c003">PrioQueue</span>结构会产生<span class="c003">PrioQueue</span>结构的另一个视图，其中<span class="c003">remove_top</span>函数不可以被访问，并且优先队列的实际表示是隐藏的：
+</div><p>通过这个签名限制 <span class="c003">PrioQueue</span> 结构会产生 <span class="c003">PrioQueue</span> 结构的另一个视图，其中 <span class="c003">remove_top</span> 函数不可以被访问，并且优先队列的实际表示是隐藏的：
 
 
 </p><div class="caml-example toplevel">
@@ -1822,14 +1821,13 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>
-
-这种限制也可以在结构的定义过程中执行，如：
+</div><p>这种限制也可以在结构的定义过程中执行，如：
 </p><pre>module PrioQueue = (struct ... end : PRIOQUEUE);;
-</pre><p>也可以使用另一种语法完成限制：
+</pre><p>
+也可以使用另一种语法完成限制：
 </p><pre>module PrioQueue : PRIOQUEUE = struct ... end;;
 </pre><p>
-与模块一样，可以包含一个签名来将其组件复制到当前签名中。例如，我们可以使用<span class="c003">extract_opt</span>函数扩展<span class="c003">PRIOQUEUE</span>签名:</p><div class="caml-example toplevel">
+与模块一样，可以包含一个签名来将其组件复制到当前签名中。例如，我们可以使用 <span class="c003">extract_opt</span> 函数扩展 <span class="c003">PRIOQUEUE</span> 签名：</p><div class="caml-example toplevel">
 
 <pre><div class="caml-input"> module type PRIOQUEUE_WITH_OPT =
     sig
@@ -1851,7 +1849,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 
 </div>
 <!--TOC section id="sec21" 2.3  仿函数-->
-<h2 class="section" id="sec21">2.3  仿函数</h2><!--SEC END --><p>仿函数（functor，又称为函子）是从一个模块到另一个模块的“函数”。仿函数允许您创建参数化模块，然后将其他模块作为参数以获得特定的实现。例如，可以参数化<span class="c003">Set</span>模块，将<span class="c003">Set</span>实现为有序列表，以与任何提供元素类型和比较函数<span class="c003">compare</span>（如<span class="c003">OrderedString</span>）的模块一起工作：</p><div class="caml-example toplevel">
+<h2 class="section" id="sec21">2.3  仿函数</h2><!--SEC END --><p>仿函数（functor，又称为函子）是从一个模块到另一个模块的“函数”。仿函数允许您创建参数化模块，然后将其他模块作为参数以获得特定的实现。例如，可以参数化 <span class="c003">Set</span> 模块，将 <span class="c003">Set</span> 实现为有序列表，以与任何提供元素类型和比较函数 <span class="c003">compare</span>（如 <span class="c003">OrderedString</span>）的模块一起工作：</p><div class="caml-example toplevel">
 
 <pre><div class="caml-input"> type comparison = Less | Equal | Greater;;
 </div><div class="caml-output ok">type comparison = Less | Equal | Greater
@@ -1900,9 +1898,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>
-
-通过将<span class="c003">Set</span>仿函数应用到实现有序类型的结构中，我们可以得到该类型的集合运算：
+</div><p>通过将 <span class="c003">Set</span> 仿函数应用到实现有序类型的结构中，我们可以得到该类型的集合运算：
 
 
 </p><div class="caml-example toplevel">
@@ -1934,7 +1930,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 
 </div>
 <!--TOC section id="sec22" 2.4  仿函数和类型抽象-->
-<h2 class="section" id="sec22">2.4  仿函数和类型抽象</h2><!--SEC END --><p>就像在<span class="c003">PrioQueue</span>示例中一样，隐藏<span class="c003">set</span>类型的实际实现是一种很好的风格，这样结构的用户就不会依赖于集合是列表的情况。这意味着我们可以在不破坏现有代码的情况下切换到另一种更有效的集合表示形式。我们可以通过给<span class="c003">Set</span>加以合适的仿函数签名限制来实现这一目的：
+<h2 class="section" id="sec22">2.4  仿函数和类型抽象</h2><!--SEC END --><p>就像在 <span class="c003">PrioQueue</span> 示例中一样，隐藏 <span class="c003">set</span> 类型的实际实现是一种很好的风格，这样结构的用户就不会依赖于集合是列表的情况。这意味着我们可以在不破坏现有代码的情况下切换到另一种更有效的集合表示形式。我们可以通过给 <span class="c003">Set</span> 加以合适的仿函数签名限制来实现这一目的：
 
 
 </p><div class="caml-example toplevel">
@@ -2023,9 +2019,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>
-
-这里的问题是<span class="c003">SET</span>抽象地指定了<span class="c003">element</span>类型，这样就丢失了仿函数返回结果中<span class="c003">element</span>类型与仿函数参数<span class="c003">t</span>类型的相等性。因此，<span class="c003">WrongStringSet.element</span>与<span class="c003">string</span>是不同的类型, <span class="c003">WrongStringSet</span>中的操作无法所用于字符串。如上所示，保证操作可用的关键是将签名<span class="c003">SET</span>中的<span class="c003">element</span>类型声明为<span class="c003">Elt.t</span>类型。但不幸的是，我们无法做到这一点，因为<span class="c003">SET</span>是在<span class="c003">Elt</span>不存在的上下文中被定义的。为了克服这个问题，OCaml提供了<span class="c003">with type</span>结构在现有签名的基础上进一步构造签名，它允许使用额外的类型等式来扩展签名：
+</div><p>这里的问题是 <span class="c003">SET</span> 抽象地指定了 <span class="c003">element</span> 类型，这样就丢失了仿函数返回结果中 <span class="c003">element</span> 类型与仿函数参数 <span class="c003">t</span> 类型的相等性。因此，<span class="c003">WrongStringSet.element</span> 与 <span class="c003">string</span> 是不同的类型, <span class="c003">WrongStringSet</span> 中的操作无法所用于字符串。如上所示，保证操作可用的关键是将签名 <span class="c003">SET</span> 中的 <span class="c003">element</span> 类型声明为 <span class="c003">Elt.t</span> 类型。但不幸的是，我们无法做到这一点，因为 <span class="c003">SET</span> 是在 <span class="c003">Elt</span> 不存在的上下文中被定义的。为了克服这个问题，OCaml 提供了 <span class="c003">with type</span> 结构在现有签名的基础上进一步构造签名，它允许使用额外的类型等式来扩展签名：
 
 
 </p><div class="caml-example toplevel">
@@ -2044,11 +2038,11 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>在简单结构的情况下，OCaml提供了另一种语法来定义仿函数并限制其结果：
+</div><p>在简单结构的情况下，OCaml 提供了另一种语法来定义仿函数并限制其结果：
 </p><pre>module AbstractSet2(Elt: ORDERED_TYPE) : (SET with type element = Elt.t) =
   struct ... end;;
 </pre><p>
-在仿函数结果中抽象类型组件是一种强大的技术，它提供了高度的类型安全性，正如我们现在展示的那样。考虑一个不同于<span class="c003">OrderedString</span>结构中实现的标准排序的字符串排序方式。例如，我们比较字符串时不区分大小写。
+在仿函数结果中抽象类型组件是一种强大的技术，它提供了高度的类型安全性，正如我们现在展示的那样。考虑一个不同于 <span class="c003">OrderedString</span> 结构中实现的标准排序的字符串排序方式。例如，我们比较字符串时不区分大小写。
 
 
 </p><div class="caml-example toplevel">
@@ -2082,34 +2076,31 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>
-
-注意，这两种类型<span class="c003">AbstractStringSet.set</span>和<span class="c003">NoCaseStringSet.set</span>是互不兼容的，这两种类型的值也是不匹配的。这是正确的行为：尽管这两种集合类型都包含相同类型（字符串）的元素，但它们是基于该类型的不同顺序构建的，操作需要维护不同的不变式（基于标准排序的严格递增与大小写不敏感的递增）。将<span class="c003">AbstractStringSet</span>中的操作应用到<span class="c003">NoCaseStringSet.set</span>类型的值可能会给出不正确的结果，或者构建违背出<span class="c003">NoCaseStringSet</span>不变式的列表。</p>
+</div><p>注意，这两种类型 <span class="c003">AbstractStringSet.set</span> 和 <span class="c003">NoCaseStringSet.set</span> 是互不兼容的，这两种类型的值也是不匹配的。这是正确的行为：尽管这两种集合类型都包含相同类型（字符串）的元素，但它们是基于该类型的不同顺序构建的，操作需要维护不同的不变式（基于标准排序的严格递增与大小写不敏感的递增）。将 <span class="c003">AbstractStringSet</span> 中的操作应用到 <span class="c003">NoCaseStringSet.set</span> 类型的值可能会给出不正确的结果，或者构建违背出 <span class="c003">NoCaseStringSet</span> 不变式的列表。</p>
 <!--TOC section id="sec23" 2.5  模块和单独编译-->
-<h2 class="section" id="sec23">2.5  模块和单独编译</h2><!--SEC END --><p>到目前为止，模块的所有示例都是在交互系统的上下文中给出的。然而，模块对于需要批量编译的大型程序最为实用。对于这些程序，实际上我们有必要将源代码分割成若干个文件（称为编译单元）。这些文件可以被单独编译，从而最小化修改代码后的重新编译量。</p><p>在OCaml中，编译单元是结构和签名的特例，可以很容易地用模块系统来解释单元之间的关系。编译单元<span class="c009">A</span>包括两个文件：
+<h2 class="section" id="sec23">2.5  模块和单独编译</h2><!--SEC END --><p>到目前为止，模块的所有示例都是在交互系统的上下文中给出的。然而，模块对于需要批量编译的大型程序最为实用。对于这些程序，实际上我们有必要将源代码分割成若干个文件（称为编译单元）。这些文件可以被单独编译，从而最小化修改代码后的重新编译量。</p><p>在 OCaml 中，编译单元是结构和签名的特例，可以很容易地用模块系统来解释单元之间的关系。编译单元 <span class="c009">A</span> 包括两个文件：
 </p><ul class="itemize"><li class="li-itemize">
-实现文件<span class="c009">A</span><span class="c003">.ml</span>，它包含一系列定义，类似于<span class="c003">struct</span>…<span class="c003">end</span>结构的内部；
-</li><li class="li-itemize">接口文件<span class="c009">A</span><span class="c003">.mli</span>，它包含一系列规范，类似于<span class="c003">sig</span>…<span class="c003">end</span>结构的内部。
+实现文件 <span class="c009">A</span><span class="c003">.ml</span>，它包含一系列定义，类似于 <span class="c003">struct</span>…<span class="c003">end</span> 结构的内部；
+</li><li class="li-itemize">接口文件 <span class="c009">A</span><span class="c003">.mli</span>，它包含一系列规范，类似于 <span class="c003">sig</span>…<span class="c003">end</span> 结构的内部。
 </li></ul><p>
-这两个文件一起定义了一个名为<span class="c009">A</span>的结构，就如同下面的定义是在顶层环境中输入的一样：
+这两个文件一起定义了一个名为 <span class="c009">A</span> 的结构，就如同下面的定义是在顶层环境中输入的一样：
 </p><pre>
 module <span class="c009">A</span>: sig (* contents of file <span class="c009">A</span>.mli *) end
         = struct (* contents of file <span class="c009">A</span>.ml *) end;;
-</pre><p>
-定义编译单元的文件可以使用<span class="c003">ocamlc -c</span>命令单独编译(<span class="c003">-c</span>选项表示“仅编译，但不进行链接”)；这将生成编译后的接口文件（扩展名为<span class="c003">.cmi</span>）和编译后的目标代码文件（扩展名为<span class="c003">.cmo</span>）。编译完所有单元后，可以使用<span class="c003">ocamlc</span>命令将它们的<span class="c003">.cmo</span>文件链接到一起。例如，下面的命令编译并链接了一个由<span class="c003">Aux</span>和<span class="c003">Main</span>编译单元组成的程序：
+</pre><p>定义编译单元的文件可以使用 <span class="c003">ocamlc -c</span> 命令单独编译(<span class="c003">-c</span> 选项表示“仅编译，但不进行链接”)；这将生成编译后的接口文件（扩展名为 <span class="c003">.cmi</span>）和编译后的目标代码文件（扩展名为 <span class="c003">.cmo</span>）。编译完所有单元后，可以使用 <span class="c003">ocamlc</span> 命令将它们的 <span class="c003">.cmo</span> 文件链接到一起。例如，下面的命令编译并链接了一个由 <span class="c003">Aux</span> 和 <span class="c003">Main</span> 编译单元组成的程序：
 </p><pre>$ ocamlc -c Aux.mli                     # 生成 aux.cmi
 $ ocamlc -c Aux.ml                      # 生成 aux.cmo
 $ ocamlc -c Main.mli                    # 生成 main.cmi
 $ ocamlc -c Main.ml                     # 生成 main.cmo
 $ ocamlc -o theprogram Aux.cmo Main.cmo
-</pre><p>该程序的行为就如同在顶层环境中输入如下语句一样：
+</pre><p>
+该程序的行为就如同在顶层环境中输入如下语句一样：
 </p><pre>
 module Aux: sig (* contents of Aux.mli *) end
           = struct (* contents of Aux.ml *) end;;
 module Main: sig (* contents of Main.mli *) end
            = struct (* contents of Main.ml *) end;;
-</pre><p>
-<span class="c003">Main</span>可以引用<span class="c003">Aux</span>模块：<span class="c003">Main.ml</span>和<span class="c003">Main.mli</span>中包含的定义和声明可以通过<span class="c003">Aux.</span><span class="c009">ident</span>的方式引用<span class="c003">Aux.ml</span>中由<span class="c003">Aux.mli</span>所导出的定义。</p><p>在链接阶段，<span class="c003">ocamlc</span>参数中<span class="c003">.cmo</span>文件列表的顺序决定了模块定义生成的顺序。因此，在上面的例子中，<span class="c003">Aux</span>应位于<span class="c003">Main</span>前面，这样<span class="c003">Main</span>可以引用<span class="c003">Aux</span>，但是<span class="c003">Aux</span>不能引用<span class="c003">Main</span>。</p><p>需要注意，只能将顶级结构映射到单独编译的文件，但仿函数或模块类型不能被直接映射到文件。但是，所有的模块类对象都可以作为结构的组件出现，因此我们可以将仿函数或模块类型放置在结构中，然后将结构映射到文件中。
+</pre><p><span class="c003">Main</span> 可以引用 <span class="c003">Aux</span> 模块：<span class="c003">Main.ml</span> 和 <span class="c003">Main.mli</span> 中包含的定义和声明可以通过 <span class="c003">Aux.</span><span class="c009">ident</span> 的方式引用 <span class="c003">Aux.ml</span> 中由 <span class="c003">Aux.mli</span> 所导出的定义。</p><p>在链接阶段，<span class="c003">ocamlc</span> 参数中 <span class="c003">.cmo</span> 文件列表的顺序决定了模块定义生成的顺序。因此，在上面的例子中，<span class="c003">Aux</span> 应位于 <span class="c003">Main</span> 前面，这样 <span class="c003">Main</span> 可以引用 <span class="c003">Aux</span>，但是 <span class="c003">Aux</span> 不能引用 <span class="c003">Main</span>。</p><p>需要注意，只能将顶级结构映射到单独编译的文件，但仿函数或模块类型不能被直接映射到文件。但是，所有的模块类对象都可以作为结构的组件出现，因此我们可以将仿函数或模块类型放置在结构中，然后将结构映射到文件中。
 
 </p>
 <!--TOC chapter id="sec24" Chapter 3  OCaml中的对象-->
@@ -2140,7 +2131,7 @@ module Main: sig (* contents of Main.mli *) end
 </p>
 <!--TOC section id="sec25" 3.1  类与对象-->
 <h2 class="section" id="sec25">3.1  类与对象</h2><!--SEC END --><p>
-<a id="ss:classes-and-objects"></a></p><p>下面的<span class="c003">point</span>类定义了一个实例变量<span class="c003">x</span>与两个方法<span class="c003">get_x</span>和<span class="c003">move</span>。其中实例变量的初始值是<span class="c003">0</span>。变量<span class="c003">x</span>被声明为可变的，因此<span class="c003">move</span>方法可以更改它的值。
+<a id="ss:classes-and-objects"></a></p><p>下面的 <span class="c003">point</span> 类定义了一个实例变量 <span class="c003">x</span> 与两个方法 <span class="c003">get_x</span> 和 <span class="c003">move</span>。其中实例变量的初始值是 <span class="c003">0</span>。变量 <span class="c003">x</span> 被声明为可变的，因此 <span class="c003">move</span> 方法可以更改它的值。
 
 
 </p><div class="caml-example toplevel">
@@ -2156,7 +2147,7 @@ module Main: sig (* contents of Main.mli *) end
 </div></pre>
 
 
-</div><p>现在我们创建一个<span class="c003">point</span>类的实例，点<span class="c003">p</span>。
+</div><p>现在我们创建一个 <span class="c003">point</span> 类的实例，点 <span class="c003">p</span>。
 
 
 </p><div class="caml-example toplevel">
@@ -2166,9 +2157,7 @@ module Main: sig (* contents of Main.mli *) end
 </div></pre>
 
 
-</div><p>
-
-需要注意，<span class="c003">p</span>的类型是<span class="c003">point</span>。这其实是由上面的类定义所自动定义的缩写。它代表对象类型<span class="c003">&lt;get_x : int; move : int -&gt; unit&gt;</span>，该类型给出了<span class="c003">point</span>包含的方法及它们的类型。</p><p>我们现在可以调用<span class="c003">p</span>的一些方法：
+</div><p>需要注意，<span class="c003">p</span> 的类型是 <span class="c003">point</span>。这其实是由上面的类定义所自动定义的缩写。它代表对象类型 <span class="c003">&lt;get_x : int; move : int -&gt; unit&gt;</span>，该类型给出了 <span class="c003">point</span> 包含的方法及它们的类型。</p><p>我们现在可以调用 <span class="c003">p</span> 的方法：
 
 
 </p><div class="caml-example toplevel">
@@ -2186,7 +2175,7 @@ module Main: sig (* contents of Main.mli *) end
 </div></pre>
 
 
-</div><p>类中变量的求值只在对象被创建时进行。因此，在下面的示例中，实例变量<span class="c003">x</span>被初始化为两个不同对象的不同值。
+</div><p>类中变量的求值只在对象被创建时进行。因此，在下面的示例中，实例变量 <span class="c003">x</span> 被初始化为两个不同对象的不同值。
 
 
 </p><div class="caml-example toplevel">
@@ -2214,7 +2203,7 @@ module Main: sig (* contents of Main.mli *) end
 </div></pre>
 
 
-</div><p><span class="c003">point</span>类还可以被抽象为<span class="c003">x</span>坐标的初值。
+</div><p><span class="c003">point</span> 类还可以被抽象为 <span class="c003">x</span> 坐标的初值。
 
 
 </p><div class="caml-example toplevel">
@@ -2231,9 +2220,7 @@ module Main: sig (* contents of Main.mli *) end
 </div></pre>
 
 
-</div><p>
-
-与函数定义一样，上面的定义可以缩写为：
+</div><p>与函数定义一样，上面的定义可以缩写为：
 
 
 </p><div class="caml-example toplevel">
@@ -2250,9 +2237,7 @@ module Main: sig (* contents of Main.mli *) end
 </div></pre>
 
 
-</div><p>
-
-<span class="c003">point</span>类的一个实例现在是一个函数，该函数需要一个初始参数来创建一个点对象：
+</div><p><span class="c003">point</span> 类的一个实例现在是一个函数，该函数需要一个初始参数来创建一个点对象：
 
 
 </p><div class="caml-example toplevel">
@@ -2266,9 +2251,7 @@ module Main: sig (* contents of Main.mli *) end
 </div></pre>
 
 
-</div><p>
-
-当然，参数<span class="c003">x_init</span>在定义的整个主体中都是可见的，包括方法。例如，下面类中的<span class="c003">get_offset</span>方法可以返回对象与其初始位置的相对位置。
+</div><p>当然，参数 <span class="c003">x_init</span> 在定义的整个主体中都是可见的，包括方法。例如，下面类中的 <span class="c003">get_offset</span> 方法可以返回对象与其初始位置的相对位置。
 
 
 </p><div class="caml-example toplevel">
@@ -2291,9 +2274,7 @@ module Main: sig (* contents of Main.mli *) end
 </div></pre>
 
 
-</div><p>
-
-在定义类的对象主体之前，可以对表达式进行求值和绑定。这对于增强不变式是有用的。例如，点可以被自动调整到坐标网格中最近的点，如下所示：
+</div><p>在定义类的对象主体之前，可以对表达式进行求值和绑定。这对于增强不变式是有用的。例如，点可以被自动调整到坐标网格中最近的点，如下所示：
 
 
 </p><div class="caml-example toplevel">
@@ -2317,9 +2298,8 @@ module Main: sig (* contents of Main.mli *) end
 </div></pre>
 
 
-</div><p>
-
-（当<span class="c003">x_init</span>坐标不在坐标网格上时，可能会引发异常）事实上，这里也可以通过使用<span class="c003">origin</span>的值调用<span class="c003">point</span>类的定义来获得相同的效果。
+</div><p>（当 <span class="c003">x_init</span> 坐标不在坐标网格上时，即坐标并非整数时，可能会引发异常）
+事实上，这里也可以通过使用 <span class="c003">origin</span> 的值调用 <span class="c003">point</span> 类的定义来获得相同的效果。
 
 
 </p><div class="caml-example toplevel">
@@ -2329,9 +2309,7 @@ module Main: sig (* contents of Main.mli *) end
 </div></pre>
 
 
-</div><p>
-
-另一种解决办法是在一个特殊的分配函数中进行调整：
+</div><p>另一种解决办法是在一个特殊的分配函数中进行调整：
 
 
 </p><div class="caml-example toplevel">
@@ -2341,9 +2319,7 @@ module Main: sig (* contents of Main.mli *) end
 </div></pre>
 
 
-</div><p>
-
-但是，前一种模式通常更合适，因为用于调整的代码是类定义的一部分，可以被继承。</p><p>这种机制提供了其他语言中的类构造函数。可以用这种方式定义几个构造函数来构建具有相同类中具备不同初始化模式的对象；另一种方法是使用初始化器，如下面的<a href="#ss%3Ainitializers">3.4</a>节所述。</p>
+</div><p>但是，前一种模式通常更合适，因为用于调整的代码是类定义的一部分，可以被继承。</p><p>这种机制提供了其他语言中的类构造函数。可以用这种方式定义几个构造函数来构建具有相同类中具备不同初始化模式的对象；另一种方法是使用初始化器，如下面的第 <a href="#ss%3Ainitializers">3.4</a> 节所述。</p>
 <!--TOC section id="sec26" 3.2  直接对象-->
 <h2 class="section" id="sec26">3.2  直接对象</h2><!--SEC END --><p>
 <a id="ss:immediate-objects"></a></p><p>还有另一种更直接的方法来创建对象：不通过类来创建它。</p><p>这种方法的语法与类表达式完全相同，但是结果是一个对象而不是一个类。本节其余部分中描述的所有结构也适用于直接对象。
@@ -2385,10 +2361,10 @@ module Main: sig (* contents of Main.mli *) end
 </div></pre>
 
 
-</div><p>与类相比，直接对象有两个缺点：它们的类型没有缩写，并且不能被继承。但是这两个缺点在某些情况下可能是优点，我们将在<a href="#ss%3Areference-to-self">3.3</a>和<a href="#ss%3Aparameterized-classes">3.10</a>节中进行阐释。</p>
-<!--TOC section id="sec27" 3.3  引用self-->
-<h2 class="section" id="sec27">3.3  引用self</h2><!--SEC END --><p>
-<a id="ss:reference-to-self"></a></p><p>方法或初始化器可以调用self（即当前对象）上的方法。为此，必须显式地将self绑定到变量<span class="c003">s</span> （事实上<span class="c003">s</span>可以是任何标识符，尽管我们通常会选择<span class="c003">self</span>这个名称）。
+</div><p>与类相比，直接对象有两个缺点：它们的类型没有缩写，并且不能被继承。但是这两个缺点在某些情况下可能是优点，我们将在第 <a href="#ss%3Areference-to-self">3.3</a> 和 <a href="#ss%3Aparameterized-classes">3.10</a> 节中进行阐释。</p>
+<!--TOC section id="sec27" 3.3  引用 self-->
+<h2 class="section" id="sec27">3.3  引用 self</h2><!--SEC END --><p>
+<a id="ss:reference-to-self"></a></p><p>方法或初始化器可以调用 self（即当前对象）上的方法。为此，必须显式地将 self 绑定到变量 <span class="c003">s</span> （事实上 <span class="c003">s</span> 可以是任何标识符，尽管我们通常会选择 <span class="c003">self</span> 这个名称）。
 
 
 </p><div class="caml-example toplevel">
@@ -2421,7 +2397,7 @@ module Main: sig (* contents of Main.mli *) end
 
 </div><p>
 
-变量<span class="c003">s</span>会在方法调用时被动态地绑定。特别是，当<span class="c003">printable_point</span>类被继承时，变量<span class="c003">s</span>将被正确地绑定到子类的对象上。</p><p>self的一个常见问题是，由于它的类型可能在子类中被扩展，所以您不能预先固定它的类型。这里有一个简单的例子。
+变量 <span class="c003">s</span> 会在方法调用时被动态地绑定。特别是，当 <span class="c003">printable_point</span> 类被继承时，变量 <span class="c003">s</span> 将被正确地绑定到子类的对象上。</p><p>self 的一个常见问题是，由于它的类型可能在子类中被扩展，所以您不能预先固定它的类型。这里有一个简单的例子。
 
 
 </p><div class="caml-example toplevel">
@@ -2441,9 +2417,7 @@ module Main: sig (* contents of Main.mli *) end
 </div></pre>
 
 
-</div><p>
-
-您可以忽略报错消息的前两行。最后一行才是最重要的：把self放在外部引用中将使我们无法通过继承来拓展它。我们将在第<a href="#ss%3Ausing-coercions">3.12</a>节中看到这个问题的解决方案。但是请注意，由于直接对象是不可扩展的，所以使用它们时不会遭遇这一问题。
+</div><p>您可以忽略报错消息的前两行。最后一行才是最重要的：把 self 放在外部引用中将使我们无法通过继承来拓展它。我们将在第 <a href="#ss%3Ausing-coercions">3.12</a> 节中看到这个问题的解决方案。但是请注意，由于直接对象是不可扩展的，所以使用它们时不会遭遇这一问题。
 
 
 </p><div class="caml-example toplevel">
@@ -2460,7 +2434,7 @@ module Main: sig (* contents of Main.mli *) end
 </div>
 <!--TOC section id="sec28" 3.4  初始化器-->
 <h2 class="section" id="sec28">3.4  初始化器</h2><!--SEC END --><p>
-<a id="ss:initializers"></a></p><p>类定义中的let绑定在对象被构建前被执行。我们也可以在构建对象之后立即执行其他表达式。这样的代码可以被编写为一个隐藏的匿名方法，我们称之为初始化器（<span class="c003">initializer</span>）。因此，初始化器可以访问self和实例变量。
+<a id="ss:initializers"></a></p><p>类定义中的 let 绑定在对象被构建前被执行。我们也可以在构建对象之后立即执行其他表达式。这样的代码可以被编写为一个隐藏的匿名方法，我们称之为初始化器（<span class="c003">initializer</span>）。因此，初始化器可以访问 self 和实例变量。
 
 
 </p><div class="caml-example toplevel">
@@ -2490,12 +2464,10 @@ val p : printable_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-初始化器是无法被重载的。相反，所有初始化器都是按顺序被执行的。初始化器对于保持不变式特别实用。另一个例子可以在<a href="#ss%3Abank-accounts">6.1</a>节中看到。</p>
+</div><p>初始化器是无法被重载的。相反，所有初始化器都是按顺序被执行的。初始化器对于保持不变式特别实用。另一个例子可以在第 <a href="#ss%3Abank-accounts">6.1</a> 节中看到。</p>
 <!--TOC section id="sec29" 3.5  虚方法-->
 <h2 class="section" id="sec29">3.5  虚方法</h2><!--SEC END --><p>
-<a id="ss:virtual-methods"></a></p><p>我们可以使用关键字<span class="c003">virtual</span>声明一个方法，但不实际定义它。这个方法将在随后的子类中提供。这种方法被称为虚方法。包含虚方法的类必须被包换<span class="c003">virtual</span>标记，并且不能被实例化（也就是说，不能创建该类的任何对象）。该类的定义仍然会定义类型缩写（将虚方法视为其他方法）。
+<a id="ss:virtual-methods"></a></p><p>我们可以使用关键字 <span class="c003">virtual</span> 声明一个方法，但不实际定义它。这个方法将在随后的子类中提供。这种方法被称为虚方法。包含虚方法的类必须被包换 <span class="c003">virtual</span> 标记，并且不能被实例化（也就是说，不能创建该类的任何对象）。该类的定义仍然会定义类型缩写（将虚方法视为其他方法）。
 
 
 </p><div class="caml-example toplevel">
@@ -2602,9 +2574,7 @@ val p : printable_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-请注意，这与Java或C++中的私有方法和受保护方法不同，后者可以从同一类的其他对象调用。这是OCaml中类型和类之间独立性的直接结果：两个不相关的类可能产生相同类型的对象，这意味着我们无法在类型上确保某一对象来自特定的类。然而，在<a href="#ss%3Afriends">3.17</a>节中给出了友元的编写方式。</p><p>私有方法是会被子类继承的（默认情况下它们在子类中是可见的），除非它们被签名隐藏，如下所示。</p><p>同时，私有方法可以在子类中被转化为公有。
+</div><p>请注意，这与 Java 或 C++ 中的私有方法和受保护方法不同，后者可以从同一类的其他对象调用。这是 OCaml 中类型和类之间独立性的直接结果：两个不相关的类可能产生相同类型的对象，这意味着我们无法在类型上确保某一对象来自特定的类。然而，在第 <a href="#ss%3Afriends">3.17</a> 节中给出了友元的编写方式。</p><p>私有方法是会被子类继承的（默认情况下它们在子类中是可见的），除非它们被签名隐藏，如下所示。</p><p>同时，私有方法可以在子类中被转化为公有。
 
 
 </p><div class="caml-example toplevel">
@@ -2625,9 +2595,7 @@ val p : printable_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-这里的<span class="c003">virtual</span>标记只用于声明一个方法，但不提供其定义。由于我们没有添加私有标记，这使得该方法成为公有的，并保留了原始定义。</p><p>另一种定义方式是
+</div><p>这里的 <span class="c003">virtual</span> 标记只用于声明一个方法，但不提供其定义。由于我们没有添加私有标记，这使得该方法成为公有的，并保留了原始定义。</p><p>另一种定义方式是
 
 
 </p><div class="caml-example toplevel">
@@ -2649,7 +2617,7 @@ val p : printable_point = &lt;obj&gt;
 
 </div><p>
 
-self的类型约束要求使用公有的<span class="c003">move</span>方法，这足以重载<span class="c003">private</span>标记。</p><p>可以认为私有方法应该在子类中保持私有。然而，由于该方法在子类中是可见的，所以总是可以选取它的代码并定义运行该代码的同名方法，因此另一个（较重的）解决方案是：
+self 的类型约束要求使用公有的 <span class="c003">move</span> 方法，这足以重载 <span class="c003">private</span> 标记。</p><p>可以认为私有方法应该在子类中保持私有。然而，由于该方法在子类中是可见的，所以总是可以选取它的代码并定义运行该代码的同名方法，因此另一个（较重的）解决方案是：
 
 
 </p><div class="caml-example toplevel">
@@ -2670,7 +2638,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div></pre>
 
 
-</div><p>当然，私有方法也可以是虚拟的。其关键字必须按此顺序出现<span class="c003">method private virtual</span>。</p>
+</div><p>当然，私有方法也可以是虚拟的。其关键字必须按此顺序出现 <span class="c003">method private virtual</span>。</p>
 <!--TOC section id="sec31" 3.7  类接口-->
 <h2 class="section" id="sec31">3.7  类接口</h2><!--SEC END --><p>
 <a id="ss:class-interfaces"></a></p><p>类接口是从类定义中推导出来的。它们也可以直接被定义，并用于限制类的类型。像类声明一样，它们还定义了一个新的类型缩写。
@@ -2692,9 +2660,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div></pre>
 
 
-</div><p>
-
-除了用于程序文档，类接口还可以被用来约束类的类型。具体的实例变量和私有方法都可以通过类的类型约束来隐藏。但是，公有方法和虚拟成员则无法被隐藏。
+</div><p>除了用于程序文档，类接口还可以被用来约束类的类型。具体的实例变量和私有方法都可以通过类的类型约束来隐藏。但是，公有方法和虚拟成员则无法被隐藏。
 
 
 </p><div class="caml-example toplevel">
@@ -2716,9 +2682,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div></pre>
 
 
-</div><p>
-
-类的接口也可以在模块签名中指定，并用于限制模块的推导签名。
+</div><p>类的接口也可以在模块签名中指定，并用于限制模块的推导签名。
 
 
 </p><div class="caml-example toplevel">
@@ -2747,7 +2711,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div>
 <!--TOC section id="sec32" 3.8  继承-->
 <h2 class="section" id="sec32">3.8  继承</h2><!--SEC END --><p>
-<a id="ss:inheritance"></a></p><p>我们通过定义从<span class="c003">point</span>类继承的<span class="c003">colored_point</span>类来说明继承。这个类具备<span class="c003">point</span>类中的所有的实例变量和方法，与一个新的实例变量<span class="c003">c</span>和一个新的<span class="c003">color</span>方法。
+<a id="ss:inheritance"></a></p><p>我们通过定义从 <span class="c003">point</span> 类继承的 <span class="c003">colored_point</span> 类来说明继承。这个类具备 <span class="c003">point</span> 类中的所有的实例变量和方法，与一个新的实例变量 <span class="c003">c</span> 和一个新的 <span class="c003">color</span> 方法。
 
 
 </p><div class="caml-example toplevel">
@@ -2780,9 +2744,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div></pre>
 
 
-</div><p>
-
-<span class="c003">point</span>和<span class="c003">colored_point</span>具有不兼容的类型，因为<span class="c003">point</span>没有<span class="c003">color</span>方法。但是，下面的<span class="c003">get_x</span>函数是一个通用函数，它可以将<span class="c003">get_x</span>方法应用于任何具有此方法的对象<span class="c003">p</span>（可能还有其他的对象，它们由类型中的省略号表示）。因此，它同时适用于<span class="c003">point</span>和<span class="c003">colored_point</span>。
+</div><p><span class="c003">point</span> 和 <span class="c003">colored_point</span> 具有不兼容的类型，因为 <span class="c003">point</span> 没有 <span class="c003">color</span> 方法。但是，下面的 <span class="c003">get_x</span> 函数是一个通用函数，它可以将 <span class="c003">get_x</span> 方法应用于任何具有此方法的对象 <span class="c003">p</span>（可能还有其他的对象，它们由类型中的省略号表示）。因此，它同时适用于 <span class="c003">point</span> 和 <span class="c003">colored_point</span>。
 
 
 </p><div class="caml-example toplevel">
@@ -2796,9 +2758,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div></pre>
 
 
-</div><p>
-
-在定义函数前不需要提前声明所使用的方法，如示例所示：
+</div><p>在定义函数前不需要提前声明所使用的方法，如示例所示：
 
 
 </p><div class="caml-example toplevel">
@@ -2815,7 +2775,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div>
 <!--TOC section id="sec33" 3.9  多继承-->
 <h2 class="section" id="sec33">3.9  多继承</h2><!--SEC END --><p>
-<a id="ss:multiple-inheritance"></a></p><p>OCaml允许多继承。其中只保留方法的最后一个定义：在子类中重新定义父类中可见的方法会覆盖父类中的定义。可以通过绑定相关的祖先来重用被覆盖方法的定义。下面，<span class="c003">super</span>被绑定到祖先<span class="c003">printable_point</span>上。<span class="c003">super</span>是一个伪值标识符，只能用于调用超类方法，如<span class="c003">super#print</span>。
+<a id="ss:multiple-inheritance"></a></p><p>OCaml 允许多继承。其中只保留方法的最后一个定义：在子类中重新定义父类中可见的方法会覆盖父类中的定义。可以通过绑定相关的祖先来重用被覆盖方法的定义。下面，<span class="c003">super</span> 被绑定到祖先 <span class="c003">printable_point</span> 上。<span class="c003">super</span> 是一个伪值标识符，只能用于调用超类方法，如 <span class="c003">super#print</span>。
 
 
 </p><div class="caml-example toplevel">
@@ -2855,9 +2815,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-隐藏在父类中的私有方法是不可见的，因此不会被覆盖。由于初始化器被视为私有方法，所以沿着类层次结构的所有初始化器都将按照引入它们的顺序被执行。</p><p>注意，为了清晰起见，方法<span class="c003">print</span>被通过<span class="c003">method</span>关键字与感叹号<span class="c003">!</span>显式地标记为覆盖另一个定义。如果方法print没有覆盖<span class="c003">printable_point</span>的<span class="c003">print</span>方法，编译器会抛出一个错误：
+</div><p>隐藏在父类中的私有方法是不可见的，因此不会被覆盖。由于初始化器被视为私有方法，所以沿着类层次结构的所有初始化器都将按照引入它们的顺序被执行。</p><p>注意，为了清晰起见，方法·<span class="c003">print</span> 被通过 <span class="c003">method</span> 关键字与感叹号 <span class="c003">!</span> 显式地标记为覆盖另一个定义。如果 print 方法没有覆盖 <span class="c003">printable_point</span> 的 <span class="c003">print</span> 方法，编译器会抛出一个错误：
 
 
 </p><div class="caml-example toplevel">
@@ -2869,7 +2827,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>这个显式覆盖标记对<span class="c003">val</span>和<span class="c003">inherit</span>也同样适用：
+</div><p>这个显式覆盖标记对 <span class="c003">val</span> 和 <span class="c003">inherit</span> 也同样适用：
 
 
 </p><div class="caml-example toplevel">
@@ -2898,7 +2856,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div>
 <!--TOC section id="sec34" 3.10  参数化类-->
 <h2 class="section" id="sec34">3.10  参数化类</h2><!--SEC END --><p>
-<a id="ss:parameterized-classes"></a></p><p>可以将ref类型作为一个对象来实现。不过以下的定义无法通过类型检查：
+<a id="ss:parameterized-classes"></a></p><p>可以将 ref 类型作为一个对象来实现。不过以下的定义无法通过类型检查：
 
 
 </p><div class="caml-example toplevel">
@@ -2921,9 +2879,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-报错的原因是至少有一个方法具有多态类型（这里是存储在ref单元中值的类型），因此这个类应该是参数化的，或者方法的类型应该被限制为单态类型。类的单态实例可以定义为：
+</div><p>报错的原因是至少有一个方法具有多态类型（这里是存储在 ref 单元中值的类型），因此这个类应该是参数化的，或者方法的类型应该被限制为单态类型。类的单态实例可以定义为：
 
 
 </p><div class="caml-example toplevel">
@@ -2940,9 +2896,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-注意，由于直接对象不定义类类型，因此它们没有这样的限制。
+</div><p>注意，由于直接对象不定义类类型，因此它们没有这样的限制。
 
 
 </p><div class="caml-example toplevel">
@@ -2957,9 +2911,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-另一方面，用于多态ref的类必须在其声明中显式列出类型参数。类的类型参数被列在<span class="c003">[</span>和<span class="c003">]</span>之间。类型参数还必须通过类型约束绑定到类主体中的某个位置。
+</div><p>另一方面，用于多态 ref 的类必须在其声明中显式列出类型参数。类的类型参数被列在 <span class="c003">[</span> 和 <span class="c003">]</span> 之间。类型参数还必须通过类型约束绑定到类主体中的某个位置。
 
 
 </p><div class="caml-example toplevel">
@@ -2979,9 +2931,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-声明中的类型参数实际上可能在类定义的主体中受到约束。在类类型中，类型参数的实际值在<span class="c003">constraint</span>子句中显示。
+</div><p>声明中的类型参数实际上可能在类定义的主体中受到约束。在类类型中，类型参数的实际值在 <span class="c003">constraint</span> 子句中显示。
 
 
 </p><div class="caml-example toplevel">
@@ -3003,9 +2953,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-让我们考虑一个更复杂的例子：定义一个圆，其圆心可以是任何类型的点。我们在方法<span class="c003">move</span>中添加了一个额外的类型约束，因为类的类型参数不能忽略任何自由变量。
+</div><p>让我们考虑一个更复杂的例子：定义一个圆，其圆心可以是任何类型的点。我们在方法 <span class="c003">move</span> 中添加了一个额外的类型约束，因为类的类型参数不能忽略任何自由变量。
 
 
 </p><div class="caml-example toplevel">
@@ -3029,9 +2977,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-我们可以使用<span class="c003">constraint</span>子句实现<span class="c003">circle</span>另一种定义方式。<span class="c003">constraint</span>子句中使用的<span class="c003">#point</span>类型是由<span class="c003">point</span>类的定义生成的缩写。这个缩写能够与属于<span class="c003">point</span>类子类的任何对象的类型相匹配。它实际上可以被扩展为<span class="c003">&lt; get_x : int; move : int -&gt; unit; .. &gt;</span>。因此我们可以给出<span class="c003">circle</span>的替代定义如下，该定义对其参数有略微强一些的约束，因为我们现在期望<span class="c003">center</span>具备<span class="c003">get_x</span>方法。
+</div><p>我们可以使用 <span class="c003">constraint</span> 子句实现 <span class="c003">circle</span> 另一种定义方式。<span class="c003">constraint</span> 子句中使用的 <span class="c003">#point</span> 类型是由 <span class="c003">point</span> 类的定义生成的缩写。这个缩写能够与属于 <span class="c003">point</span> 类子类的任何对象的类型相匹配。它实际上可以被扩展为 <span class="c003">&lt; get_x : int; move : int -&gt; unit; .. &gt;</span>。因此我们可以给出 <span class="c003">circle</span> 的替代定义如下，该定义对其参数有略微强一些的约束，因为我们现在期望 <span class="c003">center</span> 具备 <span class="c003">get_x</span> 方法。
 
 
 </p><div class="caml-example toplevel">
@@ -3056,9 +3002,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-<span class="c003">colored_circle</span>类是<span class="c003">circle</span>类的一个特别版本，它要求<span class="c003">center</span>的类型与<span class="c003">#colored_point</span>一致，并包括方法<span class="c003">color</span>。注意，在定制参数化类时，类型参数的实例必须始终被显式给出。它同样被写在<span class="c003">[</span>和<span class="c003">]</span>之间。
+</div><p><span class="c003">colored_circle</span> 类是 <span class="c003">circle</span> 类的一个特别版本，它要求 <span class="c003">center</span> 的类型与 <span class="c003">#colored_point</span> 一致，并包括方法 <span class="c003">color</span>。注意，在定制参数化类时，类型参数的实例必须始终被显式给出。它同样被写在 <span class="c003">[</span> 和 <span class="c003">]</span> 之间。
 
 
 </p><div class="caml-example toplevel">
@@ -3105,9 +3049,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-乍看之下，我们似乎得到了一个多态迭代器，但是这在实践中不起作用。
+</div><p>乍看之下，我们似乎得到了一个多态迭代器，但是这在实践中不起作用。
 
 
 </p><div class="caml-example toplevel">
@@ -3130,9 +3072,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-在第一次求和运算中，我们的迭代器可以工作。然而，由于对象本身不是多态的（只有它们的构造函数是多态的），因此<span class="c003">fold</span>方法的使用规定了这个对象的类型。因此，我们将其用作字符串迭代器第二次尝试就失败了。</p><p>这里的问题是量化过程被错误地定位了：我们所需要的不是多态类，而是多态的<span class="c003">fold</span>方法。这可以通过在方法定义中显式地提供多态类型来实现。
+</div><p>在第一次求和运算中，我们的迭代器可以工作。然而，由于对象本身不是多态的（只有它们的构造函数是多态的），因此·<span class="c003">fold</span> 方法的使用规定了这个对象的类型。因此，我们将其用作字符串迭代器第二次尝试就失败了。</p><p>这里的问题是量化过程被错误地定位了：我们所需要的不是多态类，而是多态的 <span class="c003">fold</span> 方法。这可以通过在方法定义中显式地提供多态类型来实现。
 
 
 </p><div class="caml-example toplevel">
@@ -3161,19 +3101,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-As you can see in the class type shown by the compiler, while
-polymorphic method types must be fully explicit in class definitions
-(appearing immediately after the method name), quantified type
-variables can be left implicit in class descriptions. Why require types
-to be explicit? The problem is that <span class="c003">(int -&gt; int -&gt; int) -&gt; int -&gt; int</span> would also be a valid type for <span class="c003">fold</span>, and it happens to be
-incompatible with the polymorphic type we gave (automatic
-instantiation only works for toplevel types variables, not for inner
-quantifiers, where it becomes an undecidable problem.) So the compiler
-cannot choose between those two types, and must be helped.</p><p>However, the type can be completely omitted in the class definition if
-it is already known, through inheritance or type constraints on self.
-Here is an example of method overriding.
+</div><p>正如您在编译器显示的类类型中所看到的，虽然多态方法类型在类定义中必须是显示给出的（紧跟在方法名称之后），但是量化的类型变量可以隐式地留在类描述中。为什么要求类型是显式的呢？这里的问题是 <span class="c003">(int -&gt; int -&gt; int) -&gt; int -&gt; int</span> 对于 <span class="c003">fold</span> 同样也是一个有效的类型，而它恰好与我们所给出的多态类型不兼容（自动实例化仅适用于顶层的类型变量，对于内层的限定符并不适用，因此内层类型的选取变成了一个不可判定问题）。因此编译器不能在这两种类型之间进行选择，必须获得额外的帮助。</p><p>但是，如果类型是已知的，则可以通过继承或 self 上的类型约束在类定义中完全省略该类型。下面是一个方法重载的例子。
 
 
 </p><div class="caml-example toplevel">
@@ -3187,9 +3115,7 @@ Here is an example of method overriding.
 </pre>
 
 
-</div><p>
-
-The following idiom separates description and definition.
+</div><p>下面的习惯用法将描述和定义分开。
 
 
 </p><div class="caml-example toplevel">
@@ -3208,9 +3134,7 @@ The following idiom separates description and definition.
 </pre>
 
 
-</div><p>
-
-Note here the <span class="c003">(self : int #iterator)</span> idiom, which ensures that this
+</div><p>Note here the <span class="c003">(self : int #iterator)</span> idiom, which ensures that this
 object implements the interface <span class="c003">iterator</span>.</p><p>Polymorphic methods are called in exactly the same way as normal
 methods, but you should be aware of some limitations of type
 inference. Namely, a polymorphic method can only be called if its

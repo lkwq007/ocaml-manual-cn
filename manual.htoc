@@ -28,7 +28,7 @@
 \begin{tocenv}
 \tocitem \@locref{sec25}{\begin{@norefs}\@print{3.1}\quad{}类与对象{}\end{@norefs}}
 \tocitem \@locref{sec26}{\begin{@norefs}\@print{3.2}\quad{}直接对象{}\end{@norefs}}
-\tocitem \@locref{sec27}{\begin{@norefs}\@print{3.3}\quad{}引用self{}\end{@norefs}}
+\tocitem \@locref{sec27}{\begin{@norefs}\@print{3.3}\quad{}引用 self{}\end{@norefs}}
 \tocitem \@locref{sec28}{\begin{@norefs}\@print{3.4}\quad{}初始化器{}\end{@norefs}}
 \tocitem \@locref{sec29}{\begin{@norefs}\@print{3.5}\quad{}虚方法{}\end{@norefs}}
 \tocitem \@locref{sec30}{\begin{@norefs}\@print{3.6}\quad{}私有方法{}\end{@norefs}}

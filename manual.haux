@@ -33,7 +33,7 @@
 \@@addtocsec{htoc}{sec26}{0}{\@print{3.2}\quad{}直接对象{}}
 \newlabel{ss:immediate-objects}{{3.2}{X}}
 \@deflabeltype{ss:immediate-objects}{section}
-\@@addtocsec{htoc}{sec27}{0}{\@print{3.3}\quad{}引用self{}}
+\@@addtocsec{htoc}{sec27}{0}{\@print{3.3}\quad{}引用 self{}}
 \newlabel{ss:reference-to-self}{{3.3}{X}}
 \@deflabeltype{ss:reference-to-self}{section}
 \@@addtocsec{htoc}{sec28}{0}{\@print{3.4}\quad{}初始化器{}}

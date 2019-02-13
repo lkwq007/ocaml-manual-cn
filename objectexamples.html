@@ -18,7 +18,7 @@
 <ul>
 <li><a href="objectexamples.html#sec25">3.1  类与对象</a>
 </li><li><a href="objectexamples.html#sec26">3.2  直接对象</a>
-</li><li><a href="objectexamples.html#sec27">3.3  引用self</a>
+</li><li><a href="objectexamples.html#sec27">3.3  引用 self</a>
 </li><li><a href="objectexamples.html#sec28">3.4  初始化器</a>
 </li><li><a href="objectexamples.html#sec29">3.5  虚方法</a>
 </li><li><a href="objectexamples.html#sec30">3.6  私有方法</a>
@@ -60,7 +60,7 @@
 </p>
 <h2 class="section" id="sec25">3.1  类与对象</h2>
 <p>
-<a id="ss:classes-and-objects"></a></p><p>下面的<span class="c003">point</span>类定义了一个实例变量<span class="c003">x</span>与两个方法<span class="c003">get_x</span>和<span class="c003">move</span>。其中实例变量的初始值是<span class="c003">0</span>。变量<span class="c003">x</span>被声明为可变的，因此<span class="c003">move</span>方法可以更改它的值。
+<a id="ss:classes-and-objects"></a></p><p>下面的 <span class="c003">point</span> 类定义了一个实例变量 <span class="c003">x</span> 与两个方法 <span class="c003">get_x</span> 和 <span class="c003">move</span>。其中实例变量的初始值是 <span class="c003">0</span>。变量 <span class="c003">x</span> 被声明为可变的，因此 <span class="c003">move</span> 方法可以更改它的值。
 
 
 </p><div class="caml-example toplevel">
@@ -76,7 +76,7 @@
 </div></pre>
 
 
-</div><p>现在我们创建一个<span class="c003">point</span>类的实例，点<span class="c003">p</span>。
+</div><p>现在我们创建一个 <span class="c003">point</span> 类的实例，点 <span class="c003">p</span>。
 
 
 </p><div class="caml-example toplevel">
@@ -86,9 +86,7 @@
 </div></pre>
 
 
-</div><p>
-
-需要注意，<span class="c003">p</span>的类型是<span class="c003">point</span>。这其实是由上面的类定义所自动定义的缩写。它代表对象类型<span class="c003">&lt;get_x : int; move : int -&gt; unit&gt;</span>，该类型给出了<span class="c003">point</span>包含的方法及它们的类型。</p><p>我们现在可以调用<span class="c003">p</span>的一些方法：
+</div><p>需要注意，<span class="c003">p</span> 的类型是 <span class="c003">point</span>。这其实是由上面的类定义所自动定义的缩写。它代表对象类型 <span class="c003">&lt;get_x : int; move : int -&gt; unit&gt;</span>，该类型给出了 <span class="c003">point</span> 包含的方法及它们的类型。</p><p>我们现在可以调用 <span class="c003">p</span> 的方法：
 
 
 </p><div class="caml-example toplevel">
@@ -106,7 +104,7 @@
 </div></pre>
 
 
-</div><p>类中变量的求值只在对象被创建时进行。因此，在下面的示例中，实例变量<span class="c003">x</span>被初始化为两个不同对象的不同值。
+</div><p>类中变量的求值只在对象被创建时进行。因此，在下面的示例中，实例变量 <span class="c003">x</span> 被初始化为两个不同对象的不同值。
 
 
 </p><div class="caml-example toplevel">
@@ -134,7 +132,7 @@
 </div></pre>
 
 
-</div><p><span class="c003">point</span>类还可以被抽象为<span class="c003">x</span>坐标的初值。
+</div><p><span class="c003">point</span> 类还可以被抽象为 <span class="c003">x</span> 坐标的初值。
 
 
 </p><div class="caml-example toplevel">
@@ -151,9 +149,7 @@
 </div></pre>
 
 
-</div><p>
-
-与函数定义一样，上面的定义可以缩写为：
+</div><p>与函数定义一样，上面的定义可以缩写为：
 
 
 </p><div class="caml-example toplevel">
@@ -170,9 +166,7 @@
 </div></pre>
 
 
-</div><p>
-
-<span class="c003">point</span>类的一个实例现在是一个函数，该函数需要一个初始参数来创建一个点对象：
+</div><p><span class="c003">point</span> 类的一个实例现在是一个函数，该函数需要一个初始参数来创建一个点对象：
 
 
 </p><div class="caml-example toplevel">
@@ -186,9 +180,7 @@
 </div></pre>
 
 
-</div><p>
-
-当然，参数<span class="c003">x_init</span>在定义的整个主体中都是可见的，包括方法。例如，下面类中的<span class="c003">get_offset</span>方法可以返回对象与其初始位置的相对位置。
+</div><p>当然，参数 <span class="c003">x_init</span> 在定义的整个主体中都是可见的，包括方法。例如，下面类中的 <span class="c003">get_offset</span> 方法可以返回对象与其初始位置的相对位置。
 
 
 </p><div class="caml-example toplevel">
@@ -211,9 +203,7 @@
 </div></pre>
 
 
-</div><p>
-
-在定义类的对象主体之前，可以对表达式进行求值和绑定。这对于增强不变式是有用的。例如，点可以被自动调整到坐标网格中最近的点，如下所示：
+</div><p>在定义类的对象主体之前，可以对表达式进行求值和绑定。这对于增强不变式是有用的。例如，点可以被自动调整到坐标网格中最近的点，如下所示：
 
 
 </p><div class="caml-example toplevel">
@@ -237,9 +227,8 @@
 </div></pre>
 
 
-</div><p>
-
-（当<span class="c003">x_init</span>坐标不在坐标网格上时，可能会引发异常）事实上，这里也可以通过使用<span class="c003">origin</span>的值调用<span class="c003">point</span>类的定义来获得相同的效果。
+</div><p>（当 <span class="c003">x_init</span> 坐标不在坐标网格上时，即坐标并非整数时，可能会引发异常）
+事实上，这里也可以通过使用 <span class="c003">origin</span> 的值调用 <span class="c003">point</span> 类的定义来获得相同的效果。
 
 
 </p><div class="caml-example toplevel">
@@ -249,9 +238,7 @@
 </div></pre>
 
 
-</div><p>
-
-另一种解决办法是在一个特殊的分配函数中进行调整：
+</div><p>另一种解决办法是在一个特殊的分配函数中进行调整：
 
 
 </p><div class="caml-example toplevel">
@@ -261,9 +248,7 @@
 </div></pre>
 
 
-</div><p>
-
-但是，前一种模式通常更合适，因为用于调整的代码是类定义的一部分，可以被继承。</p><p>这种机制提供了其他语言中的类构造函数。可以用这种方式定义几个构造函数来构建具有相同类中具备不同初始化模式的对象；另一种方法是使用初始化器，如下面的<a href="#ss%3Ainitializers">3.4</a>节所述。</p>
+</div><p>但是，前一种模式通常更合适，因为用于调整的代码是类定义的一部分，可以被继承。</p><p>这种机制提供了其他语言中的类构造函数。可以用这种方式定义几个构造函数来构建具有相同类中具备不同初始化模式的对象；另一种方法是使用初始化器，如下面的第 <a href="#ss%3Ainitializers">3.4</a> 节所述。</p>
 <h2 class="section" id="sec26">3.2  直接对象</h2>
 <p>
 <a id="ss:immediate-objects"></a></p><p>还有另一种更直接的方法来创建对象：不通过类来创建它。</p><p>这种方法的语法与类表达式完全相同，但是结果是一个对象而不是一个类。本节其余部分中描述的所有结构也适用于直接对象。
@@ -305,10 +290,10 @@
 </div></pre>
 
 
-</div><p>与类相比，直接对象有两个缺点：它们的类型没有缩写，并且不能被继承。但是这两个缺点在某些情况下可能是优点，我们将在<a href="#ss%3Areference-to-self">3.3</a>和<a href="#ss%3Aparameterized-classes">3.10</a>节中进行阐释。</p>
-<h2 class="section" id="sec27">3.3  引用self</h2>
+</div><p>与类相比，直接对象有两个缺点：它们的类型没有缩写，并且不能被继承。但是这两个缺点在某些情况下可能是优点，我们将在第 <a href="#ss%3Areference-to-self">3.3</a> 和 <a href="#ss%3Aparameterized-classes">3.10</a> 节中进行阐释。</p>
+<h2 class="section" id="sec27">3.3  引用 self</h2>
 <p>
-<a id="ss:reference-to-self"></a></p><p>方法或初始化器可以调用self（即当前对象）上的方法。为此，必须显式地将self绑定到变量<span class="c003">s</span> （事实上<span class="c003">s</span>可以是任何标识符，尽管我们通常会选择<span class="c003">self</span>这个名称）。
+<a id="ss:reference-to-self"></a></p><p>方法或初始化器可以调用 self（即当前对象）上的方法。为此，必须显式地将 self 绑定到变量 <span class="c003">s</span> （事实上 <span class="c003">s</span> 可以是任何标识符，尽管我们通常会选择 <span class="c003">self</span> 这个名称）。
 
 
 </p><div class="caml-example toplevel">
@@ -341,7 +326,7 @@
 
 </div><p>
 
-变量<span class="c003">s</span>会在方法调用时被动态地绑定。特别是，当<span class="c003">printable_point</span>类被继承时，变量<span class="c003">s</span>将被正确地绑定到子类的对象上。</p><p>self的一个常见问题是，由于它的类型可能在子类中被扩展，所以您不能预先固定它的类型。这里有一个简单的例子。
+变量 <span class="c003">s</span> 会在方法调用时被动态地绑定。特别是，当 <span class="c003">printable_point</span> 类被继承时，变量 <span class="c003">s</span> 将被正确地绑定到子类的对象上。</p><p>self 的一个常见问题是，由于它的类型可能在子类中被扩展，所以您不能预先固定它的类型。这里有一个简单的例子。
 
 
 </p><div class="caml-example toplevel">
@@ -361,9 +346,7 @@
 </div></pre>
 
 
-</div><p>
-
-您可以忽略报错消息的前两行。最后一行才是最重要的：把self放在外部引用中将使我们无法通过继承来拓展它。我们将在第<a href="#ss%3Ausing-coercions">3.12</a>节中看到这个问题的解决方案。但是请注意，由于直接对象是不可扩展的，所以使用它们时不会遭遇这一问题。
+</div><p>您可以忽略报错消息的前两行。最后一行才是最重要的：把 self 放在外部引用中将使我们无法通过继承来拓展它。我们将在第 <a href="#ss%3Ausing-coercions">3.12</a> 节中看到这个问题的解决方案。但是请注意，由于直接对象是不可扩展的，所以使用它们时不会遭遇这一问题。
 
 
 </p><div class="caml-example toplevel">
@@ -380,7 +363,7 @@
 </div>
 <h2 class="section" id="sec28">3.4  初始化器</h2>
 <p>
-<a id="ss:initializers"></a></p><p>类定义中的let绑定在对象被构建前被执行。我们也可以在构建对象之后立即执行其他表达式。这样的代码可以被编写为一个隐藏的匿名方法，我们称之为初始化器（<span class="c003">initializer</span>）。因此，初始化器可以访问self和实例变量。
+<a id="ss:initializers"></a></p><p>类定义中的 let 绑定在对象被构建前被执行。我们也可以在构建对象之后立即执行其他表达式。这样的代码可以被编写为一个隐藏的匿名方法，我们称之为初始化器（<span class="c003">initializer</span>）。因此，初始化器可以访问 self 和实例变量。
 
 
 </p><div class="caml-example toplevel">
@@ -410,12 +393,10 @@ val p : printable_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-初始化器是无法被重载的。相反，所有初始化器都是按顺序被执行的。初始化器对于保持不变式特别实用。另一个例子可以在<a href="advexamples.html#ss%3Abank-accounts">6.1</a>节中看到。</p>
+</div><p>初始化器是无法被重载的。相反，所有初始化器都是按顺序被执行的。初始化器对于保持不变式特别实用。另一个例子可以在第 <a href="advexamples.html#ss%3Abank-accounts">6.1</a> 节中看到。</p>
 <h2 class="section" id="sec29">3.5  虚方法</h2>
 <p>
-<a id="ss:virtual-methods"></a></p><p>我们可以使用关键字<span class="c003">virtual</span>声明一个方法，但不实际定义它。这个方法将在随后的子类中提供。这种方法被称为虚方法。包含虚方法的类必须被包换<span class="c003">virtual</span>标记，并且不能被实例化（也就是说，不能创建该类的任何对象）。该类的定义仍然会定义类型缩写（将虚方法视为其他方法）。
+<a id="ss:virtual-methods"></a></p><p>我们可以使用关键字 <span class="c003">virtual</span> 声明一个方法，但不实际定义它。这个方法将在随后的子类中提供。这种方法被称为虚方法。包含虚方法的类必须被包换 <span class="c003">virtual</span> 标记，并且不能被实例化（也就是说，不能创建该类的任何对象）。该类的定义仍然会定义类型缩写（将虚方法视为其他方法）。
 
 
 </p><div class="caml-example toplevel">
@@ -522,9 +503,7 @@ val p : printable_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-请注意，这与Java或C++中的私有方法和受保护方法不同，后者可以从同一类的其他对象调用。这是OCaml中类型和类之间独立性的直接结果：两个不相关的类可能产生相同类型的对象，这意味着我们无法在类型上确保某一对象来自特定的类。然而，在<a href="#ss%3Afriends">3.17</a>节中给出了友元的编写方式。</p><p>私有方法是会被子类继承的（默认情况下它们在子类中是可见的），除非它们被签名隐藏，如下所示。</p><p>同时，私有方法可以在子类中被转化为公有。
+</div><p>请注意，这与 Java 或 C++ 中的私有方法和受保护方法不同，后者可以从同一类的其他对象调用。这是 OCaml 中类型和类之间独立性的直接结果：两个不相关的类可能产生相同类型的对象，这意味着我们无法在类型上确保某一对象来自特定的类。然而，在第 <a href="#ss%3Afriends">3.17</a> 节中给出了友元的编写方式。</p><p>私有方法是会被子类继承的（默认情况下它们在子类中是可见的），除非它们被签名隐藏，如下所示。</p><p>同时，私有方法可以在子类中被转化为公有。
 
 
 </p><div class="caml-example toplevel">
@@ -545,9 +524,7 @@ val p : printable_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-这里的<span class="c003">virtual</span>标记只用于声明一个方法，但不提供其定义。由于我们没有添加私有标记，这使得该方法成为公有的，并保留了原始定义。</p><p>另一种定义方式是
+</div><p>这里的 <span class="c003">virtual</span> 标记只用于声明一个方法，但不提供其定义。由于我们没有添加私有标记，这使得该方法成为公有的，并保留了原始定义。</p><p>另一种定义方式是
 
 
 </p><div class="caml-example toplevel">
@@ -569,7 +546,7 @@ val p : printable_point = &lt;obj&gt;
 
 </div><p>
 
-self的类型约束要求使用公有的<span class="c003">move</span>方法，这足以重载<span class="c003">private</span>标记。</p><p>可以认为私有方法应该在子类中保持私有。然而，由于该方法在子类中是可见的，所以总是可以选取它的代码并定义运行该代码的同名方法，因此另一个（较重的）解决方案是：
+self 的类型约束要求使用公有的 <span class="c003">move</span> 方法，这足以重载 <span class="c003">private</span> 标记。</p><p>可以认为私有方法应该在子类中保持私有。然而，由于该方法在子类中是可见的，所以总是可以选取它的代码并定义运行该代码的同名方法，因此另一个（较重的）解决方案是：
 
 
 </p><div class="caml-example toplevel">
@@ -590,7 +567,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div></pre>
 
 
-</div><p>当然，私有方法也可以是虚拟的。其关键字必须按此顺序出现<span class="c003">method private virtual</span>。</p>
+</div><p>当然，私有方法也可以是虚拟的。其关键字必须按此顺序出现 <span class="c003">method private virtual</span>。</p>
 <h2 class="section" id="sec31">3.7  类接口</h2>
 <p>
 <a id="ss:class-interfaces"></a></p><p>类接口是从类定义中推导出来的。它们也可以直接被定义，并用于限制类的类型。像类声明一样，它们还定义了一个新的类型缩写。
@@ -612,9 +589,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div></pre>
 
 
-</div><p>
-
-除了用于程序文档，类接口还可以被用来约束类的类型。具体的实例变量和私有方法都可以通过类的类型约束来隐藏。但是，公有方法和虚拟成员则无法被隐藏。
+</div><p>除了用于程序文档，类接口还可以被用来约束类的类型。具体的实例变量和私有方法都可以通过类的类型约束来隐藏。但是，公有方法和虚拟成员则无法被隐藏。
 
 
 </p><div class="caml-example toplevel">
@@ -636,9 +611,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div></pre>
 
 
-</div><p>
-
-类的接口也可以在模块签名中指定，并用于限制模块的推导签名。
+</div><p>类的接口也可以在模块签名中指定，并用于限制模块的推导签名。
 
 
 </p><div class="caml-example toplevel">
@@ -667,7 +640,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div>
 <h2 class="section" id="sec32">3.8  继承</h2>
 <p>
-<a id="ss:inheritance"></a></p><p>我们通过定义从<span class="c003">point</span>类继承的<span class="c003">colored_point</span>类来说明继承。这个类具备<span class="c003">point</span>类中的所有的实例变量和方法，与一个新的实例变量<span class="c003">c</span>和一个新的<span class="c003">color</span>方法。
+<a id="ss:inheritance"></a></p><p>我们通过定义从 <span class="c003">point</span> 类继承的 <span class="c003">colored_point</span> 类来说明继承。这个类具备 <span class="c003">point</span> 类中的所有的实例变量和方法，与一个新的实例变量 <span class="c003">c</span> 和一个新的 <span class="c003">color</span> 方法。
 
 
 </p><div class="caml-example toplevel">
@@ -700,9 +673,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div></pre>
 
 
-</div><p>
-
-<span class="c003">point</span>和<span class="c003">colored_point</span>具有不兼容的类型，因为<span class="c003">point</span>没有<span class="c003">color</span>方法。但是，下面的<span class="c003">get_x</span>函数是一个通用函数，它可以将<span class="c003">get_x</span>方法应用于任何具有此方法的对象<span class="c003">p</span>（可能还有其他的对象，它们由类型中的省略号表示）。因此，它同时适用于<span class="c003">point</span>和<span class="c003">colored_point</span>。
+</div><p><span class="c003">point</span> 和 <span class="c003">colored_point</span> 具有不兼容的类型，因为 <span class="c003">point</span> 没有 <span class="c003">color</span> 方法。但是，下面的 <span class="c003">get_x</span> 函数是一个通用函数，它可以将 <span class="c003">get_x</span> 方法应用于任何具有此方法的对象 <span class="c003">p</span>（可能还有其他的对象，它们由类型中的省略号表示）。因此，它同时适用于 <span class="c003">point</span> 和 <span class="c003">colored_point</span>。
 
 
 </p><div class="caml-example toplevel">
@@ -716,9 +687,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div></pre>
 
 
-</div><p>
-
-在定义函数前不需要提前声明所使用的方法，如示例所示：
+</div><p>在定义函数前不需要提前声明所使用的方法，如示例所示：
 
 
 </p><div class="caml-example toplevel">
@@ -735,7 +704,7 @@ self的类型约束要求使用公有的<span class="c003">move</span>方法，�
 </div>
 <h2 class="section" id="sec33">3.9  多继承</h2>
 <p>
-<a id="ss:multiple-inheritance"></a></p><p>OCaml允许多继承。其中只保留方法的最后一个定义：在子类中重新定义父类中可见的方法会覆盖父类中的定义。可以通过绑定相关的祖先来重用被覆盖方法的定义。下面，<span class="c003">super</span>被绑定到祖先<span class="c003">printable_point</span>上。<span class="c003">super</span>是一个伪值标识符，只能用于调用超类方法，如<span class="c003">super#print</span>。
+<a id="ss:multiple-inheritance"></a></p><p>OCaml 允许多继承。其中只保留方法的最后一个定义：在子类中重新定义父类中可见的方法会覆盖父类中的定义。可以通过绑定相关的祖先来重用被覆盖方法的定义。下面，<span class="c003">super</span> 被绑定到祖先 <span class="c003">printable_point</span> 上。<span class="c003">super</span> 是一个伪值标识符，只能用于调用超类方法，如 <span class="c003">super#print</span>。
 
 
 </p><div class="caml-example toplevel">
@@ -775,9 +744,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-隐藏在父类中的私有方法是不可见的，因此不会被覆盖。由于初始化器被视为私有方法，所以沿着类层次结构的所有初始化器都将按照引入它们的顺序被执行。</p><p>注意，为了清晰起见，方法<span class="c003">print</span>被通过<span class="c003">method</span>关键字与感叹号<span class="c003">!</span>显式地标记为覆盖另一个定义。如果方法print没有覆盖<span class="c003">printable_point</span>的<span class="c003">print</span>方法，编译器会抛出一个错误：
+</div><p>隐藏在父类中的私有方法是不可见的，因此不会被覆盖。由于初始化器被视为私有方法，所以沿着类层次结构的所有初始化器都将按照引入它们的顺序被执行。</p><p>注意，为了清晰起见，方法·<span class="c003">print</span> 被通过 <span class="c003">method</span> 关键字与感叹号 <span class="c003">!</span> 显式地标记为覆盖另一个定义。如果 print 方法没有覆盖 <span class="c003">printable_point</span> 的 <span class="c003">print</span> 方法，编译器会抛出一个错误：
 
 
 </p><div class="caml-example toplevel">
@@ -789,7 +756,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>这个显式覆盖标记对<span class="c003">val</span>和<span class="c003">inherit</span>也同样适用：
+</div><p>这个显式覆盖标记对 <span class="c003">val</span> 和 <span class="c003">inherit</span> 也同样适用：
 
 
 </p><div class="caml-example toplevel">
@@ -818,7 +785,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div>
 <h2 class="section" id="sec34">3.10  参数化类</h2>
 <p>
-<a id="ss:parameterized-classes"></a></p><p>可以将ref类型作为一个对象来实现。不过以下的定义无法通过类型检查：
+<a id="ss:parameterized-classes"></a></p><p>可以将 ref 类型作为一个对象来实现。不过以下的定义无法通过类型检查：
 
 
 </p><div class="caml-example toplevel">
@@ -841,9 +808,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-报错的原因是至少有一个方法具有多态类型（这里是存储在ref单元中值的类型），因此这个类应该是参数化的，或者方法的类型应该被限制为单态类型。类的单态实例可以定义为：
+</div><p>报错的原因是至少有一个方法具有多态类型（这里是存储在 ref 单元中值的类型），因此这个类应该是参数化的，或者方法的类型应该被限制为单态类型。类的单态实例可以定义为：
 
 
 </p><div class="caml-example toplevel">
@@ -860,9 +825,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-注意，由于直接对象不定义类类型，因此它们没有这样的限制。
+</div><p>注意，由于直接对象不定义类类型，因此它们没有这样的限制。
 
 
 </p><div class="caml-example toplevel">
@@ -877,9 +840,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-另一方面，用于多态ref的类必须在其声明中显式列出类型参数。类的类型参数被列在<span class="c003">[</span>和<span class="c003">]</span>之间。类型参数还必须通过类型约束绑定到类主体中的某个位置。
+</div><p>另一方面，用于多态 ref 的类必须在其声明中显式列出类型参数。类的类型参数被列在 <span class="c003">[</span> 和 <span class="c003">]</span> 之间。类型参数还必须通过类型约束绑定到类主体中的某个位置。
 
 
 </p><div class="caml-example toplevel">
@@ -899,9 +860,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-声明中的类型参数实际上可能在类定义的主体中受到约束。在类类型中，类型参数的实际值在<span class="c003">constraint</span>子句中显示。
+</div><p>声明中的类型参数实际上可能在类定义的主体中受到约束。在类类型中，类型参数的实际值在 <span class="c003">constraint</span> 子句中显示。
 
 
 </p><div class="caml-example toplevel">
@@ -923,9 +882,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-让我们考虑一个更复杂的例子：定义一个圆，其圆心可以是任何类型的点。我们在方法<span class="c003">move</span>中添加了一个额外的类型约束，因为类的类型参数不能忽略任何自由变量。
+</div><p>让我们考虑一个更复杂的例子：定义一个圆，其圆心可以是任何类型的点。我们在方法 <span class="c003">move</span> 中添加了一个额外的类型约束，因为类的类型参数不能忽略任何自由变量。
 
 
 </p><div class="caml-example toplevel">
@@ -949,9 +906,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-我们可以使用<span class="c003">constraint</span>子句实现<span class="c003">circle</span>另一种定义方式。<span class="c003">constraint</span>子句中使用的<span class="c003">#point</span>类型是由<span class="c003">point</span>类的定义生成的缩写。这个缩写能够与属于<span class="c003">point</span>类子类的任何对象的类型相匹配。它实际上可以被扩展为<span class="c003">&lt; get_x : int; move : int -&gt; unit; .. &gt;</span>。因此我们可以给出<span class="c003">circle</span>的替代定义如下，该定义对其参数有略微强一些的约束，因为我们现在期望<span class="c003">center</span>具备<span class="c003">get_x</span>方法。
+</div><p>我们可以使用 <span class="c003">constraint</span> 子句实现 <span class="c003">circle</span> 另一种定义方式。<span class="c003">constraint</span> 子句中使用的 <span class="c003">#point</span> 类型是由 <span class="c003">point</span> 类的定义生成的缩写。这个缩写能够与属于 <span class="c003">point</span> 类子类的任何对象的类型相匹配。它实际上可以被扩展为 <span class="c003">&lt; get_x : int; move : int -&gt; unit; .. &gt;</span>。因此我们可以给出 <span class="c003">circle</span> 的替代定义如下，该定义对其参数有略微强一些的约束，因为我们现在期望 <span class="c003">center</span> 具备 <span class="c003">get_x</span> 方法。
 
 
 </p><div class="caml-example toplevel">
@@ -976,9 +931,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-<span class="c003">colored_circle</span>类是<span class="c003">circle</span>类的一个特别版本，它要求<span class="c003">center</span>的类型与<span class="c003">#colored_point</span>一致，并包括方法<span class="c003">color</span>。注意，在定制参数化类时，类型参数的实例必须始终被显式给出。它同样被写在<span class="c003">[</span>和<span class="c003">]</span>之间。
+</div><p><span class="c003">colored_circle</span> 类是 <span class="c003">circle</span> 类的一个特别版本，它要求 <span class="c003">center</span> 的类型与 <span class="c003">#colored_point</span> 一致，并包括方法 <span class="c003">color</span>。注意，在定制参数化类时，类型参数的实例必须始终被显式给出。它同样被写在 <span class="c003">[</span> 和 <span class="c003">]</span> 之间。
 
 
 </p><div class="caml-example toplevel">
@@ -1025,9 +978,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-乍看之下，我们似乎得到了一个多态迭代器，但是这在实践中不起作用。
+</div><p>乍看之下，我们似乎得到了一个多态迭代器，但是这在实践中不起作用。
 
 
 </p><div class="caml-example toplevel">
@@ -1050,9 +1001,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-在第一次求和运算中，我们的迭代器可以工作。然而，由于对象本身不是多态的（只有它们的构造函数是多态的），因此<span class="c003">fold</span>方法的使用规定了这个对象的类型。因此，我们将其用作字符串迭代器第二次尝试就失败了。</p><p>这里的问题是量化过程被错误地定位了：我们所需要的不是多态类，而是多态的<span class="c003">fold</span>方法。这可以通过在方法定义中显式地提供多态类型来实现。
+</div><p>在第一次求和运算中，我们的迭代器可以工作。然而，由于对象本身不是多态的（只有它们的构造函数是多态的），因此·<span class="c003">fold</span> 方法的使用规定了这个对象的类型。因此，我们将其用作字符串迭代器第二次尝试就失败了。</p><p>这里的问题是量化过程被错误地定位了：我们所需要的不是多态类，而是多态的 <span class="c003">fold</span> 方法。这可以通过在方法定义中显式地提供多态类型来实现。
 
 
 </p><div class="caml-example toplevel">
@@ -1081,19 +1030,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-As you can see in the class type shown by the compiler, while
-polymorphic method types must be fully explicit in class definitions
-(appearing immediately after the method name), quantified type
-variables can be left implicit in class descriptions. Why require types
-to be explicit? The problem is that <span class="c003">(int -&gt; int -&gt; int) -&gt; int -&gt; int</span> would also be a valid type for <span class="c003">fold</span>, and it happens to be
-incompatible with the polymorphic type we gave (automatic
-instantiation only works for toplevel types variables, not for inner
-quantifiers, where it becomes an undecidable problem.) So the compiler
-cannot choose between those two types, and must be helped.</p><p>However, the type can be completely omitted in the class definition if
-it is already known, through inheritance or type constraints on self.
-Here is an example of method overriding.
+</div><p>正如您在编译器显示的类类型中所看到的，虽然多态方法类型在类定义中必须是显示给出的（紧跟在方法名称之后），但是量化的类型变量可以隐式地留在类描述中。为什么要求类型是显式的呢？这里的问题是 <span class="c003">(int -&gt; int -&gt; int) -&gt; int -&gt; int</span> 对于 <span class="c003">fold</span> 同样也是一个有效的类型，而它恰好与我们所给出的多态类型不兼容（自动实例化仅适用于顶层的类型变量，对于内层的限定符并不适用，因此内层类型的选取变成了一个不可判定问题）。因此编译器不能在这两种类型之间进行选择，必须获得额外的帮助。</p><p>但是，如果类型是已知的，则可以通过继承或 self 上的类型约束在类定义中完全省略该类型。下面是一个方法重载的例子。
 
 
 </p><div class="caml-example toplevel">
@@ -1107,9 +1044,7 @@ Here is an example of method overriding.
 </pre>
 
 
-</div><p>
-
-The following idiom separates description and definition.
+</div><p>下面的习惯用法将描述和定义分开。
 
 
 </p><div class="caml-example toplevel">
@@ -1128,9 +1063,7 @@ The following idiom separates description and definition.
 </pre>
 
 
-</div><p>
-
-Note here the <span class="c003">(self : int #iterator)</span> idiom, which ensures that this
+</div><p>Note here the <span class="c003">(self : int #iterator)</span> idiom, which ensures that this
 object implements the interface <span class="c003">iterator</span>.</p><p>Polymorphic methods are called in exactly the same way as normal
 methods, but you should be aware of some limitations of type
 inference. Namely, a polymorphic method can only be called if its

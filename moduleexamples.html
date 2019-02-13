@@ -23,9 +23,9 @@
 </li><li><a href="moduleexamples.html#sec23">2.5  模块和单独编译</a>
 </li></ul>
 <p> <a id="c:moduleexamples"></a>
-</p><p>本章介绍了OCaml的模块系统。</p>
+</p><p>本章介绍了 OCaml 的模块系统。</p>
 <h2 class="section" id="sec19">2.1  Structures</h2>
-<p>模块的主要动机是将相关定义（例如数据类型的定义和该类型上的操作）打包在一起，并为这些定义强制赋予一致的命名模式。这样可以避免名称耗尽或意外地混淆名称。这样的包被称为结构（structure），由<span class="c003">struct</span>…<span class="c003">end</span>构造引入，该结构可以包含任意定义序列。结构通常用<span class="c003">module</span>绑定来命名。例如，下面是将一种优先队列及其操作打包在一起的结构：
+<p>模块的主要动机是将相关定义（例如数据类型的定义和该类型上的操作）打包在一起，并为这些定义强制赋予一致的命名模式。这样可以避免名称耗尽或意外地混淆名称。这样的包被称为结构（structure），由 <span class="c003">struct</span>…<span class="c003">end</span> 构造引入，该结构可以包含任意定义序列。结构通常用 <span class="c003">module</span> 绑定来命名。例如，下面是将一种优先队列及其操作打包在一起的结构：
 
 
 </p><div class="caml-example toplevel">
@@ -69,9 +69,7 @@
 </div></pre>
 
 
-</div><p>
-
-在结构外部，可以使用“点表示法”来引用其组件，即由结构名称限定的标识符。例如，<span class="c003">PrioQueue.insert</span>是在结构<span class="c003">PrioQueue</span>中定义的函数，<span class="c003">PrioQueue.queue</span>是在<span class="c003">PrioQueue</span>中定义的<span class="c003">queue</span>类型。
+</div><p>在结构外部，可以使用“点表示法”来引用其组件，即由结构名称限定的标识符。例如，<span class="c003">PrioQueue.insert</span> 是在结构 <span class="c003">PrioQueue</span> 中定义的函数，<span class="c003">PrioQueue.queue</span> 是在 <span class="c003">PrioQueue</span> 中定义的 <span class="c003">queue</span> 类型。
 
 
 </p><div class="caml-example toplevel">
@@ -82,7 +80,10 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>另一种方式是打开模块，它将模块中定义的所有标识符都放在当前结构的范围内。</p><div class="caml-example toplevel">
+</div><p>另一种方式是打开模块，它将模块中定义的所有标识符都放在当前结构的范围内。
+
+
+</p><div class="caml-example toplevel">
 
 <pre><div class="caml-input">   open PrioQueue;;
 </div></pre>
@@ -125,9 +126,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>
-
-在第二种形式中，当局部打开的主体本身由括号、大括号或方括号分隔时，可以省略局部打开的括号。例如：
+</div><p>在第二种形式中，当局部打开的主体本身由括号、大括号或方括号分隔时，可以省略局部打开的括号。例如：
 
 
 </p><div class="caml-example toplevel">
@@ -157,7 +156,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>还可以使用<span class="c003">include</span>语句将模块的组件复制到另一个模块中。这对于扩展现有模块特别实用。举例来说，我们可以添加一些函数，在优先队列为空时返回一个可选值，而不是一个异常。
+</div><p>还可以使用  <span class="c003">include</span> 语句将模块的组件复制到另一个模块中。这对于扩展现有模块特别实用。举例来说，我们可以添加一些函数，在优先队列为空时返回一个可选值，而不是一个异常。
 
 
 </p><div class="caml-example toplevel">
@@ -192,7 +191,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 
 </div>
 <h2 class="section" id="sec20">2.2  签名</h2>
-<p>签名是结构的接口。签名指定了结构的哪些组件可以由外部访问，以及暴露哪些类型。签名可以用于隐藏结构的某些组件（例如本地函数定义），或者导出具有受限类型的组件。例如，下面的签名指定了三个优先队列操作：<span class="c003">empty</span>、<span class="c003">insert</span>、<span class="c003">extract</span>，但没有指定辅助函数<span class="c003">remove_top</span>。类似地，它使<span class="c003">queue</span>类型抽象化（不以具体类型提供其实际表示）。
+<p>签名是结构的接口。签名指定了结构的哪些组件可以由外部访问，以及暴露哪些类型。签名可以用于隐藏结构的某些组件（例如本地函数定义），或者导出具有受限类型的组件。例如，下面的签名指定了三个优先队列操作：<span class="c003">empty</span>、<span class="c003">insert</span>、<span class="c003">extract</span>，但没有指定辅助函数 <span class="c003">remove_top</span>。类似地，它使 <span class="c003">queue</span> 类型抽象化（不以具体类型提供其实际表示）。
 
 
 </p><div class="caml-example toplevel">
@@ -218,7 +217,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>通过这个签名限制<span class="c003">PrioQueue</span>结构会产生<span class="c003">PrioQueue</span>结构的另一个视图，其中<span class="c003">remove_top</span>函数不可以被访问，并且优先队列的实际表示是隐藏的：
+</div><p>通过这个签名限制 <span class="c003">PrioQueue</span> 结构会产生 <span class="c003">PrioQueue</span> 结构的另一个视图，其中 <span class="c003">remove_top</span> 函数不可以被访问，并且优先队列的实际表示是隐藏的：
 
 
 </p><div class="caml-example toplevel">
@@ -236,14 +235,13 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>
-
-这种限制也可以在结构的定义过程中执行，如：
+</div><p>这种限制也可以在结构的定义过程中执行，如：
 </p><pre>module PrioQueue = (struct ... end : PRIOQUEUE);;
-</pre><p>也可以使用另一种语法完成限制：
+</pre><p>
+也可以使用另一种语法完成限制：
 </p><pre>module PrioQueue : PRIOQUEUE = struct ... end;;
 </pre><p>
-与模块一样，可以包含一个签名来将其组件复制到当前签名中。例如，我们可以使用<span class="c003">extract_opt</span>函数扩展<span class="c003">PRIOQUEUE</span>签名:</p><div class="caml-example toplevel">
+与模块一样，可以包含一个签名来将其组件复制到当前签名中。例如，我们可以使用 <span class="c003">extract_opt</span> 函数扩展 <span class="c003">PRIOQUEUE</span> 签名：</p><div class="caml-example toplevel">
 
 <pre><div class="caml-input"> module type PRIOQUEUE_WITH_OPT =
     sig
@@ -265,7 +263,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 
 </div>
 <h2 class="section" id="sec21">2.3  仿函数</h2>
-<p>仿函数（functor，又称为函子）是从一个模块到另一个模块的“函数”。仿函数允许您创建参数化模块，然后将其他模块作为参数以获得特定的实现。例如，可以参数化<span class="c003">Set</span>模块，将<span class="c003">Set</span>实现为有序列表，以与任何提供元素类型和比较函数<span class="c003">compare</span>（如<span class="c003">OrderedString</span>）的模块一起工作：</p><div class="caml-example toplevel">
+<p>仿函数（functor，又称为函子）是从一个模块到另一个模块的“函数”。仿函数允许您创建参数化模块，然后将其他模块作为参数以获得特定的实现。例如，可以参数化 <span class="c003">Set</span> 模块，将 <span class="c003">Set</span> 实现为有序列表，以与任何提供元素类型和比较函数 <span class="c003">compare</span>（如 <span class="c003">OrderedString</span>）的模块一起工作：</p><div class="caml-example toplevel">
 
 <pre><div class="caml-input"> type comparison = Less | Equal | Greater;;
 </div><div class="caml-output ok">type comparison = Less | Equal | Greater
@@ -314,9 +312,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>
-
-通过将<span class="c003">Set</span>仿函数应用到实现有序类型的结构中，我们可以得到该类型的集合运算：
+</div><p>通过将 <span class="c003">Set</span> 仿函数应用到实现有序类型的结构中，我们可以得到该类型的集合运算：
 
 
 </p><div class="caml-example toplevel">
@@ -348,7 +344,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 
 </div>
 <h2 class="section" id="sec22">2.4  仿函数和类型抽象</h2>
-<p>就像在<span class="c003">PrioQueue</span>示例中一样，隐藏<span class="c003">set</span>类型的实际实现是一种很好的风格，这样结构的用户就不会依赖于集合是列表的情况。这意味着我们可以在不破坏现有代码的情况下切换到另一种更有效的集合表示形式。我们可以通过给<span class="c003">Set</span>加以合适的仿函数签名限制来实现这一目的：
+<p>就像在 <span class="c003">PrioQueue</span> 示例中一样，隐藏 <span class="c003">set</span> 类型的实际实现是一种很好的风格，这样结构的用户就不会依赖于集合是列表的情况。这意味着我们可以在不破坏现有代码的情况下切换到另一种更有效的集合表示形式。我们可以通过给 <span class="c003">Set</span> 加以合适的仿函数签名限制来实现这一目的：
 
 
 </p><div class="caml-example toplevel">
@@ -437,9 +433,7 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>
-
-这里的问题是<span class="c003">SET</span>抽象地指定了<span class="c003">element</span>类型，这样就丢失了仿函数返回结果中<span class="c003">element</span>类型与仿函数参数<span class="c003">t</span>类型的相等性。因此，<span class="c003">WrongStringSet.element</span>与<span class="c003">string</span>是不同的类型, <span class="c003">WrongStringSet</span>中的操作无法所用于字符串。如上所示，保证操作可用的关键是将签名<span class="c003">SET</span>中的<span class="c003">element</span>类型声明为<span class="c003">Elt.t</span>类型。但不幸的是，我们无法做到这一点，因为<span class="c003">SET</span>是在<span class="c003">Elt</span>不存在的上下文中被定义的。为了克服这个问题，OCaml提供了<span class="c003">with type</span>结构在现有签名的基础上进一步构造签名，它允许使用额外的类型等式来扩展签名：
+</div><p>这里的问题是 <span class="c003">SET</span> 抽象地指定了 <span class="c003">element</span> 类型，这样就丢失了仿函数返回结果中 <span class="c003">element</span> 类型与仿函数参数 <span class="c003">t</span> 类型的相等性。因此，<span class="c003">WrongStringSet.element</span> 与 <span class="c003">string</span> 是不同的类型, <span class="c003">WrongStringSet</span> 中的操作无法所用于字符串。如上所示，保证操作可用的关键是将签名 <span class="c003">SET</span> 中的 <span class="c003">element</span> 类型声明为 <span class="c003">Elt.t</span> 类型。但不幸的是，我们无法做到这一点，因为 <span class="c003">SET</span> 是在 <span class="c003">Elt</span> 不存在的上下文中被定义的。为了克服这个问题，OCaml 提供了 <span class="c003">with type</span> 结构在现有签名的基础上进一步构造签名，它允许使用额外的类型等式来扩展签名：
 
 
 </p><div class="caml-example toplevel">
@@ -458,11 +452,11 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>在简单结构的情况下，OCaml提供了另一种语法来定义仿函数并限制其结果：
+</div><p>在简单结构的情况下，OCaml 提供了另一种语法来定义仿函数并限制其结果：
 </p><pre>module AbstractSet2(Elt: ORDERED_TYPE) : (SET with type element = Elt.t) =
   struct ... end;;
 </pre><p>
-在仿函数结果中抽象类型组件是一种强大的技术，它提供了高度的类型安全性，正如我们现在展示的那样。考虑一个不同于<span class="c003">OrderedString</span>结构中实现的标准排序的字符串排序方式。例如，我们比较字符串时不区分大小写。
+在仿函数结果中抽象类型组件是一种强大的技术，它提供了高度的类型安全性，正如我们现在展示的那样。考虑一个不同于 <span class="c003">OrderedString</span> 结构中实现的标准排序的字符串排序方式。例如，我们比较字符串时不区分大小写。
 
 
 </p><div class="caml-example toplevel">
@@ -496,34 +490,31 @@ PrioQueue.Node (1, "hello", PrioQueue.Empty, PrioQueue.Empty)
 </div></pre>
 
 
-</div><p>
-
-注意，这两种类型<span class="c003">AbstractStringSet.set</span>和<span class="c003">NoCaseStringSet.set</span>是互不兼容的，这两种类型的值也是不匹配的。这是正确的行为：尽管这两种集合类型都包含相同类型（字符串）的元素，但它们是基于该类型的不同顺序构建的，操作需要维护不同的不变式（基于标准排序的严格递增与大小写不敏感的递增）。将<span class="c003">AbstractStringSet</span>中的操作应用到<span class="c003">NoCaseStringSet.set</span>类型的值可能会给出不正确的结果，或者构建违背出<span class="c003">NoCaseStringSet</span>不变式的列表。</p>
+</div><p>注意，这两种类型 <span class="c003">AbstractStringSet.set</span> 和 <span class="c003">NoCaseStringSet.set</span> 是互不兼容的，这两种类型的值也是不匹配的。这是正确的行为：尽管这两种集合类型都包含相同类型（字符串）的元素，但它们是基于该类型的不同顺序构建的，操作需要维护不同的不变式（基于标准排序的严格递增与大小写不敏感的递增）。将 <span class="c003">AbstractStringSet</span> 中的操作应用到 <span class="c003">NoCaseStringSet.set</span> 类型的值可能会给出不正确的结果，或者构建违背出 <span class="c003">NoCaseStringSet</span> 不变式的列表。</p>
 <h2 class="section" id="sec23">2.5  模块和单独编译</h2>
-<p>到目前为止，模块的所有示例都是在交互系统的上下文中给出的。然而，模块对于需要批量编译的大型程序最为实用。对于这些程序，实际上我们有必要将源代码分割成若干个文件（称为编译单元）。这些文件可以被单独编译，从而最小化修改代码后的重新编译量。</p><p>在OCaml中，编译单元是结构和签名的特例，可以很容易地用模块系统来解释单元之间的关系。编译单元<span class="c009">A</span>包括两个文件：
+<p>到目前为止，模块的所有示例都是在交互系统的上下文中给出的。然而，模块对于需要批量编译的大型程序最为实用。对于这些程序，实际上我们有必要将源代码分割成若干个文件（称为编译单元）。这些文件可以被单独编译，从而最小化修改代码后的重新编译量。</p><p>在 OCaml 中，编译单元是结构和签名的特例，可以很容易地用模块系统来解释单元之间的关系。编译单元 <span class="c009">A</span> 包括两个文件：
 </p><ul class="itemize"><li class="li-itemize">
-实现文件<span class="c009">A</span><span class="c003">.ml</span>，它包含一系列定义，类似于<span class="c003">struct</span>…<span class="c003">end</span>结构的内部；
-</li><li class="li-itemize">接口文件<span class="c009">A</span><span class="c003">.mli</span>，它包含一系列规范，类似于<span class="c003">sig</span>…<span class="c003">end</span>结构的内部。
+实现文件 <span class="c009">A</span><span class="c003">.ml</span>，它包含一系列定义，类似于 <span class="c003">struct</span>…<span class="c003">end</span> 结构的内部；
+</li><li class="li-itemize">接口文件 <span class="c009">A</span><span class="c003">.mli</span>，它包含一系列规范，类似于 <span class="c003">sig</span>…<span class="c003">end</span> 结构的内部。
 </li></ul><p>
-这两个文件一起定义了一个名为<span class="c009">A</span>的结构，就如同下面的定义是在顶层环境中输入的一样：
+这两个文件一起定义了一个名为 <span class="c009">A</span> 的结构，就如同下面的定义是在顶层环境中输入的一样：
 </p><pre>
 module <span class="c009">A</span>: sig (* contents of file <span class="c009">A</span>.mli *) end
         = struct (* contents of file <span class="c009">A</span>.ml *) end;;
-</pre><p>
-定义编译单元的文件可以使用<span class="c003">ocamlc -c</span>命令单独编译(<span class="c003">-c</span>选项表示“仅编译，但不进行链接”)；这将生成编译后的接口文件（扩展名为<span class="c003">.cmi</span>）和编译后的目标代码文件（扩展名为<span class="c003">.cmo</span>）。编译完所有单元后，可以使用<span class="c003">ocamlc</span>命令将它们的<span class="c003">.cmo</span>文件链接到一起。例如，下面的命令编译并链接了一个由<span class="c003">Aux</span>和<span class="c003">Main</span>编译单元组成的程序：
+</pre><p>定义编译单元的文件可以使用 <span class="c003">ocamlc -c</span> 命令单独编译(<span class="c003">-c</span> 选项表示“仅编译，但不进行链接”)；这将生成编译后的接口文件（扩展名为 <span class="c003">.cmi</span>）和编译后的目标代码文件（扩展名为 <span class="c003">.cmo</span>）。编译完所有单元后，可以使用 <span class="c003">ocamlc</span> 命令将它们的 <span class="c003">.cmo</span> 文件链接到一起。例如，下面的命令编译并链接了一个由 <span class="c003">Aux</span> 和 <span class="c003">Main</span> 编译单元组成的程序：
 </p><pre>$ ocamlc -c Aux.mli                     # 生成 aux.cmi
 $ ocamlc -c Aux.ml                      # 生成 aux.cmo
 $ ocamlc -c Main.mli                    # 生成 main.cmi
 $ ocamlc -c Main.ml                     # 生成 main.cmo
 $ ocamlc -o theprogram Aux.cmo Main.cmo
-</pre><p>该程序的行为就如同在顶层环境中输入如下语句一样：
+</pre><p>
+该程序的行为就如同在顶层环境中输入如下语句一样：
 </p><pre>
 module Aux: sig (* contents of Aux.mli *) end
           = struct (* contents of Aux.ml *) end;;
 module Main: sig (* contents of Main.mli *) end
            = struct (* contents of Main.ml *) end;;
-</pre><p>
-<span class="c003">Main</span>可以引用<span class="c003">Aux</span>模块：<span class="c003">Main.ml</span>和<span class="c003">Main.mli</span>中包含的定义和声明可以通过<span class="c003">Aux.</span><span class="c009">ident</span>的方式引用<span class="c003">Aux.ml</span>中由<span class="c003">Aux.mli</span>所导出的定义。</p><p>在链接阶段，<span class="c003">ocamlc</span>参数中<span class="c003">.cmo</span>文件列表的顺序决定了模块定义生成的顺序。因此，在上面的例子中，<span class="c003">Aux</span>应位于<span class="c003">Main</span>前面，这样<span class="c003">Main</span>可以引用<span class="c003">Aux</span>，但是<span class="c003">Aux</span>不能引用<span class="c003">Main</span>。</p><p>需要注意，只能将顶级结构映射到单独编译的文件，但仿函数或模块类型不能被直接映射到文件。但是，所有的模块类对象都可以作为结构的组件出现，因此我们可以将仿函数或模块类型放置在结构中，然后将结构映射到文件中。
+</pre><p><span class="c003">Main</span> 可以引用 <span class="c003">Aux</span> 模块：<span class="c003">Main.ml</span> 和 <span class="c003">Main.mli</span> 中包含的定义和声明可以通过 <span class="c003">Aux.</span><span class="c009">ident</span> 的方式引用 <span class="c003">Aux.ml</span> 中由 <span class="c003">Aux.mli</span> 所导出的定义。</p><p>在链接阶段，<span class="c003">ocamlc</span> 参数中 <span class="c003">.cmo</span> 文件列表的顺序决定了模块定义生成的顺序。因此，在上面的例子中，<span class="c003">Aux</span> 应位于 <span class="c003">Main</span> 前面，这样 <span class="c003">Main</span> 可以引用 <span class="c003">Aux</span>，但是 <span class="c003">Aux</span> 不能引用 <span class="c003">Main</span>。</p><p>需要注意，只能将顶级结构映射到单独编译的文件，但仿函数或模块类型不能被直接映射到文件。但是，所有的模块类对象都可以作为结构的组件出现，因此我们可以将仿函数或模块类型放置在结构中，然后将结构映射到文件中。
 
 </p>
 <hr>
