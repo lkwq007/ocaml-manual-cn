@@ -1,5 +1,7 @@
 # OCaml 文档中文版
 
+[![Build Status](https://travis-ci.org/lkwq007/ocaml-manual-cn.svg?branch=master)](https://travis-ci.org/lkwq007/ocaml-manual-cn)
+
 https://lkwq007.github.io/ocaml-manual-cn/
 
 ## 动机
@@ -17,7 +19,7 @@ https://lkwq007.github.io/ocaml-manual-cn/
 
 
 - [X] 重写 Makefile
-- [ ] travis-ci
+- [X] travis-ci
 - [ ] 全文翻译
 - [ ] 翻译校对
 
