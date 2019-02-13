@@ -1,7 +1,9 @@
 # inspired by https://gist.github.com/avsm/6757425
 
+# hevea
 OPAM_DEPENDS="hevea"
 
+# info
 export OPAMYES=1
 export OPAMVERBOSE=1
 echo OCaml version
@@ -10,9 +12,13 @@ echo OPAM versions
 opam --version
 opam --git-version
 
+# init opam
 opam init 
 opam install ${OPAM_DEPENDS}
 eval `opam config env`
-make
-eval `opam config env`
+
+# rm .gitignore of htmlman
+cd manual/htmlman
+rm .gitignore
+cd ../..
 make

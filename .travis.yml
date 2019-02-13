@@ -7,3 +7,11 @@ before_install:
   - sudo apt-get update -q
   - sudo apt-get install apt-fast -y
   - sudo apt-fast install ocaml ocaml-native-compilers opam texlive-full -y
+deploy:
+  provider: pages
+  local_dir: manual/htmlman
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
