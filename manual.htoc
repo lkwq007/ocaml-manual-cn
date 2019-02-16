@@ -1,7 +1,7 @@
 \begin{tocenv}
-\tocitem \@locref{sec6}{\begin{@norefs}\@print{部分 I}\quad{}OCaml 简介{}\end{@norefs}}
+\tocitem \@locref{sec6}{\begin{@norefs}\@print{第 I 部分}\quad{}OCaml 简介{}\end{@norefs}}
 \begin{tocenv}
-\tocitem \@locref{sec7}{\begin{@norefs}\@print{章 1}\quad{}核心语言{}\end{@norefs}}
+\tocitem \@locref{sec7}{\begin{@norefs}\@print{第 1 章}\quad{}核心语言{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec8}{\begin{@norefs}\@print{1.1}\quad{}基础{}\end{@norefs}}
 \tocitem \@locref{sec9}{\begin{@norefs}\@print{1.2}\quad{}数据类型{}\end{@norefs}}
@@ -16,7 +16,7 @@
 \tocitem \@locref{sec16}{\begin{@norefs}\@print{1.8}\quad{}美观打印{}\end{@norefs}}
 \tocitem \@locref{sec17}{\begin{@norefs}\@print{1.9}\quad{}独立 OCaml 程序{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec18}{\begin{@norefs}\@print{章 2}\quad{}模块系统{}\end{@norefs}}
+\tocitem \@locref{sec18}{\begin{@norefs}\@print{第 2 章}\quad{}模块系统{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec19}{\begin{@norefs}\@print{2.1}\quad{}Structures{}\end{@norefs}}
 \tocitem \@locref{sec20}{\begin{@norefs}\@print{2.2}\quad{}签名{}\end{@norefs}}
@@ -24,7 +24,7 @@
 \tocitem \@locref{sec22}{\begin{@norefs}\@print{2.4}\quad{}仿函数和类型抽象{}\end{@norefs}}
 \tocitem \@locref{sec23}{\begin{@norefs}\@print{2.5}\quad{}模块和单独编译{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec24}{\begin{@norefs}\@print{章 3}\quad{}OCaml 中的对象{}\end{@norefs}}
+\tocitem \@locref{sec24}{\begin{@norefs}\@print{第 3 章}\quad{}OCaml 中的对象{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec25}{\begin{@norefs}\@print{3.1}\quad{}类与对象{}\end{@norefs}}
 \tocitem \@locref{sec26}{\begin{@norefs}\@print{3.2}\quad{}直接对象{}\end{@norefs}}
@@ -44,7 +44,7 @@
 \tocitem \@locref{sec40}{\begin{@norefs}\@print{3.16}\quad{}Binary methods{}\end{@norefs}}
 \tocitem \@locref{sec41}{\begin{@norefs}\@print{3.17}\quad{}Friends{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec42}{\begin{@norefs}\@print{章 4}\quad{}Labels and variants{}\end{@norefs}}
+\tocitem \@locref{sec42}{\begin{@norefs}\@print{第 4 章}\quad{}Labels and variants{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec43}{\begin{@norefs}\@print{4.1}\quad{}Labels{}\end{@norefs}}
 \begin{tocenv}
@@ -57,7 +57,7 @@
 \tocitem \@locref{sec50}{\begin{@norefs}\@print{4.2.1}\quad{}Weaknesses of polymorphic variants{}\end{@norefs}}
 \end{tocenv}
 \end{tocenv}
-\tocitem \@locref{sec51}{\begin{@norefs}\@print{章 5}\quad{}Polymorphism and its limitations{}\end{@norefs}}
+\tocitem \@locref{sec51}{\begin{@norefs}\@print{第 5 章}\quad{}Polymorphism and its limitations{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec52}{\begin{@norefs}\@print{5.1}\quad{}Weak polymorphism and mutation{}\end{@norefs}}
 \begin{tocenv}
@@ -74,7 +74,7 @@
 \end{tocenv}
 \tocitem \@locref{sec61}{\begin{@norefs}\@print{5.3}\quad{}Higher-rank polymorphic functions{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec62}{\begin{@norefs}\@print{章 6}\quad{}Advanced examples with classes and modules{}\end{@norefs}}
+\tocitem \@locref{sec62}{\begin{@norefs}\@print{第 6 章}\quad{}Advanced examples with classes and modules{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec63}{\begin{@norefs}\@print{6.1}\quad{}Extended example: bank accounts{}\end{@norefs}}
 \tocitem \@locref{sec64}{\begin{@norefs}\@print{6.2}\quad{}Simple modules as classes{}\end{@norefs}}
@@ -86,9 +86,9 @@
 \tocitem \@locref{sec69}{\begin{@norefs}\@print{6.3}\quad{}The subject/observer pattern{}\end{@norefs}}
 \end{tocenv}
 \end{tocenv}
-\tocitem \@locref{sec70}{\begin{@norefs}\@print{部分 II}\quad{}OCaml 语言{}\end{@norefs}}
+\tocitem \@locref{sec70}{\begin{@norefs}\@print{第 II 部分}\quad{}OCaml 语言{}\end{@norefs}}
 \begin{tocenv}
-\tocitem \@locref{sec71}{\begin{@norefs}\@print{章 7}\quad{}The OCaml language{}\end{@norefs}}
+\tocitem \@locref{sec71}{\begin{@norefs}\@print{第 7 章}\quad{}The OCaml language{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec74}{\begin{@norefs}\@print{7.1}\quad{}Lexical conventions{}\end{@norefs}}
 \tocitem \@locref{sec87}{\begin{@norefs}\@print{7.2}\quad{}Values{}\end{@norefs}}
@@ -145,7 +145,7 @@
 \end{tocenv}
 \tocitem \@locref{sec233}{\begin{@norefs}\@print{7.12}\quad{}Compilation units{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec234}{\begin{@norefs}\@print{章 8}\quad{}Language extensions{}\end{@norefs}}
+\tocitem \@locref{sec234}{\begin{@norefs}\@print{第 8 章}\quad{}Language extensions{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec235}{\begin{@norefs}\@print{8.1}\quad{}Recursive definitions of values{}\end{@norefs}}
 \tocitem \@locref{sec236}{\begin{@norefs}\@print{8.2}\quad{}Lazy patterns{}\end{@norefs}}
@@ -195,9 +195,9 @@
 \tocitem \@locref{s:empty-variants}{\begin{@norefs}\@print{8.23}\quad{}Empty variant types\label{s:empty-variants} {}\end{@norefs}}
 \end{tocenv}
 \end{tocenv}
-\tocitem \@locref{sec278}{\begin{@norefs}\@print{部分 III}\quad{}OCaml 工具{}\end{@norefs}}
+\tocitem \@locref{sec278}{\begin{@norefs}\@print{第 III 部分}\quad{}OCaml 工具{}\end{@norefs}}
 \begin{tocenv}
-\tocitem \@locref{sec279}{\begin{@norefs}\@print{章 9}\quad{}Batch compilation (ocamlc){}\end{@norefs}}
+\tocitem \@locref{sec279}{\begin{@norefs}\@print{第 9 章}\quad{}Batch compilation (ocamlc){}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec280}{\begin{@norefs}\@print{9.1}\quad{}Overview of the compiler{}\end{@norefs}}
 \tocitem \@locref{sec281}{\begin{@norefs}\@print{9.2}\quad{}Options{}\end{@norefs}}
@@ -210,7 +210,7 @@
 \tocitem \@locref{sec288}{\begin{@norefs}\@print{9.5.3}\quad{}Warning 57: Ambiguous or-pattern variables under guard{}\end{@norefs}}
 \end{tocenv}
 \end{tocenv}
-\tocitem \@locref{sec289}{\begin{@norefs}\@print{章 10}\quad{}The toplevel system or REPL (ocaml){}\end{@norefs}}
+\tocitem \@locref{sec289}{\begin{@norefs}\@print{第 10 章}\quad{}The toplevel system or REPL (ocaml){}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec290}{\begin{@norefs}\@print{10.1}\quad{}Options{}\end{@norefs}}
 \tocitem \@locref{sec291}{\begin{@norefs}\@print{10.2}\quad{}Toplevel directives{}\end{@norefs}}
@@ -222,14 +222,14 @@
 \end{tocenv}
 \tocitem \@locref{sec296}{\begin{@norefs}\@print{10.6}\quad{}The native toplevel: \texttt{ocamlnat}\ (experimental){}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec297}{\begin{@norefs}\@print{章 11}\quad{}The runtime system (ocamlrun){}\end{@norefs}}
+\tocitem \@locref{sec297}{\begin{@norefs}\@print{第 11 章}\quad{}The runtime system (ocamlrun){}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec298}{\begin{@norefs}\@print{11.1}\quad{}Overview{}\end{@norefs}}
 \tocitem \@locref{sec299}{\begin{@norefs}\@print{11.2}\quad{}Options{}\end{@norefs}}
 \tocitem \@locref{sec300}{\begin{@norefs}\@print{11.3}\quad{}Dynamic loading of shared libraries{}\end{@norefs}}
 \tocitem \@locref{sec301}{\begin{@norefs}\@print{11.4}\quad{}Common errors{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec302}{\begin{@norefs}\@print{章 12}\quad{}Native-code compilation (ocamlopt){}\end{@norefs}}
+\tocitem \@locref{sec302}{\begin{@norefs}\@print{第 12 章}\quad{}Native-code compilation (ocamlopt){}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec303}{\begin{@norefs}\@print{12.1}\quad{}Overview of the compiler{}\end{@norefs}}
 \tocitem \@locref{sec304}{\begin{@norefs}\@print{12.2}\quad{}Options{}\end{@norefs}}
@@ -237,7 +237,7 @@
 \tocitem \@locref{sec309}{\begin{@norefs}\@print{12.4}\quad{}Running executables produced by ocamlopt{}\end{@norefs}}
 \tocitem \@locref{sec310}{\begin{@norefs}\@print{12.5}\quad{}Compatibility with the bytecode compiler{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec311}{\begin{@norefs}\@print{章 13}\quad{}Lexer and parser generators (ocamllex, ocamlyacc){}\end{@norefs}}
+\tocitem \@locref{sec311}{\begin{@norefs}\@print{第 13 章}\quad{}Lexer and parser generators (ocamllex, ocamlyacc){}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec312}{\begin{@norefs}\@print{13.1}\quad{}Overview of \texttt{ocamllex}{}\end{@norefs}}
 \begin{tocenv}
@@ -266,13 +266,13 @@
 \tocitem \@locref{sec330}{\begin{@norefs}\@print{13.6}\quad{}A complete example{}\end{@norefs}}
 \tocitem \@locref{sec331}{\begin{@norefs}\@print{13.7}\quad{}Common errors{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec332}{\begin{@norefs}\@print{章 14}\quad{}Dependency generator (ocamldep){}\end{@norefs}}
+\tocitem \@locref{sec332}{\begin{@norefs}\@print{第 14 章}\quad{}Dependency generator (ocamldep){}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec333}{\begin{@norefs}\@print{14.1}\quad{}Options{}\end{@norefs}}
 \tocitem \@locref{sec334}{\begin{@norefs}\@print{14.2}\quad{}A typical Makefile{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec335}{\begin{@norefs}\@print{章 15}\quad{}The browser/editor (ocamlbrowser){}\end{@norefs}}
-\tocitem \@locref{sec336}{\begin{@norefs}\@print{章 16}\quad{}The documentation generator (ocamldoc){}\end{@norefs}}
+\tocitem \@locref{sec335}{\begin{@norefs}\@print{第 15 章}\quad{}The browser/editor (ocamlbrowser){}\end{@norefs}}
+\tocitem \@locref{sec336}{\begin{@norefs}\@print{第 16 章}\quad{}The documentation generator (ocamldoc){}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec337}{\begin{@norefs}\@print{16.1}\quad{}Usage{}\end{@norefs}}
 \begin{tocenv}
@@ -298,7 +298,7 @@
 \tocitem \@locref{sec370}{\begin{@norefs}\@print{16.4.1}\quad{}Compilation and usage{}\end{@norefs}}
 \end{tocenv}
 \end{tocenv}
-\tocitem \@locref{sec373}{\begin{@norefs}\@print{章 17}\quad{}The debugger (ocamldebug){}\end{@norefs}}
+\tocitem \@locref{sec373}{\begin{@norefs}\@print{第 17 章}\quad{}The debugger (ocamldebug){}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec374}{\begin{@norefs}\@print{17.1}\quad{}Compiling for debugging{}\end{@norefs}}
 \tocitem \@locref{sec375}{\begin{@norefs}\@print{17.2}\quad{}Invocation{}\end{@norefs}}
@@ -337,15 +337,15 @@
 \tocitem \@locref{sec400}{\begin{@norefs}\@print{17.9}\quad{}Miscellaneous commands{}\end{@norefs}}
 \tocitem \@locref{sec401}{\begin{@norefs}\@print{17.10}\quad{}Running the debugger under Emacs{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec402}{\begin{@norefs}\@print{章 18}\quad{}Profiling (ocamlprof){}\end{@norefs}}
+\tocitem \@locref{sec402}{\begin{@norefs}\@print{第 18 章}\quad{}Profiling (ocamlprof){}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec403}{\begin{@norefs}\@print{18.1}\quad{}Compiling for profiling{}\end{@norefs}}
 \tocitem \@locref{sec407}{\begin{@norefs}\@print{18.2}\quad{}Profiling an execution{}\end{@norefs}}
 \tocitem \@locref{sec408}{\begin{@norefs}\@print{18.3}\quad{}Printing profiling information{}\end{@norefs}}
 \tocitem \@locref{sec409}{\begin{@norefs}\@print{18.4}\quad{}Time profiling{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec411}{\begin{@norefs}\@print{章 19}\quad{}The ocamlbuild compilation manager{}\end{@norefs}}
-\tocitem \@locref{c:intf-c}{\begin{@norefs}\@print{章 20}\quad{}Interfacing\label{c:intf-c} C with OCaml{}\end{@norefs}}
+\tocitem \@locref{sec411}{\begin{@norefs}\@print{第 19 章}\quad{}The ocamlbuild compilation manager{}\end{@norefs}}
+\tocitem \@locref{c:intf-c}{\begin{@norefs}\@print{第 20 章}\quad{}Interfacing\label{c:intf-c} C with OCaml{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec413}{\begin{@norefs}\@print{20.1}\quad{}Overview and compilation information{}\end{@norefs}}
 \begin{tocenv}
@@ -423,7 +423,7 @@
 \tocitem \@locref{sec477}{\begin{@norefs}\@print{20.13}\quad{}Advanced topic: interfacing with Windows Unicode APIs{}\end{@norefs}}
 \tocitem \@locref{sec479}{\begin{@norefs}\@print{20.14}\quad{}Building mixed C/OCaml libraries: \texttt{ocamlmklib}{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec481}{\begin{@norefs}\@print{章 21}\quad{}Optimisation with Flambda{}\end{@norefs}}
+\tocitem \@locref{sec481}{\begin{@norefs}\@print{第 21 章}\quad{}Optimisation with Flambda{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec482}{\begin{@norefs}\@print{21.1}\quad{}Overview{}\end{@norefs}}
 \tocitem \@locref{sec483}{\begin{@norefs}\@print{21.2}\quad{}Command-line flags{}\end{@norefs}}
@@ -479,7 +479,7 @@
 \tocitem \@locref{sec530}{\begin{@norefs}\@print{21.15}\quad{}Use of unsafe operations{}\end{@norefs}}
 \tocitem \@locref{sec531}{\begin{@norefs}\@print{21.16}\quad{}Glossary{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec532}{\begin{@norefs}\@print{章 22}\quad{}Memory profiling with Spacetime{}\end{@norefs}}
+\tocitem \@locref{sec532}{\begin{@norefs}\@print{第 22 章}\quad{}Memory profiling with Spacetime{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec533}{\begin{@norefs}\@print{22.1}\quad{}Overview{}\end{@norefs}}
 \tocitem \@locref{sec534}{\begin{@norefs}\@print{22.2}\quad{}How to use it{}\end{@norefs}}
@@ -491,7 +491,7 @@
 \tocitem \@locref{sec538}{\begin{@norefs}\@print{22.3}\quad{}Runtime overhead{}\end{@norefs}}
 \tocitem \@locref{sec539}{\begin{@norefs}\@print{22.4}\quad{}For developers{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec540}{\begin{@norefs}\@print{章 23}\quad{}Fuzzing with afl-fuzz{}\end{@norefs}}
+\tocitem \@locref{sec540}{\begin{@norefs}\@print{第 23 章}\quad{}Fuzzing with afl-fuzz{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec541}{\begin{@norefs}\@print{23.1}\quad{}Overview{}\end{@norefs}}
 \tocitem \@locref{sec542}{\begin{@norefs}\@print{23.2}\quad{}Generating instrumentation{}\end{@norefs}}
@@ -500,28 +500,28 @@
 \end{tocenv}
 \tocitem \@locref{sec544}{\begin{@norefs}\@print{23.3}\quad{}Example{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{c:plugins}{\begin{@norefs}\@print{章 24}\quad{}Compiler plugins\label{c:plugins}{}\end{@norefs}}
+\tocitem \@locref{c:plugins}{\begin{@norefs}\@print{第 24 章}\quad{}Compiler plugins\label{c:plugins}{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec546}{\begin{@norefs}\@print{24.1}\quad{}Overview{}\end{@norefs}}
 \tocitem \@locref{sec547}{\begin{@norefs}\@print{24.2}\quad{}Basic example{}\end{@norefs}}
 \end{tocenv}
 \end{tocenv}
-\tocitem \@locref{sec548}{\begin{@norefs}\@print{部分 IV}\quad{}OCaml 库{}\end{@norefs}}
+\tocitem \@locref{sec548}{\begin{@norefs}\@print{第 IV 部分}\quad{}OCaml 库{}\end{@norefs}}
 \begin{tocenv}
-\tocitem \@locref{sec549}{\begin{@norefs}\@print{章 25}\quad{}The core library{}\end{@norefs}}
+\tocitem \@locref{sec549}{\begin{@norefs}\@print{第 25 章}\quad{}The core library{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec551}{\begin{@norefs}\@print{25.1}\quad{}Built-in types and predefined exceptions{}\end{@norefs}}
 \tocitem \@locref{sec554}{\begin{@norefs}\@print{25.2}\quad{}Module {\tt Stdlib}: the initially opened module{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec555}{\begin{@norefs}\@print{章 26}\quad{}The standard library{}\end{@norefs}}
-\tocitem \@locref{sec557}{\begin{@norefs}\@print{章 27}\quad{}The compiler front-end{}\end{@norefs}}
-\tocitem \@locref{sec558}{\begin{@norefs}\@print{章 28}\quad{}The unix library: Unix system calls{}\end{@norefs}}
-\tocitem \@locref{sec559}{\begin{@norefs}\@print{章 29}\quad{}The num library: arbitrary-precision rational arithmetic{}\end{@norefs}}
-\tocitem \@locref{sec560}{\begin{@norefs}\@print{章 30}\quad{}The str library: regular expressions and string processing{}\end{@norefs}}
-\tocitem \@locref{sec561}{\begin{@norefs}\@print{章 31}\quad{}The threads library{}\end{@norefs}}
-\tocitem \@locref{sec562}{\begin{@norefs}\@print{章 32}\quad{}The graphics library{}\end{@norefs}}
-\tocitem \@locref{sec563}{\begin{@norefs}\@print{章 33}\quad{}The dynlink library: dynamic loading and linking of object files{}\end{@norefs}}
-\tocitem \@locref{sec564}{\begin{@norefs}\@print{章 34}\quad{}The bigarray library{}\end{@norefs}}
+\tocitem \@locref{sec555}{\begin{@norefs}\@print{第 26 章}\quad{}The standard library{}\end{@norefs}}
+\tocitem \@locref{sec557}{\begin{@norefs}\@print{第 27 章}\quad{}The compiler front-end{}\end{@norefs}}
+\tocitem \@locref{sec558}{\begin{@norefs}\@print{第 28 章}\quad{}The unix library: Unix system calls{}\end{@norefs}}
+\tocitem \@locref{sec559}{\begin{@norefs}\@print{第 29 章}\quad{}The num library: arbitrary-precision rational arithmetic{}\end{@norefs}}
+\tocitem \@locref{sec560}{\begin{@norefs}\@print{第 30 章}\quad{}The str library: regular expressions and string processing{}\end{@norefs}}
+\tocitem \@locref{sec561}{\begin{@norefs}\@print{第 31 章}\quad{}The threads library{}\end{@norefs}}
+\tocitem \@locref{sec562}{\begin{@norefs}\@print{第 32 章}\quad{}The graphics library{}\end{@norefs}}
+\tocitem \@locref{sec563}{\begin{@norefs}\@print{第 33 章}\quad{}The dynlink library: dynamic loading and linking of object files{}\end{@norefs}}
+\tocitem \@locref{sec564}{\begin{@norefs}\@print{第 34 章}\quad{}The bigarray library{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec565}{\begin{@norefs}\@print{部分 V}\quad{}附录{}\end{@norefs}}
+\tocitem \@locref{sec565}{\begin{@norefs}\@print{第 V 部分}\quad{}附录{}\end{@norefs}}
 \end{tocenv}
