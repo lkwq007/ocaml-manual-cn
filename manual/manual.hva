@@ -1,3 +1,37 @@
-\input{book.hva}
+% \input{book.hva}
+% dirty hack for chinese support
+\renewcommand\today{\theyear~年~\themonth~月~\theday~日}
+\renewcommand\contentsname{目录}
+\ifstyleloaded\relax
+\else
+\input{bookcommon.hva}
+\newcommand{\@book@attr}[1]{\@secid\envclass@attr{#1}}
+\@makesection
+  {\part}{-2}{part}
+  {\@opencell{class="center"}{}{}\@open{h1}{\@book@attr{part}}}%
+  {第~\thepart~部分}{\\}%
+  {\@close{h1}\@closecell}
+\newstyle{.part}{margin:2ex auto;text-align:center}
+\@makesection
+  {\chapter}{-1}{chapter}
+   {\@open{h1}{\@book@attr{chapter}}}{第~\thechapter~章}{\quad}{\@close{h1}}
+\@makesection
+  {\section}{0}{section}
+  {\@open{h2}{\@book@attr{section}}}{\thesection}{\quad}{\@close{h2}}%
+\@makesection
+  {\subsection}{1}{subsection}
+  {\@open{h3}{\@book@attr{subsection}}}{\thesubsection}{\quad}{\@close{h3}}%
+\@makesection
+  {\subsubsection}{2}{subsubsection}
+  {\@open{h4}{\@book@attr{subsubsection}}}{\thesubsubsection}{\quad}{\@close{h4}}%
+\@makesection
+  {\paragraph}{3}{paragraph}
+  {\@open{h5}{\@book@attr{paragraph}}}{\theparagraph}{\quad}{\@close{h5}}%
+\@makesection
+  {\subparagraph}{4}{subparagraph}
+  {\@open{h6}{\@book@attr{subparagraph}}}{\thesubparagraph}{\quad}{\@close{h6}}%
+\newcommand{\hacha@style}{book}%
+\styleloadedtrue
+\fi
 \input{macros.hva}
 \newif\ifouthtml\outhtmltrue
