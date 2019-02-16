@@ -1,20 +1,20 @@
-\chapter{OCaml中的对象}
+\chapter{OCaml 中的对象}
 \label{c:objectexamples}
 %HEVEA\cutname{objectexamples.html}
 {\it (作者：Jérôme Vouillon、Didier Rémy、Jacques Garrigue)}
 
 \bigskip
 
-\noindent 本章概述了OCaml的面向对象特性。
+\noindent 本章概述了 OCaml 的面向对象特性。
 
-请注意，OCaml中的对象、类和类型之间的关系与主流面向对象语言（如Java和C++）中的关系不同，因此您不应该假设类似的关键字具有相同的含义。与那些语言相比，在OCaml中使用面向对象特性的频率要低得多。使用OCaml时通常有更合适的选择，比如模块和函数。事实上，很多OCaml程序根本不使用对象。
+请注意，OCaml 中的对象、类和类型之间的关系与主流面向对象语言（如 Java 和 C++）中的关系不同，因此您不应该假设类似的关键字具有相同的含义。与那些语言相比，在 OCaml 中使用面向对象特性的频率要低得多。使用 OCaml 时通常有更合适的选择，比如模块和函数。事实上，很多 OCaml 程序根本不使用对象。
 
 
 \begin{htmlonly}
 
 \ref{ss:classes-and-objects} 类和对象 \\
 \ref{ss:immediate-objects} 直接对象 \\
-\ref{ss:reference-to-self} 引用self \\
+\ref{ss:reference-to-self} 引用 self \\
 \ref{ss:initializers} 初始化器 \\
 \ref{ss:virtual-methods} 虚方法 \\
 \ref{ss:private-methods} 私有方法 \\
@@ -27,7 +27,7 @@
 \ref{ss:functional-objects} 函数对象 \\
 \ref{ss:cloning-objects} 克隆对象 \\
 \ref{ss:recursive-classes} 递归类 \\
-\ref{ss:binary-methods} Binary methods \\
+\ref{ss:binary-methods} 二元方法 \\
 \ref{ss:friends} 友元 \\
 
 %%\ref{s:advanced-examples} {\bf Advanced examples}
@@ -580,34 +580,26 @@ class intlist' l =
   end;;
 \end{caml_example*}
 
-Note here the "(self : int #iterator)" idiom, which ensures that this
-object implements the interface "iterator".
+注意这里~"(self : int #iterator)"~的用法，它可以确保这个对象实现~"iterator"~接口。
 
-Polymorphic methods are called in exactly the same way as normal
-methods, but you should be aware of some limitations of type
-inference.  Namely, a polymorphic method can only be called if its
-type is known at the call site.  Otherwise, the method will be assumed
-to be monomorphic, and given an incompatible type.
+多态方法的调用方式与普通方法完全相同，但是您应该了解类型推导的一些限制。也就是说，一个多态方法只能在其类型已知时被调用。否则，该方法将被假定为单态的，并且被给定一个不兼容的类型。
 \begin{caml_example}{toplevel}
 let sum lst = lst#fold (fun x y -> x+y) 0;;
 sum l [@@expect error];;
 \end{caml_example}
-The workaround is easy: you should put a type constraint on the
-parameter.
+
+解决方法很简单：在参数上给出类型约束。
 \begin{caml_example}{toplevel}
 let sum (lst : _ #iterator) = lst#fold (fun x y -> x+y) 0;;
 \end{caml_example}
-Of course the constraint may also be an explicit method type.
-Only occurences of quantified variables are required.
+
+当然，约束也可以是显式方法类型，只需要出现量化的变量。
 \begin{caml_example}{toplevel}
 let sum lst =
   (lst : < fold : 'a. ('a -> _ -> 'a) -> 'a -> 'a; .. >)#fold (+) 0;;
 \end{caml_example}
 
-Another use of polymorphic methods is to allow some form of implicit
-subtyping in method arguments. We have already seen in section
-\ref{ss:inheritance} how some functions may be polymorphic in the
-class of their argument. This can be extended to methods.
+多态方法的另一个用途是允许用户在方法参数中使用某种形式的隐式子类型。我们已经在第~\ref{ss:inheritance} 节中看到一些函数的如何在它们的参数类中是多态的。这在方法中同样适用。
 \begin{caml_example}{toplevel}
 class type point0 = object method get_x : int end;;
 class distance_point x =
