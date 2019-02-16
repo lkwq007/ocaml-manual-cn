@@ -7,14 +7,14 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <link rel="stylesheet" type="text/css" href="manual.css">
-<title>Chapter 3  OCaml中的对象</title>
+<title>章 3  OCaml 中的对象</title>
 </head>
 <body>
 <a href="moduleexamples.html"><img src="previous_motif.svg" alt="Previous"></a>
 <a href="index.html"><img src="contents_motif.svg" alt="Up"></a>
 <a href="lablexamples.html"><img src="next_motif.svg" alt="Next"></a>
 <hr>
-<h1 class="chapter" id="sec24">Chapter 3  OCaml中的对象</h1>
+<h1 class="chapter" id="sec24">章 3  OCaml 中的对象</h1>
 <ul>
 <li><a href="objectexamples.html#sec25">3.1  类与对象</a>
 </li><li><a href="objectexamples.html#sec26">3.2  直接对象</a>
@@ -39,9 +39,9 @@
 </p><p>
 <span class="c009">(作者：Jérôme Vouillon、Didier Rémy、Jacques Garrigue)</span></p><p><br>
 <br>
-</p><p>本章概述了OCaml的面向对象特性。</p><p>请注意，OCaml中的对象、类和类型之间的关系与主流面向对象语言（如Java和C++）中的关系不同，因此您不应该假设类似的关键字具有相同的含义。与那些语言相比，在OCaml中使用面向对象特性的频率要低得多。使用OCaml时通常有更合适的选择，比如模块和函数。事实上，很多OCaml程序根本不使用对象。</p><p><a href="#ss%3Aclasses-and-objects">3.1</a> 类和对象 <br>
+</p><p>本章概述了 OCaml 的面向对象特性。</p><p>请注意，OCaml 中的对象、类和类型之间的关系与主流面向对象语言（如 Java 和 C++）中的关系不同，因此您不应该假设类似的关键字具有相同的含义。与那些语言相比，在 OCaml 中使用面向对象特性的频率要低得多。使用 OCaml 时通常有更合适的选择，比如模块和函数。事实上，很多 OCaml 程序根本不使用对象。</p><p><a href="#ss%3Aclasses-and-objects">3.1</a> 类和对象 <br>
 <a href="#ss%3Aimmediate-objects">3.2</a> 直接对象 <br>
-<a href="#ss%3Areference-to-self">3.3</a> 引用self <br>
+<a href="#ss%3Areference-to-self">3.3</a> 引用 self <br>
 <a href="#ss%3Ainitializers">3.4</a> 初始化器 <br>
 <a href="#ss%3Avirtual-methods">3.5</a> 虚方法 <br>
 <a href="#ss%3Aprivate-methods">3.6</a> 私有方法 <br>
@@ -54,7 +54,7 @@
 <a href="#ss%3Afunctional-objects">3.13</a> 函数对象 <br>
 <a href="#ss%3Acloning-objects">3.14</a> 克隆对象 <br>
 <a href="#ss%3Arecursive-classes">3.15</a> 递归类 <br>
-<a href="#ss%3Abinary-methods">3.16</a> Binary methods <br>
+<a href="#ss%3Abinary-methods">3.16</a> 二元方法 <br>
 <a href="#ss%3Afriends">3.17</a> 友元 <br>
 
 </p>
@@ -1063,12 +1063,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </pre>
 
 
-</div><p>Note here the <span class="c003">(self : int #iterator)</span> idiom, which ensures that this
-object implements the interface <span class="c003">iterator</span>.</p><p>Polymorphic methods are called in exactly the same way as normal
-methods, but you should be aware of some limitations of type
-inference. Namely, a polymorphic method can only be called if its
-type is known at the call site. Otherwise, the method will be assumed
-to be monomorphic, and given an incompatible type.
+</div><p>注意这里 <span class="c003">(self : int #iterator)</span> 的用法，它可以确保这个对象实现 <span class="c003">iterator</span> 接口。</p><p>多态方法的调用方式与普通方法完全相同，但是您应该了解类型推导的一些限制。也就是说，一个多态方法只能在其类型已知时被调用。否则，该方法将被假定为单态的，并且被给定一个不兼容的类型。
 
 
 </p><div class="caml-example toplevel">
@@ -1085,10 +1080,7 @@ to be monomorphic, and given an incompatible type.
 </div></pre>
 
 
-</div><p>
-
-The workaround is easy: you should put a type constraint on the
-parameter.
+</div><p>解决方法很简单：在参数上给出类型约束。
 
 
 </p><div class="caml-example toplevel">
@@ -1098,10 +1090,7 @@ parameter.
 </div></pre>
 
 
-</div><p>
-
-Of course the constraint may also be an explicit method type.
-Only occurences of quantified variables are required.
+</div><p>当然，约束也可以是显式方法类型，只需要出现量化的变量。
 
 
 </p><div class="caml-example toplevel">
@@ -1112,10 +1101,7 @@ Only occurences of quantified variables are required.
 </div></pre>
 
 
-</div><p>Another use of polymorphic methods is to allow some form of implicit
-subtyping in method arguments. We have already seen in section
-<a href="#ss%3Ainheritance">3.8</a> how some functions may be polymorphic in the
-class of their argument. This can be extended to methods.
+</div><p>多态方法的另一个用途是允许用户在方法参数中使用某种形式的隐式子类型。我们已经在第 <a href="#ss%3Ainheritance">3.8</a> 节中看到一些函数的如何在它们的参数类中是多态的。这在方法中同样适用。
 
 
 </p><div class="caml-example toplevel">

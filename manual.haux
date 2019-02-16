@@ -1,7 +1,7 @@
-\@@addtocsec{htoc}{sec6}{-2}{\@print{Part I}\quad{}OCaml 简介{}}
+\@@addtocsec{htoc}{sec6}{-2}{\@print{部分 I}\quad{}OCaml 简介{}}
 \newlabel{p:tutorials}{{I}{X}}
 \@deflabeltype{p:tutorials}{part}
-\@@addtocsec{htoc}{sec7}{-1}{\@print{Chapter 1}\quad{}核心语言{}}
+\@@addtocsec{htoc}{sec7}{-1}{\@print{章 1}\quad{}核心语言{}}
 \newlabel{c:core-xamples}{{1}{X}}
 \@deflabeltype{c:core-xamples}{chapter}
 \@@addtocsec{htoc}{sec8}{0}{\@print{1.1}\quad{}基础{}}
@@ -16,7 +16,7 @@
 \@@addtocsec{htoc}{sec15}{0}{\@print{1.7}\quad{}表达式的符号处理{}}
 \@@addtocsec{htoc}{sec16}{0}{\@print{1.8}\quad{}美观打印{}}
 \@@addtocsec{htoc}{sec17}{0}{\@print{1.9}\quad{}独立 OCaml 程序{}}
-\@@addtocsec{htoc}{sec18}{-1}{\@print{Chapter 2}\quad{}模块系统{}}
+\@@addtocsec{htoc}{sec18}{-1}{\@print{章 2}\quad{}模块系统{}}
 \newlabel{c:moduleexamples}{{2}{X}}
 \@deflabeltype{c:moduleexamples}{chapter}
 \@@addtocsec{htoc}{sec19}{0}{\@print{2.1}\quad{}Structures{}}
@@ -24,7 +24,7 @@
 \@@addtocsec{htoc}{sec21}{0}{\@print{2.3}\quad{}仿函数{}}
 \@@addtocsec{htoc}{sec22}{0}{\@print{2.4}\quad{}仿函数和类型抽象{}}
 \@@addtocsec{htoc}{sec23}{0}{\@print{2.5}\quad{}模块和单独编译{}}
-\@@addtocsec{htoc}{sec24}{-1}{\@print{Chapter 3}\quad{}OCaml中的对象{}}
+\@@addtocsec{htoc}{sec24}{-1}{\@print{章 3}\quad{}OCaml 中的对象{}}
 \newlabel{c:objectexamples}{{3}{X}}
 \@deflabeltype{c:objectexamples}{chapter}
 \@@addtocsec{htoc}{sec25}{0}{\@print{3.1}\quad{}类与对象{}}
@@ -78,7 +78,7 @@
 \@@addtocsec{htoc}{sec41}{0}{\@print{3.17}\quad{}Friends{}}
 \newlabel{ss:friends}{{3.17}{X}}
 \@deflabeltype{ss:friends}{section}
-\@@addtocsec{htoc}{sec42}{-1}{\@print{Chapter 4}\quad{}Labels and variants{}}
+\@@addtocsec{htoc}{sec42}{-1}{\@print{章 4}\quad{}Labels and variants{}}
 \newlabel{c:labl-examples}{{4}{X}}
 \@deflabeltype{c:labl-examples}{chapter}
 \@@addtocsec{htoc}{sec43}{0}{\@print{4.1}\quad{}Labels{}}
@@ -89,7 +89,7 @@
 \@@addtocsec{htoc}{sec46}{1}{\@print{4.1.3}\quad{}Suggestions for labeling{}}
 \@@addtocsec{htoc}{sec47}{0}{\@print{4.2}\quad{}Polymorphic variants{}}
 \@@addtocsec{htoc}{sec50}{1}{\@print{4.2.1}\quad{}Weaknesses of polymorphic variants{}}
-\@@addtocsec{htoc}{sec51}{-1}{\@print{Chapter 5}\quad{}Polymorphism and its limitations{}}
+\@@addtocsec{htoc}{sec51}{-1}{\@print{章 5}\quad{}Polymorphism and its limitations{}}
 \newlabel{c:polymorphism}{{5}{X}}
 \@deflabeltype{c:polymorphism}{chapter}
 \@@addtocsec{htoc}{sec52}{0}{\@print{5.1}\quad{}Weak polymorphism and mutation{}}
@@ -108,7 +108,7 @@
 \@@addtocsec{htoc}{sec59}{1}{\@print{5.2.1}\quad{}Explicitly polymorphic annotations{}}
 \@@addtocsec{htoc}{sec60}{1}{\@print{5.2.2}\quad{}More examples{}}
 \@@addtocsec{htoc}{sec61}{0}{\@print{5.3}\quad{}Higher-rank polymorphic functions{}}
-\@@addtocsec{htoc}{sec62}{-1}{\@print{Chapter 6}\quad{}Advanced examples with classes and modules{}}
+\@@addtocsec{htoc}{sec62}{-1}{\@print{章 6}\quad{}Advanced examples with classes and modules{}}
 \newlabel{c:advexamples}{{6}{X}}
 \@deflabeltype{c:advexamples}{chapter}
 \@@addtocsec{htoc}{sec63}{0}{\@print{6.1}\quad{}Extended example: bank accounts{}}
@@ -131,10 +131,10 @@
 \@@addtocsec{htoc}{sec69}{0}{\@print{6.3}\quad{}The subject/observer pattern{}}
 \newlabel{ss:subject-observer}{{6.3}{X}}
 \@deflabeltype{ss:subject-observer}{section}
-\@@addtocsec{htoc}{sec70}{-2}{\@print{Part II}\quad{}OCaml 语言{}}
+\@@addtocsec{htoc}{sec70}{-2}{\@print{部分 II}\quad{}OCaml 语言{}}
 \newlabel{p:refman}{{II}{X}}
 \@deflabeltype{p:refman}{part}
-\@@addtocsec{htoc}{sec71}{-1}{\@print{Chapter 7}\quad{}The OCaml language{}}
+\@@addtocsec{htoc}{sec71}{-1}{\@print{章 7}\quad{}The OCaml language{}}
 \newlabel{c:refman}{{7}{X}}
 \@deflabeltype{c:refman}{chapter}
 \@@addtocsec{htoc}{sec74}{0}{\@print{7.1}\quad{}Lexical conventions{}}
@@ -219,7 +219,7 @@
 \@@addtocsec{htoc}{sec220}{1}{\@print{7.11.2}\quad{}Structures{}}
 \@@addtocsec{htoc}{sec230}{1}{\@print{7.11.3}\quad{}Functors{}}
 \@@addtocsec{htoc}{sec233}{0}{\@print{7.12}\quad{}Compilation units{}}
-\stx@exists{unit-interface}\stx@exists{unit-implementation}\@@addtocsec{htoc}{sec234}{-1}{\@print{Chapter 8}\quad{}Language extensions{}}
+\stx@exists{unit-interface}\stx@exists{unit-implementation}\@@addtocsec{htoc}{sec234}{-1}{\@print{章 8}\quad{}Language extensions{}}
 \newlabel{c:extensions}{{8}{X}}
 \@deflabeltype{c:extensions}{chapter}
 \@@addtocsec{htoc}{sec235}{0}{\@print{8.1}\quad{}Recursive definitions of values{}}
@@ -312,10 +312,10 @@
 \stx@exists{dot-ext}\@@addtocsec{htoc}{s:empty-variants}{0}{\@print{8.23}\quad{}Empty variant types\label{s:empty-variants} {}}
 \new@anchor@label{sec277}{s:empty-variants}{{8.23}{X}}
 \@deflabeltype{s:empty-variants}{section}
-\@@addtocsec{htoc}{sec278}{-2}{\@print{Part III}\quad{}OCaml 工具{}}
+\@@addtocsec{htoc}{sec278}{-2}{\@print{部分 III}\quad{}OCaml 工具{}}
 \newlabel{p:commands}{{III}{X}}
 \@deflabeltype{p:commands}{part}
-\@@addtocsec{htoc}{sec279}{-1}{\@print{Chapter 9}\quad{}Batch compilation (ocamlc){}}
+\@@addtocsec{htoc}{sec279}{-1}{\@print{章 9}\quad{}Batch compilation (ocamlc){}}
 \newlabel{c:camlc}{{9}{X}}
 \@deflabeltype{c:camlc}{chapter}
 \@@addtocsec{htoc}{sec280}{0}{\@print{9.1}\quad{}Overview of the compiler{}}
@@ -336,7 +336,7 @@
 \@@addtocsec{htoc}{sec288}{1}{\@print{9.5.3}\quad{}Warning 57: Ambiguous or-pattern variables under guard{}}
 \newlabel{ss:warn57}{{9.5.3}{X}}
 \@deflabeltype{ss:warn57}{subsection}
-\@@addtocsec{htoc}{sec289}{-1}{\@print{Chapter 10}\quad{}The toplevel system or REPL (ocaml){}}
+\@@addtocsec{htoc}{sec289}{-1}{\@print{章 10}\quad{}The toplevel system or REPL (ocaml){}}
 \newlabel{c:camllight}{{10}{X}}
 \@deflabeltype{c:camllight}{chapter}
 \stx@exists{toplevel-input}\stx@exists{directive-argument}\@@addtocsec{htoc}{sec290}{0}{\@print{10.1}\quad{}Options{}}
@@ -352,7 +352,7 @@
 \@@addtocsec{htoc}{sec294}{0}{\@print{10.5}\quad{}Building custom toplevel systems: \texttt{ocamlmktop}{}}
 \@@addtocsec{htoc}{sec295}{1}{\@print{10.5.1}\quad{}Options{}}
 \@@addtocsec{htoc}{sec296}{0}{\@print{10.6}\quad{}The native toplevel: \texttt{ocamlnat}\ (experimental){}}
-\@@addtocsec{htoc}{sec297}{-1}{\@print{Chapter 11}\quad{}The runtime system (ocamlrun){}}
+\@@addtocsec{htoc}{sec297}{-1}{\@print{章 11}\quad{}The runtime system (ocamlrun){}}
 \newlabel{c:runtime}{{11}{X}}
 \@deflabeltype{c:runtime}{chapter}
 \@@addtocsec{htoc}{sec298}{0}{\@print{11.1}\quad{}Overview{}}
@@ -363,7 +363,7 @@
 \newlabel{s-ocamlrun-dllpath}{{11.3}{X}}
 \@deflabeltype{s-ocamlrun-dllpath}{section}
 \@@addtocsec{htoc}{sec301}{0}{\@print{11.4}\quad{}Common errors{}}
-\@@addtocsec{htoc}{sec302}{-1}{\@print{Chapter 12}\quad{}Native-code compilation (ocamlopt){}}
+\@@addtocsec{htoc}{sec302}{-1}{\@print{章 12}\quad{}Native-code compilation (ocamlopt){}}
 \newlabel{c:nativecomp}{{12}{X}}
 \@deflabeltype{c:nativecomp}{chapter}
 \@@addtocsec{htoc}{sec303}{0}{\@print{12.1}\quad{}Overview of the compiler{}}
@@ -373,7 +373,7 @@
 \@@addtocsec{htoc}{sec310}{0}{\@print{12.5}\quad{}Compatibility with the bytecode compiler{}}
 \newlabel{s:compat-native-bytecode}{{12.5}{X}}
 \@deflabeltype{s:compat-native-bytecode}{section}
-\@@addtocsec{htoc}{sec311}{-1}{\@print{Chapter 13}\quad{}Lexer and parser generators (ocamllex, ocamlyacc){}}
+\@@addtocsec{htoc}{sec311}{-1}{\@print{章 13}\quad{}Lexer and parser generators (ocamllex, ocamlyacc){}}
 \newlabel{c:ocamlyacc}{{13}{X}}
 \@deflabeltype{c:ocamlyacc}{chapter}
 \@@addtocsec{htoc}{sec312}{0}{\@print{13.1}\quad{}Overview of \texttt{ocamllex}{}}
@@ -398,15 +398,15 @@
 \@@addtocsec{htoc}{sec329}{0}{\@print{13.5}\quad{}Options{}}
 \@@addtocsec{htoc}{sec330}{0}{\@print{13.6}\quad{}A complete example{}}
 \@@addtocsec{htoc}{sec331}{0}{\@print{13.7}\quad{}Common errors{}}
-\@@addtocsec{htoc}{sec332}{-1}{\@print{Chapter 14}\quad{}Dependency generator (ocamldep){}}
+\@@addtocsec{htoc}{sec332}{-1}{\@print{章 14}\quad{}Dependency generator (ocamldep){}}
 \newlabel{c:camldep}{{14}{X}}
 \@deflabeltype{c:camldep}{chapter}
 \@@addtocsec{htoc}{sec333}{0}{\@print{14.1}\quad{}Options{}}
 \@@addtocsec{htoc}{sec334}{0}{\@print{14.2}\quad{}A typical Makefile{}}
-\@@addtocsec{htoc}{sec335}{-1}{\@print{Chapter 15}\quad{}The browser/editor (ocamlbrowser){}}
+\@@addtocsec{htoc}{sec335}{-1}{\@print{章 15}\quad{}The browser/editor (ocamlbrowser){}}
 \newlabel{c:browser}{{15}{X}}
 \@deflabeltype{c:browser}{chapter}
-\@@addtocsec{htoc}{sec336}{-1}{\@print{Chapter 16}\quad{}The documentation generator (ocamldoc){}}
+\@@addtocsec{htoc}{sec336}{-1}{\@print{章 16}\quad{}The documentation generator (ocamldoc){}}
 \newlabel{c:ocamldoc}{{16}{X}}
 \@deflabeltype{c:ocamldoc}{chapter}
 \@@addtocsec{htoc}{sec337}{0}{\@print{16.1}\quad{}Usage{}}
@@ -446,7 +446,7 @@
 \@@addtocsec{htoc}{sec370}{1}{\@print{16.4.1}\quad{}Compilation and usage{}}
 \newlabel{s:ocamldoc-compilation-and-usage}{{16.4.1}{X}}
 \@deflabeltype{s:ocamldoc-compilation-and-usage}{subsection}
-\@@addtocsec{htoc}{sec373}{-1}{\@print{Chapter 17}\quad{}The debugger (ocamldebug){}}
+\@@addtocsec{htoc}{sec373}{-1}{\@print{章 17}\quad{}The debugger (ocamldebug){}}
 \newlabel{c:debugger}{{17}{X}}
 \@deflabeltype{c:debugger}{chapter}
 \@@addtocsec{htoc}{sec374}{0}{\@print{17.1}\quad{}Compiling for debugging{}}
@@ -487,17 +487,17 @@
 \@@addtocsec{htoc}{sec401}{0}{\@print{17.10}\quad{}Running the debugger under Emacs{}}
 \newlabel{s:inf-debugger}{{17.10}{X}}
 \@deflabeltype{s:inf-debugger}{section}
-\@@addtocsec{htoc}{sec402}{-1}{\@print{Chapter 18}\quad{}Profiling (ocamlprof){}}
+\@@addtocsec{htoc}{sec402}{-1}{\@print{章 18}\quad{}Profiling (ocamlprof){}}
 \newlabel{c:profiler}{{18}{X}}
 \@deflabeltype{c:profiler}{chapter}
 \@@addtocsec{htoc}{sec403}{0}{\@print{18.1}\quad{}Compiling for profiling{}}
 \@@addtocsec{htoc}{sec407}{0}{\@print{18.2}\quad{}Profiling an execution{}}
 \@@addtocsec{htoc}{sec408}{0}{\@print{18.3}\quad{}Printing profiling information{}}
 \@@addtocsec{htoc}{sec409}{0}{\@print{18.4}\quad{}Time profiling{}}
-\@@addtocsec{htoc}{sec411}{-1}{\@print{Chapter 19}\quad{}The ocamlbuild compilation manager{}}
+\@@addtocsec{htoc}{sec411}{-1}{\@print{章 19}\quad{}The ocamlbuild compilation manager{}}
 \newlabel{c:ocamlbuild}{{19}{X}}
 \@deflabeltype{c:ocamlbuild}{chapter}
-\@@addtocsec{htoc}{c:intf-c}{-1}{\@print{Chapter 20}\quad{}Interfacing\label{c:intf-c} C with OCaml{}}
+\@@addtocsec{htoc}{c:intf-c}{-1}{\@print{章 20}\quad{}Interfacing\label{c:intf-c} C with OCaml{}}
 \new@anchor@label{sec412}{c:intf-c}{{20}{X}}
 \@deflabeltype{c:intf-c}{chapter}
 \@@addtocsec{htoc}{sec413}{0}{\@print{20.1}\quad{}Overview and compilation information{}}
@@ -587,7 +587,7 @@
 \@@addtocsec{htoc}{sec479}{0}{\@print{20.14}\quad{}Building mixed C/OCaml libraries: \texttt{ocamlmklib}{}}
 \newlabel{s-ocamlmklib}{{20.14}{X}}
 \@deflabeltype{s-ocamlmklib}{section}
-\@@addtocsec{htoc}{sec481}{-1}{\@print{Chapter 21}\quad{}Optimisation with Flambda{}}
+\@@addtocsec{htoc}{sec481}{-1}{\@print{章 21}\quad{}Optimisation with Flambda{}}
 \@@addtocsec{htoc}{sec482}{0}{\@print{21.1}\quad{}Overview{}}
 \@@addtocsec{htoc}{sec483}{0}{\@print{21.2}\quad{}Command-line flags{}}
 \@@addtocsec{htoc}{sec485}{1}{\@print{21.2.1}\quad{}Specification of optimisation parameters by round{}}
@@ -655,7 +655,7 @@
 \newlabel{unsafe}{{21.15}{X}}
 \@deflabeltype{unsafe}{section}
 \@@addtocsec{htoc}{sec531}{0}{\@print{21.16}\quad{}Glossary{}}
-\@@addtocsec{htoc}{sec532}{-1}{\@print{Chapter 22}\quad{}Memory profiling with Spacetime{}}
+\@@addtocsec{htoc}{sec532}{-1}{\@print{章 22}\quad{}Memory profiling with Spacetime{}}
 \@@addtocsec{htoc}{sec533}{0}{\@print{22.1}\quad{}Overview{}}
 \@@addtocsec{htoc}{sec534}{0}{\@print{22.2}\quad{}How to use it{}}
 \@@addtocsec{htoc}{sec535}{1}{\@print{22.2.1}\quad{}Building{}}
@@ -665,43 +665,43 @@
 \newlabel{runtimeoverhead}{{22.3}{X}}
 \@deflabeltype{runtimeoverhead}{section}
 \@@addtocsec{htoc}{sec539}{0}{\@print{22.4}\quad{}For developers{}}
-\@@addtocsec{htoc}{sec540}{-1}{\@print{Chapter 23}\quad{}Fuzzing with afl-fuzz{}}
+\@@addtocsec{htoc}{sec540}{-1}{\@print{章 23}\quad{}Fuzzing with afl-fuzz{}}
 \@@addtocsec{htoc}{sec541}{0}{\@print{23.1}\quad{}Overview{}}
 \@@addtocsec{htoc}{sec542}{0}{\@print{23.2}\quad{}Generating instrumentation{}}
 \@@addtocsec{htoc}{sec543}{1}{\@print{23.2.1}\quad{}Advanced options{}}
 \@@addtocsec{htoc}{sec544}{0}{\@print{23.3}\quad{}Example{}}
-\@@addtocsec{htoc}{c:plugins}{-1}{\@print{Chapter 24}\quad{}Compiler plugins\label{c:plugins}{}}
+\@@addtocsec{htoc}{c:plugins}{-1}{\@print{章 24}\quad{}Compiler plugins\label{c:plugins}{}}
 \new@anchor@label{sec545}{c:plugins}{{24}{X}}
 \@deflabeltype{c:plugins}{chapter}
 \@@addtocsec{htoc}{sec546}{0}{\@print{24.1}\quad{}Overview{}}
 \@@addtocsec{htoc}{sec547}{0}{\@print{24.2}\quad{}Basic example{}}
-\@@addtocsec{htoc}{sec548}{-2}{\@print{Part IV}\quad{}OCaml 库{}}
+\@@addtocsec{htoc}{sec548}{-2}{\@print{部分 IV}\quad{}OCaml 库{}}
 \newlabel{p:library}{{IV}{X}}
 \@deflabeltype{p:library}{part}
-\@@addtocsec{htoc}{sec549}{-1}{\@print{Chapter 25}\quad{}The core library{}}
+\@@addtocsec{htoc}{sec549}{-1}{\@print{章 25}\quad{}The core library{}}
 \newlabel{c:corelib}{{25}{X}}
 \@deflabeltype{c:corelib}{chapter}
 \@@addtocsec{htoc}{sec551}{0}{\@print{25.1}\quad{}Built-in types and predefined exceptions{}}
 \@@addtocsec{htoc}{sec554}{0}{\@print{25.2}\quad{}Module {\tt Stdlib}: the initially opened module{}}
-\@@addtocsec{htoc}{sec555}{-1}{\@print{Chapter 26}\quad{}The standard library{}}
+\@@addtocsec{htoc}{sec555}{-1}{\@print{章 26}\quad{}The standard library{}}
 \newlabel{c:stdlib}{{26}{X}}
 \@deflabeltype{c:stdlib}{chapter}
 \newlabel{stdlib:top}{{26}{X}}
 \@deflabeltype{stdlib:top}{chapter}
-\@@addtocsec{htoc}{sec557}{-1}{\@print{Chapter 27}\quad{}The compiler front-end{}}
+\@@addtocsec{htoc}{sec557}{-1}{\@print{章 27}\quad{}The compiler front-end{}}
 \newlabel{c:parsinglib}{{27}{X}}
 \@deflabeltype{c:parsinglib}{chapter}
-\@@addtocsec{htoc}{sec558}{-1}{\@print{Chapter 28}\quad{}The unix library: Unix system calls{}}
+\@@addtocsec{htoc}{sec558}{-1}{\@print{章 28}\quad{}The unix library: Unix system calls{}}
 \newlabel{c:unix}{{28}{X}}
 \@deflabeltype{c:unix}{chapter}
-\@@addtocsec{htoc}{sec559}{-1}{\@print{Chapter 29}\quad{}The num library: arbitrary-precision rational arithmetic{}}
-\@@addtocsec{htoc}{sec560}{-1}{\@print{Chapter 30}\quad{}The str library: regular expressions and string processing{}}
-\@@addtocsec{htoc}{sec561}{-1}{\@print{Chapter 31}\quad{}The threads library{}}
+\@@addtocsec{htoc}{sec559}{-1}{\@print{章 29}\quad{}The num library: arbitrary-precision rational arithmetic{}}
+\@@addtocsec{htoc}{sec560}{-1}{\@print{章 30}\quad{}The str library: regular expressions and string processing{}}
+\@@addtocsec{htoc}{sec561}{-1}{\@print{章 31}\quad{}The threads library{}}
 \newlabel{c:threads}{{31}{X}}
 \@deflabeltype{c:threads}{chapter}
-\@@addtocsec{htoc}{sec562}{-1}{\@print{Chapter 32}\quad{}The graphics library{}}
-\@@addtocsec{htoc}{sec563}{-1}{\@print{Chapter 33}\quad{}The dynlink library: dynamic loading and linking of object files{}}
-\@@addtocsec{htoc}{sec564}{-1}{\@print{Chapter 34}\quad{}The bigarray library{}}
-\@@addtocsec{htoc}{sec565}{-2}{\@print{Part V}\quad{}附录{}}
+\@@addtocsec{htoc}{sec562}{-1}{\@print{章 32}\quad{}The graphics library{}}
+\@@addtocsec{htoc}{sec563}{-1}{\@print{章 33}\quad{}The dynlink library: dynamic loading and linking of object files{}}
+\@@addtocsec{htoc}{sec564}{-1}{\@print{章 34}\quad{}The bigarray library{}}
+\@@addtocsec{htoc}{sec565}{-2}{\@print{部分 V}\quad{}附录{}}
 \newlabel{p:appendix}{{V}{X}}
 \@deflabeltype{p:appendix}{part}
