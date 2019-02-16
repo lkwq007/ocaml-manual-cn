@@ -22,7 +22,7 @@ TEXQUOTE = $(SRC)/runtime/ocamlrun ../tools/texquote2
 FILES = allfiles.tex biblio.tex foreword.tex version.tex warnings-help.etex
 
 TEXINPUTS = ".:..:../refman:../library:../cmds:../tutorials:../../styles:"
-RELEASE = $$HOME/release/$${RELEASENAME}
+RELEASE = ../release/$${RELEASENAME}
 HEVEA = hevea
 HACHA = hacha
 INFO_FLAGS = -fix -exec xxdate.exe -info -w 79
