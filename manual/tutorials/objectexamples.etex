@@ -23,7 +23,7 @@
 \ref{ss:multiple-inheritance} 多继承 \\
 \ref{ss:parameterized-classes} 参数化类 \\
 \ref{ss:polymorphic-methods} 多态方法 \\
-\ref{ss:using-coercions} 强制转换 \\
+\ref{ss:using-coercions} 使用强制 \\
 \ref{ss:functional-objects} 函数对象 \\
 \ref{ss:cloning-objects} 克隆对象 \\
 \ref{ss:recursive-classes} 递归类 \\
@@ -557,7 +557,7 @@ l#fold (fun x y -> x+y) 0;;
 l#fold (fun s x -> s ^ string_of_int x ^ " ") "";;
 \end{caml_example}
 
-正如您在编译器显示的类类型中所看到的，虽然多态方法类型在类定义中必须是显示给出的（紧跟在方法名称之后），但是量化的类型变量可以隐式地留在类描述中。为什么要求类型是显式的呢？这里的问题是~"(int -> int -> int) -> int ->
+正如您在编译器显示的类类型中所看到的，虽然多态方法类型在类定义中必须是显示给出的（紧跟在方法名称之后），但是限定的类型变量可以隐式地留在类描述中。为什么要求类型是显式的呢？这里的问题是~"(int -> int -> int) -> int ->
 int"~对于~"fold"~同样也是一个有效的类型，而它恰好与我们所给出的多态类型不兼容（自动实例化仅适用于顶层的类型变量，对于内层的限定符并不适用，因此内层类型的选取变成了一个不可判定问题）。因此编译器不能在这两种类型之间进行选择，必须获得额外的帮助。
 
 但是，如果类型是已知的，则可以通过继承或 self 上的类型约束在类定义中完全省略该类型。下面是一个方法重载的例子。
@@ -593,7 +593,7 @@ sum l [@@expect error];;
 let sum (lst : _ #iterator) = lst#fold (fun x y -> x+y) 0;;
 \end{caml_example}
 
-当然，约束也可以是显式方法类型，只需要出现量化的变量。
+当然，约束也可以是显式方法类型，只需要出现限定的变量。
 \begin{caml_example}{toplevel}
 let sum lst =
   (lst : < fold : 'a. ('a -> _ -> 'a) -> 'a -> 'a; .. >)#fold (+) 0;;
@@ -611,10 +611,8 @@ class distance_point x =
 let p = new distance_point 3 in
 (p#distance (new point 8), p#distance (new colored_point 1 "blue"));;
 \end{caml_example}
-Note here the special syntax "(#point0 as 'a)" we have to use to
-quantify the extensible part of "#point0". As for the variable binder,
-it can be omitted in class specifications. If you want polymorphism
-inside object field it must be quantified independently.
+
+注意这里的特殊语法 ~"(#point0 as 'a)"，我们必须使用它来限定~"#point0"~的扩展部分。而可变绑定器是可以在类定义中被省略的。如果您想在对象的字段中实现多态性，则必须独立地对其加以限定。
 \begin{caml_example}{toplevel}
 class multi_poly =
   object
@@ -624,11 +622,10 @@ class multi_poly =
       fun o x -> o#n2 x
   end;;
 \end{caml_example}
-In method "m1", "o" must be an object with at least a method "n1",
-itself polymorphic.  In method "m2", the argument of "n2" and "x" must
-have the same type, which is quantified at the same level as "'a".
 
-\section{Using coercions}
+在方法~"m1"~中，"o"~必须是具有方法~"n1"~的对象，其本身具有多态性。在方法~"m2"~中，"n2" 的参数和~"x"~必须具有相同的类型，其量化级别与~"'a"~相同。
+
+\section{使用强制}
 \label{ss:using-coercions}
 
 Subtyping is never implicit.  There are, however, two ways to perform
