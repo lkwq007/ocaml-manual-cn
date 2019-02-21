@@ -27,7 +27,7 @@
 </li><li><a href="objectexamples.html#sec33">3.9  多继承</a>
 </li><li><a href="objectexamples.html#sec34">3.10  参数化类</a>
 </li><li><a href="objectexamples.html#sec35">3.11  多态方法</a>
-</li><li><a href="objectexamples.html#sec36">3.12  Using coercions</a>
+</li><li><a href="objectexamples.html#sec36">3.12  使用强制</a>
 </li><li><a href="objectexamples.html#sec37">3.13  Functional objects</a>
 </li><li><a href="objectexamples.html#sec38">3.14  Cloning objects</a>
 </li><li><a href="objectexamples.html#sec39">3.15  Recursive classes</a>
@@ -50,7 +50,7 @@
 <a href="#ss%3Amultiple-inheritance">3.9</a> 多继承 <br>
 <a href="#ss%3Aparameterized-classes">3.10</a> 参数化类 <br>
 <a href="#ss%3Apolymorphic-methods">3.11</a> 多态方法 <br>
-<a href="#ss%3Ausing-coercions">3.12</a> 强制转换 <br>
+<a href="#ss%3Ausing-coercions">3.12</a> 使用强制 <br>
 <a href="#ss%3Afunctional-objects">3.13</a> 函数对象 <br>
 <a href="#ss%3Acloning-objects">3.14</a> 克隆对象 <br>
 <a href="#ss%3Arecursive-classes">3.15</a> 递归类 <br>
@@ -1030,7 +1030,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>正如您在编译器显示的类类型中所看到的，虽然多态方法类型在类定义中必须是显示给出的（紧跟在方法名称之后），但是量化的类型变量可以隐式地留在类描述中。为什么要求类型是显式的呢？这里的问题是 <span class="c003">(int -&gt; int -&gt; int) -&gt; int -&gt; int</span> 对于 <span class="c003">fold</span> 同样也是一个有效的类型，而它恰好与我们所给出的多态类型不兼容（自动实例化仅适用于顶层的类型变量，对于内层的限定符并不适用，因此内层类型的选取变成了一个不可判定问题）。因此编译器不能在这两种类型之间进行选择，必须获得额外的帮助。</p><p>但是，如果类型是已知的，则可以通过继承或 self 上的类型约束在类定义中完全省略该类型。下面是一个方法重载的例子。
+</div><p>正如您在编译器显示的类类型中所看到的，虽然多态方法类型在类定义中必须是显示给出的（紧跟在方法名称之后），但是限定的类型变量可以隐式地留在类描述中。为什么要求类型是显式的呢？这里的问题是 <span class="c003">(int -&gt; int -&gt; int) -&gt; int -&gt; int</span> 对于 <span class="c003">fold</span> 同样也是一个有效的类型，而它恰好与我们所给出的多态类型不兼容（自动实例化仅适用于顶层的类型变量，对于内层的限定符并不适用，因此内层类型的选取变成了一个不可判定问题）。因此编译器不能在这两种类型之间进行选择，必须获得额外的帮助。</p><p>但是，如果类型是已知的，则可以通过继承或 self 上的类型约束在类定义中完全省略该类型。下面是一个方法重载的例子。
 
 
 </p><div class="caml-example toplevel">
@@ -1090,7 +1090,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>当然，约束也可以是显式方法类型，只需要出现量化的变量。
+</div><p>当然，约束也可以是显式方法类型，只需要出现限定的变量。
 
 
 </p><div class="caml-example toplevel">
@@ -1133,12 +1133,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-Note here the special syntax <span class="c003">(#point0 as 'a)</span> we have to use to
-quantify the extensible part of <span class="c003">#point0</span>. As for the variable binder,
-it can be omitted in class specifications. If you want polymorphism
-inside object field it must be quantified independently.
+</div><p>注意这里的特殊语法  <span class="c003">(#point0 as 'a)</span>，我们必须使用它来限定 <span class="c003">#point0</span> 的扩展部分。而可变绑定器是可以在类定义中被省略的。如果您想在对象的字段中实现多态性，则必须独立地对其加以限定。
 
 
 </p><div class="caml-example toplevel">
@@ -1158,12 +1153,8 @@ inside object field it must be quantified independently.
 </div></pre>
 
 
-</div><p>
-
-In method <span class="c003">m1</span>, <span class="c003">o</span> must be an object with at least a method <span class="c003">n1</span>,
-itself polymorphic. In method <span class="c003">m2</span>, the argument of <span class="c003">n2</span> and <span class="c003">x</span> must
-have the same type, which is quantified at the same level as <span class="c003">'a</span>.</p>
-<h2 class="section" id="sec36">3.12  Using coercions</h2>
+</div><p>在方法 <span class="c003">m1</span> 中，<span class="c003">o</span> 必须是具有方法 <span class="c003">n1</span> 的对象，其本身具有多态性。在方法 <span class="c003">m2</span> 中，<span class="c003">n2</span> 的参数和 <span class="c003">x</span> 必须具有相同的类型，其量化级别与 <span class="c003">'a</span> 相同。</p>
+<h2 class="section" id="sec36">3.12  使用强制</h2>
 <p>
 <a id="ss:using-coercions"></a></p><p>Subtyping is never implicit. There are, however, two ways to perform
 subtyping. The most general construction is fully explicit: both the

@@ -16,7 +16,7 @@
 <hr>
 <h1 class="chapter" id="sec18">第 2 章  模块系统</h1>
 <ul>
-<li><a href="moduleexamples.html#sec19">2.1  Structures</a>
+<li><a href="moduleexamples.html#sec19">2.1  结构</a>
 </li><li><a href="moduleexamples.html#sec20">2.2  签名</a>
 </li><li><a href="moduleexamples.html#sec21">2.3  仿函数</a>
 </li><li><a href="moduleexamples.html#sec22">2.4  仿函数和类型抽象</a>
@@ -24,7 +24,7 @@
 </li></ul>
 <p> <a id="c:moduleexamples"></a>
 </p><p>本章介绍了 OCaml 的模块系统。</p>
-<h2 class="section" id="sec19">2.1  Structures</h2>
+<h2 class="section" id="sec19">2.1  结构</h2>
 <p>模块的主要动机是将相关定义（例如数据类型的定义和该类型上的操作）打包在一起，并为这些定义强制赋予一致的命名模式。这样可以避免名称耗尽或意外地混淆名称。这样的包被称为结构（structure），由 <span class="c003">struct</span>…<span class="c003">end</span> 构造引入，该结构可以包含任意定义序列。结构通常用 <span class="c003">module</span> 绑定来命名。例如，下面是将一种优先队列及其操作打包在一起的结构：
 
 

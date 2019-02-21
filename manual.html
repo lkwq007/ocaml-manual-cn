@@ -123,7 +123,7 @@ a.syntax:hover{color:black;text-decoration:none;background-color:#FF6060}
 <span style="font-size:x-large">文档与用户手册 <br>
 <span style="font-size:large">Xavier Leroy, <br>
  Damien Doligez, Alain Frisch, Jacques Garrigue, Didier Rémy and Jérôme Vouillon <br>
- 2019 年 2 月 16 日<br>
+ 2019 年 2 月 21 日<br>
   
 <span style="font-size:medium">Copyright © 2013 Institut National de
 Recherche en Informatique et en Automatique. <br>
@@ -159,7 +159,7 @@ and as a
 </li></ul>
 </li><li class="li-toc"><a href="#sec18">第 2 章  模块系统</a>
 <ul class="toc"><li class="li-toc">
-<a href="#sec19">2.1  Structures</a>
+<a href="#sec19">2.1  结构</a>
 </li><li class="li-toc"><a href="#sec20">2.2  签名</a>
 </li><li class="li-toc"><a href="#sec21">2.3  仿函数</a>
 </li><li class="li-toc"><a href="#sec22">2.4  仿函数和类型抽象</a>
@@ -178,7 +178,7 @@ and as a
 </li><li class="li-toc"><a href="#sec33">3.9  多继承</a>
 </li><li class="li-toc"><a href="#sec34">3.10  参数化类</a>
 </li><li class="li-toc"><a href="#sec35">3.11  多态方法</a>
-</li><li class="li-toc"><a href="#sec36">3.12  Using coercions</a>
+</li><li class="li-toc"><a href="#sec36">3.12  使用强制</a>
 </li><li class="li-toc"><a href="#sec37">3.13  Functional objects</a>
 </li><li class="li-toc"><a href="#sec38">3.14  Cloning objects</a>
 </li><li class="li-toc"><a href="#sec39">3.15  Recursive classes</a>
@@ -1610,8 +1610,8 @@ $ ./fib 20
 <h1 class="chapter" id="sec18">第 2 章  模块系统</h1><!--SEC END --><p> <a id="c:moduleexamples"></a>
 </p><!--NAME moduleexamples.html-->
 <p>本章介绍了 OCaml 的模块系统。</p>
-<!--TOC section id="sec19" 2.1  Structures-->
-<h2 class="section" id="sec19">2.1  Structures</h2><!--SEC END --><p>模块的主要动机是将相关定义（例如数据类型的定义和该类型上的操作）打包在一起，并为这些定义强制赋予一致的命名模式。这样可以避免名称耗尽或意外地混淆名称。这样的包被称为结构（structure），由 <span class="c003">struct</span>…<span class="c003">end</span> 构造引入，该结构可以包含任意定义序列。结构通常用 <span class="c003">module</span> 绑定来命名。例如，下面是将一种优先队列及其操作打包在一起的结构：
+<!--TOC section id="sec19" 2.1  结构-->
+<h2 class="section" id="sec19">2.1  结构</h2><!--SEC END --><p>模块的主要动机是将相关定义（例如数据类型的定义和该类型上的操作）打包在一起，并为这些定义强制赋予一致的命名模式。这样可以避免名称耗尽或意外地混淆名称。这样的包被称为结构（structure），由 <span class="c003">struct</span>…<span class="c003">end</span> 构造引入，该结构可以包含任意定义序列。结构通常用 <span class="c003">module</span> 绑定来命名。例如，下面是将一种优先队列及其操作打包在一起的结构：
 
 
 </p><div class="caml-example toplevel">
@@ -2121,7 +2121,7 @@ module Main: sig (* contents of Main.mli *) end
 <a href="#ss%3Amultiple-inheritance">3.9</a> 多继承 <br>
 <a href="#ss%3Aparameterized-classes">3.10</a> 参数化类 <br>
 <a href="#ss%3Apolymorphic-methods">3.11</a> 多态方法 <br>
-<a href="#ss%3Ausing-coercions">3.12</a> 强制转换 <br>
+<a href="#ss%3Ausing-coercions">3.12</a> 使用强制 <br>
 <a href="#ss%3Afunctional-objects">3.13</a> 函数对象 <br>
 <a href="#ss%3Acloning-objects">3.14</a> 克隆对象 <br>
 <a href="#ss%3Arecursive-classes">3.15</a> 递归类 <br>
@@ -3101,7 +3101,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>正如您在编译器显示的类类型中所看到的，虽然多态方法类型在类定义中必须是显示给出的（紧跟在方法名称之后），但是量化的类型变量可以隐式地留在类描述中。为什么要求类型是显式的呢？这里的问题是 <span class="c003">(int -&gt; int -&gt; int) -&gt; int -&gt; int</span> 对于 <span class="c003">fold</span> 同样也是一个有效的类型，而它恰好与我们所给出的多态类型不兼容（自动实例化仅适用于顶层的类型变量，对于内层的限定符并不适用，因此内层类型的选取变成了一个不可判定问题）。因此编译器不能在这两种类型之间进行选择，必须获得额外的帮助。</p><p>但是，如果类型是已知的，则可以通过继承或 self 上的类型约束在类定义中完全省略该类型。下面是一个方法重载的例子。
+</div><p>正如您在编译器显示的类类型中所看到的，虽然多态方法类型在类定义中必须是显示给出的（紧跟在方法名称之后），但是限定的类型变量可以隐式地留在类描述中。为什么要求类型是显式的呢？这里的问题是 <span class="c003">(int -&gt; int -&gt; int) -&gt; int -&gt; int</span> 对于 <span class="c003">fold</span> 同样也是一个有效的类型，而它恰好与我们所给出的多态类型不兼容（自动实例化仅适用于顶层的类型变量，对于内层的限定符并不适用，因此内层类型的选取变成了一个不可判定问题）。因此编译器不能在这两种类型之间进行选择，必须获得额外的帮助。</p><p>但是，如果类型是已知的，则可以通过继承或 self 上的类型约束在类定义中完全省略该类型。下面是一个方法重载的例子。
 
 
 </p><div class="caml-example toplevel">
@@ -3161,7 +3161,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>当然，约束也可以是显式方法类型，只需要出现量化的变量。
+</div><p>当然，约束也可以是显式方法类型，只需要出现限定的变量。
 
 
 </p><div class="caml-example toplevel">
@@ -3204,12 +3204,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-Note here the special syntax <span class="c003">(#point0 as 'a)</span> we have to use to
-quantify the extensible part of <span class="c003">#point0</span>. As for the variable binder,
-it can be omitted in class specifications. If you want polymorphism
-inside object field it must be quantified independently.
+</div><p>注意这里的特殊语法  <span class="c003">(#point0 as 'a)</span>，我们必须使用它来限定 <span class="c003">#point0</span> 的扩展部分。而可变绑定器是可以在类定义中被省略的。如果您想在对象的字段中实现多态性，则必须独立地对其加以限定。
 
 
 </p><div class="caml-example toplevel">
@@ -3229,13 +3224,9 @@ inside object field it must be quantified independently.
 </div></pre>
 
 
-</div><p>
-
-In method <span class="c003">m1</span>, <span class="c003">o</span> must be an object with at least a method <span class="c003">n1</span>,
-itself polymorphic. In method <span class="c003">m2</span>, the argument of <span class="c003">n2</span> and <span class="c003">x</span> must
-have the same type, which is quantified at the same level as <span class="c003">'a</span>.</p>
-<!--TOC section id="sec36" 3.12  Using coercions-->
-<h2 class="section" id="sec36">3.12  Using coercions</h2><!--SEC END --><p>
+</div><p>在方法 <span class="c003">m1</span> 中，<span class="c003">o</span> 必须是具有方法 <span class="c003">n1</span> 的对象，其本身具有多态性。在方法 <span class="c003">m2</span> 中，<span class="c003">n2</span> 的参数和 <span class="c003">x</span> 必须具有相同的类型，其量化级别与 <span class="c003">'a</span> 相同。</p>
+<!--TOC section id="sec36" 3.12  使用强制-->
+<h2 class="section" id="sec36">3.12  使用强制</h2><!--SEC END --><p>
 <a id="ss:using-coercions"></a></p><p>Subtyping is never implicit. There are, however, two ways to perform
 subtyping. The most general construction is fully explicit: both the
 domain and the codomain of the type coercion must be given.</p><p>We have seen that points and colored points have incompatible types.

@@ -19,7 +19,7 @@
 \@@addtocsec{htoc}{sec18}{-1}{\@print{第 2 章}\quad{}模块系统{}}
 \newlabel{c:moduleexamples}{{2}{X}}
 \@deflabeltype{c:moduleexamples}{chapter}
-\@@addtocsec{htoc}{sec19}{0}{\@print{2.1}\quad{}Structures{}}
+\@@addtocsec{htoc}{sec19}{0}{\@print{2.1}\quad{}结构{}}
 \@@addtocsec{htoc}{sec20}{0}{\@print{2.2}\quad{}签名{}}
 \@@addtocsec{htoc}{sec21}{0}{\@print{2.3}\quad{}仿函数{}}
 \@@addtocsec{htoc}{sec22}{0}{\@print{2.4}\quad{}仿函数和类型抽象{}}
@@ -60,7 +60,7 @@
 \@@addtocsec{htoc}{sec35}{0}{\@print{3.11}\quad{}多态方法{}}
 \newlabel{ss:polymorphic-methods}{{3.11}{X}}
 \@deflabeltype{ss:polymorphic-methods}{section}
-\@@addtocsec{htoc}{sec36}{0}{\@print{3.12}\quad{}Using coercions{}}
+\@@addtocsec{htoc}{sec36}{0}{\@print{3.12}\quad{}使用强制{}}
 \newlabel{ss:using-coercions}{{3.12}{X}}
 \@deflabeltype{ss:using-coercions}{section}
 \@@addtocsec{htoc}{sec37}{0}{\@print{3.13}\quad{}Functional objects{}}

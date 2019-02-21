@@ -18,7 +18,7 @@
 \end{tocenv}
 \tocitem \@locref{sec18}{\begin{@norefs}\@print{第 2 章}\quad{}模块系统{}\end{@norefs}}
 \begin{tocenv}
-\tocitem \@locref{sec19}{\begin{@norefs}\@print{2.1}\quad{}Structures{}\end{@norefs}}
+\tocitem \@locref{sec19}{\begin{@norefs}\@print{2.1}\quad{}结构{}\end{@norefs}}
 \tocitem \@locref{sec20}{\begin{@norefs}\@print{2.2}\quad{}签名{}\end{@norefs}}
 \tocitem \@locref{sec21}{\begin{@norefs}\@print{2.3}\quad{}仿函数{}\end{@norefs}}
 \tocitem \@locref{sec22}{\begin{@norefs}\@print{2.4}\quad{}仿函数和类型抽象{}\end{@norefs}}
@@ -37,7 +37,7 @@
 \tocitem \@locref{sec33}{\begin{@norefs}\@print{3.9}\quad{}多继承{}\end{@norefs}}
 \tocitem \@locref{sec34}{\begin{@norefs}\@print{3.10}\quad{}参数化类{}\end{@norefs}}
 \tocitem \@locref{sec35}{\begin{@norefs}\@print{3.11}\quad{}多态方法{}\end{@norefs}}
-\tocitem \@locref{sec36}{\begin{@norefs}\@print{3.12}\quad{}Using coercions{}\end{@norefs}}
+\tocitem \@locref{sec36}{\begin{@norefs}\@print{3.12}\quad{}使用强制{}\end{@norefs}}
 \tocitem \@locref{sec37}{\begin{@norefs}\@print{3.13}\quad{}Functional objects{}\end{@norefs}}
 \tocitem \@locref{sec38}{\begin{@norefs}\@print{3.14}\quad{}Cloning objects{}\end{@norefs}}
 \tocitem \@locref{sec39}{\begin{@norefs}\@print{3.15}\quad{}Recursive classes{}\end{@norefs}}
