@@ -1,5 +1,5 @@
 \begin{tocenv}
-\tocitem \@locref{sec6}{\begin{@norefs}\@print{第 I 部分}\quad{}OCaml 简介{}\end{@norefs}}
+\tocitem \@locref{sec6}{\begin{@norefs}\@print{第一部分}\quad{}OCaml 简介{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec7}{\begin{@norefs}\@print{第 1 章}\quad{}核心语言{}\end{@norefs}}
 \begin{tocenv}
@@ -86,7 +86,7 @@
 \tocitem \@locref{sec69}{\begin{@norefs}\@print{6.3}\quad{}The subject/observer pattern{}\end{@norefs}}
 \end{tocenv}
 \end{tocenv}
-\tocitem \@locref{sec70}{\begin{@norefs}\@print{第 II 部分}\quad{}OCaml 语言{}\end{@norefs}}
+\tocitem \@locref{sec70}{\begin{@norefs}\@print{第二部分}\quad{}OCaml 语言{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec71}{\begin{@norefs}\@print{第 7 章}\quad{}The OCaml language{}\end{@norefs}}
 \begin{tocenv}
@@ -195,7 +195,7 @@
 \tocitem \@locref{s:empty-variants}{\begin{@norefs}\@print{8.23}\quad{}Empty variant types\label{s:empty-variants} {}\end{@norefs}}
 \end{tocenv}
 \end{tocenv}
-\tocitem \@locref{sec278}{\begin{@norefs}\@print{第 III 部分}\quad{}OCaml 工具{}\end{@norefs}}
+\tocitem \@locref{sec278}{\begin{@norefs}\@print{第三部分}\quad{}OCaml 工具{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec279}{\begin{@norefs}\@print{第 9 章}\quad{}Batch compilation (ocamlc){}\end{@norefs}}
 \begin{tocenv}
@@ -506,7 +506,7 @@
 \tocitem \@locref{sec547}{\begin{@norefs}\@print{24.2}\quad{}Basic example{}\end{@norefs}}
 \end{tocenv}
 \end{tocenv}
-\tocitem \@locref{sec548}{\begin{@norefs}\@print{第 IV 部分}\quad{}OCaml 库{}\end{@norefs}}
+\tocitem \@locref{sec548}{\begin{@norefs}\@print{第四部分}\quad{}OCaml 库{}\end{@norefs}}
 \begin{tocenv}
 \tocitem \@locref{sec549}{\begin{@norefs}\@print{第 25 章}\quad{}The core library{}\end{@norefs}}
 \begin{tocenv}
@@ -523,5 +523,5 @@
 \tocitem \@locref{sec563}{\begin{@norefs}\@print{第 33 章}\quad{}The dynlink library: dynamic loading and linking of object files{}\end{@norefs}}
 \tocitem \@locref{sec564}{\begin{@norefs}\@print{第 34 章}\quad{}The bigarray library{}\end{@norefs}}
 \end{tocenv}
-\tocitem \@locref{sec565}{\begin{@norefs}\@print{第 V 部分}\quad{}附录{}\end{@norefs}}
+\tocitem \@locref{sec565}{\begin{@norefs}\@print{第五部分}\quad{}附录{}\end{@norefs}}
 \end{tocenv}

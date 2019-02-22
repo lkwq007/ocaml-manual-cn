@@ -123,7 +123,7 @@ a.syntax:hover{color:black;text-decoration:none;background-color:#FF6060}
 <span style="font-size:x-large">文档与用户手册 <br>
 <span style="font-size:large">Xavier Leroy, <br>
  Damien Doligez, Alain Frisch, Jacques Garrigue, Didier Rémy and Jérôme Vouillon <br>
- 2019 年 2 月 21 日<br>
+ 2019 年 2 月 22 日<br>
   
 <span style="font-size:medium">Copyright © 2013 Institut National de
 Recherche en Informatique et en Automatique. <br>
@@ -140,7 +140,7 @@ and as a
 <hr style="height:2">
 </blockquote><!--TOC chapter id="sec1" 目录-->
 <h1 class="chapter" id="sec1">目录</h1><!--SEC END --><ul class="toc"><li class="li-toc">
-<a href="#sec6">第 I 部分  OCaml 简介</a>
+<a href="#sec6">第一部分  OCaml 简介</a>
 <ul class="toc"><li class="li-toc">
 <a href="#sec7">第 1 章  核心语言</a>
 <ul class="toc"><li class="li-toc">
@@ -227,7 +227,7 @@ and as a
 </li><li class="li-toc"><a href="#sec69">6.3  The subject/observer pattern</a>
 </li></ul>
 </li></ul>
-</li><li class="li-toc"><a href="#sec70">第 II 部分  OCaml 语言</a>
+</li><li class="li-toc"><a href="#sec70">第二部分  OCaml 语言</a>
 <ul class="toc"><li class="li-toc">
 <a href="#sec71">第 7 章  The OCaml language</a>
 <ul class="toc"><li class="li-toc">
@@ -336,7 +336,7 @@ and as a
 </li><li class="li-toc"><a href="#s%3Aempty-variants">8.23  Empty variant types </a>
 </li></ul>
 </li></ul>
-</li><li class="li-toc"><a href="#sec278">第 III 部分  OCaml 工具</a>
+</li><li class="li-toc"><a href="#sec278">第三部分  OCaml 工具</a>
 <ul class="toc"><li class="li-toc">
 <a href="#sec279">第 9 章  Batch compilation (ocamlc)</a>
 <ul class="toc"><li class="li-toc">
@@ -647,7 +647,7 @@ and as a
 </li><li class="li-toc"><a href="#sec547">24.2  Basic example</a>
 </li></ul>
 </li></ul>
-</li><li class="li-toc"><a href="#sec548">第 IV 部分  OCaml 库</a>
+</li><li class="li-toc"><a href="#sec548">第四部分  OCaml 库</a>
 <ul class="toc"><li class="li-toc">
 <a href="#sec549">第 25 章  The core library</a>
 <ul class="toc"><li class="li-toc">
@@ -664,14 +664,14 @@ and as a
 </li><li class="li-toc"><a href="#sec563">第 33 章  The dynlink library: dynamic loading and linking of object files</a>
 </li><li class="li-toc"><a href="#sec564">第 34 章  The bigarray library</a>
 </li></ul>
-</li><li class="li-toc"><a href="#sec565">第 V 部分  附录</a>
+</li><li class="li-toc"><a href="#sec565">第五部分  附录</a>
 </li></ul><!--TOC chapter id="sec2" 前言-->
 <h1 class="chapter" id="sec2">前言</h1><!--SEC END --><!--NAME foreword.html-->
 <p>该手册记录了 OCaml 4.08 版本的相关信息。其结构组织如下：</p><ul class="itemize"><li class="li-itemize">
-第 <a href="#p%3Atutorials">I</a> 部分，“OCaml 简介”将提供该语言的简要介绍。
-</li><li class="li-itemize">第 <a href="#p%3Arefman">II</a> 部分，“OCaml 语言”，给出该语言的使用参考说明。
-</li><li class="li-itemize">第 <a href="#p%3Acommands">III</a> 部分，“OCaml 工具”，记录了编译器、顶层系统和编程工具的相关信息。
-</li><li class="li-itemize">第 <a href="#p%3Alibrary">IV</a> 部分，“OCaml 库”，描述了标准库所提供的模块。
+第<a href="#p%3Atutorials">一</a>部分，“OCaml 简介”将提供该语言的简要介绍。
+</li><li class="li-itemize">第<a href="#p%3Arefman">二</a>部分，“OCaml 语言”，给出该语言的使用参考说明。
+</li><li class="li-itemize">第<a href="#p%3Acommands">三</a>部分，“OCaml 工具”，记录了编译器、顶层系统和编程工具的相关信息。
+</li><li class="li-itemize">第<a href="#p%3Alibrary">四</a>部分，“OCaml 库”，描述了标准库所提供的模块。
 
 </li></ul><!--TOC section id="sec3" 约定-->
 <h2 class="section" id="sec3">约定</h2><!--SEC END --><p>OCaml 可以在若干操作系统上运行。因此该手册上的部分内容将只针对如下的某一特定操作系统：</p><blockquote class="quote"><span class="c007">Unix:</span>   这部分材料仅针对 Unix 族的操作系统，如 Linux 和 MacOS X。
@@ -692,8 +692,8 @@ and as a
 <a href="http://caml.inria.fr/">旧版的 Caml 网站</a>上获得。<a href="http://www.ocaml.org/">Caml 社区网站</a>上包括大量关于 OCaml 的额外信息。
 
 </p>
-<!--TOC part id="sec6" 第 I 部分  OCaml 简介-->
-<table class="center"><tr><td><h1 class="part" id="sec6">第 I 部分<br>
+<!--TOC part id="sec6" 第一部分  OCaml 简介-->
+<table class="center"><tr><td><h1 class="part" id="sec6">第一部分<br>
 OCaml 简介</h1></td></tr>
 </table><!--SEC END --><p>
 <a id="p:tutorials"></a>
@@ -6559,8 +6559,8 @@ and attach several observers to the same object:
 
 
 </div>
-<!--TOC part id="sec70" 第 II 部分  OCaml 语言-->
-<table class="center"><tr><td><h1 class="part" id="sec70">第 II 部分<br>
+<!--TOC part id="sec70" 第二部分  OCaml 语言-->
+<table class="center"><tr><td><h1 class="part" id="sec70">第二部分<br>
 OCaml 语言</h1></td></tr>
 </table><!--SEC END --><p>
 <a id="p:refman"></a>
@@ -12083,8 +12083,8 @@ Empty variant type can be eliminated by refutation case of pattern matching.
 
 </div><!--CUT END -->
 
-<!--TOC part id="sec278" 第 III 部分  OCaml 工具-->
-<table class="center"><tr><td><h1 class="part" id="sec278">第 III 部分<br>
+<!--TOC part id="sec278" 第三部分  OCaml 工具-->
+<table class="center"><tr><td><h1 class="part" id="sec278">第三部分<br>
 OCaml 工具</h1></td></tr>
 </table><!--SEC END --><p>
 <a id="p:commands"></a></p>
@@ -19908,8 +19908,8 @@ let () = Pparse.ImplementationHooks.add_hook "Hello world hook" transform
 </pre><p>Compiling other files with this plugin enabled is then as simple as
 </p><pre>$ ocamlopt -plugin plugin.cmxs test.ml -o test
 </pre>
-<!--TOC part id="sec548" 第 IV 部分  OCaml 库-->
-<table class="center"><tr><td><h1 class="part" id="sec548">第 IV 部分<br>
+<!--TOC part id="sec548" 第四部分  OCaml 库-->
+<table class="center"><tr><td><h1 class="part" id="sec548">第四部分<br>
 OCaml 库</h1></td></tr>
 </table><!--SEC END --><p>
 <a id="p:library"></a>
@@ -20446,8 +20446,8 @@ For interactive use of the <span class="c003">bigarray</span> compatibility libr
 or (if dynamic linking of C libraries is supported on your platform),
 start <span class="c003">ocaml</span> and type <span class="c003">#load "bigarray.cma";;</span>.
 </p>
-<!--TOC part id="sec565" 第 V 部分  附录-->
-<table class="center"><tr><td><h1 class="part" id="sec565">第 V 部分<br>
+<!--TOC part id="sec565" 第五部分  附录-->
+<table class="center"><tr><td><h1 class="part" id="sec565">第五部分<br>
 附录</h1></td></tr>
 </table><!--SEC END --><p>
 <a id="p:appendix"></a></p><ul class="ftoc2"><li class="li-links">

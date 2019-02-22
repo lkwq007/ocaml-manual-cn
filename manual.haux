@@ -1,5 +1,5 @@
-\@@addtocsec{htoc}{sec6}{-2}{\@print{第 I 部分}\quad{}OCaml 简介{}}
-\newlabel{p:tutorials}{{I}{X}}
+\@@addtocsec{htoc}{sec6}{-2}{\@print{第一部分}\quad{}OCaml 简介{}}
+\newlabel{p:tutorials}{{一}{X}}
 \@deflabeltype{p:tutorials}{part}
 \@@addtocsec{htoc}{sec7}{-1}{\@print{第 1 章}\quad{}核心语言{}}
 \newlabel{c:core-xamples}{{1}{X}}
@@ -131,8 +131,8 @@
 \@@addtocsec{htoc}{sec69}{0}{\@print{6.3}\quad{}The subject/observer pattern{}}
 \newlabel{ss:subject-observer}{{6.3}{X}}
 \@deflabeltype{ss:subject-observer}{section}
-\@@addtocsec{htoc}{sec70}{-2}{\@print{第 II 部分}\quad{}OCaml 语言{}}
-\newlabel{p:refman}{{II}{X}}
+\@@addtocsec{htoc}{sec70}{-2}{\@print{第二部分}\quad{}OCaml 语言{}}
+\newlabel{p:refman}{{二}{X}}
 \@deflabeltype{p:refman}{part}
 \@@addtocsec{htoc}{sec71}{-1}{\@print{第 7 章}\quad{}The OCaml language{}}
 \newlabel{c:refman}{{7}{X}}
@@ -312,8 +312,8 @@
 \stx@exists{dot-ext}\@@addtocsec{htoc}{s:empty-variants}{0}{\@print{8.23}\quad{}Empty variant types\label{s:empty-variants} {}}
 \new@anchor@label{sec277}{s:empty-variants}{{8.23}{X}}
 \@deflabeltype{s:empty-variants}{section}
-\@@addtocsec{htoc}{sec278}{-2}{\@print{第 III 部分}\quad{}OCaml 工具{}}
-\newlabel{p:commands}{{III}{X}}
+\@@addtocsec{htoc}{sec278}{-2}{\@print{第三部分}\quad{}OCaml 工具{}}
+\newlabel{p:commands}{{三}{X}}
 \@deflabeltype{p:commands}{part}
 \@@addtocsec{htoc}{sec279}{-1}{\@print{第 9 章}\quad{}Batch compilation (ocamlc){}}
 \newlabel{c:camlc}{{9}{X}}
@@ -675,8 +675,8 @@
 \@deflabeltype{c:plugins}{chapter}
 \@@addtocsec{htoc}{sec546}{0}{\@print{24.1}\quad{}Overview{}}
 \@@addtocsec{htoc}{sec547}{0}{\@print{24.2}\quad{}Basic example{}}
-\@@addtocsec{htoc}{sec548}{-2}{\@print{第 IV 部分}\quad{}OCaml 库{}}
-\newlabel{p:library}{{IV}{X}}
+\@@addtocsec{htoc}{sec548}{-2}{\@print{第四部分}\quad{}OCaml 库{}}
+\newlabel{p:library}{{四}{X}}
 \@deflabeltype{p:library}{part}
 \@@addtocsec{htoc}{sec549}{-1}{\@print{第 25 章}\quad{}The core library{}}
 \newlabel{c:corelib}{{25}{X}}
@@ -702,6 +702,6 @@
 \@@addtocsec{htoc}{sec562}{-1}{\@print{第 32 章}\quad{}The graphics library{}}
 \@@addtocsec{htoc}{sec563}{-1}{\@print{第 33 章}\quad{}The dynlink library: dynamic loading and linking of object files{}}
 \@@addtocsec{htoc}{sec564}{-1}{\@print{第 34 章}\quad{}The bigarray library{}}
-\@@addtocsec{htoc}{sec565}{-2}{\@print{第 V 部分}\quad{}附录{}}
-\newlabel{p:appendix}{{V}{X}}
+\@@addtocsec{htoc}{sec565}{-2}{\@print{第五部分}\quad{}附录{}}
+\newlabel{p:appendix}{{五}{X}}
 \@deflabeltype{p:appendix}{part}
