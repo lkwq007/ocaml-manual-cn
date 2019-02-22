@@ -5,12 +5,12 @@
 该手册记录了 OCaml \ocamlversion\ 版本的相关信息。其结构组织如下：
 
 \begin{itemize}
-\item 第~\ref{p:tutorials} 部分，“OCaml 简介”将提供该语言的简要介绍。
-\item 第~\ref{p:refman} 部分，“OCaml 语言”，给出该语言的使用参考说明。
-\item 第~\ref{p:commands} 部分，“OCaml 工具”，记录了编译器、顶层系统和编程工具的相关信息。
-\item 第~\ref{p:library} 部分，“OCaml 库”，描述了标准库所提供的模块。
+\item 第\ref{p:tutorials}部分，“OCaml 简介”将提供该语言的简要介绍。
+\item 第\ref{p:refman}部分，“OCaml 语言”，给出该语言的使用参考说明。
+\item 第\ref{p:commands}部分，“OCaml 工具”，记录了编译器、顶层系统和编程工具的相关信息。
+\item 第\ref{p:library}部分，“OCaml 库”，描述了标准库所提供的模块。
 \begin{latexonly}
-\item 第~\ref{p:appendix} 部分，“附录”，包含了标准库中所有标示符的索引和关键词的索引。
+\item 第\ref{p:appendix}部分，“附录”，包含了标准库中所有标示符的索引和关键词的索引。
 \end{latexonly}
 \end{itemize}
 

@@ -1,15 +1,33 @@
 % \input{book.hva}
 % dirty hack for chinese support
+
 \renewcommand\today{\theyear~年~\themonth~月~\theday~日}
 \renewcommand\contentsname{目录}
+
+% dirty CJK since hevea not support loop and math operators
+% command like \roman is implemented by ocaml func roman_of_int
+% considering we only have a few parts, so that can be enough
+\newcommand{\CJK}[1]
+{\ifthenelse{\equal{#1}{\string I}}{一}
+{\ifthenelse{\equal{#1}{\string II}}{二}
+{\ifthenelse{\equal{#1}{\string III}}{三}
+{\ifthenelse{\equal{#1}{\string IV}}{四}
+{\ifthenelse{\equal{#1}{\string V}}{五}
+{\ifthenelse{\equal{#1}{\string VI}}{六}
+{\ifthenelse{\equal{#1}{\string VII}}{七}
+{\ifthenelse{\equal{#1}{\string VIII}}{八}
+{\ifthenelse{\equal{#1}{\string IX}}{九}
+{十}}}}}}}}}}
+
 \ifstyleloaded\relax
 \else
 \input{bookcommon.hva}
+\renewcommand \thepart {\CJK{\Roman{part}}}
 \newcommand{\@book@attr}[1]{\@secid\envclass@attr{#1}}
 \@makesection
   {\part}{-2}{part}
   {\@opencell{class="center"}{}{}\@open{h1}{\@book@attr{part}}}%
-  {第~\thepart~部分}{\\}%
+  {第\thepart部分}{\\}%
   {\@close{h1}\@closecell}
 \newstyle{.part}{margin:2ex auto;text-align:center}
 \@makesection
