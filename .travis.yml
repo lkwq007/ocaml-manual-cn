@@ -7,11 +7,26 @@ before_install:
   - sudo apt-get update -q
   - sudo apt-get install apt-fast -y
   - sudo apt-fast install ocaml ocaml-native-compilers opam texlive-full -y
+before_deploy:
+  - mkdir release
+  - REFMAN_VERSION=`git describe --abbrev=0 --tags`
+  - export RELEASENAME="ocaml-${REFMAN_VERSION}-"
+  - make release
 deploy:
-  provider: pages
-  local_dir: manual/htmlman
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  on:
-    branch: master
+  - provider: pages
+    local_dir: manual/htmlman
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    keep-history: true
+    on:
+      branch: master
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    file_glob: true
+    file: release/*
+    skip_cleanup: true
+    draft: true
+    on:
+      tags: true
+
+    
