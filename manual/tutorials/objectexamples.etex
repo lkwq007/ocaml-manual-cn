@@ -23,7 +23,7 @@
 \ref{ss:multiple-inheritance} 多继承 \\
 \ref{ss:parameterized-classes} 参数化类 \\
 \ref{ss:polymorphic-methods} 多态方法 \\
-\ref{ss:using-coercions} 使用强制 \\
+\ref{ss:using-coercions} 使用强制转换 \\
 \ref{ss:functional-objects} 函数对象 \\
 \ref{ss:cloning-objects} 克隆对象 \\
 \ref{ss:recursive-classes} 递归类 \\
@@ -522,6 +522,8 @@ class ['a] colored_circle c =
 \section{多态方法}
 \label{ss:polymorphic-methods}
 
+注：需校订，我对于部分概念暂时没有印象 by @lkwq007
+
 虽然参数化类的内容可能是具有多态性的，但它们不足以允许方法使用的多态性。
 
 一个经典的例子是迭代器的定义。
@@ -625,27 +627,26 @@ class multi_poly =
 
 在方法~"m1"~中，"o"~必须是具有方法~"n1"~的对象，其本身具有多态性。在方法~"m2"~中，"n2" 的参数和~"x"~必须具有相同的类型，其量化级别与~"'a"~相同。
 
-\section{使用强制}
+\section{使用强制转换}
 \label{ss:using-coercions}
 
-Subtyping is never implicit.  There are, however, two ways to perform
-subtyping.  The most general construction is fully explicit: both the
-domain and the codomain of the type coercion must be given.
+注：需校订，我对于部分概念暂时没有印象 by @lkwq007
 
-We have seen that points and colored points have incompatible types.
-For instance, they cannot be mixed in the same list. However, a
-colored point can be coerced to a point, hiding its "color" method:
+子类型在 OCaml 中并不是隐式的。但是其中有两种使用子类型的方法。最一般的构造方法是完全显式的：类型强制的域与上域都必须被给出。
+
+我们已经看到，点（"point"~类型）和有色点（"colored_point"~类型）具有不兼容的类型。例如，它们不能被混合放在同一个列表中。然而，我可以通过隐藏彩色点的~"color"~方法的方式将它强制转换为一个点：
 \begin{caml_example}{toplevel}
 let colored_point_to_point cp = (cp : colored_point :> point);;
 let p = new point 3 and q = new colored_point 4 "blue";;
 let l = [p; (colored_point_to_point q)];;
 \end{caml_example}
-An object of type "t" can be seen as an object of type "t'"
-only if "t" is a subtype of "t'". For instance, a point cannot be
-seen as a colored point.
+
+只有当~"t"~是~"t'"~的子类型时，一个类型为~"t"~的对象才能被视为类型为~"t'"~的对象。例如，一个点不能被看作是一个有颜色的点。
 \begin{caml_example}{toplevel}[error]
 (p : point :> colored_point);;
 \end{caml_example}
+
+
 Indeed, narrowing coercions without runtime checks would be unsafe.
 Runtime type checks might raise exceptions, and they would require
 the presence of type information at runtime, which is not the case in
