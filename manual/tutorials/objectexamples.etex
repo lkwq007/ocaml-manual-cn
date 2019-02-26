@@ -821,13 +821,10 @@ type 'a c'_class = 'a constraint 'a = < m : int; .. >;;
 \end{caml_example*}
 with an extra type variable capturing the open object type.
 
-\section{Functional objects}
+\section{函数式对象}
 \label{ss:functional-objects}
 
-It is possible to write a version of class "point" without assignments
-on the instance variables. The override construct "{< ... >}" returns a copy of
-``self'' (that is, the current object), possibly changing the value of
-some instance variables.
+事实上，我们不需要对实例变量赋值，就可以获得~"point"~类的一个对象。重载结构~"{< ... >}"~可以返回“self”（即当前对象）的副本，在此过程中可以更改某些实例变量的值。
 \begin{caml_example}{toplevel}
 class functional_point y =
   object
@@ -840,12 +837,10 @@ p#get_x;;
 (p#move 3)#get_x;;
 p#get_x;;
 \end{caml_example}
-Note that the type abbreviation "functional_point" is recursive, which can
-be seen in the class type of "functional_point": the type of self is "'a"
-and "'a" appears inside the type of the method "move".
 
-The above definition of "functional_point" is not equivalent
-to the following:
+注意，类型缩写~"functional_point"~是递归的。我们可以在~"functional_point"~的类类型中看到它：self 的类型是~"'a"，而~ "'a"~出现在方法~"move"~的类型中。
+
+"functional_point"~的上述定义不同于以下内容：
 \begin{caml_example}{toplevel}
 class bad_functional_point y =
   object
@@ -854,15 +849,10 @@ class bad_functional_point y =
     method move d = new bad_functional_point (x+d)
   end;;
 \end{caml_example}
-While objects of either class will behave the same, objects of their
-subclasses will be different. In a subclass of "bad_functional_point",
-the method "move" will
-keep returning an object of the parent class.  On the contrary, in a
-subclass of "functional_point", the method "move" will return an
-object of the subclass.
 
-Functional update is often used in conjunction with binary methods
-as illustrated in section \ref{module:string}.
+虽然这两个类的对象的行为是相同的，但是它们的子类的对象是不同的。在~"bad_functional_point"~的子类中，方法~"move"~将继续返回父类的一个对象。相反，在~"functional_point"~的子类中，"move"~方法将会返回子类的一个对象。
+
+如~\ref{module:string}~节所示，函数式更新通常与二元方法一起使用。
 
 \section{Cloning objects}
 \label{ss:cloning-objects}
