@@ -854,20 +854,12 @@ class bad_functional_point y =
 
 如~\ref{module:string}~节所示，函数式更新通常与二元方法一起使用。
 
-\section{Cloning objects}
+\section{克隆对象}
 \label{ss:cloning-objects}
 
-Objects can also be cloned, whether they are functional or imperative.
-The library function "Oo.copy" makes a shallow copy of an object. That is,
-it returns a new object that has the same methods and instance
-variables as its argument. The
-instance variables are copied but their contents are shared.
-Assigning a new value to an instance variable of the copy (using a method
-call) will not affect instance variables of the original, and conversely.
-A deeper assignment (for example if the instance variable is a reference cell)
-will of course affect both the original and the copy.
+对象也可以被克隆，无论它们是函数式的还是命令式的。库函数~"Oo.copy"~能够生成对象的浅拷贝。也就是说，它可以返回一个新对象，该对象具有与其参数相同的方法和实例变量。其中实例变量被复制，但它们的内容是被共享的。将新值赋给副本的实例变量（使用方法调用）不会影响原始实例变量，反之亦然。更深层次的赋值（例如，如果实例变量是 ref 单元格）将会自然地同时影响原始和副本。
 
-The type of "Oo.copy" is the following:
+"Oo.copy"~的类型如下所示：
 \begin{caml_example}{toplevel}
 Oo.copy;;
 \end{caml_example}
