@@ -863,36 +863,24 @@ class bad_functional_point y =
 \begin{caml_example}{toplevel}
 Oo.copy;;
 \end{caml_example}
-The keyword "as" in that type binds the type variable "'a" to
-the object type "< .. >".  Therefore, "Oo.copy" takes an object with
-any methods (represented by the ellipsis), and returns an object of
-the same type. The type of "Oo.copy" is different from type "< .. > ->
-< .. >" as each ellipsis represents a different set of methods.
-Ellipsis actually behaves as a type variable.
+
+该类型中的~"as"~关键字将类型变量~"'a"~绑定到对象类型~"< .. >"。因此，"Oo.copy"~可以接受具有任何方法的对象（由省略号表示），并返回相同类型的对象。"Oo.copy"~的类型与~"< .. > -> < .. >"~类型不同，其中每个省略号表示一组不同的方法。在这里省略号实际上表现为一个类型变量。
 \begin{caml_example}{toplevel}
 let p = new point 5;;
 let q = Oo.copy p;;
 q#move 7; (p#get_x, q#get_x);;
 \end{caml_example}
-In fact, "Oo.copy p" will behave as "p#copy" assuming that a public
-method "copy" with body "{< >}" has been defined in the class of "p".
 
-Objects can be compared using the generic comparison functions "=" and "<>".
-Two objects are equal if and only if they are physically equal. In
-particular, an object and its copy are not equal.
+事实上，"Oo.copy p"~将会表现为~"p#copy"。这里假设在~"p"~类的结构体~"{< >}"~中定义了一个公共方法~"copy"。
+
+对象可以使用泛型比较函数~"="~和~"<>"~进行比较。两个对象相等当且仅当它们在物理上相等。需要特别说明的是，一个对象和它的副本是不相等的。
 \begin{caml_example}{toplevel}
 let q = Oo.copy p;;
 p = q, p = p;;
 \end{caml_example}
-Other generic comparisons such as ("<", "<=", ...) can also be used on
-objects.  The
-relation "<" defines an unspecified but strict ordering on objects.  The
-ordering relationship between two objects is fixed once for all after the
-two objects have been created and it is not affected by mutation of fields.
+其他的泛型比较，如（"<"、"<="~等）也可以用于对象。关系~"<"~定义了一类未被指定但严格的对象次序。两个对象之间的次序关系在这两个对象被创建之后被是恒定的，其不受字段变化的影响。
 
-Cloning and override have a non empty intersection.
-They are interchangeable when used within an object and without
-overriding any field:
+克隆和重载有一个非空的交集。当它们在对象中被使用且不覆盖任何字段时，它们是可以互换的：
 \begin{caml_example}{toplevel}
 class copy =
   object
@@ -903,11 +891,10 @@ class copy =
     method copy = Oo.copy self
   end;;
 \end{caml_example}
-Only the override can be used to actually override fields, and
-only the "Oo.copy" primitive can be used externally.
 
-Cloning can also be used to provide facilities for saving and
-restoring the state of objects.
+只有重载操作可以用于实际重写字段，同时也只有~"Oo.copy"~原型可以在外部使用。
+
+克隆还可以用于提供保存和恢复对象状态的机制。
 \begin{caml_example}{toplevel}
 class backup =
   object (self : 'mytype)
@@ -916,8 +903,8 @@ class backup =
     method restore = match copy with Some x -> x | None -> self
   end;;
 \end{caml_example}
-The above definition will only backup one level.
-The backup facility can be added to any class by using multiple inheritance.
+
+上面的定义只会备份一层。我们可以通过多继承将备份机制添加到任何类中。
 \begin{caml_example}{toplevel}
 class ['a] backup_ref x = object inherit ['a] oref x inherit backup end;;
 let rec get p n = if n = 0 then p # get else get (p # restore) (n-1);;
@@ -925,8 +912,8 @@ let p = new backup_ref 0  in
 p # save; p # set 1; p # save; p # set 2;
 [get p 0; get p 1; get p 2; get p 3; get p 4];;
 \end{caml_example}
-We can define a variant of backup that retains all copies. (We also
-add a method "clear" to manually erase all copies.)
+
+我们可以定义一个保留所有副本的备份的变体。（我们还添加了一个清除所有副本的方法~"clear"）
 \begin{caml_example}{toplevel}
 class backup =
   object (self : 'mytype)
