@@ -20,6 +20,7 @@ manual: tools
 html: tools
 	$(MAKE) -C manual html
 
+.PHONY: release
 release:
 	$(MAKE) -C manual release
 
