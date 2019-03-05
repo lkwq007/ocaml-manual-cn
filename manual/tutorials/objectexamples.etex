@@ -819,7 +819,7 @@ The closer you get to it is:
 \begin{caml_example*}{toplevel}
 type 'a c'_class = 'a constraint 'a = < m : int; .. >;;
 \end{caml_example*}
-with an extra type variable capturing the open object type.
+使用一个额外的类型变量捕获打开的对象类型。
 
 \section{函数式对象}
 \label{ss:functional-objects}
@@ -932,11 +932,10 @@ p # save; p # set 1; p # save; p # set 2;
 
 
 
-\section{Recursive classes}
+\section{递归类}
 \label{ss:recursive-classes}
 
-Recursive classes can be used to define objects whose types are
-mutually recursive.
+递归类可被用于定义类型相互递归的对象。
 \begin{caml_example}{toplevel}
 class window =
   object
@@ -949,31 +948,21 @@ and widget (w : window) =
     method window = window
   end;;
 \end{caml_example}
-Although their types are mutually recursive, the classes "widget" and
-"window" are themselves independent.
 
+尽管它们的类型是相互递归的，但是~"widget"~类和~"window"~类其本身是独立的。
 
-\section{Binary methods}
+\section{二元方法}
 \label{ss:binary-methods}
 
-A binary method is a method which takes an argument of the same type
-as self. The class "comparable" below is a template for classes with a
-binary method "leq" of type "'a -> bool" where the type variable "'a"
-is bound to the type of self. Therefore, "#comparable" expands to "<
-leq : 'a -> bool; .. > as 'a".  We see here that the binder "as" also
-allows writing recursive types.
+二元方法是一类参数与 self 具有相同类型的的方法。以下的~"comparable"~类是一个具有二元方法~"leq"~的类模板，"leq"~的类型为~"'a -> bool"，其中类型变量~"'a"~被绑定到 self 的类型。因此，"#comparable"~被拓展为为~"< leq : 'a -> bool; .. > as 'a"。在这里我们看到绑定器~"as"~同样允许编写递归类型。
 \begin{caml_example}{toplevel}
 class virtual comparable =
   object (_ : 'a)
     method virtual leq : 'a -> bool
   end;;
 \end{caml_example}
-We then define a subclass "money" of "comparable". The class "money"
-simply wraps floats as comparable objects. We will extend it below with
-more operations. We have to use a type constraint on the class parameter "x"
-because the primitive "<=" is a polymorphic function in
-OCaml.  The "inherit" clause ensures that the type of objects
-of this class is an instance of "#comparable".
+
+然后我们定义了~"comparable"~子类~"money"。"money"~类仅仅将浮点数封装为可比较的对象，我们将在下面对其进行扩展。在这里，我们必须对类参数~"x"~使用类型约束，因为原型~"<="~是 OCaml 中的一个多态函数。"inherit"~子句确保该类的对象类型是~"#comparable"~的实例。
 \begin{caml_example}{toplevel}
 class money (x : float) =
   object
@@ -984,16 +973,9 @@ class money (x : float) =
   end;;
 \end{caml_example}
 % not explained: mutability can be hidden
-Note that the type "money" is not a subtype of type
-"comparable", as the self type appears in contravariant position
-in the type of method "leq".
-Indeed, an object "m" of class "money" has a method "leq"
-that expects an argument of type "money" since it accesses
-its "value" method.  Considering "m" of type "comparable" would allow a
-call to method "leq" on "m" with an argument that does not have a method
-"value", which would be an error.
+注意类型~"money"~不是类型~"comparable"~的子类型，因为 self 的类型在方法~"leq"~的类型中是逆变的。事实上，类~"money"~的对象~"m"~有一个~"leq"~方法，该方法需要~"money"~类型的参数，因为它访问了参数的~"value"~方法。考虑到~"m"~的~"comparable"~类型会允许在~"m"~上使用一个没有~"value"~方法的参数调用~"leq"~方法，这将会产生一个错误。
 
-Similarly, the type "money2" below is not a subtype of type "money".
+同样，下面的~"money2"~类型不是~"money"~类型的子类型。
 \begin{caml_example}{toplevel}
 class money2 x =
   object
@@ -1001,35 +983,24 @@ class money2 x =
     method times k = {< repr = k *. repr >}
   end;;
 \end{caml_example}
-It is however possible to define functions that manipulate objects of
-type either "money" or "money2": the function "min"
-will return the minimum of any two objects whose type unifies with
-"#comparable". The type of "min" is not the same as "#comparable ->
-#comparable -> #comparable", as the abbreviation "#comparable" hides a
-type variable (an ellipsis). Each occurrence of this abbreviation
-generates a new variable.
+
+然而，我们可以定义操作~"money"~或~"money2"~类型对象的函数：函数~"min"~将返回类型与~"#comparable"~一致的任何两个对象的最小值。"min"~的类型与~"#comparable -> #comparable -> #comparable"~不同，因为缩写~"#comparable"~隐藏了一个类型变量（省略号）。该缩写的每次出现都会产生一个新的变量。
 \begin{caml_example}{toplevel}
 let min (x : #comparable) y =
   if x#leq y then x else y;;
 \end{caml_example}
-This function can be applied to objects of type "money"
-or "money2".
+
+这个函数可以应用于~"money"~或~"money2"~类型的对象。
 \begin{caml_example}{toplevel}
 (min (new money  1.3) (new money 3.1))#value;;
 (min (new money2 5.0) (new money2 3.14))#value;;
 \end{caml_example}
 
-More examples of binary methods can be found in sections
-\ref{module:string} and \ref{module:set}.
+更多二元方法的例子可以在第~\ref{module:string}~节和第~\ref{module:set}~节中找到
 
-Note the use of override for method "times".
-Writing  "new money2 (k *. repr)" instead of  "{< repr = k *. repr >}"
-would not behave well with inheritance: in a subclass "money3" of "money2"
-the "times" method would return an object of class "money2" but not of class
-"money3" as would be expected.
+对~"times"~方法使用重载时需要注意。将其写作~"new money2 (k *. repr)"~而非~"{< repr = k *. repr >}"~将不能妥当地处理继承：在~"money2"~的子类~"money3"~中，"times"~方法将返回~"money2"~类的对象，而不像预期的那样返回~"money3"~类的对象。
 
-The class "money" could naturally carry another binary method. Here is a
-direct definition:
+"money"~类可以自然地包含另一种二元方法。这是一种直接的定义：
 \begin{caml_example}{toplevel}
 class money x =
   object (self : 'a)
@@ -1042,17 +1013,10 @@ class money x =
   end;;
 \end{caml_example}
 
-\section{Friends}
+\section{友元}
 \label{ss:friends}
 
-The above class "money" reveals a problem that often occurs with binary
-methods.  In order to interact with other objects of the same class, the
-representation of "money" objects must be revealed, using a method such as
-"value". If we remove all binary methods (here "plus" and "leq"),
-the representation can easily be hidden inside objects by removing the method
-"value" as well. However, this is not possible as soon as some binary
-method requires access to the representation of objects of the same
-class (other than self).
+上面的~"money"~类揭示了使用二元方法时常出现的一个问题。为了与同一类的其他对象进行交互，必须使用一个形如~"value"~的方法使~"money"~对象的表示暴漏出来。如果我们移除其中全部的二进制方法（在这里为~"plus"~和~"leq"），也可以通过删除~"value"~方法来将该表示隐藏在对象中。然而，当某些二进制方法需要访问相同类（除了 self）的对象的表示时，这是无法实现的。
 \begin{caml_example}{toplevel}
 class safe_money x =
   object (self : 'a)
@@ -1061,10 +1025,8 @@ class safe_money x =
     method times k = {< repr = k *. x >}
   end;;
 \end{caml_example}
-Here, the representation of the object is known only to a particular object.
-To make it available to other objects of the same class, we are forced to
-make it available to the whole world. However we can easily restrict the
-visibility of the representation using the module system.
+
+在这里，对象的表示只有特定对象知道。为了使其对同一类的其他对象是可用的，我们必须使它对“整个世界”可用。但是，我们可以很容易地使用模块系统来限制表示的可见性。
 \begin{caml_example*}{toplevel}
 module type MONEY =
   sig
@@ -1093,15 +1055,7 @@ module Euro : MONEY =
       end
   end;;
 \end{caml_example*}
-Another example of friend functions may be found in section
-\ref{module:set}.  These examples occur when a group of objects (here
-objects of the same class) and functions should see each others internal
-representation, while their representation should be hidden from the
-outside. The solution is always to define all friends in the same module,
-give access to the representation and use a signature constraint to make the
-representation abstract outside the module.
-
-
+友元函数的另一个例子可以在第~\ref{module:set}~节中找到。当一组对象（这里是同一类的对象）和函数需要看到彼此的内部表示，而它们的表示应该对外部隐藏时，这些示例可以用作参考。解决方案始终是在同一个模块中定义所有友元，对表示进行访问，并使用签名约束使表示在模块外部变得抽象。
 
 % LocalWords:  typecheck monomorphic uncaptured Subtyping subtyping leq repr Oo
 % LocalWords:  val sig bool Euro struct OCaml Vouillon Didier int ref incr init
