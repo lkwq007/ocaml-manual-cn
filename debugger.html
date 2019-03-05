@@ -122,36 +122,36 @@ Also, breakpoints can only be set at events. Thus, events play the
 role of line numbers in debuggers for conventional languages.</p><p>During program execution, a counter is incremented at each event
 encountered. The value of this counter is referred as the <em>current
 time</em>. Thanks to reverse execution, it is possible to jump back and
-forth to any time of the execution.</p><p>Here is where the debugger events (written ǧ) are located in
+forth to any time of the execution.</p><p>Here is where the debugger events (written §§) are located in
 the source code:
 </p><ul class="itemize"><li class="li-itemize">
 Following a function application:
 <pre>
-(f arg)ǧ
+(f arg)§§
 </pre>
 </li><li class="li-itemize">On entrance to a function:
 <pre>
-fun x y z -&gt; ǧ ...
+fun x y z -&gt; §§ ...
 </pre>
 </li><li class="li-itemize">On each case of a pattern-matching definition (function,
 <span class="c003">match</span>…<span class="c003">with</span> construct, <span class="c003">try</span>…<span class="c003">with</span> construct):
 <pre>
-function pat1 -&gt; ǧ expr1
+function pat1 -&gt; §§ expr1
        | ...
-       | patN -&gt; ǧ exprN
+       | patN -&gt; §§ exprN
 </pre>
 </li><li class="li-itemize">Between subexpressions of a sequence:
 <pre>
-expr1; ǧ expr2; ǧ ...; ǧ exprN
+expr1; §§ expr2; §§ ...; §§ exprN
 </pre>
 </li><li class="li-itemize">In the two branches of a conditional expression:
 <pre>
-if cond then ǧ expr1 else ǧ expr2
+if cond then §§ expr1 else §§ expr2
 </pre>
 </li><li class="li-itemize">At the beginning of each iteration of a loop:
 <pre>
-while cond do ǧ body done
-for i = a to b do ǧ body done
+while cond do §§ body done
+for i = a to b do §§ body done
 </pre>
 </li></ul><p>
 Exceptions: A function application followed by a function return is replaced

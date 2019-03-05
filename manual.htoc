@@ -37,12 +37,12 @@
 \tocitem \@locref{sec33}{\begin{@norefs}\@print{3.9}\quad{}多继承{}\end{@norefs}}
 \tocitem \@locref{sec34}{\begin{@norefs}\@print{3.10}\quad{}参数化类{}\end{@norefs}}
 \tocitem \@locref{sec35}{\begin{@norefs}\@print{3.11}\quad{}多态方法{}\end{@norefs}}
-\tocitem \@locref{sec36}{\begin{@norefs}\@print{3.12}\quad{}使用强制{}\end{@norefs}}
-\tocitem \@locref{sec37}{\begin{@norefs}\@print{3.13}\quad{}Functional objects{}\end{@norefs}}
-\tocitem \@locref{sec38}{\begin{@norefs}\@print{3.14}\quad{}Cloning objects{}\end{@norefs}}
-\tocitem \@locref{sec39}{\begin{@norefs}\@print{3.15}\quad{}Recursive classes{}\end{@norefs}}
-\tocitem \@locref{sec40}{\begin{@norefs}\@print{3.16}\quad{}Binary methods{}\end{@norefs}}
-\tocitem \@locref{sec41}{\begin{@norefs}\@print{3.17}\quad{}Friends{}\end{@norefs}}
+\tocitem \@locref{sec36}{\begin{@norefs}\@print{3.12}\quad{}使用强制转换{}\end{@norefs}}
+\tocitem \@locref{sec37}{\begin{@norefs}\@print{3.13}\quad{}函数式对象{}\end{@norefs}}
+\tocitem \@locref{sec38}{\begin{@norefs}\@print{3.14}\quad{}克隆对象{}\end{@norefs}}
+\tocitem \@locref{sec39}{\begin{@norefs}\@print{3.15}\quad{}递归类{}\end{@norefs}}
+\tocitem \@locref{sec40}{\begin{@norefs}\@print{3.16}\quad{}二元方法{}\end{@norefs}}
+\tocitem \@locref{sec41}{\begin{@norefs}\@print{3.17}\quad{}友元{}\end{@norefs}}
 \end{tocenv}
 \tocitem \@locref{sec42}{\begin{@norefs}\@print{第 4 章}\quad{}Labels and variants{}\end{@norefs}}
 \begin{tocenv}

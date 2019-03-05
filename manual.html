@@ -123,22 +123,19 @@ a.syntax:hover{color:black;text-decoration:none;background-color:#FF6060}
 <span style="font-size:x-large">文档与用户手册 <br>
 <span style="font-size:large">Xavier Leroy, <br>
  Damien Doligez, Alain Frisch, Jacques Garrigue, Didier Rémy and Jérôme Vouillon <br>
- 2019 年 2 月 22 日<br>
+ 2019 年 3 月 5 日<br>
   
 <span style="font-size:medium">Copyright © 2013 Institut National de
 Recherche en Informatique et en Automatique. <br>
 法国国家信息与自动化研究所版权所有
 </span></span></span></span></span></div><blockquote class="quote">
-<hr style="height:2">
-This manual is also available in
-<a href="http://caml.inria.fr/distrib/ocaml-4.08/ocaml-4.08-refman.pdf">PDF</a>.
-<a href="http://caml.inria.fr/distrib/ocaml-4.08/ocaml-4.08-refman.txt">plain text</a>,
-as a
-<a href="http://caml.inria.fr/distrib/ocaml-4.08/ocaml-4.08-refman-html.tar.gz">bundle of HTML files</a>,
-and as a
-<a href="http://caml.inria.fr/distrib/ocaml-4.08/ocaml-4.08-refman.info.tar.gz">bundle of Emacs Info files</a>.
-<hr style="height:2">
-</blockquote><!--TOC chapter id="sec1" 目录-->
+<hr style="height:2"><p>本文档同时也具有 
+<a href="https://github.com/lkwq007/ocaml-manual-cn/releases/download/4.08/ocaml-4.08-refman.pdf">PDF 格式</a>、
+<a href="https://github.com/lkwq007/ocaml-manual-cn/releases/download/4.08/ocaml-4.08-refman.txt">纯文本格式</a>、
+<a href="https://github.com/lkwq007/ocaml-manual-cn/releases/download/4.08/ocaml-4.08-refman-html.tar.gz">HTML 格式</a>
+与 
+<a href="https://github.com/lkwq007/ocaml-manual-cn/releases/download/4.08/ocaml-4.08-refman.info.tar.gz">Emacs Info 格式</a>的副本。
+</p><hr style="height:2"></blockquote><!--TOC chapter id="sec1" 目录-->
 <h1 class="chapter" id="sec1">目录</h1><!--SEC END --><ul class="toc"><li class="li-toc">
 <a href="#sec6">第一部分  OCaml 简介</a>
 <ul class="toc"><li class="li-toc">
@@ -178,12 +175,12 @@ and as a
 </li><li class="li-toc"><a href="#sec33">3.9  多继承</a>
 </li><li class="li-toc"><a href="#sec34">3.10  参数化类</a>
 </li><li class="li-toc"><a href="#sec35">3.11  多态方法</a>
-</li><li class="li-toc"><a href="#sec36">3.12  使用强制</a>
-</li><li class="li-toc"><a href="#sec37">3.13  Functional objects</a>
-</li><li class="li-toc"><a href="#sec38">3.14  Cloning objects</a>
-</li><li class="li-toc"><a href="#sec39">3.15  Recursive classes</a>
-</li><li class="li-toc"><a href="#sec40">3.16  Binary methods</a>
-</li><li class="li-toc"><a href="#sec41">3.17  Friends</a>
+</li><li class="li-toc"><a href="#sec36">3.12  使用强制转换</a>
+</li><li class="li-toc"><a href="#sec37">3.13  函数式对象</a>
+</li><li class="li-toc"><a href="#sec38">3.14  克隆对象</a>
+</li><li class="li-toc"><a href="#sec39">3.15  递归类</a>
+</li><li class="li-toc"><a href="#sec40">3.16  二元方法</a>
+</li><li class="li-toc"><a href="#sec41">3.17  友元</a>
 </li></ul>
 </li><li class="li-toc"><a href="#sec42">第 4 章  Labels and variants</a>
 <ul class="toc"><li class="li-toc">
@@ -2121,7 +2118,7 @@ module Main: sig (* contents of Main.mli *) end
 <a href="#ss%3Amultiple-inheritance">3.9</a> 多继承 <br>
 <a href="#ss%3Aparameterized-classes">3.10</a> 参数化类 <br>
 <a href="#ss%3Apolymorphic-methods">3.11</a> 多态方法 <br>
-<a href="#ss%3Ausing-coercions">3.12</a> 使用强制 <br>
+<a href="#ss%3Ausing-coercions">3.12</a> 使用强制转换 <br>
 <a href="#ss%3Afunctional-objects">3.13</a> 函数对象 <br>
 <a href="#ss%3Acloning-objects">3.14</a> 克隆对象 <br>
 <a href="#ss%3Arecursive-classes">3.15</a> 递归类 <br>
@@ -3029,7 +3026,7 @@ val p' : printable_colored_point = &lt;obj&gt;
 </div>
 <!--TOC section id="sec35" 3.11  多态方法-->
 <h2 class="section" id="sec35">3.11  多态方法</h2><!--SEC END --><p>
-<a id="ss:polymorphic-methods"></a></p><p>虽然参数化类的内容可能是具有多态性的，但它们不足以允许方法使用的多态性。</p><p>一个经典的例子是迭代器的定义。
+<a id="ss:polymorphic-methods"></a></p><p>注：需校订，我对于部分概念暂时没有印象 by @lkwq007</p><p>虽然参数化类的内容可能是具有多态性的，但它们不足以允许方法使用的多态性。</p><p>一个经典的例子是迭代器的定义。
 
 
 </p><div class="caml-example toplevel">
@@ -3225,13 +3222,9 @@ val p' : printable_colored_point = &lt;obj&gt;
 
 
 </div><p>在方法 <span class="c003">m1</span> 中，<span class="c003">o</span> 必须是具有方法 <span class="c003">n1</span> 的对象，其本身具有多态性。在方法 <span class="c003">m2</span> 中，<span class="c003">n2</span> 的参数和 <span class="c003">x</span> 必须具有相同的类型，其量化级别与 <span class="c003">'a</span> 相同。</p>
-<!--TOC section id="sec36" 3.12  使用强制-->
-<h2 class="section" id="sec36">3.12  使用强制</h2><!--SEC END --><p>
-<a id="ss:using-coercions"></a></p><p>Subtyping is never implicit. There are, however, two ways to perform
-subtyping. The most general construction is fully explicit: both the
-domain and the codomain of the type coercion must be given.</p><p>We have seen that points and colored points have incompatible types.
-For instance, they cannot be mixed in the same list. However, a
-colored point can be coerced to a point, hiding its <span class="c003">color</span> method:
+<!--TOC section id="sec36" 3.12  使用强制转换-->
+<h2 class="section" id="sec36">3.12  使用强制转换</h2><!--SEC END --><p>
+<a id="ss:using-coercions"></a></p><p>注：需校订，我对于部分概念暂时没有印象 by @lkwq007</p><p>子类型在 OCaml 中并不是隐式的。但是其中有两种使用子类型的方法。最一般的构造方法是完全显式的：类型强制的域与上域都必须被给出。</p><p>我们已经看到，点（<span class="c003">point</span> 类型）和有色点（<span class="c003">colored_point</span> 类型）具有不兼容的类型。例如，它们不能被混合放在同一个列表中。然而，我可以通过隐藏彩色点的 <span class="c003">color</span> 方法的方式将它强制转换为一个点：
 
 
 </p><div class="caml-example toplevel">
@@ -3250,11 +3243,7 @@ val q : colored_point = &lt;obj&gt;
 </div></pre>
 
 
-</div><p>
-
-An object of type <span class="c003">t</span> can be seen as an object of type <span class="c003">t'</span>
-only if <span class="c003">t</span> is a subtype of <span class="c003">t'</span>. For instance, a point cannot be
-seen as a colored point.
+</div><p>只有当 <span class="c003">t</span> 是 <span class="c003">t'</span> 的子类型时，一个类型为 <span class="c003">t</span> 的对象才能被视为类型为 <span class="c003">t'</span> 的对象。例如，一个点不能被看作是一个有颜色的点。
 
 
 </p><div class="caml-example toplevel">
@@ -3269,9 +3258,7 @@ seen as a colored point.
 </div></pre>
 
 
-</div><p>
-
-Indeed, narrowing coercions without runtime checks would be unsafe.
+</div><p>Indeed, narrowing coercions without runtime checks would be unsafe.
 Runtime type checks might raise exceptions, and they would require
 the presence of type information at runtime, which is not the case in
 the OCaml system.
@@ -3559,13 +3546,10 @@ The closer you get to it is:
 
 </div><p>
 
-with an extra type variable capturing the open object type.</p>
-<!--TOC section id="sec37" 3.13  Functional objects-->
-<h2 class="section" id="sec37">3.13  Functional objects</h2><!--SEC END --><p>
-<a id="ss:functional-objects"></a></p><p>It is possible to write a version of class <span class="c003">point</span> without assignments
-on the instance variables. The override construct <span class="c003">{&lt; ... &gt;}</span> returns a copy of
-“self” (that is, the current object), possibly changing the value of
-some instance variables.
+使用一个额外的类型变量捕获打开的对象类型。</p>
+<!--TOC section id="sec37" 3.13  函数式对象-->
+<h2 class="section" id="sec37">3.13  函数式对象</h2><!--SEC END --><p>
+<a id="ss:functional-objects"></a></p><p>事实上，我们不需要对实例变量赋值，就可以获得 <span class="c003">point</span> 类的一个对象。重载结构 <span class="c003">{&lt; ... &gt;}</span> 可以返回“self”（即当前对象）的副本，在此过程中可以更改某些实例变量的值。
 
 
 </p><div class="caml-example toplevel">
@@ -3598,12 +3582,7 @@ some instance variables.
 </div></pre>
 
 
-</div><p>
-
-Note that the type abbreviation <span class="c003">functional_point</span> is recursive, which can
-be seen in the class type of <span class="c003">functional_point</span>: the type of self is <span class="c003">'a</span>
-and <span class="c003">'a</span> appears inside the type of the method <span class="c003">move</span>.</p><p>The above definition of <span class="c003">functional_point</span> is not equivalent
-to the following:
+</div><p>注意，类型缩写 <span class="c003">functional_point</span> 是递归的。我们可以在 <span class="c003">functional_point</span> 的类类型中看到它：self 的类型是 <span class="c003">'a</span>，而  <span class="c003">'a</span> 出现在方法 <span class="c003">move</span> 的类型中。</p><p><span class="c003">functional_point</span> 的上述定义不同于以下内容：
 
 
 </p><div class="caml-example toplevel">
@@ -3624,26 +3603,10 @@ to the following:
 </div></pre>
 
 
-</div><p>
-
-While objects of either class will behave the same, objects of their
-subclasses will be different. In a subclass of <span class="c003">bad_functional_point</span>,
-the method <span class="c003">move</span> will
-keep returning an object of the parent class. On the contrary, in a
-subclass of <span class="c003">functional_point</span>, the method <span class="c003">move</span> will return an
-object of the subclass.</p><p>Functional update is often used in conjunction with binary methods
-as illustrated in section <a href="#module%3Astring">6.2.1</a>.</p>
-<!--TOC section id="sec38" 3.14  Cloning objects-->
-<h2 class="section" id="sec38">3.14  Cloning objects</h2><!--SEC END --><p>
-<a id="ss:cloning-objects"></a></p><p>Objects can also be cloned, whether they are functional or imperative.
-The library function <span class="c003">Oo.copy</span> makes a shallow copy of an object. That is,
-it returns a new object that has the same methods and instance
-variables as its argument. The
-instance variables are copied but their contents are shared.
-Assigning a new value to an instance variable of the copy (using a method
-call) will not affect instance variables of the original, and conversely.
-A deeper assignment (for example if the instance variable is a reference cell)
-will of course affect both the original and the copy.</p><p>The type of <span class="c003">Oo.copy</span> is the following:
+</div><p>虽然这两个类的对象的行为是相同的，但是它们的子类的对象是不同的。在 <span class="c003">bad_functional_point</span> 的子类中，方法 <span class="c003">move</span> 将继续返回父类的一个对象。相反，在 <span class="c003">functional_point</span> 的子类中，<span class="c003">move</span> 方法将会返回子类的一个对象。</p><p>如 <a href="#module%3Astring">6.2.1</a> 节所示，函数式更新通常与二元方法一起使用。</p>
+<!--TOC section id="sec38" 3.14  克隆对象-->
+<h2 class="section" id="sec38">3.14  克隆对象</h2><!--SEC END --><p>
+<a id="ss:cloning-objects"></a></p><p>对象也可以被克隆，无论它们是函数式的还是命令式的。库函数 <span class="c003">Oo.copy</span> 能够生成对象的浅拷贝。也就是说，它可以返回一个新对象，该对象具有与其参数相同的方法和实例变量。其中实例变量被复制，但它们的内容是被共享的。将新值赋给副本的实例变量（使用方法调用）不会影响原始实例变量，反之亦然。更深层次的赋值（例如，如果实例变量是 ref 单元格）将会自然地同时影响原始和副本。</p><p><span class="c003">Oo.copy</span> 的类型如下所示：
 
 
 </p><div class="caml-example toplevel">
@@ -3653,13 +3616,7 @@ will of course affect both the original and the copy.</p><p>The type of <span cl
 </div></pre>
 
 
-</div><p>
-
-The keyword <span class="c003">as</span> in that type binds the type variable <span class="c003">'a</span> to
-the object type <span class="c003">&lt; .. &gt;</span>. Therefore, <span class="c003">Oo.copy</span> takes an object with
-any methods (represented by the ellipsis), and returns an object of
-the same type. The type of <span class="c003">Oo.copy</span> is different from type <span class="c003">&lt; .. &gt; -&gt; &lt; .. &gt;</span> as each ellipsis represents a different set of methods.
-Ellipsis actually behaves as a type variable.
+</div><p>该类型中的 <span class="c003">as</span> 关键字将类型变量 <span class="c003">'a</span> 绑定到对象类型 <span class="c003">&lt; .. &gt;</span>。因此，<span class="c003">Oo.copy</span> 可以接受具有任何方法的对象（由省略号表示），并返回相同类型的对象。<span class="c003">Oo.copy</span> 的类型与 <span class="c003">&lt; .. &gt; -&gt; &lt; .. &gt;</span> 类型不同，其中每个省略号表示一组不同的方法。在这里省略号实际上表现为一个类型变量。
 
 
 </p><div class="caml-example toplevel">
@@ -3677,12 +3634,7 @@ Ellipsis actually behaves as a type variable.
 </div></pre>
 
 
-</div><p>
-
-In fact, <span class="c003">Oo.copy p</span> will behave as <span class="c003">p#copy</span> assuming that a public
-method <span class="c003">copy</span> with body <span class="c003">{&lt; &gt;}</span> has been defined in the class of <span class="c003">p</span>.</p><p>Objects can be compared using the generic comparison functions <span class="c003">=</span> and <span class="c003">&lt;&gt;</span>.
-Two objects are equal if and only if they are physically equal. In
-particular, an object and its copy are not equal.
+</div><p>事实上，<span class="c003">Oo.copy p</span> 将会表现为 <span class="c003">p#copy</span>。这里假设在 <span class="c003">p</span> 类的结构体 <span class="c003">{&lt; &gt;}</span> 中定义了一个公共方法 <span class="c003">copy</span>。</p><p>对象可以使用泛型比较函数 <span class="c003">=</span> 和 <span class="c003">&lt;&gt;</span> 进行比较。两个对象相等当且仅当它们在物理上相等。需要特别说明的是，一个对象和它的副本是不相等的。
 
 
 </p><div class="caml-example toplevel">
@@ -3698,13 +3650,7 @@ particular, an object and its copy are not equal.
 
 </div><p>
 
-Other generic comparisons such as (<span class="c003">&lt;</span>, <span class="c003">&lt;=</span>, ...) can also be used on
-objects. The
-relation <span class="c003">&lt;</span> defines an unspecified but strict ordering on objects. The
-ordering relationship between two objects is fixed once for all after the
-two objects have been created and it is not affected by mutation of fields.</p><p>Cloning and override have a non empty intersection.
-They are interchangeable when used within an object and without
-overriding any field:
+其他的泛型比较，如（<span class="c003">&lt;</span>、<span class="c003">&lt;=</span> 等）也可以用于对象。关系 <span class="c003">&lt;</span> 定义了一类未被指定但严格的对象次序。两个对象之间的次序关系在这两个对象被创建之后被是恒定的，其不受字段变化的影响。</p><p>克隆和重载有一个非空的交集。当它们在对象中被使用且不覆盖任何字段时，它们是可以互换的：
 
 
 </p><div class="caml-example toplevel">
@@ -3724,11 +3670,7 @@ overriding any field:
 </div></pre>
 
 
-</div><p>
-
-Only the override can be used to actually override fields, and
-only the <span class="c003">Oo.copy</span> primitive can be used externally.</p><p>Cloning can also be used to provide facilities for saving and
-restoring the state of objects.
+</div><p>只有重载操作可以用于实际重写字段，同时也只有 <span class="c003">Oo.copy</span> 原型可以在外部使用。</p><p>克隆还可以用于提供保存和恢复对象状态的机制。
 
 
 </p><div class="caml-example toplevel">
@@ -3748,10 +3690,7 @@ restoring the state of objects.
 </div></pre>
 
 
-</div><p>
-
-The above definition will only backup one level.
-The backup facility can be added to any class by using multiple inheritance.
+</div><p>上面的定义只会备份一层。我们可以通过多继承将备份机制添加到任何类中。
 
 
 </p><div class="caml-example toplevel">
@@ -3780,10 +3719,7 @@ The backup facility can be added to any class by using multiple inheritance.
 </div></pre>
 
 
-</div><p>
-
-We can define a variant of backup that retains all copies. (We also
-add a method <span class="c003">clear</span> to manually erase all copies.)
+</div><p>我们可以定义一个保留所有副本的备份的变体。（我们还添加了一个清除所有副本的方法 <span class="c003">clear</span>）
 
 
 </p><div class="caml-example toplevel">
@@ -3829,10 +3765,9 @@ add a method <span class="c003">clear</span> to manually erase all copies.)
 
 
 </div>
-<!--TOC section id="sec39" 3.15  Recursive classes-->
-<h2 class="section" id="sec39">3.15  Recursive classes</h2><!--SEC END --><p>
-<a id="ss:recursive-classes"></a></p><p>Recursive classes can be used to define objects whose types are
-mutually recursive.
+<!--TOC section id="sec39" 3.15  递归类-->
+<h2 class="section" id="sec39">3.15  递归类</h2><!--SEC END --><p>
+<a id="ss:recursive-classes"></a></p><p>递归类可被用于定义类型相互递归的对象。
 
 
 </p><div class="caml-example toplevel">
@@ -3856,17 +3791,10 @@ and widget : window -&gt; object val window : window method window : window end
 </div></pre>
 
 
-</div><p>
-
-Although their types are mutually recursive, the classes <span class="c003">widget</span> and
-<span class="c003">window</span> are themselves independent.</p>
-<!--TOC section id="sec40" 3.16  Binary methods-->
-<h2 class="section" id="sec40">3.16  Binary methods</h2><!--SEC END --><p>
-<a id="ss:binary-methods"></a></p><p>A binary method is a method which takes an argument of the same type
-as self. The class <span class="c003">comparable</span> below is a template for classes with a
-binary method <span class="c003">leq</span> of type <span class="c003">'a -&gt; bool</span> where the type variable <span class="c003">'a</span>
-is bound to the type of self. Therefore, <span class="c003">#comparable</span> expands to <span class="c003">&lt; leq : 'a -&gt; bool; .. &gt; as 'a</span>. We see here that the binder <span class="c003">as</span> also
-allows writing recursive types.
+</div><p>尽管它们的类型是相互递归的，但是 <span class="c003">widget</span> 类和 <span class="c003">window</span> 类其本身是独立的。</p>
+<!--TOC section id="sec40" 3.16  二元方法-->
+<h2 class="section" id="sec40">3.16  二元方法</h2><!--SEC END --><p>
+<a id="ss:binary-methods"></a></p><p>二元方法是一类参数与 self 具有相同类型的的方法。以下的 <span class="c003">comparable</span> 类是一个具有二元方法 <span class="c003">leq</span> 的类模板，<span class="c003">leq</span> 的类型为 <span class="c003">'a -&gt; bool</span>，其中类型变量 <span class="c003">'a</span> 被绑定到 self 的类型。因此，<span class="c003">#comparable</span> 被拓展为为 <span class="c003">&lt; leq : 'a -&gt; bool; .. &gt; as 'a</span>。在这里我们看到绑定器 <span class="c003">as</span> 同样允许编写递归类型。
 
 
 </p><div class="caml-example toplevel">
@@ -3879,14 +3807,7 @@ allows writing recursive types.
 </div></pre>
 
 
-</div><p>
-
-We then define a subclass <span class="c003">money</span> of <span class="c003">comparable</span>. The class <span class="c003">money</span>
-simply wraps floats as comparable objects. We will extend it below with
-more operations. We have to use a type constraint on the class parameter <span class="c003">x</span>
-because the primitive <span class="c003">&lt;=</span> is a polymorphic function in
-OCaml. The <span class="c003">inherit</span> clause ensures that the type of objects
-of this class is an instance of <span class="c003">#comparable</span>.
+</div><p>然后我们定义了 <span class="c003">comparable</span> 子类 <span class="c003">money</span>。<span class="c003">money</span> 类仅仅将浮点数封装为可比较的对象，我们将在下面对其进行扩展。在这里，我们必须对类参数 <span class="c003">x</span> 使用类型约束，因为原型 <span class="c003">&lt;=</span> 是 OCaml 中的一个多态函数。<span class="c003">inherit</span> 子句确保该类的对象类型是 <span class="c003">#comparable</span> 的实例。
 
 
 </p><div class="caml-example toplevel">
@@ -3910,14 +3831,7 @@ of this class is an instance of <span class="c003">#comparable</span>.
 
 </div><p>
 
-Note that the type <span class="c003">money</span> is not a subtype of type
-<span class="c003">comparable</span>, as the self type appears in contravariant position
-in the type of method <span class="c003">leq</span>.
-Indeed, an object <span class="c003">m</span> of class <span class="c003">money</span> has a method <span class="c003">leq</span>
-that expects an argument of type <span class="c003">money</span> since it accesses
-its <span class="c003">value</span> method. Considering <span class="c003">m</span> of type <span class="c003">comparable</span> would allow a
-call to method <span class="c003">leq</span> on <span class="c003">m</span> with an argument that does not have a method
-<span class="c003">value</span>, which would be an error.</p><p>Similarly, the type <span class="c003">money2</span> below is not a subtype of type <span class="c003">money</span>.
+注意类型 <span class="c003">money</span> 不是类型 <span class="c003">comparable</span> 的子类型，因为 self 的类型在方法 <span class="c003">leq</span> 的类型中是逆变的。事实上，类 <span class="c003">money</span> 的对象 <span class="c003">m</span> 有一个 <span class="c003">leq</span> 方法，该方法需要 <span class="c003">money</span> 类型的参数，因为它访问了参数的 <span class="c003">value</span> 方法。考虑到 <span class="c003">m</span> 的 <span class="c003">comparable</span> 类型会允许在 <span class="c003">m</span> 上使用一个没有 <span class="c003">value</span> 方法的参数调用 <span class="c003">leq</span> 方法，这将会产生一个错误。</p><p>同样，下面的 <span class="c003">money2</span> 类型不是 <span class="c003">money</span> 类型的子类型。
 
 
 </p><div class="caml-example toplevel">
@@ -3938,14 +3852,7 @@ call to method <span class="c003">leq</span> on <span class="c003">m</span> with
 </div></pre>
 
 
-</div><p>
-
-It is however possible to define functions that manipulate objects of
-type either <span class="c003">money</span> or <span class="c003">money2</span>: the function <span class="c003">min</span>
-will return the minimum of any two objects whose type unifies with
-<span class="c003">#comparable</span>. The type of <span class="c003">min</span> is not the same as <span class="c003">#comparable -&gt; #comparable -&gt; #comparable</span>, as the abbreviation <span class="c003">#comparable</span> hides a
-type variable (an ellipsis). Each occurrence of this abbreviation
-generates a new variable.
+</div><p>然而，我们可以定义操作 <span class="c003">money</span> 或 <span class="c003">money2</span> 类型对象的函数：函数 <span class="c003">min</span> 将返回类型与 <span class="c003">#comparable</span> 一致的任何两个对象的最小值。<span class="c003">min</span> 的类型与 <span class="c003">#comparable -&gt; #comparable -&gt; #comparable</span> 不同，因为缩写 <span class="c003">#comparable</span> 隐藏了一个类型变量（省略号）。该缩写的每次出现都会产生一个新的变量。
 
 
 </p><div class="caml-example toplevel">
@@ -3956,10 +3863,7 @@ generates a new variable.
 </div></pre>
 
 
-</div><p>
-
-This function can be applied to objects of type <span class="c003">money</span>
-or <span class="c003">money2</span>.
+</div><p>这个函数可以应用于 <span class="c003">money</span> 或 <span class="c003">money2</span> 类型的对象。
 
 
 </p><div class="caml-example toplevel">
@@ -3973,13 +3877,7 @@ or <span class="c003">money2</span>.
 </div></pre>
 
 
-</div><p>More examples of binary methods can be found in sections
-<a href="#module%3Astring">6.2.1</a> and <a href="#module%3Aset">6.2.3</a>.</p><p>Note the use of override for method <span class="c003">times</span>.
-Writing <span class="c003">new money2 (k *. repr)</span> instead of <span class="c003">{&lt; repr = k *. repr &gt;}</span>
-would not behave well with inheritance: in a subclass <span class="c003">money3</span> of <span class="c003">money2</span>
-the <span class="c003">times</span> method would return an object of class <span class="c003">money2</span> but not of class
-<span class="c003">money3</span> as would be expected.</p><p>The class <span class="c003">money</span> could naturally carry another binary method. Here is a
-direct definition:
+</div><p>更多二元方法的例子可以在第 <a href="#module%3Astring">6.2.1</a> 节和第 <a href="#module%3Aset">6.2.3</a> 节中找到</p><p>对 <span class="c003">times</span> 方法使用重载时需要注意。将其写作 <span class="c003">new money2 (k *. repr)</span> 而非 <span class="c003">{&lt; repr = k *. repr &gt;}</span> 将不能妥当地处理继承：在 <span class="c003">money2</span> 的子类 <span class="c003">money3</span> 中，<span class="c003">times</span> 方法将返回 <span class="c003">money2</span> 类的对象，而不像预期的那样返回 <span class="c003">money3</span> 类的对象。</p><p><span class="c003">money</span> 类可以自然地包含另一种二元方法。这是一种直接的定义：
 
 
 </p><div class="caml-example toplevel">
@@ -4007,16 +3905,9 @@ direct definition:
 
 
 </div>
-<!--TOC section id="sec41" 3.17  Friends-->
-<h2 class="section" id="sec41">3.17  Friends</h2><!--SEC END --><p>
-<a id="ss:friends"></a></p><p>The above class <span class="c003">money</span> reveals a problem that often occurs with binary
-methods. In order to interact with other objects of the same class, the
-representation of <span class="c003">money</span> objects must be revealed, using a method such as
-<span class="c003">value</span>. If we remove all binary methods (here <span class="c003">plus</span> and <span class="c003">leq</span>),
-the representation can easily be hidden inside objects by removing the method
-<span class="c003">value</span> as well. However, this is not possible as soon as some binary
-method requires access to the representation of objects of the same
-class (other than self).
+<!--TOC section id="sec41" 3.17  友元-->
+<h2 class="section" id="sec41">3.17  友元</h2><!--SEC END --><p>
+<a id="ss:friends"></a></p><p>上面的 <span class="c003">money</span> 类揭示了使用二元方法时常出现的一个问题。为了与同一类的其他对象进行交互，必须使用一个形如 <span class="c003">value</span> 的方法使 <span class="c003">money</span> 对象的表示暴漏出来。如果我们移除其中全部的二进制方法（在这里为 <span class="c003">plus</span> 和 <span class="c003">leq</span>），也可以通过删除 <span class="c003">value</span> 方法来将该表示隐藏在对象中。然而，当某些二进制方法需要访问相同类（除了 self）的对象的表示时，这是无法实现的。
 
 
 </p><div class="caml-example toplevel">
@@ -4037,12 +3928,7 @@ class (other than self).
 </div></pre>
 
 
-</div><p>
-
-Here, the representation of the object is known only to a particular object.
-To make it available to other objects of the same class, we are forced to
-make it available to the whole world. However we can easily restrict the
-visibility of the representation using the module system.
+</div><p>在这里，对象的表示只有特定对象知道。为了使其对同一类的其他对象是可用的，我们必须使它对“整个世界”可用。但是，我们可以很容易地使用模块系统来限制表示的可见性。
 
 
 </p><div class="caml-example toplevel">
@@ -4082,13 +3968,7 @@ visibility of the representation using the module system.
 
 </div><p>
 
-Another example of friend functions may be found in section
-<a href="#module%3Aset">6.2.3</a>. These examples occur when a group of objects (here
-objects of the same class) and functions should see each others internal
-representation, while their representation should be hidden from the
-outside. The solution is always to define all friends in the same module,
-give access to the representation and use a signature constraint to make the
-representation abstract outside the module.</p>
+友元函数的另一个例子可以在第 <a href="#module%3Aset">6.2.3</a> 节中找到。当一组对象（这里是同一类的对象）和函数需要看到彼此的内部表示，而它们的表示应该对外部隐藏时，这些示例可以用作参考。解决方案始终是在同一个模块中定义所有友元，对表示进行访问，并使用签名约束使表示在模块外部变得抽象。</p>
 <!--TOC chapter id="sec42" 第 4 章  Labels and variants-->
 <h1 class="chapter" id="sec42">第 4 章  Labels and variants</h1><!--SEC END --><p> <a id="c:labl-examples"></a>
 </p><!--NAME lablexamples.html-->
@@ -16062,36 +15942,36 @@ Also, breakpoints can only be set at events. Thus, events play the
 role of line numbers in debuggers for conventional languages.</p><p>During program execution, a counter is incremented at each event
 encountered. The value of this counter is referred as the <em>current
 time</em>. Thanks to reverse execution, it is possible to jump back and
-forth to any time of the execution.</p><p>Here is where the debugger events (written ǧ) are located in
+forth to any time of the execution.</p><p>Here is where the debugger events (written §§) are located in
 the source code:
 </p><ul class="itemize"><li class="li-itemize">
 Following a function application:
 <pre>
-(f arg)ǧ
+(f arg)§§
 </pre>
 </li><li class="li-itemize">On entrance to a function:
 <pre>
-fun x y z -&gt; ǧ ...
+fun x y z -&gt; §§ ...
 </pre>
 </li><li class="li-itemize">On each case of a pattern-matching definition (function,
 <span class="c003">match</span>…<span class="c003">with</span> construct, <span class="c003">try</span>…<span class="c003">with</span> construct):
 <pre>
-function pat1 -&gt; ǧ expr1
+function pat1 -&gt; §§ expr1
        | ...
-       | patN -&gt; ǧ exprN
+       | patN -&gt; §§ exprN
 </pre>
 </li><li class="li-itemize">Between subexpressions of a sequence:
 <pre>
-expr1; ǧ expr2; ǧ ...; ǧ exprN
+expr1; §§ expr2; §§ ...; §§ exprN
 </pre>
 </li><li class="li-itemize">In the two branches of a conditional expression:
 <pre>
-if cond then ǧ expr1 else ǧ expr2
+if cond then §§ expr1 else §§ expr2
 </pre>
 </li><li class="li-itemize">At the beginning of each iteration of a loop:
 <pre>
-while cond do ǧ body done
-for i = a to b do ǧ body done
+while cond do §§ body done
+for i = a to b do §§ body done
 </pre>
 </li></ul><p>
 Exceptions: A function application followed by a function return is replaced

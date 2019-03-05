@@ -60,22 +60,22 @@
 \@@addtocsec{htoc}{sec35}{0}{\@print{3.11}\quad{}多态方法{}}
 \newlabel{ss:polymorphic-methods}{{3.11}{X}}
 \@deflabeltype{ss:polymorphic-methods}{section}
-\@@addtocsec{htoc}{sec36}{0}{\@print{3.12}\quad{}使用强制{}}
+\@@addtocsec{htoc}{sec36}{0}{\@print{3.12}\quad{}使用强制转换{}}
 \newlabel{ss:using-coercions}{{3.12}{X}}
 \@deflabeltype{ss:using-coercions}{section}
-\@@addtocsec{htoc}{sec37}{0}{\@print{3.13}\quad{}Functional objects{}}
+\@@addtocsec{htoc}{sec37}{0}{\@print{3.13}\quad{}函数式对象{}}
 \newlabel{ss:functional-objects}{{3.13}{X}}
 \@deflabeltype{ss:functional-objects}{section}
-\@@addtocsec{htoc}{sec38}{0}{\@print{3.14}\quad{}Cloning objects{}}
+\@@addtocsec{htoc}{sec38}{0}{\@print{3.14}\quad{}克隆对象{}}
 \newlabel{ss:cloning-objects}{{3.14}{X}}
 \@deflabeltype{ss:cloning-objects}{section}
-\@@addtocsec{htoc}{sec39}{0}{\@print{3.15}\quad{}Recursive classes{}}
+\@@addtocsec{htoc}{sec39}{0}{\@print{3.15}\quad{}递归类{}}
 \newlabel{ss:recursive-classes}{{3.15}{X}}
 \@deflabeltype{ss:recursive-classes}{section}
-\@@addtocsec{htoc}{sec40}{0}{\@print{3.16}\quad{}Binary methods{}}
+\@@addtocsec{htoc}{sec40}{0}{\@print{3.16}\quad{}二元方法{}}
 \newlabel{ss:binary-methods}{{3.16}{X}}
 \@deflabeltype{ss:binary-methods}{section}
-\@@addtocsec{htoc}{sec41}{0}{\@print{3.17}\quad{}Friends{}}
+\@@addtocsec{htoc}{sec41}{0}{\@print{3.17}\quad{}友元{}}
 \newlabel{ss:friends}{{3.17}{X}}
 \@deflabeltype{ss:friends}{section}
 \@@addtocsec{htoc}{sec42}{-1}{\@print{第 4 章}\quad{}Labels and variants{}}
