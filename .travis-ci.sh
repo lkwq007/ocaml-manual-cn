@@ -22,3 +22,12 @@ cd manual/htmlman
 rm .gitignore
 cd ../..
 make
+# this part should not be put in the before_deploy part
+mkdir release
+{
+  REFMAN_VERSION=`git describe --abbrev=0 --tags` &&
+  export RELEASENAME="ocaml-${REFMAN_VERSION}-"
+} || { 
+  export RELEASENAME=""
+}
+make release
